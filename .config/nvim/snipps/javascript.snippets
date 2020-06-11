@@ -1,0 +1,35 @@
+snippet cl "console.log()" b
+console.log(${1:message});
+endsnippet
+
+snippet cll "console.log() ++" b
+console.log("--------------------");
+console.log(${1:message});
+console.log("--------------------");
+endsnippet
+
+snippet ce "console.error()" b
+console.error(${1:error});
+endsnippet
+
+snippet rfc "jsx: react functional component" b
+import React from 'react';
+
+const ${1:MyComponent} = () => (
+	<div> $1 </div>
+);
+
+export { $1 };
+endsnippet
+
+snippet trfc "tsx: react functional component" b
+import React from 'react';
+
+type Props = {};
+
+const ${1:MyComponent}: React.FC<Props> = () => (
+	<div> $1 </div>
+);
+
+export { $1 };
+endsnippet

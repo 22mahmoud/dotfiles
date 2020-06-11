@@ -1,0 +1,86 @@
+# terminal emulator
+super + Return
+    $TERMINAL
+super + v
+    $TERMINAL -e $EDITOR
+super + g
+    $BROWSER
+super + space
+    rofi -show drun -show-icons
+# Restart bspwm
+super + shift + r
+  bspc wm -r
+# close and kill
+super + shift + q
+    bspc node -c
+# toggle fullscreen
+    #cleanfullscreen
+super + f
+    bspc node -t \~fullscreen
+# toggle floating
+super + shift + space
+    bspc node focused -t \~floating
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} ^{1-9,10}
+# Flip the tree from the current nodes parent
+super + control + {h,j,k,l}
+  bspc node @parent -F {vertical,horizontal,horizontal,vertical}
+# move a floating window
+super + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+# Expand a window by moving one of its side outward
+ctrl + shift + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+# Contract a window by moving one of its side inward
+ctrl + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# Toggle gaps
+super + shift + d
+    bspc config window_gap {0,15}
+# Increase/descrease gap size
+super { ,+ shift }+ z
+    bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
+# Make a windoww sticky/non-sticky
+super + o
+    bspc node -g sticky={on,off}
+Print
+  screenshot full
+super + Print
+  screenshot select
+
+# rofi
+super + ctrl + c
+  rofi -show calc -modi calc -no-show-match -no-sort
+super + ctrl + e
+  rofimoji
+
+# System Control
+super + shift + x
+    betterlockscreen -l blur
+super + ctrl + p
+ rofi -show p -modi p:rofi-power-menu -width 20 -lines 6 -scroll-method=1 
+
+# Lock the screen
+super + shift + e
+  betterlockscreen -l
+
+super + shift + p
+   (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ar,us || setxkbmap us,ar
+
+# Volume
+XF86AudioMute
+    sound toggle
+XF86AudioRaiseVolume
+    sound inc
+XF86AudioLowerVolume
+    sound dec
+
+
+XF86MonBrightnessUp
+    brightness inc
+XF86MonBrightnessDown
+    brightness dec

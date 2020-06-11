@@ -1,0 +1,45 @@
+# apps
+alias v="nvim"
+alias c="code-insiders ."
+alias vfm=~/.config/vifm/scripts/vifmrun
+
+# yarn
+alias y="yarn install"
+alias yst="yarn start"
+alias yd='yarn dev'
+
+# npm
+alias n='npm install'
+alias nst='npm run start'
+alias nd='npm run dev'
+
+# colorls
+alias ls='exa -G  --color auto --icons -a -s type'
+alias ll='exa -l --color always --icons -a -s type'
+
+
+# git 
+function gc { git commit -m "$@"; }
+alias gs="git status"
+alias gp="git pull"
+alias gf="git fetch"
+alias gpush="git push"
+alias ga="git add ."
+alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
+  --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
+  %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
+
+# scripts
+alias wp='feh --randomize --bg-fil ~/wallpapers/*'
+alias vtop='vtop --theme gruvbox'
+
+gshow() {
+    local commit_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+    local view_commit="$commit_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+    git log --color=always \
+        --format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" "$@" | \
+    fzf --no-sort --tiebreak=index --no-multi --reverse --ansi \
+        --header="enter to view, alt-y to copy hash" --preview="$view_commit" \
+        --bind="enter:execute:$view_commit | less -R" \
+        --bind="alt-y:execute:$commit_hash | xclip -selection clipboard"
+}
