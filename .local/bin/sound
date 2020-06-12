@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$1" == "inc" ]; then
+   pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%
+fi
+
+if [ "$1" == "dec" ]; then
+   pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%
+fi
+
+if [ "$1" == "toggle" ]; then
+   pactl set-sink-mute 0 toggle
+fi
+
+
+AMIXER=$(amixer sget Master)
+VOLUME=$(echo $AMIXER | grep 'Right:' | awk -F'[][]' '{ print $2 }' | tr -d "%")
+MUTE=$(echo $AMIXER | grep -o '\[off\]' | tail -n 1)
+if [ "$VOLUME" -le 20 ]; then
+    ICON=🔈
+else if [ "$VOLUME" -le 60 ]; then
+         ICON=🔉
+     else 
+         ICON=🔊
+     fi
+fi
+if [ "$MUTE" == "[off]" ]; then
+    ICON=🔇
+fi 
+
+bar=$(seq --separator="─" 0 "$((VOLUME / 5))" | sed 's/[0-9]//g')
+dunstify -t 1500 -u low "$ICON Sound" "Volume: ${VOLUME}%" \
+   -h string:x-canonical-private-synchronous:"changeVolume"
+
+

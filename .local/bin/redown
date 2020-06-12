@@ -1,0 +1,49 @@
+#!/bin/bash
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+case $key in
+    -s|--sub)
+    S="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -c|--category)
+    C="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -t|--time)
+    T="$2"
+    shift # past argument
+    shift # past value
+    ;;
+   -d|--dir)
+    D="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+SUBREDDIT=${S-wallpaper}
+CATEGORY=${C-top}
+TIME=${T-day}
+DIR=${D-wallpapers}
+
+urls=$(wget -O - -o /dev/null "https://www.reddit.com/r/${SUBREDDIT}/${CATEGORY}.json?t=${TIME}" | \
+  jq -r ".data.children[].data.url")
+  
+
+for i in "${urls[@]}"
+do
+  :
+  wget $i -N -P ~/$DIR
+done
