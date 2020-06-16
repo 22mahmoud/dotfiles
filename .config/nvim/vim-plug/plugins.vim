@@ -37,6 +37,7 @@ call plug#begin('~/.vim/plugged')
   " themes
   Plug 'arzg/vim-colors-xcode'
   Plug 'gruvbox-community/gruvbox'
+  Plug 'arcticicestudio/nord-vim'
   " Status Line (airline)
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'

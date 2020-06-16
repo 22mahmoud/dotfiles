@@ -2,8 +2,8 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/ashraf/.gtkrc-2.0.mine"
-gtk-theme-name="gruvbox-gtk"
-gtk-icon-theme-name="Newaita-dark"
+gtk-theme-name="Nordic"
+gtk-icon-theme-name="Flat-Remix-Blue-Dark"
 gtk-font-name="Open Sans Light 11"
 gtk-cursor-theme-name="Bibata"
 gtk-cursor-theme-size=0

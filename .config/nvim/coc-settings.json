@@ -1,5 +1,5 @@
 {
-  "rust-analyzer.serverPath": "/home/ashraf/.local/bin/rust-analyzer",
+  "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",

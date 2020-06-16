@@ -1,1 +1,1 @@
-colorscheme gruvbox
+colorscheme nord

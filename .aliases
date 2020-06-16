@@ -1,5 +1,6 @@
 # apps
 alias v="nvim"
+alias sv="sudo nvim"
 alias c="code-insiders ."
 alias vfm=~/.config/vifm/scripts/vifmrun
 
@@ -13,10 +14,22 @@ alias n='npm install'
 alias nst='npm run start'
 alias nd='npm run dev'
 
-# colorls
-alias ls='exa -G  --color auto --icons -a -s type'
-alias ll='exa -l --color always --icons -a -s type'
 
+# Replace legacy tools with new ones
+if [ "$(command -v exa)" ]; then
+    unalias -m 'll'
+    unalias -m 'l'
+    unalias -m 'la'
+    unalias -m 'ls'
+    alias ls='exa -G  --color auto --icons -a -s type'
+    alias ll='exa -l --color always --icons -a -s type'
+fi
+
+# Colorized cat.
+if [ "$(command -v bat)" ]; then
+    unalias -m 'cat'
+    alias cat='bat -pp --theme="ansi-dark"'
+fi
 
 # git 
 function gc { git commit -m "$@"; }
@@ -31,15 +44,4 @@ alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
 
 # scripts
 alias wp='feh --randomize --bg-fil ~/wallpapers/*'
-alias vtop='vtop --theme gruvbox'
-
-gshow() {
-    local commit_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-    local view_commit="$commit_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
-    git log --color=always \
-        --format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" "$@" | \
-    fzf --no-sort --tiebreak=index --no-multi --reverse --ansi \
-        --header="enter to view, alt-y to copy hash" --preview="$view_commit" \
-        --bind="enter:execute:$view_commit | less -R" \
-        --bind="alt-y:execute:$commit_hash | xclip -selection clipboard"
-}
+alias vtop='vtop --theme nord'

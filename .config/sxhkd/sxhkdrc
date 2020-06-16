@@ -6,7 +6,7 @@ super + v
 super + g
     $BROWSER
 super + space
-    rofi -show drun -show-icons
+  rofi -show-icons -modi drun -show drun
 # Restart bspwm
 super + shift + r
   bspc wm -r
@@ -14,7 +14,6 @@ super + shift + r
 super + shift + q
     bspc node -c
 # toggle fullscreen
-    #cleanfullscreen
 super + f
     bspc node -t \~fullscreen
 # toggle floating
@@ -38,9 +37,12 @@ ctrl + shift + alt + {h,j,k,l}
 # Contract a window by moving one of its side inward
 ctrl + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# preselect the direction
+super + shift + {a,s,w,d,c}
+  bspc node -p {west,south,north,east,cancel}
 # Toggle gaps
-super + shift + d
-    bspc config window_gap {0,15}
+super + shift + g
+    bspc config window_gap {0,10}
 # Increase/descrease gap size
 super { ,+ shift }+ z
     bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
@@ -51,12 +53,18 @@ Print
   screenshot full
 super + Print
   screenshot select
+super + shift + Print
+  record
+super + shift + ctrl + Print
+  kill $(pgrep ffmpeg)
 
 # rofi
 super + ctrl + c
   rofi -show calc -modi calc -no-show-match -no-sort
 super + ctrl + e
   rofimoji
+super + ctrl + t
+  SPEAK_SOURCE=true SOURCE=en TARGET=ar ENGINE=google rofitr
 
 # System Control
 super + shift + x

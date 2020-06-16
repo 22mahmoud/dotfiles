@@ -1,63 +1,68 @@
-/* ==========================================================================
-   Rofi color theme
-
-   Based on the Gruvbox color scheme for Vim by morhetz
-   https://github.com/morhetz/gruvbox
-
-   File: gruvbox-dark.rasi
-   Desc: Gruvbox dark color theme for Rofi
-   Author: bardisty <b@bah.im>
-   Source: https://github.com/bardisty/gruvbox-rofi
-   Modified: Mon Feb 12 2018 04:08:43 PST -0800
-   ========================================================================== */
-
-* {
-    /* Theme settings */
-    highlight: bold italic;
-    scrollbar: true;
-
-    /* Gruvbox dark colors */
-    gruvbox-dark-bg0:          #282828;
-    gruvbox-dark-bg0-soft:     #32302f;
-    gruvbox-dark-bg3:          #665c54;
-    gruvbox-dark-fg0:          #fbf1c7;
-    gruvbox-dark-fg1:          #ebdbb2;
-    gruvbox-dark-red-dark:     #cc241d;
-    gruvbox-dark-red-light:    #fb4934;
-    gruvbox-dark-yellow-dark:  #d79921;
-    gruvbox-dark-yellow-light: #fabd2f;
-    gruvbox-dark-gray:         #a89984;
-    gruvbox-dark-green:        #98971A;
-
-    /* Theme colors */
-    background:                  @gruvbox-dark-bg0;
-    background-color:            @background;
-    foreground:                  @gruvbox-dark-fg1;
-    border-color:                @gruvbox-dark-green;
-    separatorcolor:              @border-color;
-    scrollbar-handle:            @border-color;
-
-    normal-background:           @background;
-    normal-foreground:           @foreground;
-    alternate-normal-background: @gruvbox-dark-bg0-soft;
-    alternate-normal-foreground: @foreground;
-    selected-normal-background:  @gruvbox-dark-bg3;
-    selected-normal-foreground:  @gruvbox-dark-fg0;
-
-    active-background:           @gruvbox-dark-yellow-dark;
-    active-foreground:           @background;
-    alternate-active-background: @active-background;
-    alternate-active-foreground: @active-foreground;
-    selected-active-background:  @gruvbox-dark-yellow-light;
-    selected-active-foreground:  @active-foreground;
-
-    urgent-background:           @gruvbox-dark-red-dark;
-    urgent-foreground:           @background;
-    alternate-urgent-background: @urgent-background;
-    alternate-urgent-foreground: @urgent-foreground;
-    selected-urgent-background:  @gruvbox-dark-red-light;
-    selected-urgent-foreground:  @urgent-foreground;
+configuration {
+  show-icons: true;
+  font: "SauceCodePro Nerd Font Medium 10";
+  drun-display-format: "{icon} {name}";
+  display-run: " ";
+  display-drun: " ";
+  display-window: " ";
+  modi: "window,run,drun";
 }
 
-@import "gruvbox-common.rasi"
+* {
+  background-color: #2E3440;
+  bg-alt: #3B4252;
+  fg: #ECEFF4;
 
+  nord-blue-light: #88C0D0;
+  nord-yellow: #EBCB8B;
+
+  border: 0;
+  lines: 8;
+  padding: 0;
+  margin: 0;
+  spacing: 0;
+}
+
+window {
+  width: 30%;
+  transparency: "real";
+	padding: 2;
+}
+
+mainbox {
+  children: [inputbar, listview];
+	border: 0;
+	padding: 0;
+}
+
+listview {
+  columns: 1;
+}
+
+element {
+  padding: 12;
+  orientation: vertical;
+  text-color: @fg;
+}
+
+element selected {
+  background-color: @bg-alt;
+  text-color: @nord-blue-light;
+}
+
+inputbar {
+  background-color: @background;
+  children: [prompt, entry];
+}
+
+prompt {
+  enabled: true;
+  font: "SauceCodePro Nerd Font 12";
+  padding: 12 0 0 12;
+  text-color: @nord-yellow;
+}
+
+entry {
+  padding: 12;
+  text-color: @nord-yellow;
+}
