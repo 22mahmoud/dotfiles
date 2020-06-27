@@ -7,9 +7,14 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
-export BROWSER="google-chrome-unstable"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export BROWSER="brave-beta"
 export READER="zathura"
 export WM='bspwm'
+export VIDEO="mpv"
+export IMAGE="sxiv"
+export COLORTERM="truecolor"
+export MANPAGER="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -175,3 +180,6 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
+
+# Start graphical server on tty1 if not already running.
+[ "$(tty)" = "/dev/tty1" ] && ssh-agent startx

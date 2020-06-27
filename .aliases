@@ -1,8 +1,13 @@
 # apps
 alias v="nvim"
 alias sv="sudo nvim"
+alias z="zathura"
+alias m="mpv"
 alias c="code-insiders ."
 alias vfm=~/.config/vifm/scripts/vifmrun
+
+  
+alias pangen="/home/ashraf/projects/panGen/pangen.sh"
 
 # yarn
 alias y="yarn install"
@@ -14,6 +19,11 @@ alias n='npm install'
 alias nst='npm run start'
 alias nd='npm run dev'
 
+# tmux
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
 
 # Replace legacy tools with new ones
 if [ "$(command -v exa)" ]; then
@@ -28,16 +38,22 @@ fi
 # Colorized cat.
 if [ "$(command -v bat)" ]; then
     unalias -m 'cat'
-    alias cat='bat -pp --theme="ansi-dark"'
+    alias cat='bat -pp --theme="Nord"'
 fi
 
 # git 
-function gc { git commit -m "$@"; }
+alias g='git'
 alias gs="git status"
-alias gp="git pull"
+alias ga="git add"
+alias gc="git commit"
+alias gpl="git pull"
+alias gplom="git pull origin master"
 alias gf="git fetch"
-alias gpush="git push"
-alias ga="git add ."
+alias gm='git merge'
+alias gch='git checkout'
+alias gnb='git checkout -b'
+alias gpu="git push"
+alias gcl='git clone'
 alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
   --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
   %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
@@ -45,3 +61,12 @@ alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
 # scripts
 alias wp='feh --randomize --bg-fil ~/wallpapers/*'
 alias vtop='vtop --theme nord'
+alias rsfetch='rsfetch -N -d -e  -l -r -s -t -u -w -p pacman'
+alias reload='source ~/.config/zsh/.zshrc'
+
+alias cfa="nvim $HOME/.config/alacritty/alacritty.yml"
+alias cfz="nvim $HOME/.config/zsh/.zshrc"
+alias cfp="nvim $HOME/.config/polybar/config-top.ini"
+alias cfb="nvim $HOME/.config/bspwm/bspwmrc"
+alias cfs="nvim $HOME/.config/sxhkd/sxhkdrc"
+alias cfv="nvim $HOME/.config/nvim/init.vim"

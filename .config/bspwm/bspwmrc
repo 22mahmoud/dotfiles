@@ -1,24 +1,6 @@
 #! /bin/sh
 bspc rule -r "*"
 
-# change the default cross cursor to left pointer cursor
-xsetroot -cursor_name left_ptr &
-# hide mouse cursor while not using it
-unclutter -idle 2 &
-# set both english and arabic layout
-setxkbmap -layout us,ar &
-# network manager
-nm-applet &
-# speed up keyboard
-xset r rate 280 40 &
-# set random wallpaper
-feh --bg-fill --randomize ~/wallpapers/* &
-# source Xresources file
-xrdb ~/.Xresources &
-# start dunst notification server
-dunst &
-# launch picom compositor
-picom --experimental-backend &
 # script to simulate i3 fullscreen behaviour
 cleanfullscreen & 
 # launch polybar
@@ -28,8 +10,8 @@ sxhkd &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 
 
-bspc config border_width            0
-bspc config window_gap              10
+bspc config border_width            2
+bspc config window_gap              15
 bspc config split_ratio             0.50
 bspc config top_padding 						20
 bspc config bottom_padding 					20
@@ -38,20 +20,9 @@ bspc config gapless_monocle         true
 bspc config center_pseudo_tiled     true
 bspc config persistent_monitors     true
 bspc config focus_follows_pointer   true
-# wmname LG3D
-wmname compiz
 
-# bspc config active_border_color	"#1e1e1e"
-# bspc config focused_border_color "#b8bb26"
-bspc config normal_border_color "$color1"
-bspc config active_border_color "$color2"
-bspc config focused_border_color "$color15"
-# Use the line below if you are on bspwm >= 0.9.4
-bspc config presel_feedback_color "$color1"
-# Use the line below if you are on bspwm < 0.9.4
-#bspc config presel_border_color "$color1"
-
-
+bspc config active_border_color	"#2E3440"
+bspc config focused_border_color "#5E81AC"
 
 ###---Rules---###
 bspc rule -a mpv state=fullscreen
@@ -60,6 +31,7 @@ bspc rule -a '*:spotify'  desktop='^9'
 bspc rule -a Zathura state=tiled
 bspc rule -a Screenkey manage=off
 bspc rule -a Android_Studio state=tiled
+bspc rule -a "*:Picture in picture" state=floating
 bspc rule -a '*:pavucontrol' state=floating
 bspc rule -a Screenkey manage=off
 bspc rule -a Glava manage=off
