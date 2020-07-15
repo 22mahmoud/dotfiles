@@ -1,0 +1,10 @@
+[user]
+  name = 22mahmoud
+  email = mahmoudss1997@gmail.com
+[color]
+  ui = true
+[core]
+  pager = delta --theme='Nord'
+  editor = nvim
+[interactive]
+  diffFilter = delta --color-only
