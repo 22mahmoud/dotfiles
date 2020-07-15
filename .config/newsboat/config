@@ -43,6 +43,7 @@ highlight article ":.*\\(embedded flash\\)$" magenta default
 browser "xdg-open %u"
 macro , open-in-browser
 macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser "xdg-open %u"
+macro m set browser "mpv --ytdl-format='[height<720]'" ; open-in-browser ; set browser "xdg-open %u"
 macro r set browser "tuir" ; open-in-browser ; set browser "$BROWSER %u"
 
 
