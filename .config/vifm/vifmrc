@@ -1,3 +1,5 @@
+source /home/ashraf/.config/vifm/icons
+
 " vim: filetype=vifm :
 " Sample configuration file for vifm (last updated: 20 July, 2018)
 " You can edit this file by hand.
@@ -11,7 +13,7 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
-set vicmd=vim
+set vicmd=nvim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -64,7 +66,8 @@ set norunexec
 
 " Selected color scheme
 
-colorscheme Default
+" colorscheme Default
+colorscheme gruvbox
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -195,24 +198,22 @@ filextype *.djvu
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
-       \ {Play using ffplay}
-       \ ffplay -nodisp -autoexit %c,
-       \ {Play using MPlayer}
-       \ mplayer %f,
-fileviewer *.mp3 mp3info
-fileviewer *.flac soxi
+       \ {Play using mpv}
+       \ mpv %c,
+fileviewer <audio/*>
+        \ vifmimg audio %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+" fileviewer *.mp3 mp3info
+" fileviewer *.flac soxi
 
 " Video
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
          \*.as[fx]
-        \ {View using ffplay}
-        \ ffplay -fs -autoexit %f,
-        \ {View using Dragon}
-        \ dragon %f:p,
-        \ {View using mplayer}
-        \ mplayer %f,
- fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+        \ {View using mpv}
+        \ mpv %f,
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
         \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
         \ vifmimg videopreview %px %py %pw %ph %c
         \ %pc
@@ -240,26 +241,24 @@ fileviewer *.[1-8] man ./%c | col -b
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
         \ sxiv -ia %f &,
-        \ {View in imv}
-        \ imv -b 1D2330 -d %d &,
-        \ {View in feh}
-        \ feh %d &,
-        \ {View in cacaview}
-        \ cacaview %c &,
- fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
         \ vifmimg draw %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
-
-" fileviewer *.gif
-"         \ vifmimg gifpreview %px %py %pw %ph %c
-"         \ %pc
-"         \ vifmimg clear
+fileviewer *.gif
+        \ vifmimg gifpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
 
 fileviewer *.ico
         \ vifmimg magickpreview %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
+fileviewer *.ico
+        \ vifmimg magickpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
 
 " OpenRaster
 filextype *.ora
@@ -361,6 +360,12 @@ filextype *.pro qtcreator %f &
 filextype */
         \ {View in thunar}
         \ Thunar %f &,
+
+fileviewer <font/*>
+        \ vifmimg font %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
 
 " Syntax highlighting in preview
 "
@@ -490,6 +495,7 @@ nnoremap <f8> :delete<cr>
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
 "
 " let $VIFM_SERVER_NAME = v:servername
+"
 map > :!vifmimg inc<CR>
 map < :!vifmimg dec<CR>
 

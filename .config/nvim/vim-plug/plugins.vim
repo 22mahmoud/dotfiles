@@ -1,4 +1,4 @@
-" auto install vim-plug
+" /* spell-checker: disable */
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,10 +26,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Better Syntax Support
   Plug 'sheerun/vim-polyglot'
+  " Svelte Syntax highlight
+  Plug 'evanleck/vim-svelte', {'branch': 'main'}
+  " njk Syntax Support
+  Plug 'lepture/vim-jinja'
+  " Pug/Jade support
+  Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
   " Start Screen
   Plug 'mhinz/vim-startify'
-  " Terminal
-  Plug 'voldikss/vim-floaterm'
   " Better Comments
   Plug 'tpope/vim-commentary'
   " Closetags

@@ -48,3 +48,4 @@ macro r set browser "tuir" ; open-in-browser ; set browser "$BROWSER %u"
 
 
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+

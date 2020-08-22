@@ -4,7 +4,16 @@
 [color]
   ui = true
 [core]
-  pager = delta --theme='Nord'
+  pager = delta
   editor = nvim
 [interactive]
   diffFilter = delta --color-only
+[delta]
+  side-by-side = true
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
+  syntax-theme = Nord
+[pull]
+  rebase = true
+[rebase]
+  autoStash = true

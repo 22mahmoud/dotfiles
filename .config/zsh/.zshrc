@@ -1,6 +1,7 @@
 source ~/.aliases
 
-rsfetch
+# rsfetch
+fet.sh
 
 autoload colors && colors
 setopt  autocd autopushd # Automatically cd into typed directory.
@@ -70,6 +71,7 @@ bindkey '^v' edit-command-line
 # [ "$(ssh-add -l)" = "The agent has no identities." ] && ssh-add ~/.ssh/personal-github
 
 # source 
+eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/fzf.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

@@ -15,7 +15,7 @@ configuration {
 
   nord-blue-light: #88C0D0;
   nord-yellow: #EBCB8B;
-
+  text-color: @nord-blue-light; 
   border: 0;
   lines: 8;
   padding: 0;
@@ -29,11 +29,6 @@ window {
 	padding: 2;
 }
 
-mainbox {
-  children: [inputbar, listview];
-	border: 0;
-	padding: 0;
-}
 
 listview {
   columns: 1;
@@ -66,3 +61,4 @@ entry {
   padding: 12;
   text-color: @nord-yellow;
 }
+

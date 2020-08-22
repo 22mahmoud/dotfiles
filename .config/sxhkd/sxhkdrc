@@ -5,13 +5,18 @@ super + v
     $TERMINAL -e $EDITOR
 super + b
     $BROWSER
-
+super + t
+    torbrowser-launcher
 super + shift + b
-    $BROWSER -incognito
+    $BROWSER --private-window
 super + n
     $TERMINAL -e newsboat -r
 super + e
     $TERMINAL -e neomutt
+
+# Reload sxhkdrc
+super + shift + s
+    pkill -usr1 -x sxhkd
 
 super + space
   rofi -show-icons -modi drun -show drun

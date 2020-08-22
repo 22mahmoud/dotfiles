@@ -4,7 +4,6 @@
 # fullscreen mode I was still able to see the windows behind it, I think this
 # looks kind of gross so that's why this exists.
 
-
 HideBar() {
   polybar-msg cmd hide
 }

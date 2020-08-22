@@ -5,7 +5,8 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "svelte"
   ],
   "prettier.disableSuccessMessage": true,
   "tsserver.formatOnType": true,
@@ -20,19 +21,42 @@
     "typescript",
     "typescriptreact",
     "javascriptreact",
-    "lua"
+    "lua",
+    "svelte",
+    "ejs"
   ],
-  "snippets.userSnippetsDirectory": "/home/ashraf/.config/nvim/snipps",
-  "snippets.extends": {
-    "javascriptreact": ["javascript"],
-    "typescript": ["javascript"],
-    "typescriptreact": ["javascript"]
-  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "wxss.validate": false,
   "explorer.width": 30,
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings": {
     "v": "open:vsplit"
-  }
+  },
+  "cSpell.ignorePaths": [
+    "**/package-lock.json",
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/objects/**",
+    ".vscode",
+    "**/src/**"
+  ],
+  "cSpell.userWords": [
+    "Alacritty",
+    "Ashraf",
+    "CLIs",
+    "Mahmoud",
+    "Ripgrep",
+    "Tldr",
+    "allacrtiy",
+    "cheatsheets",
+    "mahmoudashraf",
+    "nord",
+    "unalias"
+  ],
+
+  "cSpell.enabled": false
 }

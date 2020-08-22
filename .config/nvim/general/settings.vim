@@ -28,6 +28,9 @@ set hlsearch                    " Highlight found searches
 set incsearch                   " Highlight wihle typing
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
+set clipboard+=unnamedplus 			" use system clipboard
+set shell=/usr/bin/zsh
+
 
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear

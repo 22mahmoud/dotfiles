@@ -1,21 +1,62 @@
 # apps
+alias vim="nvim"
 alias v="nvim"
-alias sv="sudo nvim"
-alias z="zathura"
+alias sv="sudo -E nvim"
+alias za="zathura"
 alias m="mpv"
-alias c="code-insiders ."
+alias yt="youtube-dl"
+alias c="code ."
 alias vfm=~/.config/vifm/scripts/vifmrun
 
-  
-alias pangen="/home/ashraf/projects/panGen/pangen.sh"
+# youtube-dl
+alias yta-best="youtube-dl --extract-audio --audio-format best "
+alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
+alias ytb="youtube-dl -f bestvideo+bestaudio "
+
+
+### ARCHIVE EXTRACTION
+# usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;      
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# navigation
+alias ..='cd ..' 
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+alias .6='cd ../../../../..'
 
 # yarn
-alias y="yarn install"
+alias y="yarn"
 alias yst="yarn start"
 alias yd='yarn dev'
 
 # npm
-alias n='npm install'
+alias n='npm'
+alias ni='npm install'
 alias nst='npm run start'
 alias nd='npm run dev'
 
@@ -24,6 +65,7 @@ alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
+alias tk="t kill-session"
 
 # Replace legacy tools with new ones
 if [ "$(command -v exa)" ]; then
@@ -54,6 +96,7 @@ alias gch='git checkout'
 alias gnb='git checkout -b'
 alias gpu="git push"
 alias gcl='git clone'
+alias gundo="git reset --soft HEAD^ && git reset all"
 alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
   --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
   %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
