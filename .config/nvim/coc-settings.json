@@ -1,5 +1,6 @@
 {
   "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
+  "rust-analyzer.checkOnSave.command": "clippy",
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
@@ -48,15 +49,18 @@
     "Alacritty",
     "Ashraf",
     "CLIs",
+    "Gmail",
     "Mahmoud",
     "Ripgrep",
     "Tldr",
     "allacrtiy",
     "cheatsheets",
+    "degoogle",
+    "foss",
     "mahmoudashraf",
     "nord",
     "unalias"
   ],
 
-  "cSpell.enabled": false
+  "tailwindCSS.emmetCompletions": true
 }

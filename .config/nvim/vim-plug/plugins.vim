@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   " Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+  " handle wiki, bookmark, todos
+  " Plug 'vimwiki/vimwiki'
   " Git
   Plug 'airblade/vim-gitgutter'
   "  Intellisense
@@ -29,7 +31,7 @@ call plug#begin('~/.vim/plugged')
   " Svelte Syntax highlight
   Plug 'evanleck/vim-svelte', {'branch': 'main'}
   " njk Syntax Support
-  Plug 'lepture/vim-jinja'
+  " Plug 'lepture/vim-jinja'
   " Pug/Jade support
   Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
   " Start Screen
