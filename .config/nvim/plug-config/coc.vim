@@ -10,11 +10,16 @@ let g:coc_global_extensions = [
       \ 'coc-rust-analyzer',
       \ 'coc-eslint',
       \ 'coc-tailwindcss',
-      \ 'coc-explorer',
       \ 'coc-svelte',
       \ 'coc-snippets',
       \ 'coc-go',
       \ ]
+
+
+let g:coc_filetype_map = {
+      \ 'jinja': 'html', 
+      \ }
+
 
 " prettier setup
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -85,7 +90,3 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Performing code actions
 map <leader>do <Plug>(coc-codeaction)
 
-" Explorer
-nmap <leader>e :CocCommand explorer<CR>
-
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

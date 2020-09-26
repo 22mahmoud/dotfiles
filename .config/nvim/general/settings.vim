@@ -1,4 +1,6 @@
-syntax enable										" Enable syntax highlighting
+filetype plugin on
+syntax on
+set nocompatible
 set termguicolors
 set hidden                      " Required to keep multiple buffers open multiple buffers
 set cursorline                  " Enable highlighting of the current line
@@ -31,7 +33,7 @@ set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
 set clipboard+=unnamedplus 			" use system clipboard
 set shell=/usr/bin/zsh          " set default shell
-
+set completeopt=menuone,noinsert,noselect
 
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear

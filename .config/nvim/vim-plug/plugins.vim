@@ -1,4 +1,3 @@
-" /* spell-checker: disable */
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -7,6 +6,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+  " lsp
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'nvim-treesitter/nvim-treesitter'
   " use ctrl+i,j,h,k to navigate between vim splits & tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " display the indention levels
@@ -18,32 +22,26 @@ call plug#begin('~/.vim/plugged')
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " Markdown
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-  " handle wiki, bookmark, todos
-  " Plug 'vimwiki/vimwiki'
   " Git
   Plug 'airblade/vim-gitgutter'
-  "  Intellisense
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Better Syntax Support
   Plug 'sheerun/vim-polyglot'
+  Plug  'lepture/vim-jinja'
+  Plug 'pantharshit00/vim-prisma'
   " Svelte Syntax highlight
   Plug 'evanleck/vim-svelte', {'branch': 'main'}
-  " njk Syntax Support
-  " Plug 'lepture/vim-jinja'
-  " Pug/Jade support
-  Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
-  " Start Screen
+    " Start Screen
   Plug 'mhinz/vim-startify'
   " Better Comments
   Plug 'tpope/vim-commentary'
   " Closetags
   Plug 'alvan/vim-closetag'
-  " themes
-  Plug 'arzg/vim-colors-xcode'
-  Plug 'gruvbox-community/gruvbox'
-  Plug 'arcticicestudio/nord-vim'
+  Plug 'jiangmiao/auto-pairs'
+  " Markdown
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
+  " Theme
+  Plug 'morhetz/gruvbox'
   " Status Line (airline)
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -52,6 +50,12 @@ call plug#begin('~/.vim/plugged')
   " Add some color
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'junegunn/rainbow_parentheses.vim'
+  " Fern
+  Plug 'lambdalisue/fern.vim'
+  Plug 'lambdalisue/glyph-palette.vim'
+  Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+  Plug 'lambdalisue/fern-git-status.vim'
+  Plug 'lambdalisue/nerdfont.vim'
 call plug#end()
 
 
