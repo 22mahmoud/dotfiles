@@ -1,15 +1,14 @@
 source 	$HOME/.config/nvim/vim-plug/plugins.vim
 source 	$HOME/.config/nvim/general/settings.vim
+lua require('init')
 source 	$HOME/.config/nvim/general/theme.vim
-source 	$HOME/.config/nvim/keys/mappings.vim
 source 	$HOME/.config/nvim/plug-config/closetags.vim
 source 	$HOME/.config/nvim/plug-config/fern.vim
 source 	$HOME/.config/nvim/plug-config/indentLine.vim
 source 	$HOME/.config/nvim/plug-config/fzf.vim
 source 	$HOME/.config/nvim/plug-config/airline.vim
 source 	$HOME/.config/nvim/plug-config/rainbow.vim
-luafile $HOME/.config/nvim/lua/plug-colorizer.lua
-luafile $HOME/.config/nvim/lua/lsp.lua
+
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -21,12 +20,14 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gT    <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> rn    <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+imap <silent> <c-p> <Plug>(completion_trigger)
+
+" nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+" nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gT    <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> rn    <cmd>lua vim.lsp.buf.rename()<CR>
+" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
 let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_trimmed_virtual_text = '40'

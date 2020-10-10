@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/home/ashraf/projects/mahmoudashraf.dev/src/blog/the-life-without-google'
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/ashraf/projects/mahmoudashraf.dev/src/thoughts/1601666637'
+let g:netrw_dirhist_1='/etc/turnserver'
+let g:netrw_dirhist_0='/home/ashraf/projects/veve/app/src/lib/apollo/withApollo'
+let g:netrw_dirhist_9='/home/ashraf/projects/veve/server/src/schema'
+let g:netrw_dirhist_8='/home/ashraf/projects/veve/app/src/graphql/mutations'
+let g:netrw_dirhist_7='/home/ashraf/projects/veve/prisma'
+let g:netrw_dirhist_6='/home/ashraf/projects/veve/node_modules/@protobufjs/path'
+let g:netrw_dirhist_5='/home/ashraf/.config/nvim/keys'
+let g:netrw_dirhist_4='/home/ashraf/.config/nvim/general'
+let g:netrw_dirhist_3='/home/ashraf/.config/nvim/lua'

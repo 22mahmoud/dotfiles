@@ -11,6 +11,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
+  " emmet
+  Plug 'mattn/emmet-vim'
   " use ctrl+i,j,h,k to navigate between vim splits & tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " display the indention levels
@@ -56,6 +58,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'lambdalisue/fern-renderer-nerdfont.vim'
   Plug 'lambdalisue/fern-git-status.vim'
   Plug 'lambdalisue/nerdfont.vim'
+  " Formatter
+  Plug 'mhartington/formatter.nvim'
+  " CSV
+  Plug 'chrisbra/csv.vim'
 call plug#end()
 
 
