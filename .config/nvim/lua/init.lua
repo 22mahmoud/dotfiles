@@ -1,8 +1,9 @@
-vim.cmd('packadd nvim-lspconfig')
-vim.cmd('packadd completion-nvim')
-vim.cmd('packadd diagnostic-nvim')
-vim.cmd('packadd nlua.nvim')
-
-require 'settings'
-require 'theme'
-require 'lsp'
+require '_settings'
+require '_mapping'
+require '_theme'
+require '_colorizer'
+require '_lsp'
+require '_treesitter'
+require '_telescope'
+require '_devicons'
+require '_status'

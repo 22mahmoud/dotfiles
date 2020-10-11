@@ -2,15 +2,19 @@ local wo = vim.wo
 local o = vim.o
 local bo = vim.bo
 
+vim.g.mapleader = ' '
+
 wo.cursorline = true
 wo.relativenumber = true
 wo.signcolumn= 'number'
 
+o.termguicolors = true
 o.smartindent = true
 o.tabstop = 2
 o.shiftwidth = 2
+bo.shiftwidth = 2
 
-o.updatetime = 600
+o.updatetime = 50
 o.hidden = true
 o.backup = false
 o.writebackup = false
@@ -24,4 +28,3 @@ o.ignorecase = true
 o.smartcase = true
 
 o.clipboard = 'unnamedplus'
-
