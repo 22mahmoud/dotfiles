@@ -1,12 +1,12 @@
 add_newline = true
 
 [character]
-symbol = "🚀"
+format = "🚀"
 use_symbol_for_status = false
 
 [cmd_duration]
 min_time = 500
-prefix = "⌛ "
+format = "⌛ "
 
 # [git_branch]
 # symbol = "🌱 "

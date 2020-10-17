@@ -12,8 +12,6 @@
   side-by-side = true
   line-numbers-left-format = ""
   line-numbers-right-format = "│ "
-  syntax-theme = Nord
+  syntax-theme = "Sublime Snazzy"
 [pull]
   rebase = true
-[rebase]
-  autoStash = true

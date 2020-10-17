@@ -21,8 +21,11 @@ bspc config center_pseudo_tiled     true
 bspc config persistent_monitors     true
 bspc config focus_follows_pointer   true
 
-bspc config active_border_color	"#2E3440"
-bspc config focused_border_color "#5E81AC"
+# bspc config active_border_color	"#2E3440"
+# bspc config focused_border_color "#5E81AC"
+
+bspc config active_border_color	"#eaeaea"
+bspc config focused_border_color "#70c0ba"
 
 ###---Rules---###
 bspc rule -a mpv state=fullscreen

@@ -12,7 +12,6 @@ window {
     padding:          2;
 }
 
-
 mainbox {
     border:  0;
     padding: 0;
@@ -21,7 +20,7 @@ mainbox {
 message {
     border:       2px 0 0;
     border-color: @separatorcolor;
-    padding:      2px;
+    padding:      1px;
 }
 
 textbox {
@@ -39,7 +38,7 @@ listview {
 
 element {
     border:  0;
-    padding: 5px;
+    padding: 2px;
 }
 
 element.normal.normal {
@@ -95,8 +94,8 @@ scrollbar {
     padding:      0;
 }
 
-mode-switcher {
-    border:       9px 0 0;
+sidebar {
+    border:       2px 0 0;
     border-color: @separatorcolor;
 }
 

@@ -2,6 +2,7 @@ export JAVA_HOME=/usr/lib/jvm/default
 export DENO_INSTALL="/home/ashraf/.deno"
 export ANDROID_HOME=$HOME/Android/Sdk
 export LESS=-RS
+export CC=clang
 export GOPATH=$(go env GOPATH)
 export GOROOT=$(go env GOROOT)
 

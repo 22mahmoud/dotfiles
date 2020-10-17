@@ -1,17 +1,23 @@
 # apps
-alias vim="nvim"
 alias v="nvim"
 alias sv="sudo -E nvim"
 alias za="zathura"
 alias m="mpv"
 alias yt="youtube-dl"
 alias c="code ."
+alias open="xdg-open"
+alias up='topgrade'
 alias vfm=~/.config/vifm/scripts/vifmrun
+alias mbsync="mbsync -c \"$XDG_CONFIG_HOME/isync/mbsyncrc\""
 
 # youtube-dl
 alias yta-best="youtube-dl --extract-audio --audio-format best "
 alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias ytb="youtube-dl -f bestvideo+bestaudio "
+
+alias updt_nvim="cd ~/.config/nvim && git submodule foreach git pull origin master \
+  && ga . && gc -m 'updt plugins'"
+
 
 
 ### ARCHIVE EXTRACTION
@@ -65,7 +71,7 @@ alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
-alias tk="t kill-session"
+alias tk="t kill-session -t"
 
 # Replace legacy tools with new ones
 if [ "$(command -v exa)" ]; then
@@ -80,7 +86,7 @@ fi
 # Colorized cat.
 if [ "$(command -v bat)" ]; then
     unalias -m 'cat'
-    alias cat='bat -pp --theme="Nord"'
+    alias cat='bat -pp --theme="Sublime Snazzy"'
 fi
 
 # git 
@@ -100,10 +106,10 @@ alias gundo="git reset --soft HEAD^ && git reset all"
 alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
   --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
   %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
+alias gsa="git submodule add"
 
 # scripts
 alias wp='feh --randomize --bg-fil ~/wallpapers/*'
-alias vtop='vtop --theme nord'
 alias rsfetch='rsfetch -N -d -e  -l -r -s -t -u -w -p pacman'
 alias reload='source ~/.config/zsh/.zshrc'
 

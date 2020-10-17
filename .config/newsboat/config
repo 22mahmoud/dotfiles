@@ -1,5 +1,10 @@
-# auto-reload yes
 reload-time 5
+auto-reload yes
+reload-time 120
+reload-threads 4
+download-retries 4
+download-timeout 10
+prepopulate-query-feeds yes
 
 bind-key j down
 bind-key k up
@@ -40,12 +45,13 @@ highlight article ":.*\\(link\\)$" cyan default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
 
-browser "xdg-open %u"
+
+browser linkhandler
 macro , open-in-browser
-macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser "xdg-open %u"
-macro m set browser "mpv --ytdl-format='[height<720]'" ; open-in-browser ; set browser "xdg-open %u"
-macro r set browser "tuir" ; open-in-browser ; set browser "$BROWSER %u"
-
-
+macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser linkhandler 
+macro m set browser "mpv --ytdl-format='[height<720]'" ; open-in-browser ; set browser linkhandler 
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
 
+bookmark-cmd ~/bookmark.sh
+bookmark-interactive no
+bookmark-autopilot yes
