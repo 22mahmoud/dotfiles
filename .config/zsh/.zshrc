@@ -1,7 +1,5 @@
 source ~/.aliases
 
-# rsfetch
-
 autoload colors && colors
 setopt  autocd autopushd # Automatically cd into typed directory.
 
@@ -74,6 +72,3 @@ eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/fzf.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

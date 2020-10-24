@@ -10,8 +10,8 @@
     separator_height = 1
     padding = 10
     horizontal_padding = 10
-    frame_width = 0
-    frame_color = "#aaaaaa"
+    frame_width = 2
+    frame_color = "#a89984"
     separator_color = auto
     sort = yes
     idle_threshold = 120
@@ -76,18 +76,18 @@
     # context = ctrl+shift+period
 
 [urgency_low]
-    background = "#3b4252"
-    foreground = "#ECEFF4"
+    background = "#1d2021"
+    foreground = "#ebdbb2"
     timeout = 10
 
 [urgency_normal]
-    background = "#3b4252"
-    foreground = "#ECEFF4"
+    background = "#1d2021"
+    foreground = "#ebdbb2"
     timeout = 10
 
 [urgency_critical]
-    background = "#BF616A"
-    foreground = "#ECEFF4"
+    background = "#cc241d"
+    foreground = "#ebdbb2"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to

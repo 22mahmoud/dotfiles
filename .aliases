@@ -15,10 +15,7 @@ alias yta-best="youtube-dl --extract-audio --audio-format best "
 alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias ytb="youtube-dl -f bestvideo+bestaudio "
 
-alias updt_nvim="cd ~/.config/nvim && git submodule foreach git pull origin master \
-  && ga . && gc -m 'updt plugins'"
-
-
+alias updt_nvim="cd ~/.config/nvim && git submodule foreach git pull origin master"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>

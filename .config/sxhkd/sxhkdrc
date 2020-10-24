@@ -1,3 +1,5 @@
+# vim: syntax=config
+
 # terminal emulator
 super + Return
     $TERMINAL
@@ -10,7 +12,7 @@ super + t
 super + shift + b
     $BROWSER --private-window
 super + n
-    $TERMINAL -e newsboat -r
+    $TERMINAL --config-file /home/ashraf/.config/alacritty/alacritty-reader.yml -e newsboat -r
 super + e
     $TERMINAL -e neomutt
 
@@ -66,26 +68,18 @@ Print
   screenshot full
 super + Print
   screenshot select
-super + shift + Print
-  record
-super + shift + ctrl + Print
-  kill $(pgrep ffmpeg)
 
 # rofi
 super + ctrl + c
   rofi -show calc -modi calc -no-show-match -no-sort
 super + ctrl + e
   rofimoji
+super + ctrl + p
+ rofi -show p -modi p:rofi-power-menu -width 20 -lines 6 -scroll-method=1 
 
 # System Control
 super + shift + x
     betterlockscreen -l blur
-super + ctrl + p
- rofi -show p -modi p:rofi-power-menu -width 20 -lines 6 -scroll-method=1 
-
-# Lock the screen
-super + shift + e
-  betterlockscreen -l
 
 super + shift + p
    (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ar,us || setxkbmap us,ar
@@ -98,7 +92,7 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
     sound dec
 
-
+# brigthness
 XF86MonBrightnessUp
     brightness inc
 XF86MonBrightnessDown

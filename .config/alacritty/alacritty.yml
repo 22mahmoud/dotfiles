@@ -1,13 +1,9 @@
-background_opacity: 1.0
 draw_bold_text_with_bright_colors: true
-
-env:  
-  TERM: xterm-256color
 
 window:
   padding:
-    x: 0
-    y: 0
+    x: 4
+    y: 2
 
 mouse:
   hide_when_typing: true
@@ -30,62 +26,34 @@ font:
     x: 0
     y: 0
 
-  # colors:
-  #   primary:
-  #     # hard contrast: background = '#1d2021'
-  #     background: '#282828'
-  #     # soft contrast: background = '#32302f'
-  #     foreground: '#ebdbb2'
-  # 
-  #   # Normal colors
-  #   normal:
-  #     black:   '#282828'
-  #     red:     '#cc241d'
-  #     green:   '#98971a'
-  #     yellow:  '#d79921'
-  #     blue:    '#458588'
-  #     magenta: '#b16286'
-  #     cyan:    '#689d6a'
-  #     white:   '#a89984'
-  # 
-  #   # Bright colors
-  #   bright:
-  #     black:   '#928374'
-  #     red:     '#fb4934'
-  #     green:   '#b8bb26'
-  #     yellow:  '#fabd2f'
-  #     blue:    '#83a598'
-  #     magenta: '#d3869b'
-  #     cyan:    '#8ec07c'
-  #     white:   '#ebdbb2'
-
 colors:
-  # Default colors
   primary:
-    background: '#000000'
-    foreground: '#eaeaea'
+    # background: '#282828'
+    # background: '#32302f'
+    background: '#1d2021'
+    foreground: '#ebdbb2'
 
   # Normal colors
   normal:
-    black:   '#000000'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e6c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0ba'
-    white:   '#424242'
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
 
   # Bright colors
   bright:
-    black:   '#666666'
-    red:     '#ff3334'
-    green:   '#9ec400'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#b77ee0'
-    cyan:    '#54ced6'
-    white:   '#2a2a2a'
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
 
 key_bindings:
   - { key: V,         mods: Alt,         action: Paste                }
