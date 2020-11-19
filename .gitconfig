@@ -1,0 +1,17 @@
+[user]
+  name = 22mahmoud
+  email = mahmoudss1997@gmail.com
+[color]
+  ui = true
+[core]
+  pager = delta
+  editor = nvim
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  side-by-side = true
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
+  syntax-theme = "Sublime Snazzy"
+[pull]
+  rebase = true

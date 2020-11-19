@@ -1,0 +1,3 @@
+#!/bin/sh
+
+slock -m "$(cowsay "$(fortune -s)")"

@@ -1,0 +1,23 @@
+# Remote Store
+IMAPStore        mailbox-remote
+Host             mail.mahmoudashraf.dev
+Port             993
+User             hello
+PassCmd          "pass mail.mahmoudashraf.dev"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+
+# Local storage
+MaildirStore  mailbox-local
+Path          ~/Mail/mailbox/
+Inbox         ~/Mail/mailbox/INBOX
+Subfolders    Verbatim
+
+Channel     mailbox
+Master      :mailbox-remote:
+Slave       :mailbox-local:
+Create      Both
+Expunge     Both
+Patterns    *
+SyncState   *
+

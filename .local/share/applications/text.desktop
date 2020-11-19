@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Vim
+Comment=Text Editor
+Exec=/usr/bin/nvim %F
+Terminal=true
+Type=Application
+Categories=TextEditor;
+MimeType=text/plain;

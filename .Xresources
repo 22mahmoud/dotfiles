@@ -1,0 +1,69 @@
+!! Transparency (0-1):
+*.alpha: 1.0
+
+!! Set a default font and font size as below:
+*.font: InconsolataForPowerline Nerd Font 11
+
+#define gruvbox0 #1d2021
+#define gruvbox1 #282828
+#define gruvbox2 #32302f
+#define gruvbox3 #928374
+#define gruvbox4 #a89984
+#define gruvbox5 #ebdbb2
+#define gruvbox6 #cc241d
+#define gruvbox7 #fb4934
+#define gruvbox8 #98971a
+#define gruvbox9 #b8bb26
+#define gruvbox10 #d79921
+#define gruvbox11 #fabd2f
+#define gruvbox12 #458588
+#define gruvbox13 #83a598
+#define gruvbox14 #b16286
+#define gruvbox15 #d3869b
+#define gruvbox16 #689d6a
+#define gruvbox17 #8ec07c
+
+! hard contrast: *background: gruvbox0
+*.background: gruvbox0
+! *background: gruvbox1
+! soft contrast: *background: gruvbox2
+*.foreground: gruvbox5
+! Black + DarkGrey
+*.color0:  gruvbox1
+*.color8:  gruvbox3
+! DarkRed + Red
+*.color1:  gruvbox6
+*.color9:  gruvbox7
+! DarkGreen + Green
+*.color2:  gruvbox8
+*.color10: gruvbox9
+! DarkYellow + Yellow
+*.color3:  gruvbox10
+*.color11: gruvbox11
+! DarkBlue + Blue
+*.color4:  gruvbox12
+*.color12: gruvbox13
+! DarkMagenta + Magenta
+*.color5:  gruvbox14
+*.color13: gruvbox15
+! DarkCyan + Cyan
+*.color6:  gruvbox16
+*.color14: gruvbox17
+! LightGrey + White
+*.color7:  gruvbox4
+*.color15: gruvbox5
+
+! dwm config
+dwm.normbgcolor: gruvbox0
+dwm.normbordercolor: gruvbox1
+dwm.normfgcolor: gruvbox5
+dwm.selbgcolor: gruvbox16
+dwm.selbordercolor: gruvbox16
+dwm.selfgcolor: gruvbox1
+dwm.borderpx: 4
+dwm.snap: 32
+dwm.showbar: 1
+dwm.topbar: 1
+dwm.nmaster: 1
+dwm.resizehints: 1
+dwm.mfact: 0.55
