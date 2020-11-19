@@ -21,6 +21,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="st"
 export BROWSER="firefox-developer-edition"
+export BROWSER_PRIVATE="firefox-developer-edition --private-window"
 export READER="zathura"
 export WM='dwm'
 export VIDEO="mpv"
