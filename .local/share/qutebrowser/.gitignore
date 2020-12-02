@@ -5,3 +5,10 @@ webengine
 history.sqlite
 state
 cmd-history
+node_modules
+yarn*
+package.json
+package-*.json
+crash.log
+history*
+readability.html

@@ -5,10 +5,11 @@ from qutebrowser.config.config import ConfigContainer  # noqa: F401
 config = config  # type: ConfigAPI # noqa: F821 pylint: disable=E0602,C0103
 c = c  # type: ConfigContainer # noqa: F821 pylint: disable=E0602,C0103
 
-import os.path
+import os
 
 config.source('theme.py')
 config.source('redirector.py')
+config.source('search_engines.py')
 config.source('binding.py')
 
 # Misc
@@ -20,9 +21,9 @@ c.auto_save.session = True
 c.session.lazy_restore = True
 c.session.default_name = "default"
 c.backend = 'webengine'
-c.editor.command = [os.environ.get("TERMINAL"), '-e', 'nvim', '{file}', '-c', 'normal {line}G{column0}l']
-c.logging.level.console = 'critical'
-c.logging.level.ram = 'critical'
+c.editor.command = [os.environ.get("TERMINAL"), '-e', 'nvim', '-f' ,'{file}', '-c', 'normal {line}G{column0}l']
+c.logging.level.console = 'debug'
+c.logging.level.ram = 'debug'
 c.url.open_base_url = True
 c.spellcheck.languages = ["en-US"]
 
@@ -34,12 +35,13 @@ c.qt.args = [
 ]
 
 # startpage
-c.url.start_pages = ["file:///home/ashraf/.config/qutebrowser/startpage.html"]
-c.url.default_page = "file:///home/ashraf/.config/qutebrowser/startpage.html"
+default_start_page = "file:///home/ashraf/.config/qutebrowser/startpage.html"
+c.url.start_pages = [default_start_page]
+c.url.default_page = default_start_page
 
 # Darkmode
 c.colors.webpage.prefers_color_scheme_dark = True
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 
 # Content (js, cookies, encoding, privacy, css, etc)
 c.content.pdfjs = False
@@ -78,26 +80,6 @@ c.tabs.title.alignment = 'left'
 c.tabs.title.format = "{index}{audio}: {current_title}"
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
 
-c.url.searchengines = {
-    'DEFAULT': 'http://searx.lukesmith.xyz/?q={}',
-    'sx': 'http://searx.lukesmith.xyz/?q={}',
-    'd': 'https://duckduckgo.com/?q={}',
-    'aw': 'https://wiki.archlinux.org/?search={}',
-    "aur": "https://aur.archlinux.org/packages/?K={}",
-    "arch": "https://www.archlinux.org/packages/?q={}",
-    'w': 'https://en.wikipedia.org/?search={}',
-    'arw': 'https://ar.wikipedia.org/?search={}',
-    'g': 'https://www.google.com/search?&q={}',
-    'sr': 'https://www.reddit.com/r/{unquoted}',
-    'gh': 'https://github.com/search?q={}',
-    'yt': 'https://invidious.snopyta.org/search?q={}',
-    'tw': 'https://nitter.snopyta.org/search?q={}',
-    'twh': 'https://nitter.snopyta.org/{unquoted}',
-    'npm': 'https://www.npmjs.com/search?q={}',
-    "maps": "https://www.openstreetmap.org/search?query={}",
-    "imdb": "https://www.imdb.com/find?ref_=nv_sr_fn&q={}&s=all",
-}
-
 # Fonts
 c.fonts.completion.entry = "8pt monospace"
 c.fonts.downloads = "8pt monospace"
@@ -111,6 +93,10 @@ c.fonts.tabs.selected = "8pt monospace"
 c.fonts.tabs.unselected = "8pt monospace"
 c.fonts.web.family.fixed = "monospace"
 
+# for old.reddit.com expand thread.
+config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
+config.bind(';p', 'hint preview')
+
 # Javascript
 c.content.javascript.enabled = False
 
@@ -122,6 +108,7 @@ js_whitelist = [
     "*://*.reddit.com/*",
     "*://*.snopyta.org/*",
     "*://*.element.io/*",
+    "*://*.dev.to/*",
 ]
 
 for website in js_whitelist:
