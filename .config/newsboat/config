@@ -25,12 +25,12 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-color listnormal cyan default
-color listfocus black yellow standout bold
-color listnormal_unread blue default
-color listfocus_unread yellow default bold
-color info green black bold
-color article white default
+color background white default
+color info cyan default 
+color listnormal white default 
+color listfocus blue default 
+color listnormal_unread cyan default
+color listfocus_unread black cyan
 
 highlight all "---.*---" yellow
 highlight feedlist ".*(0/0))" black

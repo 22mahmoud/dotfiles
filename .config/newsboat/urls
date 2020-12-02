@@ -1,5 +1,5 @@
 "query:→ Unread Articles:unread = \"yes\""
-# "query:Twitter:tags # \"Twitter\""
+#"query:Twitter:tags # \"Twitter\""
 "query:Youtube:tags # \"Youtube\"" 
 
 "--- (News) -------------------------------------------"
@@ -9,7 +9,6 @@ https://hnrss.org/newest?q=svelte "~Svelte - hackernews"
 https://this-week-in-rust.org/rss.xml "Rust"
 https://static.fsf.org/fsforg/rss/jobs.xml "jobs"
 https://smashingmagazine.com/feed "~Smashing Magazine"
-https://davidwalsh.name/feed "~David Walsh"
 https://suckless.org/atom.xml
 
 "--- (Blogs) -------------------------------------------"
@@ -20,7 +19,6 @@ https://www.swyx.io/rss.xml
 https://gideonwolfe.com/index.xml
 https://ishadeed.com/feed.xml
 https://css-tricks.com/feed/
-https://rss.mahmoudashraf.dev/?action=display&bridge=FreeCodeCamp&format=Atom
 https://adrianroselli.com/feed
 https://wattenberger.com/rss
 https://www.sarasoueidan.com/blog/index.xml
@@ -32,75 +30,96 @@ https://unixsheikh.com/feed.rss
 https://www.cambus.net/atom.xml
 https://jcs.org/rss
 https://christine.website/blog.rss
+https://davidwalsh.name/feed
+https://nullprogram.com/feed/
+https://una.im/feed
+https://adactio.com/articles/rss
+https://adrianroselli.com/feed
+https://addyosmani.com/rss.xml
+https://www.carlrippon.com/rss.xml
+https://drewdevault.com/blog/index.xml
+http://eradman.com/atom.xml
+https://hunden.linuxkompis.se/feed.xml
+https://hugotunius.se/feed.xml
+https://sirodoht.com/rss/
+https://uglyduck.ca/atom.xml
+https://matthewstrom.com/feed.xml
+https://www.romanzolotarev.com/rss.xml
+https://jvns.ca/atom.xml
+https://cronokirby.com/posts/index.xml
+https://zupzup.org/index.xml
+https://jlelse.blog/posts.rss
 
 # "--- (Facebook) -------------------------------------------"
 
-# "--- (Twitter) -------------------------------------------"
-# https://nitter.net/dan_abramov/rss "~Dan Abramov" "Twitter"
-# https://nitter.net/kentcdodds/rss "~Kent C. dodds" "Twitter"
-# https://nitter.net/MostafaNageeb/rss "~Mostfa Nageeb" "Twitter"
-# https://nitter.net/addyosmani/rss "~Addy Osmani" "Twitter"
-# https://nitter.net/ryanflorence/rss "~Ryan Florence" "Twitter"
-# https://nitter.net/benawad/rss "~Ben Awad" "Twitter"
-# https://nitter.net/housecor/rss "~Cory House" "Twitter"
-# https://nitter.net/jlengstorf/rss "~Jason Lengstorf" "Twitter"
-# https://nitter.net/jsjoeio/rss "~Joe Previte 🦀" "Twitter"
-# https://nitter.net/tylermcginnis/rss "~Tyler McGinnis" "Twitter"
-# https://nitter.net/DavidKPiano/rss "~David K. 🎹" "Twitter"
-# https://nitter.net/dabit3/rss "~Nader Dabit" "Twitter"
-# https://nitter.net/gabe_g2i/rss "~Gabe Greenberg" "Twitter"
-# https://nitter.net/rauchg/rss "~Guillermo Rauch" "Twitter"
-# https://nitter.net/kamranahmedse/rss "~Kamran Ahmed" "Twitter"
-# https://nitter.net/Rich_Harris/rss "~Rich Harris" "Twitter"
-# https://nitter.net/adamwathan/rss "~Adam Wathan" "Twitter"
-# https://nitter.net/b0rk/rss "~🔎Julia Evans 🔍" "Twitter"
-# https://nitter.net/peggyrayzis/rss "~Peggy Rayzis 👩🏼‍💻" "Twitter"
-# https://nitter.net/tannerlinsley/rss "~Tanner Linsley ⚛️" "Twitter"
-# https://nitter.net/eveporcello/rss "~Eve Porcello" "Twitter"
-# https://nitter.net/jessleenyc/rss "~Jess Lee (she/her)" "Twitter"
-# https://nitter.net/MrAhmadAwais/rss "~Awais" "Twitter"
-# https://nitter.net/johnlindquist/rss "~John Lindquist" "Twitter"
-# https://nitter.net/left_pad/rss "~Henry" "Twitter"
-# https://nitter.net/rwieruch/rss "~Robin Wieruch ⚛️" "Twitter"
-# https://nitter.net/kylemathews/rss "~Kyle Mathews" "Twitter"
-# https://nitter.net/mjackson/rss "~Michael Jackson" "Twitter"
-# https://nitter.net/kadikraman/rss "~Kadi Kraman" "Twitter"
-# https://nitter.net/kyleshevlin/rss "~Kyle Shevlin" "Twitter"
+#"--- (Twitter) -------------------------------------------"
+#https://nitter.snopyta.org/dan_abramov/rss "~Dan Abramov" "Twitter"
+#https://nitter.snopyta.org/kentcdodds/rss "~Kent C. dodds" "Twitter"
+#https://nitter.snopyta.org/addyosmani/rss "~Addy Osmani" "Twitter"
+#https://nitter.snopyta.org/ryanflorence/rss "~Ryan Florence" "Twitter"
+#https://nitter.snopyta.org/benawad/rss "~Ben Awad" "Twitter"
+#https://nitter.snopyta.org/housecor/rss "~Cory House" "Twitter"
+#https://nitter.snopyta.org/jlengstorf/rss "~Jason Lengstorf" "Twitter"
+#https://nitter.snopyta.org/jsjoeio/rss "~Joe Previte 🦀" "Twitter"
+#https://nitter.snopyta.org/tylermcginnis/rss "~Tyler McGinnis" "Twitter"
+#https://nitter.snopyta.org/DavidKPiano/rss "~David K. 🎹" "Twitter"
+#https://nitter.snopyta.org/dabit3/rss "~Nader Dabit" "Twitter"
+#https://nitter.snopyta.org/gabe_g2i/rss "~Gabe Greenberg" "Twitter"
+#https://nitter.snopyta.org/rauchg/rss "~Guillermo Rauch" "Twitter"
+#https://nitter.snopyta.org/kamranahmedse/rss "~Kamran Ahmed" "Twitter"
+#https://nitter.snopyta.org/Rich_Harris/rss "~Rich Harris" "Twitter"
+#https://nitter.snopyta.org/adamwathan/rss "~Adam Wathan" "Twitter"
+#https://nitter.snopyta.org/b0rk/rss "~🔎Julia Evans 🔍" "Twitter"
+#https://nitter.snopyta.org/peggyrayzis/rss "~Peggy Rayzis 👩🏼‍💻" "Twitter"
+#https://nitter.snopyta.org/tannerlinsley/rss "~Tanner Linsley ⚛️" "Twitter"
+#https://nitter.snopyta.org/eveporcello/rss "~Eve Porcello" "Twitter"
+#https://nitter.snopyta.org/jessleenyc/rss "~Jess Lee (she/her)" "Twitter"
+#https://nitter.snopyta.org/MrAhmadAwais/rss "~Awais" "Twitter"
+#https://nitter.snopyta.org/johnlindquist/rss "~John Lindquist" "Twitter"
+#https://nitter.snopyta.org/left_pad/rss "~Henry" "Twitter"
+#https://nitter.snopyta.org/rwieruch/rss "~Robin Wieruch ⚛️" "Twitter"
+#https://nitter.snopyta.org/kylemathews/rss "~Kyle Mathews" "Twitter"
+#https://nitter.snopyta.org/mjackson/rss "~Michael Jackson" "Twitter"
+#https://nitter.snopyta.org/kadikraman/rss "~Kadi Kraman" "Twitter"
+#https://nitter.snopyta.org/kyleshevlin/rss "~Kyle Shevlin" "Twitter"
 
 "--- (Youtube) -------------------------------------------"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCy1H38XrN7hi7wHSClfXPqQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCO94PxO3TmChOqJ45ZQ9RLA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC-8QAzbLcRglXeN_MY9blyw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCJUmE61LxhbhudzUugHL2wQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCRA18QWPzB7FYVyg0WFKC6g "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCTHij3Ac5GizLsn5yB4IX_Q "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC7R7bcH9-KEBDiGNP1mZnmw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCwiCyswBHPe50z7yGkDSDqw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCO1cgjhGzsSYb1rsB4bFe4Q "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCuTdS6ur0JB743juF9K315w "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC_iD0xppBwwsrM9DegC5cQQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCf93fPKwotph47H3_KDcRyg "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCWPY8W-FAZ2HdDiJp2RC_sQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCdttmnJddGQZsXRL_DbqgWA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCQoEz_WidaTa-4yIUfjs5ag "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCi9DV7ai7a8-XgRt5iH9d7Q "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC1fLEeYICmo3O9cUsqIi7HA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCuwTHYdMavwEPsZ6OAkXfig "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCAMQZZXKxFhdr5gvbcy1IuQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCYqCZOwHbnPwyjawKfE21wg "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCvjgXvBlbQiydffZU7m1_aw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC3hA0SYlwTqAqcBjcFTRHkg "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UC806fwFWpiLQV5y-qifzHnA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCNQ47xqc8U6diewfjBFH1_g "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCorzANoC3fX9VVefJHM5wtA "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCJetJ7nDNLlEzDLXv7KIo0w "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCD0b5d9sqNQTjrXfg5ik3eQ "Youtube"
-https://invidious.snopyta.org/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCy1H38XrN7hi7wHSClfXPqQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCO94PxO3TmChOqJ45ZQ9RLA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC-8QAzbLcRglXeN_MY9blyw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCJUmE61LxhbhudzUugHL2wQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCRA18QWPzB7FYVyg0WFKC6g "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCTHij3Ac5GizLsn5yB4IX_Q "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC7R7bcH9-KEBDiGNP1mZnmw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCwiCyswBHPe50z7yGkDSDqw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCO1cgjhGzsSYb1rsB4bFe4Q "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCuTdS6ur0JB743juF9K315w "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC_iD0xppBwwsrM9DegC5cQQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCf93fPKwotph47H3_KDcRyg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCWPY8W-FAZ2HdDiJp2RC_sQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCdttmnJddGQZsXRL_DbqgWA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCQoEz_WidaTa-4yIUfjs5ag "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCi9DV7ai7a8-XgRt5iH9d7Q "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC1fLEeYICmo3O9cUsqIi7HA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCuwTHYdMavwEPsZ6OAkXfig "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCAMQZZXKxFhdr5gvbcy1IuQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCYqCZOwHbnPwyjawKfE21wg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCvjgXvBlbQiydffZU7m1_aw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC3hA0SYlwTqAqcBjcFTRHkg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UC806fwFWpiLQV5y-qifzHnA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCNQ47xqc8U6diewfjBFH1_g "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCorzANoC3fX9VVefJHM5wtA "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCJetJ7nDNLlEzDLXv7KIo0w "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCD0b5d9sqNQTjrXfg5ik3eQ "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg "Youtube"
+https://youtube.com/feeds/videos.xml?channel_id=UCi8XrDg1bK_MJ0goOnbpTMQ "Youtube"
+
+

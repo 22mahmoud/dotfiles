@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# source Xresources file
-xrdb -merge ~/.Xresources &
-
 # change the default cross cursor to left pointer cursor
 xsetroot -cursor_name left_ptr &
 
@@ -30,4 +27,7 @@ dunst &
 # launch picom compositor
 picom --experimental-backend &
 
-exec dwm
+# source Xresources file
+xrdb -merge ~/.Xresources &&
+
+exec dwm 

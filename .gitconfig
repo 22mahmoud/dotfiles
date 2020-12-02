@@ -1,6 +1,11 @@
 [user]
   name = 22mahmoud
-  email = mahmoudss1997@gmail.com
+  email = hello@mahmoudashraf.dev
+  signingKey = Mahmoud Ashraf <hello@mahmoudashraf.dev>
+[commit]
+	gpgsign = true
+[tag]
+  gpgSign = true
 [color]
   ui = true
 [core]
@@ -9,9 +14,13 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
-  side-by-side = true
+  side-by-side = false
   line-numbers-left-format = ""
   line-numbers-right-format = "│ "
   syntax-theme = "Sublime Snazzy"
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [pull]
   rebase = true
+[gpg]
+	program = gpg

@@ -32,7 +32,6 @@ setopt auto_menu
 # general
 zle_highlight+=(paste:none)
 
-
 # zoxied - better file navigation
 eval "$(zoxide init zsh)"
 

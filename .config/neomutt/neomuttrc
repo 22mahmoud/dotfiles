@@ -60,13 +60,18 @@ set menu_scroll
 set tilde
 unset markers
 
+set query_command= "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor        <Tab> complete-query
+
 # email headers and attachments
 ignore                *
 unignore              from: to: cc: bcc: date: subject:
 unhdr_order           *
 hdr_order             from: to: cc: bcc: date: subject:
-auto_view             text/html
-alternative_order     text/plain text/enriched text/html
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
 
 # sidebar patch config
 set sidebar_short_path
@@ -77,10 +82,11 @@ set sidebar_indent_string   = '  ''
 set sidebar_format          = "%B %* [%?N?%N / ?%S]"
 
 # GPG/PGP 
-set crypt_autosign = yes
-set crypt_opportunistic_encrypt = yes
-set pgp_self_encrypt = yes
-set pgp_default_key  = 'hello@mahmoudashraf.dev'
+# set crypt_autosign = yes
+# set crypt_opportunistic_encrypt = yes
+# set pgp_self_encrypt = yes
+# set pgp_default_key  = 'Mahmoud Ashraf <hello@mahmoudashraf.dev>'
+
 
 # account (mailbox)
 set realname      = "Mahmoud Ashraf"

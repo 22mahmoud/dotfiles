@@ -3,10 +3,12 @@ export DENO_INSTALL="/home/ashraf/.deno"
 export ANDROID_HOME="$ANDROID_SDK_HOME/Sdk"
 export LESS=-RS
 export CC=clang
+export VOLTA_HOME=$HOME/.volta
 
 typeset -U PATH path
 
 path=(
+  "$VOLTA_HOME/bin"
   "$ANDROID_HOME/emulator"
 	"$HOME/.gem/ruby/2.7.0/bin"
   "$ANDROID_HOME/tools"

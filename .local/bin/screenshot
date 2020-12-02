@@ -9,11 +9,10 @@ esac
 
 RES=$(dunstify "Maim" "Screenshot Taken" -p --action "default,ok" )
 
-
 ID="$(echo $RES | awk '{print $1}')"
 ACTION="$(echo $RES | awk '{print $2}')"
 
 if [ $ACTION = "default" ]
 then
-    /usr/bin/sxiv $output & dunstify --close=$ID
+    sxiv "${output}" & dunstify --close=$ID
 fi

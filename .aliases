@@ -8,16 +8,17 @@ alias c="code ."
 alias open="xdg-open"
 alias up='topgrade'
 alias vfm=~/.config/vifm/scripts/vifmrun
-alias mbsync="mbsync -c \"$XDG_CONFIG_HOME/isync/mbsyncrc\""
 alias tsm='transmission-remote'
+alias nnn='nnn -c'
 alias cfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias csr='/opt/shell-color-scripts/colorscript.sh random'
 
 # youtube-dl
 alias yta-best="youtube-dl --extract-audio --audio-format best "
 alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias ytb="youtube-dl -f bestvideo+bestaudio "
 
-alias updt_nvim="cd ~/.config/nvim && git submodule foreach git pull origin master"
+alias uv="cd ~/.config/nvim && git submodule foreach git pull origin master"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>

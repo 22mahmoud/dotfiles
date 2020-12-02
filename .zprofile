@@ -1,4 +1,5 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$(du "$HOME/.local/share/go/bin" | cut -f2 | paste -sd ':')"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -20,18 +21,15 @@ export MOZ_LOG="${XDG_DATA_HOME:-$HOME/.local/share}/mozilla"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="st"
-export BROWSER="firefox-developer-edition"
-export BROWSER_PRIVATE="firefox-developer-edition --private-window"
+export BROWSER="qutebrowser"
 export READER="zathura"
 export WM='dwm'
 export VIDEO="mpv"
 export IMAGE="sxiv"
 export COLORTERM="truecolor"
 export MANPAGER="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
-export LESS="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
 
-
-# for android studio
+# Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # nnn config
@@ -40,6 +38,12 @@ export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"
 export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur"
+export NNN_TRASH=1
 
-# Start graphical server on tty1 if not already running.
-[ "$(tty)" = "/dev/tty1" ] && ssh-agent startx
+# mailcap
+export MAILCAPS="${XDG_CONFIG_HOME:-$HOME/.config}/mailcap"
+
+# startx when logged in
+if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+    exec ssh-agent startx
+fi
