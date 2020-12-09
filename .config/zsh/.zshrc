@@ -1,6 +1,3 @@
-# prompt
-eval "$(starship init zsh)"
-
 # source 
 source ~/.aliases
 source /usr/share/zsh/plugins/fzf.zsh
@@ -74,3 +71,5 @@ bindkey -r '^l'
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
 
+# prompt
+eval "$(starship init zsh)"

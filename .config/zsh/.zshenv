@@ -1,4 +1,4 @@
-export JAVA_HOME=/usr/lib/jvm/default
+export JAVA_HOME=/usr/lib/jvm/java-14-j9
 export DENO_INSTALL="/home/ashraf/.deno"
 export ANDROID_HOME="$ANDROID_SDK_HOME/Sdk"
 export LESS=-RS
@@ -9,8 +9,8 @@ typeset -U PATH path
 
 path=(
   "$VOLTA_HOME/bin"
-  "$ANDROID_HOME/emulator"
 	"$HOME/.gem/ruby/2.7.0/bin"
+  "$ANDROID_HOME/emulator"
   "$ANDROID_HOME/tools"
   "$ANDROID_HOME/tools/bin"
   "$ANDROID_HOME/platform-tools"

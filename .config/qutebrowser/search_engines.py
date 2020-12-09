@@ -14,8 +14,10 @@ c.url.searchengines = {
     'tw': 'https://nitter.snopyta.org/search?q={}',
     'twh': 'https://nitter.snopyta.org/{unquoted}',
     'npm': 'https://www.npmjs.com/search?q={}',
+    'mdn': 'https://developer.mozilla.org/en-US/search?q={}',
     "maps": "https://www.openstreetmap.org/search?query={}",
     "imdb": "https://www.imdb.com/find?ref_=nv_sr_fn&q={}&s=all",
     "souq": "https://egypt.souq.com/eg-ar/{}/s/?as=1",
     "olx": "https://www.olx.com.eg/alexandria/q-{}/",
+    "az": "https://www.amazon.com/s?field-keywords={}",
 }

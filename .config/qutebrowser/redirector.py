@@ -1,8 +1,8 @@
 from qutebrowser.api import interceptor, message
 
 REDIRECT_MAP = {
-    'twitter.com': 'nitter.snopyta.org',
-    'www.twitter.com': 'nitter.snopyta.org',
+    # 'twitter.com': 'nitter.snopyta.org',
+    # 'www.twitter.com': 'nitter.snopyta.org',
 
     'instagram.com': 'bibliogram.snopyta.org',
     'www.instagram.com': 'bibliogram.snopyta.org',
