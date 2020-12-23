@@ -1,0 +1,13 @@
+# vim: syntax=config
+
+account            mailbox
+host               mail.mahmoudashraf.dev
+port               587
+protocol           smtp
+auth               on
+passwordeval       "pass mail.mahmoudashraf.dev"
+user               hello
+from               hello@mahmoudashraf.dev
+tls                on
+tls_trust_file    /etc/ssl/certs/ca-certificates.crt
+
