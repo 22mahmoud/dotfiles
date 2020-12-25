@@ -9,7 +9,8 @@ set signature     = "~/.config/neomutt/signature"
 
 mailboxes         "=INBOX" "=drafts" "=sent" "=trash"
 set folder        = "~/Mail/rtn"
-set spoolfile     = "~/Mail/rtn/INBOX"
-set postponed     = "~/Mail/rtn/drafts"
-set trash         = "+/trash"
+set spoolfile     = "+INBOX"
+set record        = "=sent"
+set postponed     = "=drafts"
+set trash         = "=trash"
 

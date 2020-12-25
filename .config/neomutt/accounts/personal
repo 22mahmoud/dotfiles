@@ -8,5 +8,9 @@ set sendmail      = "msmtp -a rubikal"
 set signature     = "~/.config/neomutt/signature"	
 
 mailboxes         "=INBOX" "=Drafts" "=Junk" "=Sent" "=Trash"
+
 set spoolfile     = "+INBOX"
+set record        = "=Sent"
 set postponed     = "=Drafts"
+set trash         = "=Trash"
+
