@@ -45,4 +45,10 @@ bind index <tab> sync-mailbox
 bind index <space> collapse-thread
 
 # Sync all email
-macro index,pager O "<shell-escape>mbsync --config=$XDG_CONFIG_HOME/isync/mbsyncrc -a<enter>" "run mbsync to sync all mail"
+macro index,pager O "<shell-escape>mbsync -a<enter>" "run mbsync to sync all mail"
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rubikal<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rtn<enter><change-folder>!<enter>'
+

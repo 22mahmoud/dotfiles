@@ -1,0 +1,15 @@
+# vim: syntax=muttrc
+source "~/.config/neomutt/normalize"
+
+set folder        = "~/Mail/rtn"
+set realname      = "Mahmoud Ashraf"
+set from          = "mashraf@roadtripnation.org"
+set sendmail      = "msmtp -a rtn"
+set signature     = "~/.config/neomutt/signature"	
+
+mailboxes         "=INBOX" "=drafts" "=sent" "=trash"
+set folder        = "~/Mail/rtn"
+set spoolfile     = "~/Mail/rtn/INBOX"
+set postponed     = "~/Mail/rtn/drafts"
+set trash         = "+/trash"
+

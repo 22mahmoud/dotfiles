@@ -1,13 +1,31 @@
 # vim: syntax=config
 
-account            mailbox
+defaults
+auth              on
+tls               on
+tls_trust_file    /etc/ssl/certs/ca-certificates.crt
+
+# personal
+account            personal
 host               mail.mahmoudashraf.dev
 port               587
-protocol           smtp
-auth               on
 passwordeval       "pass mail.mahmoudashraf.dev"
 user               hello
 from               hello@mahmoudashraf.dev
-tls                on
-tls_trust_file    /etc/ssl/certs/ca-certificates.crt
+
+# rubikal
+account            rubikal
+host               smtp.gmail.com
+port               587
+passwordeval       "pass rubikal"
+user               mahmoud.ashraf@rubikal.com
+from               mahmoud.ashraf@rubikal.com
+
+# rtn
+account            rtn
+host               smtp.gmail.com
+port               587
+passwordeval       "pass rtn"
+user               mashraf@roadtripnation.org
+from               mashraf@roadtripnation.org
 

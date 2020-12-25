@@ -1,7 +1,11 @@
 # vim: syntax=muttrc
 
+# accounts
+folder-hook 'personal' 'source ~/.config/neomutt/accounts/personal'
+folder-hook 'rubikal'  'source ~/.config/neomutt/accounts/rubikal'
+folder-hook 'rtn'      'source ~/.config/neomutt/accounts/rtn'
+
 # pathes
-set folder            = ~/Mail/mailbox
 set tmpdir            = /tmp/mutt
 set header_cache      = ~/.cache/mutt/headers
 set message_cachedir  = ~/.cache/mutt/bodies
@@ -60,6 +64,7 @@ set menu_scroll
 set tilde
 unset markers
 
+# abbok
 set query_command= "abook --mutt-query '%s'"
 macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
 bind editor        <Tab> complete-query
@@ -72,14 +77,19 @@ hdr_order             from: to: cc: bcc: date: subject:
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 
-
 # sidebar patch config
-set sidebar_short_path
-set sidebar_folder_indent
-set sidebar_width           = 25
-set sidebar_divider_char    = ' | '
-set sidebar_indent_string   = '  ''
-set sidebar_format          = "%B %* [%?N?%N / ?%S]"
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set mail_check_stats
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
+bind index,pager \Cp sidebar-prev-new
+bind index,pager \Cn sidebar-next-new
+bind index,pager B sidebar-toggle-visible
 
 # GPG/PGP 
 # set crypt_autosign = yes
@@ -87,14 +97,5 @@ set sidebar_format          = "%B %* [%?N?%N / ?%S]"
 # set pgp_self_encrypt = yes
 # set pgp_default_key  = 'Mahmoud Ashraf <hello@mahmoudashraf.dev>'
 
-
-# account (mailbox)
-set realname      = "Mahmoud Ashraf"
-set from          = "hello@mahmoudashraf.dev"
-set sendmail      = "msmtp -a mailbox"
-unmailboxes       *
-mailboxes         "=INBOX" "=Drafts" "=Junk" "=Sent" "=Trash"
-set spoolfile     = "+INBOX"
-set record        = "=Sent"
-set postponed     = "=Drafts"
-set trash         = "=Trash"
+# Default account
+source ./accounts/personal

@@ -1,5 +1,11 @@
+# default
+Create      Both
+Expunge     Both
+SyncState   *
+
+# personal
 # Remote Store
-IMAPStore        mailbox-remote
+IMAPStore        personal-remote
 Host             mail.mahmoudashraf.dev
 Port             993
 User             hello
@@ -8,16 +14,92 @@ SSLType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
 
 # Local storage
-MaildirStore  mailbox-local
-Path          ~/Mail/mailbox/
-Inbox         ~/Mail/mailbox/INBOX
+MaildirStore  personal-local
+Path          ~/Mail/personal/
+Inbox         ~/Mail/personal/INBOX
 Subfolders    Verbatim
 
-Channel     mailbox
-Master      :mailbox-remote:
-Slave       :mailbox-local:
-Create      Both
-Expunge     Both
+Channel     personal
+Master      :personal-remote:
+Slave       :personal-local:
 Patterns    *
-SyncState   *
+
+
+# rubikal
+# Remote Store
+IMAPStore        rubikal-remote
+Host             imap.gmail.com
+Port             993
+User             mahmoud.ashraf@rubikal.com
+PassCmd          "pass rubikal"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+AuthMechs        LOGIN
+
+# Local storage
+MaildirStore  rubikal-local
+Path          ~/Mail/rubikal/
+Inbox         ~/Mail/rubikal/INBOX
+
+Channel     rubikal-inbox
+Master      :rubikal-remote:
+Slave       :rubikal-local:
+patterns    "INBOX"
+
+Channel     rubikal-sent
+Master      :rubikal-remote:"[Gmail]/Sent Mail"
+Slave       :rubikal-local:sent
+
+Channel     rubikal-trash
+Master      :rubikal-remote:"[Gmail]/Trash"
+Slave       :rubikal-local:trash
+
+Channel     rubikal-drafts
+Master      :rubikal-remote:"[Gmail]/Drafts"
+Slave       :rubikal-local:drafts
+
+Group rubikal
+channel rubikal-inbox
+channel rubikal-sent
+channel rubikal-trash
+channel rubikal-drafts
+
+# rtn
+# Remote Store
+IMAPStore        rtn-remote
+Host             imap.gmail.com
+Port             993
+User             mashraf@roadtripnation.org
+PassCmd          "pass rtn"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+AuthMechs        LOGIN
+
+# Local storage
+MaildirStore  rtn-local
+Path          ~/Mail/rtn/
+Inbox         ~/Mail/rtn/INBOX
+
+Channel     rtn-inbox
+Master      :rtn-remote:
+Slave       :rtn-local:
+patterns    "INBOX"
+
+Channel     rtn-sent
+Master      :rtn-remote:"[Gmail]/Sent Mail"
+Slave       :rtn-local:sent
+
+Channel     rtn-trash
+Master      :rtn-remote:"[Gmail]/Trash"
+Slave       :rtn-local:trash
+
+Channel     rtn-drafts
+Master      :rtn-remote:"[Gmail]/Drafts"
+Slave       :rtn-local:drafts
+
+Group rtn
+channel rtn-inbox
+channel rtn-sent
+channel rtn-trash
+channel rtn-drafts
 

@@ -1,0 +1,14 @@
+# vim: syntax=muttrc
+source "~/.config/neomutt/normalize"
+
+set folder        = "~/Mail/rubikal"
+set realname      = "Mahmoud Ashraf"
+set from          = "mahmoud.ashraf@rubikal.com"
+set sendmail      = "msmtp -a rubikal"
+set signature     = "~/.config/neomutt/signature"	
+
+mailboxes         "=INBOX" "=drafts" "=sent" "=trash"
+set folder        = "~/Mail/rubikal"
+set spoolfile     = "+INBOX"
+set postponed     = "~/Mail/rubikal/drafts"
+set trash         = "+/trash"
