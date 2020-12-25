@@ -4,7 +4,7 @@ source "~/.config/neomutt/normalize"
 set folder        = ~/Mail/personal
 set realname      = "Mahmoud Ashraf"
 set from          = "hello@mahmoudashraf.dev"
-set sendmail      = "msmtp -a rubikal"
+set sendmail      = "msmtp -a personal"
 set signature     = "~/.config/neomutt/signature"	
 
 mailboxes         "=INBOX" "=Drafts" "=Junk" "=Sent" "=Trash"
