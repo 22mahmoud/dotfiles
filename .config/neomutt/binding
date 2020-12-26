@@ -6,7 +6,7 @@ bind attach l view-mailcap
 bind editor <space> noop
 bind pager c imap-fetch-mail
 bind index G last-entry
-bind index g noop
+bind index,pager g noop
 bind index gg first-entry
 bind pager,attach h exit
 bind pager j next-line
@@ -47,8 +47,13 @@ bind index <space> collapse-thread
 # Sync all email
 macro index,pager O "<shell-escape>mbsync -a<enter>" "run mbsync to sync all mail"
 
+# navigation settings
+macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rubikal<enter><change-folder>!<enter>'
 macro index <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rtn<enter><change-folder>!<enter>'
-
