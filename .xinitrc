@@ -13,7 +13,7 @@ setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
 slstatus &
 
 # network manager
-# nm-applet &
+nm-applet &
 
 # speed up keyboard
 xset r rate 280 40 &
@@ -29,5 +29,8 @@ picom --experimental-backend &
 
 # source Xresources file
 xrdb -merge ~/.Xresources &&
+
+xmodmap -e "keycode 117 = Return" -e "keycode 36 = Next" &&
+
 
 exec dwm 
