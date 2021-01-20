@@ -73,6 +73,19 @@ alias tls="t ls"
 alias tn="t new -t"
 alias tk="t kill-session -t"
 
+# docker 
+alias d="docker"
+alias ds="docker ps"
+alias dexec="docker exec -it"
+
+# kubernetes
+alias k="kubectl"
+alias kps="kubectl get pods"
+alias kds="kubectl get deployments"
+alias kss="kubectl get services"
+alias ka="kubectl apply -f"
+alias kd="kubectl delete pod"
+
 # Replace legacy tools with new ones
 if [ "$(command -v exa)" ]; then
     unalias -m 'll'
