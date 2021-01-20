@@ -48,15 +48,15 @@ patterns    "INBOX"
 
 Channel     rubikal-sent
 Master      :rubikal-remote:"[Gmail]/Sent Mail"
-Slave       :rubikal-local:sent
+Slave       :rubikal-local:Sent
 
 Channel     rubikal-trash
 Master      :rubikal-remote:"[Gmail]/Trash"
-Slave       :rubikal-local:trash
+Slave       :rubikal-local:Trash
 
 Channel     rubikal-drafts
 Master      :rubikal-remote:"[Gmail]/Drafts"
-Slave       :rubikal-local:drafts
+Slave       :rubikal-local:Drafts
 
 Group rubikal
 channel rubikal-inbox
@@ -87,15 +87,15 @@ patterns    "INBOX"
 
 Channel     rtn-sent
 Master      :rtn-remote:"[Gmail]/Sent Mail"
-Slave       :rtn-local:sent
+Slave       :rtn-local:Sent
 
 Channel     rtn-trash
 Master      :rtn-remote:"[Gmail]/Trash"
-Slave       :rtn-local:trash
+Slave       :rtn-local:Trash
 
 Channel     rtn-drafts
 Master      :rtn-remote:"[Gmail]/Drafts"
-Slave       :rtn-local:drafts
+Slave       :rtn-local:Drafts
 
 Group rtn
 channel rtn-inbox

@@ -7,10 +7,10 @@ set from          = "mashraf@roadtripnation.org"
 set sendmail      = "msmtp -a rtn"
 set signature     = "~/.config/neomutt/signature"	
 
-mailboxes         "=INBOX" "=drafts" "=sent" "=trash"
-set folder        = "~/Mail/rtn"
+mailboxes         "=INBOX" "=Drafts" "=Sent" "=Trash"
+
 set spoolfile     = "+INBOX"
-set record        = "=sent"
-set postponed     = "=drafts"
-set trash         = "=trash"
+set record        = "=Sent"
+set postponed     = "=Drafts"
+set trash         = "=Trash"
 
