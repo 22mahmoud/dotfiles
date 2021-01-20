@@ -60,10 +60,10 @@ dwm.normfgcolor: gruvbox5
 dwm.selbgcolor: gruvbox16
 dwm.selbordercolor: gruvbox16
 dwm.selfgcolor: gruvbox1
-dwm.borderpx: 4
+dwm.borderpx: 2
 dwm.snap: 32
 dwm.showbar: 1
 dwm.topbar: 1
 dwm.nmaster: 1
 dwm.resizehints: 1
-dwm.mfact: 0.55
+dwm.mfact: 0.50
