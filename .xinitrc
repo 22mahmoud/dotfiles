@@ -13,24 +13,24 @@ setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
 slstatus &
 
 # network manager
-nm-applet &
+# nm-applet &
 
 # speed up keyboard
 xset r rate 280 40 &
-
-# set random wallpaper
-feh --bg-fill --randomize ~/wallpapers/* &
 
 # start dunst notification server
 dunst &
 
 # launch picom compositor
-picom --experimental-backend &
+# picom --experimental-backend &
+
+# set random wallpaper
+# feh --bg-fill --randomize ~/wallpapers/* &
+xsetroot -solid \#1d2021 &&
 
 # source Xresources file
 xrdb -merge ~/.Xresources &&
 
-xmodmap -e "keycode 117 = Return" -e "keycode 36 = Next" &&
-
+# xmodmap -e "keycode 112 = Return" -e "keycode 36 = Prior" &&
 
 exec dwm 

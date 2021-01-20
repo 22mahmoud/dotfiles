@@ -17,10 +17,12 @@
   side-by-side = false
   line-numbers-left-format = ""
   line-numbers-right-format = "│ "
-  syntax-theme = "Sublime Snazzy"
+  syntax-theme = "gruvbox"
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [pull]
   rebase = true
 [gpg]
 	program = gpg
+[init]
+	defaultBranch = main
