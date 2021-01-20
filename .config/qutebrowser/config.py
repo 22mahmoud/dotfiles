@@ -29,10 +29,10 @@ c.spellcheck.languages = ["en-US"]
 
 # qt engin
 c.qt.highdpi = True
-c.qt.args = [
-    "disable-reading-from-canvas",
-    "enable-strict-mixed-content-checking",
-]
+# c.qt.args = [
+#     "disable-reading-from-canvas",
+#     "enable-strict-mixed-content-checking",
+# ]
 
 # startpage
 default_start_page = "file:///home/ashraf/.config/qutebrowser/startpage.html"

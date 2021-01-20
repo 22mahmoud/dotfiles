@@ -7,8 +7,8 @@ REDIRECT_MAP = {
     'instagram.com': 'bibliogram.snopyta.org',
     'www.instagram.com': 'bibliogram.snopyta.org',
 
-    'youtube.com': 'invidious.snopyta.org',
-    'www.youtube.com': 'invidious.snopyta.org',
+    # 'youtube.com': 'invidious.snopyta.org',
+    # 'www.youtube.com': 'invidious.snopyta.org',
 
     'maps.google.com': 'openstreetmap.org',
     'www.maps.google.com': 'openstreetmap.org',
