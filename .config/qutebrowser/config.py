@@ -1,3 +1,5 @@
+config.load_autoconfig(False)
+
 # pylint: disable=C0111
 from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
 from qutebrowser.config.config import ConfigContainer  # noqa: F401
@@ -29,10 +31,10 @@ c.spellcheck.languages = ["en-US"]
 
 # qt engin
 c.qt.highdpi = True
-# c.qt.args = [
-#     "disable-reading-from-canvas",
-#     "enable-strict-mixed-content-checking",
-# ]
+c.qt.args = [
+    "disable-reading-from-canvas",
+    "enable-strict-mixed-content-checking",
+]
 
 # startpage
 default_start_page = "file:///home/ashraf/.config/qutebrowser/startpage.html"
@@ -46,7 +48,8 @@ c.colors.webpage.prefers_color_scheme_dark = True
 # Content (js, cookies, encoding, privacy, css, etc)
 c.content.pdfjs = False
 c.content.autoplay = False
-c.content.host_blocking.enabled = False
+c.content.blocking.enabled = True
+c.content.blocking.method = "adblock"
 c.content.notifications = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
