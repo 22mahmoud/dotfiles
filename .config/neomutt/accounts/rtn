@@ -3,7 +3,7 @@ source "~/.config/neomutt/normalize"
 
 set folder        = "~/Mail/rtn"
 set realname      = "Mahmoud Ashraf"
-set from          = "mashraf@roadtripnation.org"
+set from          = "mahmoud.ashraf@roadtripnation.org"
 set sendmail      = "msmtp -a rtn"
 set signature     = "~/.config/neomutt/signature"	
 

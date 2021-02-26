@@ -13,7 +13,7 @@ setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
 slstatus &
 
 # network manager
-# nm-applet &
+nm-applet &
 
 # speed up keyboard
 xset r rate 280 40 &
@@ -22,11 +22,11 @@ xset r rate 280 40 &
 dunst &
 
 # launch picom compositor
-# picom --experimental-backend &
+picom --experimental-backend &
 
 # set random wallpaper
-# feh --bg-fill --randomize ~/wallpapers/* &
-xsetroot -solid \#1d2021 &&
+feh --bg-fill --randomize ~/wallpapers/* &
+# xsetroot -solid \#1d2021 &
 
 # source Xresources file
 xrdb -merge ~/.Xresources &&

@@ -1,6 +1,6 @@
-# source 
 source ~/.aliases
-source /usr/share/zsh/plugins/fzf.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -78,3 +78,7 @@ bindkey '^v' edit-command-line
 
 # prompt
 eval "$(starship init zsh)"
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

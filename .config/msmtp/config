@@ -26,6 +26,6 @@ account            rtn
 host               smtp.gmail.com
 port               587
 passwordeval       "pass rtn"
-user               mashraf@roadtripnation.org
-from               mashraf@roadtripnation.org
+user               mahmoud.ashraf@roadtripnation.org
+from               mahmoud.ashraf@roadtripnation.org
 

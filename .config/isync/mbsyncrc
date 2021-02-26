@@ -69,7 +69,7 @@ channel rubikal-drafts
 IMAPStore        rtn-remote
 Host             imap.gmail.com
 Port             993
-User             mashraf@roadtripnation.org
+User             mahmoud.ashraf@roadtripnation.org
 PassCmd          "pass rtn"
 SSLType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt

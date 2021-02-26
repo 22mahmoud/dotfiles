@@ -5,39 +5,39 @@
 #   Base16 qutebrowser template by theova and Daniel Mulford
 #   Gruvbox dark, hard scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
-bg0_hard = "#1d2021"
-bg0_soft = '#32302f'
-bg0_normal = '#282828'
+bg0_hard = "#000000"
+bg0_soft = '#000000'
+bg0_normal = '#000000'
 
 bg0 = bg0_normal
-bg1 = "#3c3836"
-bg2 = "#504945"
-bg3 = "#665c54"
-bg4 = "#7c6f64"
+bg1 = "#000000"
+bg2 = "#555555"
+bg3 = "#000000"
+bg4 = "#555555"
 
-fg0 = "#fbf1c7"
-fg1 = "#ebdbb2"
-fg2 = "#d5c4a1"
-fg3 = "#bdae93"
-fg4 = "#a89984"
+fg0 = "#ffffff"
+fg1 = "#eeeeee"
+fg2 = "#ffffff"
+fg3 = "#eeeeee"
+fg4 = "#ffffff"
 
 bright_red = "#fb4934"
-bright_green = "#b8bb26"
-bright_yellow = "#fabd2f"
-bright_blue = "#83a598"
-bright_purple = "#d3869b"
-bright_aqua = "#8ec07c"
-bright_gray = "#928374"
-bright_orange = "#fe8019"
+bright_green = "#ffa0a0"
+bright_yellow = "#d2b580"
+bright_blue = "#92baff"
+bright_purple = "#e0b2d6"
+bright_aqua = "#a0bfdf"
+bright_gray = "#ffffff"
+bright_orange = "#d2b580"
 
-dark_red = "#cc241d"
-dark_green = "#98971a"
-dark_yellow = "#d79921"
-dark_blue = "#458588"
-dark_purple = "#b16286"
-dark_aqua = "#689d6a"
-dark_gray = "#a89984"
-dark_orange = "#d65d0e"
+dark_red = "#ff8059"
+dark_green = "#00fc50"
+dark_yellow = "#eecc00"
+dark_blue = "#29aeff"
+dark_purple = "#feacd0"
+dark_aqua = "#00d3d0"
+dark_gray = "#eeeeee"
+dark_orange = "#ff8059"
 
 ### Completion
 
@@ -289,7 +289,7 @@ c.colors.tabs.odd.bg = bg2
 c.colors.tabs.even.fg = c.colors.tabs.odd.fg
 
 # Background color of unselected even tabs.
-c.colors.tabs.even.bg = bg3
+c.colors.tabs.even.bg = bg2
 
 # Foreground color of selected odd tabs.
 c.colors.tabs.selected.odd.fg = fg2
@@ -304,13 +304,13 @@ c.colors.tabs.selected.even.fg = c.colors.tabs.selected.odd.fg
 c.colors.tabs.selected.even.bg = bg0
 
 # Background color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.bg = dark_aqua
+c.colors.tabs.pinned.even.bg = bg2
 
 # Foreground color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.fg = bg2
+c.colors.tabs.pinned.even.fg = fg2
 
 # Background color of pinned unselected odd tabs.
-c.colors.tabs.pinned.odd.bg = bright_aqua
+c.colors.tabs.pinned.odd.bg = bg2
 
 # Foreground color of pinned unselected odd tabs.
 c.colors.tabs.pinned.odd.fg = c.colors.tabs.pinned.even.fg

@@ -32,16 +32,16 @@ export MANPAGER="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# mailcap
+export MAILCAPS="${XDG_CONFIG_HOME:-$HOME/.config}/mailcap"
+
 # nnn config
 export GUI=1
 export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
 export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_FIFO=/tmp/nnn.fifo
-export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur"
+export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
 export NNN_TRASH=1
-
-# mailcap
-export MAILCAPS="${XDG_CONFIG_HOME:-$HOME/.config}/mailcap"
 
 # startx when logged in
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then

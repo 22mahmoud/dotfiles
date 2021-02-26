@@ -11,6 +11,7 @@
 [core]
   pager = delta
   editor = nvim
+	hooksPath = ~/.config/git/hooks
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -26,3 +27,5 @@
 	program = gpg
 [init]
 	defaultBranch = main
+[alias]
+	ctags = !.git/hooks/ctags

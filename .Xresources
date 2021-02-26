@@ -23,44 +23,63 @@
 #define gruvbox16 #689d6a
 #define gruvbox17 #8ec07c
 
-! hard contrast: *background: gruvbox0
-*.background: gruvbox0
-! *background: gruvbox1
-! soft contrast: *background: gruvbox2
-*.foreground: gruvbox5
+#define modus0  #000000
+#define modus1  #000000
+#define modus2  #555555
+#define modus3  #555555
+#define modus4  #eeeeee
+#define modus5  #ffffff
+#define modus6  #ff8059
+#define modus7  #ffa0a0
+#define modus8  #00fc50
+#define modus9  #88cf88
+#define modus10 #eecc00
+#define modus11 #d2b580
+#define modus12 #458588
+#define modus13 #29aeff
+#define modus14 #feacd0
+#define modus15 #e0b2d6
+#define modus16 #00d3d0
+#define modus17 #a0bfdf
+
+! hard contrast: *background: modus0
+*.background: modus0
+! *background: modus1
+! soft contrast: *background: modus2
+*.foreground: modus5
 ! Black + DarkGrey
-*.color0:  gruvbox1
-*.color8:  gruvbox3
+*.color0:  modus1
+*.color8:  modus3
 ! DarkRed + Red
-*.color1:  gruvbox6
-*.color9:  gruvbox7
+*.color1:  modus6
+*.color9:  modus7
 ! DarkGreen + Green
-*.color2:  gruvbox8
-*.color10: gruvbox9
+*.color2:  modus8
+*.color10: modus9
 ! DarkYellow + Yellow
-*.color3:  gruvbox10
-*.color11: gruvbox11
+*.color3:  modus10
+*.color11: modus11
 ! DarkBlue + Blue
-*.color4:  gruvbox12
-*.color12: gruvbox13
+*.color4:  modus12
+*.color12: modus13
 ! DarkMagenta + Magenta
-*.color5:  gruvbox14
-*.color13: gruvbox15
+*.color5:  modus14
+*.color13: modus15
 ! DarkCyan + Cyan
-*.color6:  gruvbox16
-*.color14: gruvbox17
+*.color6:  modus16
+*.color14: modus17
 ! LightGrey + White
-*.color7:  gruvbox4
-*.color15: gruvbox5
+*.color7:  modus4
+*.color15: modus5
 
 ! dwm config
-dwm.normbgcolor: gruvbox0
-dwm.normbordercolor: gruvbox1
-dwm.normfgcolor: gruvbox5
-dwm.selbgcolor: gruvbox16
-dwm.selbordercolor: gruvbox16
-dwm.selfgcolor: gruvbox1
-dwm.borderpx: 2
+dwm.normbgcolor: modus0
+dwm.normbordercolor: modus1
+dwm.normfgcolor: modus5
+dwm.selbgcolor: modus16
+dwm.selbordercolor: modus16
+dwm.selfgcolor: modus1
+dwm.borderpx: 3
 dwm.snap: 32
 dwm.showbar: 1
 dwm.topbar: 1
