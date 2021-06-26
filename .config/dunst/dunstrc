@@ -17,7 +17,7 @@
     idle_threshold = 120
 
     ### Text ###
-    font = OpenSans 10
+    font = monospace 10
     line_height = 0
     markup = full
     # The format of the message.  Possible variables are:

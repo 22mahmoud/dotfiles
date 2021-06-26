@@ -20,8 +20,8 @@ Inbox         ~/Mail/personal/INBOX
 Subfolders    Verbatim
 
 Channel     personal
-Master      :personal-remote:
-Slave       :personal-local:
+Far      :personal-remote:
+Near       :personal-local:
 Patterns    *
 
 
@@ -42,21 +42,21 @@ Path          ~/Mail/rubikal/
 Inbox         ~/Mail/rubikal/INBOX
 
 Channel     rubikal-inbox
-Master      :rubikal-remote:
-Slave       :rubikal-local:
+Far      :rubikal-remote:
+Near       :rubikal-local:
 patterns    "INBOX"
 
 Channel     rubikal-sent
-Master      :rubikal-remote:"[Gmail]/Sent Mail"
-Slave       :rubikal-local:Sent
+Far      :rubikal-remote:"[Gmail]/Sent Mail"
+Near       :rubikal-local:Sent
 
 Channel     rubikal-trash
-Master      :rubikal-remote:"[Gmail]/Trash"
-Slave       :rubikal-local:Trash
+Far      :rubikal-remote:"[Gmail]/Trash"
+Near       :rubikal-local:Trash
 
 Channel     rubikal-drafts
-Master      :rubikal-remote:"[Gmail]/Drafts"
-Slave       :rubikal-local:Drafts
+Far      :rubikal-remote:"[Gmail]/Drafts"
+Near       :rubikal-local:Drafts
 
 Group rubikal
 channel rubikal-inbox
@@ -69,7 +69,7 @@ channel rubikal-drafts
 IMAPStore        rtn-remote
 Host             imap.gmail.com
 Port             993
-User             mahmoud.ashraf@roadtripnation.org
+User             mashraf@roadtripnation.org
 PassCmd          "pass rtn"
 SSLType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
@@ -81,21 +81,21 @@ Path          ~/Mail/rtn/
 Inbox         ~/Mail/rtn/INBOX
 
 Channel     rtn-inbox
-Master      :rtn-remote:
-Slave       :rtn-local:
+Far      :rtn-remote:
+Near       :rtn-local:
 patterns    "INBOX"
 
 Channel     rtn-sent
-Master      :rtn-remote:"[Gmail]/Sent Mail"
-Slave       :rtn-local:Sent
+Far      :rtn-remote:"[Gmail]/Sent Mail"
+Near       :rtn-local:Sent
 
 Channel     rtn-trash
-Master      :rtn-remote:"[Gmail]/Trash"
-Slave       :rtn-local:Trash
+Far      :rtn-remote:"[Gmail]/Trash"
+Near       :rtn-local:Trash
 
 Channel     rtn-drafts
-Master      :rtn-remote:"[Gmail]/Drafts"
-Slave       :rtn-local:Drafts
+Far      :rtn-remote:"[Gmail]/Drafts"
+Near       :rtn-local:Drafts
 
 Group rtn
 channel rtn-inbox

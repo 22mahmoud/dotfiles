@@ -1,15 +1,15 @@
 #!/bin/bash
 
 if [ "$1" == "inc" ]; then
-    xbacklight -inc 10
+  xbacklight -inc 10 -fps 30
 fi
 
 if [ "$1" == "dec" ]; then
-    xbacklight -dec 10
+  xbacklight -dec 10 -fps 30
 fi
 
 BRIGHTNESS=$(xbacklight -get | cut -d '.' -f 1)
 dunstify \
-    -h string:x-canonical-private-synchronous:"changeBrightness" \
-    " ☀  Brightness" "$BRIGHTNESS%"
+  -h string:x-canonical-private-synchronous:"changeBrightness" \
+  " ☀  Brightness" "$BRIGHTNESS%"
 

@@ -1,3 +1,7 @@
+# devour
+mpv="devour mpv"
+zathura="devour zathura"
+
 # apps
 alias v="nvim"
 alias sv="sudo -E nvim"
@@ -18,7 +22,10 @@ alias yta-best="youtube-dl --extract-audio --audio-format best "
 alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias ytb="youtube-dl -f bestvideo+bestaudio "
 
-alias uv="cd ~/.config/nvim && git submodule foreach git pull origin master"
+# paru
+alias p="paru"
+alias pa="paru -S"
+alias pr="paru -Rcns"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>

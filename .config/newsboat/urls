@@ -10,6 +10,7 @@ https://this-week-in-rust.org/rss.xml "Rust"
 https://static.fsf.org/fsforg/rss/jobs.xml "jobs"
 https://smashingmagazine.com/feed "~Smashing Magazine"
 https://suckless.org/atom.xml
+https://www.30pin.com/rss/ "30pin"
 
 "--- (Blogs) -------------------------------------------"
 https://mahmoudashraf.dev/rss.xml
@@ -121,5 +122,5 @@ https://youtube.com/feeds/videos.xml?channel_id=UCJetJ7nDNLlEzDLXv7KIo0w "Youtub
 https://youtube.com/feeds/videos.xml?channel_id=UCD0b5d9sqNQTjrXfg5ik3eQ "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UCi8XrDg1bK_MJ0goOnbpTMQ "Youtube"
-
+https://youtube.com/feeds/videos.xml?channel_id=UC_Dqmkd6MsRAMfBXEyXTKYw "Youtube"
 

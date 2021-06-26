@@ -60,7 +60,7 @@ argument_parser = argparse.ArgumentParser(
     epilog=EPILOG,
 )
 argument_parser.add_argument('url', nargs='?', default=os.getenv('QUTE_URL'))
-argument_parser.add_argument('--dmenu-invocation', '-d', default='dmenu -i -l 10 -p Bitwarden',
+argument_parser.add_argument('--dmenu-invocation', '-d', default='dmenu',
                              help='Invocation used to execute a dmenu-provider')
 argument_parser.add_argument('--no-insert-mode', '-n', dest='insert_mode', action='store_false',
                              help="Don't automatically enter insert mode")
@@ -104,10 +104,6 @@ def ask_password():
         '-p',
         'Master Password',
         '-P',
-        '-l',
-        '0',
-        '-fn',
-        'monospace:size=12'
     ], universal_newlines=True, stdout=subprocess.PIPE)
     if process.returncode > 0:
         raise Exception('Could not unlock vault')

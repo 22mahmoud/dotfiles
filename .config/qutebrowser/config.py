@@ -42,7 +42,7 @@ c.url.start_pages = [default_start_page]
 c.url.default_page = default_start_page
 
 # Darkmode
-c.colors.webpage.prefers_color_scheme_dark = True
+c.colors.webpage.preferred_color_scheme = "dark"
 # c.colors.webpage.darkmode.enabled = True
 
 # Content (js, cookies, encoding, privacy, css, etc)
@@ -50,19 +50,15 @@ c.content.pdfjs = False
 c.content.autoplay = False
 c.content.blocking.enabled = True
 c.content.blocking.method = "adblock"
-c.content.notifications = False
+c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
 c.content.cookies.accept = 'no-3rdparty'
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
-c.content.headers.user_agent = (
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
-    ' AppleWebKit/537.36 (KHTML, like Gecko)'
-    ' Chrome/79.0.3945.117 Safari/537.36'
-)
+c.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://accounts.google.com/*')
 c.content.headers.accept_language = 'en-US,en;q=0.5'
-c.content.site_specific_quirks = False
+c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False
 c.content.webgl = False
 c.content.headers.do_not_track = True
@@ -106,12 +102,18 @@ c.content.javascript.enabled = False
 js_whitelist = [
     "*://*.github.com/*",
     "*://*.gitlab.com/*",
+    "*://*.youtube.com/*",
+    "*://*.duckduckgo.com/*",
     "*://*.mahmoudashraf.dev/*",
     "*://*.linkedin.com/*",
     "*://*.reddit.com/*",
-    "*://*.snopyta.org/*",
     "*://*.element.io/*",
     "*://*.dev.to/*",
+    "*://*.brave.com/*",
+    "*://*.twitter.com/*",
+    "*://*.vid.puffyan.us/*",
+    "*://*.yewtu.be/*",
+    "*://*.invidious.fdn.fr/*",
 ]
 
 for website in js_whitelist:

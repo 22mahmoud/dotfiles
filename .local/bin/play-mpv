@@ -1,4 +1,0 @@
-#!/bin/sh
-
-notify-send -t 4000 "📺 Playing video" "$(xclip -o)"
-mpv --ytdl-format=22 "$(xclip -o)" || mpv "$(xclip -o)"

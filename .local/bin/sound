@@ -12,18 +12,19 @@ if [ "$1" == "toggle" ]; then
    pactl set-sink-mute 0 toggle
 fi
 
-
 AMIXER=$(amixer sget Master)
 VOLUME=$(echo $AMIXER | grep 'Right:' | awk -F'[][]' '{ print $2 }' | tr -d "%")
 MUTE=$(echo $AMIXER | grep -o '\[off\]' | tail -n 1)
+
 if [ "$VOLUME" -le 20 ]; then
-    ICON=🔈
+  ICON=🔈
 else if [ "$VOLUME" -le 60 ]; then
-         ICON=🔉
-     else 
-         ICON=🔊
-     fi
+  ICON=🔉
+else 
+  ICON=🔊
 fi
+fi
+
 if [ "$MUTE" == "[off]" ]; then
     ICON=🔇
 fi 

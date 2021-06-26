@@ -2,7 +2,7 @@ add_newline = true
 
 [character]
 # format = "🚀"
-use_symbol_for_status = false
+# use_symbol_for_status = false
 
 [cmd_duration]
 min_time = 500
@@ -17,7 +17,7 @@ format = "⌛ "
 commit_hash_length = 4
 
 [git_state]
-progress_divider = " of "
+# progress_divider = " of "
 cherry_pick = "🍒 PICKING"
 
 [git_status]
@@ -30,8 +30,7 @@ stashed = "📦"
 modified = "📝"
 staged.value = "++"
 staged.style = "green"
-staged_count.enabled = true
-staged_count.style = "green"
+staged.enabled = true
 renamed = "👅"
 deleted = "🗑"
 
@@ -41,7 +40,7 @@ symbol = " "
 [conda]
 symbol = " "
 
-[docker]
+[docker_context]
 symbol = " "
 
 [elixir]
@@ -56,8 +55,8 @@ symbol = " "
 [golang]
 symbol = " "
 
-[haskell]
-symbol = " "
+# [haskell]
+# symbol = " "
 
 [hg_branch]
 symbol = " "

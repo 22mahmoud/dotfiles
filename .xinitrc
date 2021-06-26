@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# source Xresources file
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
+# hotkey daemon
+sxhkd &
+
 # change the default cross cursor to left pointer cursor
 xsetroot -cursor_name left_ptr &
 
@@ -25,12 +31,7 @@ dunst &
 picom --experimental-backend &
 
 # set random wallpaper
-feh --bg-fill --randomize ~/wallpapers/* &
-# xsetroot -solid \#1d2021 &
+styli.sh -s nature &
 
-# source Xresources file
-xrdb -merge ~/.Xresources &&
-
-# xmodmap -e "keycode 112 = Return" -e "keycode 36 = Prior" &&
-
-exec dwm 
+# launch the wm
+exec dwm

@@ -1,6 +1,6 @@
 # Bindings for normal mode
-config.bind('V', 'spawn mpv --ytdl-format="[height<=?720]" {url}')
-config.bind(',v', 'hint links spawn mpv --ytdl-format="[height<=?720]" {hint-url}')
+config.bind('V', 'spawn mpv --ytdl-format="[height<=?1080]" {url}')
+config.bind(',v', 'hint links spawn mpv --ytdl-format="[height<=?1080]" {hint-url}')
 config.bind('M', 'spawn mpv --ytdl-format="[height<=?480]" {url}')
 config.bind(',m', 'hint links spawn mpv --ytdl-format="[height<=?480]" {hint-url}')
 config.bind(',p', 'spawn --userscript qute-bitwarden --auto-lock 60480000')
@@ -21,7 +21,7 @@ config.unbind('d')
 config.unbind('D')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
-config.bind('<Ctrl-e>', 'open-editor')
+config.bind('<Ctrl-e>', 'edit-text')
 
 # Bindings for insert mode
 config.bind('<Ctrl-a>', 'fake-key <Home>', mode='insert')

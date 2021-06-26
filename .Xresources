@@ -1,9 +1,3 @@
-!! Transparency (0-1):
-*.alpha: 1.0
-
-!! Set a default font and font size as below:
-*.font: InconsolataForPowerline Nerd Font 11
-
 #define gruvbox0 #1d2021
 #define gruvbox1 #282828
 #define gruvbox2 #32302f
@@ -23,66 +17,55 @@
 #define gruvbox16 #689d6a
 #define gruvbox17 #8ec07c
 
-#define modus0  #000000
-#define modus1  #000000
-#define modus2  #555555
-#define modus3  #555555
-#define modus4  #eeeeee
-#define modus5  #ffffff
-#define modus6  #ff8059
-#define modus7  #ffa0a0
-#define modus8  #00fc50
-#define modus9  #88cf88
-#define modus10 #eecc00
-#define modus11 #d2b580
-#define modus12 #458588
-#define modus13 #29aeff
-#define modus14 #feacd0
-#define modus15 #e0b2d6
-#define modus16 #00d3d0
-#define modus17 #a0bfdf
-
-! hard contrast: *background: modus0
-*.background: modus0
-! *background: modus1
-! soft contrast: *background: modus2
-*.foreground: modus5
+*.cursorColor: gruvbox17
+! hard contrast: *background: gruvbox0
+*.background: gruvbox0
+! *background: gruvbox1
+! soft contrast: *background: gruvbox2
+*.foreground: gruvbox5
 ! Black + DarkGrey
-*.color0:  modus1
-*.color8:  modus3
+*.color0:  gruvbox1
+*.color8:  gruvbox3
 ! DarkRed + Red
-*.color1:  modus6
-*.color9:  modus7
+*.color1:  gruvbox6
+*.color9:  gruvbox7
 ! DarkGreen + Green
-*.color2:  modus8
-*.color10: modus9
+*.color2:  gruvbox8
+*.color10: gruvbox9
 ! DarkYellow + Yellow
-*.color3:  modus10
-*.color11: modus11
+*.color3:  gruvbox10
+*.color11: gruvbox11
 ! DarkBlue + Blue
-*.color4:  modus12
-*.color12: modus13
+*.color4:  gruvbox12
+*.color12: gruvbox13
 ! DarkMagenta + Magenta
-*.color5:  modus14
-*.color13: modus15
+*.color5:  gruvbox14
+*.color13: gruvbox15
 ! DarkCyan + Cyan
-*.color6:  modus16
-*.color14: modus17
+*.color6:  gruvbox16
+*.color14: gruvbox17
 ! LightGrey + White
-*.color7:  modus4
-*.color15: modus5
+*.color7:  gruvbox4
+*.color15: gruvbox5
+
+!! Transparency (0-1):
+*.alpha: 0.8
+
+!! Set a default font and font size as below:
+*.font: mono:pixelsize=13:antialias=true:autohint=true
+
+*.normbgcolor: gruvbox0
+*.normbordercolor: gruvbox1
+*.normfgcolor: gruvbox5
+*.selbgcolor: gruvbox16
+*.selbordercolor: gruvbox16
+*.selfgcolor: gruvbox1
 
 ! dwm config
-dwm.normbgcolor: modus0
-dwm.normbordercolor: modus1
-dwm.normfgcolor: modus5
-dwm.selbgcolor: modus16
-dwm.selbordercolor: modus16
-dwm.selfgcolor: modus1
 dwm.borderpx: 3
 dwm.snap: 32
 dwm.showbar: 1
 dwm.topbar: 1
 dwm.nmaster: 1
-dwm.resizehints: 1
+dwm.resizehints: 0
 dwm.mfact: 0.50
