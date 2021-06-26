@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, text/html, charset=UTF-8" http-equiv="Content-Type">
     </meta>
-    <title>qutebrowser</title>
+    <title>[QUESTION] Why are `userscripts` and `greasemonkey userscripts` read from the data path instead of the config path?</title>
     <style type="text/css">
         :root {
           /* fonts */
@@ -95,4 +95,10 @@
     SAwLTIgMC44OTUtMiAyczAuODk1IDIgMiAyaDIwYzEuMTEgMCAyLTAuODk1IDItMnMtMC44OTUtMi0yLTJ6bTAgOGgtMjBjLTEuMTEgMC0yIDAuODk1LTIg
     MnMwLjg5NSAyIDIgMmgyMGMxLjExIDAgMi0wLjg5NSAyLTJzLTAuODk1LTItMi0yem0tMTIgOGgtOGMtMS4xMSAwLTIgMC44OTUtMiAyczAuODk1IDIgMiA
     yaDhjMS4xMSAwIDItMC44OTUgMi0ycy0wLjg5NS0yLTItMnoiIGZpbGw9IiNmZmYiLz4KPC9nPgo8L3N2Zz4K"/>
-</head><div id="readability-page-1" class="page"><div id="searchexpando"><p><label>limit my search to r/qutebrowser</label><label>include NSFW results</label></p><div id="moresearchinfo"><p><a href="#" id="search_hidemore">[-]</a></p><p>use the following search parameters to narrow your results:</p><dl><dt>subreddit:<i>subreddit</i></dt><dd>find submissions in "subreddit"</dd><dt>author:<i>username</i></dt><dd>find submissions by "username"</dd><dt>site:<i>example.com</i></dt><dd>find submissions from "example.com"</dd><dt>url:<i>text</i></dt><dd>search for "text" in url</dd><dt>selftext:<i>text</i></dt><dd>search for "text" in self post contents</dd><dt>self:yes (or self:no)</dt><dd>include (or exclude) self posts</dd><dt>nsfw:yes (or nsfw:no)</dt><dd>include (or exclude) results marked as NSFW</dd></dl><p>e.g. <code>subreddit:aww site:imgur.com dog</code></p><p><a href="https://www.reddit.com/wiki/search">see the search faq for details.</a></p></div><p><a href="https://www.reddit.com/wiki/search" id="search_showmore">advanced search: by author, subreddit...</a></p></div></div>
+</head><div id="readability-page-1" class="page"><div><div><p>Once a year or so, a discussion like "does $thing really belong at $place" pops up, and people usually have different opinions on those (<em>especially</em> when it comes to macOS, see <a href="https://github.com/qutebrowser/qutebrowser/issues/383">part 1</a> and <a href="https://github.com/qutebrowser/qutebrowser/issues/5179">part 2</a>, but there also have been various "does this belong to data or config" discussions as well).</p>
+
+<p>In this case, whoever implemented those locations (wasn't me) thought it was a good default, and I agreed. I'm not going to spend any more time discussing which location would be right and which isn't (been there before, and usually there are good arguments for/against both). For userscripts and greasemonkey files, I suppose it'd be possible for qutebrowser to read from both paths though, so I <a href="https://github.com/qutebrowser/qutebrowser/issues/5615">opened an issue</a>.</p>
+
+<p>FWIW as a workaround, you can use <code>:spawn --userscript</code> with a full path to a script and/or symlink those directories to inside <code>~/.config/qutebrowser</code>.</p>
+</div>
+</div></div>

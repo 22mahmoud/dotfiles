@@ -1,3 +1,8 @@
+from qutebrowser.config.configfiles import ConfigAPI
+
+config: ConfigAPI = config # type: ignore
+
+
 # Bindings for normal mode
 config.bind('V', 'spawn mpv --ytdl-format="[height<=?1080]" {url}')
 config.bind(',v', 'hint links spawn mpv --ytdl-format="[height<=?1080]" {hint-url}')
@@ -21,11 +26,15 @@ config.unbind('d')
 config.unbind('D')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
-config.bind('<Ctrl-e>', 'edit-text')
+
+# for old.reddit.com expand thread.
+config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
+config.bind(';p', 'hint preview')
 
 # Bindings for insert mode
+config.bind('<Ctrl+Shift+e>', 'edit-text', mode='insert')
 config.bind('<Ctrl-a>', 'fake-key <Home>', mode='insert')
-config.bind('<Ctrl-n>', 'fake-key <End>', mode='insert')
+config.bind('<Ctrl-e>', 'fake-key <End>', mode='insert')
 config.bind('<Ctrl-d>', 'fake-key <Delete>', mode='insert')
 config.bind('<Ctrl-h>', 'fake-key <Backspace>', mode='insert')
 config.bind('<Ctrl-k>', 'fake-key <Shift-End> ;; fake-key <Delete>', mode='insert')

@@ -1,13 +1,12 @@
-config.load_autoconfig(False)
-
-# pylint: disable=C0111
-from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
-from qutebrowser.config.config import ConfigContainer  # noqa: F401
-
-config = config  # type: ConfigAPI # noqa: F821 pylint: disable=E0602,C0103
-c = c  # type: ConfigContainer # noqa: F821 pylint: disable=E0602,C0103
-
 import os
+
+from qutebrowser.config.configfiles import ConfigAPI
+from qutebrowser.config.config import ConfigContainer
+
+config: ConfigAPI = config # type: ignore
+c: ConfigContainer = c # type: ignore
+
+config.load_autoconfig(False)
 
 config.source('theme.py')
 config.source('redirector.py')
@@ -53,7 +52,7 @@ c.content.blocking.method = "adblock"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
-c.content.cookies.accept = 'no-3rdparty'
+c.content.cookies.accept = 'never'
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://accounts.google.com/*')
@@ -92,10 +91,6 @@ c.fonts.tabs.selected = "8pt monospace"
 c.fonts.tabs.unselected = "8pt monospace"
 c.fonts.web.family.fixed = "monospace"
 
-# for old.reddit.com expand thread.
-config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
-config.bind(';p', 'hint preview')
-
 # Javascript
 c.content.javascript.enabled = False
 
@@ -117,5 +112,7 @@ js_whitelist = [
 ]
 
 for website in js_whitelist:
+    config.set('content.cookies.accept', 'no-3rdparty', website)
     with config.pattern(website) as p:
         p.content.javascript.enabled = True
+

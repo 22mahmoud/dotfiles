@@ -4,6 +4,9 @@
 #   base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 #   Base16 qutebrowser template by theova and Daniel Mulford
 #   Gruvbox dark, hard scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+from qutebrowser.config.config import ConfigContainer
+
+c: ConfigContainer = c # type: ignore
 
 bg0_hard = "#1d2021"
 bg0_soft = '#32302f'
