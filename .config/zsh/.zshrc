@@ -14,6 +14,8 @@ fi
 autoload colors && colors
 setopt  autocd autopushd # Automatically cd into typed directory.
 
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -24,7 +26,7 @@ autoload -U compinit
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 _comp_options+=(globdots)
 unsetopt menu_complete
 unsetopt flowcontrol
@@ -81,7 +83,3 @@ eval "$(starship init zsh)"
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-source ~/.aliases
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

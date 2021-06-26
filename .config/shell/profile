@@ -1,0 +1,72 @@
+#!bin/zsh
+
+# add ~/.local/bin to $PATH
+export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+
+# set up XDG env variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XINITRC="/home/ashraf/.config/x11/xinitrc"
+
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export GOPATH="$XDG_DATA_HOME/go"
+export MBSYNCRC="$XDG_CONFIG_HOME/isync/mbsyncrc"
+export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
+export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"
+export SSB_HOME="$XDG_DATA_HOME/zoom"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
+export PM2_HOME="$XDG_DATA_HOME/pm2"
+export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
+export PYTHONHISTFILE="$XDG_CACHE_HOME/python_history"
+export PYTHONSTARTUP=~/.config/python/pythonrc
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export LESSHISTFILE=-
+export REDISCLI_HISTFILE="$XDG_CACHE_HOME/redis/rediscli_history"
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
+export RANDFILE="$XDG_CACHE_HOME/rnd"
+export VIMINIT='if has("nvim") | so $XDG_CONFIG_HOME/nvim/init.vim | else | set nocp | so $XDG_CONFIG_HOME/vim/vimrc | endif'
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
+export DENO_INSTALL="$XDG_DATA_HOME/deno"
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export HISTFILE="$XDG_DATA_HOME/bash/history"
+
+# Default programs:
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERMINAL="st"
+export BROWSER="qutebrowser"
+export READER="zathura"
+export WM='dwm'
+export VIDEO="mpv"
+export IMAGE="sxiv"
+export COLORTERM="truecolor"
+export MANPAGER="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
+
+# Fix for Java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+# nnn config
+export GUI=1
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
+export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
+export NNN_TRASH=1
+
+# startx when logged in
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
+  exec ssh-agent startx "$XINITRC"

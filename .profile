@@ -1,1 +1,1 @@
-/home/ashraf/.zprofile
+.config/shell/profile

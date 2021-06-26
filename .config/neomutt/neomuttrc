@@ -65,8 +65,8 @@ set tilde
 unset markers
 
 # abbok
-set query_command= "abook --mutt-query '%s'"
-macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+set query_command= "abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK --add-email-quiet<return>" "Add this sender to Abook"
 bind editor        <Tab> complete-query
 
 # email headers and attachments
