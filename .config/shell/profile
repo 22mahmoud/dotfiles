@@ -41,6 +41,7 @@ export VIMINIT='if has("nvim") | so $XDG_CONFIG_HOME/nvim/init.vim | else | set 
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
 export DENO_INSTALL="$XDG_DATA_HOME/deno"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 
 # Default programs:

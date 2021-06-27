@@ -1,3 +1,5 @@
+# set ft=config
+
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -vI"
@@ -20,7 +22,7 @@ alias tsm='transmission-remote'
 alias nnn='nnn -c'
 alias mbsync='mbsync -c $MBSYNCRC'
 alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
-alias cfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfg='git --git-dir=$XDG_DATA_HOME/cfg/ --work-tree=$HOME'
 
 # youtube-dl
 alias yta-best="youtube-dl --extract-audio --audio-format best "
