@@ -39,3 +39,10 @@ super + alt + {equal, minus}
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
   brightness {inc, dec}
+
+Print
+  screenshot full &
+
+shift + Print
+  screenshot select &
+
