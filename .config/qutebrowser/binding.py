@@ -26,6 +26,7 @@ config.unbind('d')
 config.unbind('D')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
+config.bind('zl', 'spawn --userscript localhost list')
 
 # for old.reddit.com expand thread.
 config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
