@@ -15,13 +15,13 @@ CertificateFile  /etc/ssl/certs/ca-certificates.crt
 
 # Local storage
 MaildirStore  personal-local
-Path          ~/Mail/personal/
-Inbox         ~/Mail/personal/INBOX
+Path          ~/.local/share/mail/personal/
+Inbox         ~/.local/share/mail/personal/INBOX
 Subfolders    Verbatim
 
 Channel     personal
-Far      :personal-remote:
-Near       :personal-local:
+Far         :personal-remote:
+Near        :personal-local:
 Patterns    *
 
 
@@ -38,13 +38,13 @@ AuthMechs        LOGIN
 
 # Local storage
 MaildirStore  rubikal-local
-Path          ~/Mail/rubikal/
-Inbox         ~/Mail/rubikal/INBOX
+Path          ~/.local/share/mail/rubikal/
+Inbox         ~/.local/share/mail/rubikal/INBOX
 
-Channel     rubikal-inbox
-Far      :rubikal-remote:
+Channel    rubikal-inbox
+Far        :rubikal-remote:
 Near       :rubikal-local:
-patterns    "INBOX"
+patterns   "INBOX"
 
 Channel     rubikal-sent
 Far      :rubikal-remote:"[Gmail]/Sent Mail"
@@ -77,20 +77,20 @@ AuthMechs        LOGIN
 
 # Local storage
 MaildirStore  rtn-local
-Path          ~/Mail/rtn/
-Inbox         ~/Mail/rtn/INBOX
+Path          ~/.local/share/mail/rtn/
+Inbox         ~/.local/share/mail/rtn/INBOX
 
-Channel     rtn-inbox
-Far      :rtn-remote:
-Near       :rtn-local:
-patterns    "INBOX"
+Channel       rtn-inbox
+Far           :rtn-remote:
+Near          :rtn-local:
+patterns      "INBOX"
 
-Channel     rtn-sent
-Far      :rtn-remote:"[Gmail]/Sent Mail"
-Near       :rtn-local:Sent
+Channel       rtn-sent
+Far           :rtn-remote:"[Gmail]/Sent Mail"
+Near          :rtn-local:Sent
 
 Channel     rtn-trash
-Far      :rtn-remote:"[Gmail]/Trash"
+Far         :rtn-remote:"[Gmail]/Trash"
 Near       :rtn-local:Trash
 
 Channel     rtn-drafts

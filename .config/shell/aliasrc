@@ -100,21 +100,8 @@ alias kss="kubectl get services"
 alias ka="kubectl apply -f"
 alias kd="kubectl delete pod"
 
-# Replace legacy tools with new ones
-if [ "$(command -v exa)" ]; then
-    unalias -m 'll'
-    unalias -m 'l'
-    unalias -m 'la'
-    unalias -m 'ls'
-    alias ls='exa -G  --color auto --icons -a -s type'
-    alias ll='exa -l --color always --icons -a -s type'
-fi
-
-# Colorized cat.
-if [ "$(command -v bat)" ]; then
-    unalias -m 'cat'
-    alias cat="bat -p -p --theme=gruvbox"
-fi
+alias ls="ls --color=auto -a"
+alias ll="ls --color=auto -a -l"
 
 # git 
 alias g='git'

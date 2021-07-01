@@ -1,4 +1,4 @@
-# vim: filetype=muttrc
+# vim: syntax=neomuttrc
 
 # Header colors:
 color header blue default ".*"

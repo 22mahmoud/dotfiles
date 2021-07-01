@@ -1,14 +1,14 @@
-# vim: syntax=muttrc
+# vim: syntax=neomuttrc
 
 # accounts
-folder-hook 'personal' 'source ~/.config/neomutt/accounts/personal'
-folder-hook 'rubikal'  'source ~/.config/neomutt/accounts/rubikal'
-folder-hook 'rtn'      'source ~/.config/neomutt/accounts/rtn'
+folder-hook 'personal' 'source $XDG_CONFIG_HOME/neomutt/accounts/personal'
+folder-hook 'rubikal'  'source $XDG_CONFIG_HOME/neomutt/accounts/rubikal'
+folder-hook 'rtn'      'source $XDG_CONFIG_HOME/neomutt/accounts/rtn'
 
 # pathes
 set tmpdir            = /tmp/mutt
-set header_cache      = ~/.cache/mutt/headers
-set message_cachedir  = ~/.cache/mutt/bodies
+set header_cache      = $XDG_CACHE_HOME/mutt/headers
+set message_cachedir  = $XDG_CACHE_HOME/mutt/bodies
 set mailcap_path      = $XDG_CONFIG_HOME/neomutt/mailcap
 source                $XDG_CONFIG_HOME/neomutt/colors
 source                $XDG_CONFIG_HOME/neomutt/binding
@@ -17,27 +17,27 @@ source                $XDG_CONFIG_HOME/neomutt/binding
 set editor          = "$EDITOR"
 
 # main options
-set envelope_from                 # which from?
-set mbox_type       = Maildir
-set fast_reply			              # skip to compose when replying
-set edit_headers                  # show headers when composing
-set askcc                         # ask for CC:
-set fcc_attach			              # save attachments with the body
-set forward_format  = "Fwd: %s"   # format of subject when forwarding
-set forward_decode                # decode when forwarding
-set reply_to                      # reply to Reply to: field
-set reverse_name		              # reply as whomever it was to
-set include                       # include message in replies
-set forward_quote		              # include message in forwards
-set mime_forward    = yes		      # attachments are forwarded with mail
-set sleep_time      = 0		        # Pause 0 seconds for informational messages
-set markers         = no		      # Disables the `+` displayed at line wraps
-set mark_old        = no		      # Unread mail stay unread until read
-set wait_key        = no		      # mutt won't ask "press key to continue"
-set mail_check      = 60          # to avoid lags using IMAP with some email providers (yahoo for example)
-unset sig_dashes                  # no dashes before sig
-unset mime_forward                # forward attachments as part of body
-unset mark_old                    # read/new is good enough for me
+set envelope_from                    # which from?
+set mbox_type           = Maildir
+set fast_reply                       # skip to compose when replying
+set edit_headers                     # show headers when composing
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+set forward_format      = "Fwd: %s"  # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set mime_forward        = yes        # attachments are forwarded with mail
+set sleep_time          = 0          # Pause 0 seconds for informational messages
+set markers             = no         # Disables the `+` displayed at line wraps
+set mark_old            = no         # Unread mail stay unread until read
+set wait_key            = no         # mutt won't ask "press key to continue"
+set mail_check          = 60         # to avoid lags using IMAP with some email providers (yahoo for example)
+unset sig_dashes                     # no dashes before sig
+unset mime_forward                   # forward attachments as part of body
+unset mark_old                       # read/new is good enough for me
 unset confirmappend
 unset move
 unset beep_new
@@ -98,4 +98,4 @@ bind index,pager B sidebar-toggle-visible
 # set pgp_default_key  = 'Mahmoud Ashraf <hello@mahmoudashraf.dev>'
 
 # Default account
-source ./accounts/personal
+source "$XDG_CONFIG_HOME/neomutt/accounts/personal"

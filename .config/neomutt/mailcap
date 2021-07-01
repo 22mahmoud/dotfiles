@@ -1,10 +1,11 @@
 # HTML
 text/plain; $EDITOR %s ;
+text/html; qutebrowser -C $XDG_CONFIG_HOME/qutebrowser/theme.py --temp-basedir -s content.proxy http://localhost:6969 -s content.javascript.enabled false %s; needsterminal; nametemplate=%s.html
+
 # text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -collapse_br_tags -dump %s; nametemplate=%s.html; copiousoutput
 # text/html; elinks -dump ; copiousoutput;
 # text/html; qutebrowser %s; needsterminal; nametemplate=%s.html
 # text/html; w3m -v -F -o display_link_number=1 -T text/html %s; edit=nvim; compose=nvim; nametemplate=%s.html; copiousoutput; needsterminal
-text/html; qutebrowser -C $XDG_CONFIG_HOME/qutebrowser/theme.py --temp-basedir -s content.proxy http://localhost:666 -s content.javascript.enabled false %s; needsterminal; nametemplate=%s.html
 
 #PDFs
 application/pdf; /usr/bin/zathura %s pdf

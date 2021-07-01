@@ -1,8 +1,5 @@
 #!bin/zsh
 
-# add ~/.local/bin to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
-
 # set up XDG env variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -43,6 +40,8 @@ export DENO_INSTALL="$XDG_DATA_HOME/deno"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
+export QT_QPA_PLATFORMTHEME=qt5ct
+export MAIL="$XDG_DATA_HOME/mail"
 
 # Default programs:
 export EDITOR="nvim"
@@ -68,6 +67,26 @@ export NNN_FIFO=/tmp/nnn.fifo
 export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
 export NNN_TRASH=1
 
+# fzf config
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# path
+typeset -U PATH path
+
+path=(
+  "$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+  "$VOLTA_HOME/bin"
+  "$VOLTA_HOME/tools/image/packages/vscode-langservers-extracted/bin"
+  "$CARGO_HOME/bin"
+  "$DENO_INSTALL/bin"
+  "$GO_PATH/bin"
+  "$GEM_HOME/bin"
+  "$path[@]"
+)
+
+export PATH
+
 # startx when logged in
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
-  exec ssh-agent startx "$XINITRC"
+  exec startx "$XINITRC"

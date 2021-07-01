@@ -52,7 +52,7 @@ c.content.blocking.method = "adblock"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
-c.content.cookies.accept = 'never'
+c.content.cookies.accept = 'no-3rdparty'
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://accounts.google.com/*')
@@ -105,6 +105,9 @@ js_whitelist = [
     "*://*.element.io/*",
     "*://*.dev.to/*",
     "*://*.brave.com/*",
+    "*://fosstodon.org/*",
+    "*://odysee.com/*",
+    "*://tilvids.com/*",
     "*://*.twitter.com/*",
     "*://*.vid.puffyan.us/*",
     "*://*.yewtu.be/*",
@@ -112,7 +115,6 @@ js_whitelist = [
 ]
 
 for website in js_whitelist:
-    config.set('content.cookies.accept', 'no-3rdparty', website)
     with config.pattern(website) as p:
         p.content.javascript.enabled = True
 

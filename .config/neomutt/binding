@@ -1,4 +1,4 @@
-# vim: syntax=muttrc
+# vim: syntax=neomuttrc
 
 # General rebindings
 bind attach <return> view-mailcap
@@ -54,6 +54,6 @@ macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
 
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/personal<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rubikal<enter><change-folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/rtn<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/personal<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/rubikal<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/rtn<enter><change-folder>!<enter>'
