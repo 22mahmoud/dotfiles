@@ -7,6 +7,3 @@
 [submodule ".config/zsh/plugins/zsh-autosuggestions"]
 	path = .config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule ".config/zsh/prompt"]
-	path = .config/zsh/prompt
-	url = git@github.com:Phantas0s/purification.git
