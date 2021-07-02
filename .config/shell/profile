@@ -69,9 +69,6 @@ export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
 # deno
 export DENO_INSTALL="$XDG_DATA_HOME/deno"
 
-# vim
-export VIMINIT='if has("nvim") | so $XDG_CONFIG_HOME/nvim/init.vim | else | set nocp | so $XDG_CONFIG_HOME/vim/vimrc | endif'
-
 # ruby
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
