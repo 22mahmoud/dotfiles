@@ -1,7 +1,7 @@
+fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
+
 # enable completion
 autoload -Uz zcompinit; zcompinit
-# autoload -Uz compinit
-# compinit -d "$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
 
 # menu style
 zstyle ':completion:*:*:*:*:*' menu select

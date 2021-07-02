@@ -8,3 +8,4 @@ export KEYTIMEOUT=1
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE="$ZSH_CACHE_DIR/history"
+. "/home/ashraf/.local/share/cargo/env"

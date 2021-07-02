@@ -1,46 +1,90 @@
 #!bin/zsh
 
-# set up XDG env variables
+# XDG
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-export XINITRC="/home/ashraf/.config/x11/xinitrc"
 
+# X11
+export XINITRC="/home/ashraf/.config/x11/xinitrc"
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
+# android/java
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+# theme
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+
+# tmux
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# go
 export GOPATH="$XDG_DATA_HOME/go"
-export MBSYNCRC="$XDG_CONFIG_HOME/isync/mbsyncrc"
+
+# node
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
+export PM2_HOME="$XDG_DATA_HOME/pm2"
+
+# abook
 export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
 export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"
+
+# zoom
 export SSB_HOME="$XDG_DATA_HOME/zoom"
-export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
-export VOLTA_HOME="$XDG_DATA_HOME/volta"
-export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
-export PM2_HOME="$XDG_DATA_HOME/pm2"
-export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
+
+# wget
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+# gnupg
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# mbsync
+export MBSYNCRC="$XDG_CONFIG_HOME/isync/mbsyncrc"
+
+# python
 export PYTHONHISTFILE="$XDG_CACHE_HOME/python_history"
 export PYTHONSTARTUP=~/.config/python/pythonrc
+
+# vscode
 export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-export LESSHISTFILE=-
+
+# redis
 export REDISCLI_HISTFILE="$XDG_CACHE_HOME/redis/rediscli_history"
 export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
-export RANDFILE="$XDG_CACHE_HOME/rnd"
-export VIMINIT='if has("nvim") | so $XDG_CONFIG_HOME/nvim/init.vim | else | set nocp | so $XDG_CONFIG_HOME/vim/vimrc | endif'
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
+
+# deno
 export DENO_INSTALL="$XDG_DATA_HOME/deno"
+
+# vim
+export VIMINIT='if has("nvim") | so $XDG_CONFIG_HOME/nvim/init.vim | else | set nocp | so $XDG_CONFIG_HOME/vim/vimrc | endif'
+
+# ruby
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
+
+# other
+export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+export LESSHISTFILE=-
+export RANDFILE="$XDG_CACHE_HOME/rnd"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
-export QT_QPA_PLATFORMTHEME=qt5ct
 export MAIL="$XDG_DATA_HOME/mail"
 
 # Default programs:
@@ -57,7 +101,6 @@ export MANPAGER="sh -c 'col -bx | bat --theme='Nord' -l man -p'"
 
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 # nnn config
 export GUI=1
