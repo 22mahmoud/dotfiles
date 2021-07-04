@@ -1,19 +1,18 @@
-#!/bin/sh
+#!/bin/zsh
 
 # The first argument must be an actual file.
-if [[ ! -e "${1}" ]]; then
+if [ ! -e "${1}" ]; then
   echo "File \"${1}\" not found. Exiting." 1>&2;
   exit 2
 fi
 
 PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
 
-declare -a PIDs
-
 _set_gif_wp() {
   xwinwrap -ov -g "$1" -- mpv \
     -wid WID \
     --no-config \
+    --no-terminal \
     --no-osc \
     --no-osd-bar \
     --loop-file=inf \
@@ -22,14 +21,16 @@ _set_gif_wp() {
     --no-audio \
     --panscan=1.0 \
     --no-input-default-bindings \
-    "$2" &
-  PIDs+=($!)
+    "$2" &> /dev/null &
+
+  # save the pid of the last command in a pid file
+  echo $! > $PIDFILE
 }
 
-while read p; do kill -9 "$p"; done < $PIDFILE
+# kill the last pid
+head $PIDFILE | xargs kill -9
 
+# get screen resolution
 res=$(xdpyinfo | awk '/dimensions/ {print $2}')
 
 _set_gif_wp "$res" "${1}"
-
-printf "%s\n" "${PIDs[@]}" > $PIDFILE
