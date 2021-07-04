@@ -1,4 +1,5 @@
 import os
+import glob
 
 from qutebrowser.config.configfiles import ConfigAPI
 from qutebrowser.config.config import ConfigContainer
@@ -79,17 +80,16 @@ c.tabs.title.format = "{index}{audio}: {current_title}"
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
 
 # Fonts
-c.fonts.completion.entry = "8pt monospace"
+c.fonts.completion.entry = "10pt monospace"
 c.fonts.downloads = "8pt monospace"
-c.fonts.hints = "bold monospace"
+c.fonts.hints = "bold 10pt monospace"
 c.fonts.keyhint = "9pt monospace"
 c.fonts.messages.error = "9pt monospace"
 c.fonts.messages.info = "9pt monospace"
 c.fonts.messages.warning = "9pt monospace"
-c.fonts.statusbar = "9pt monospace"
-c.fonts.tabs.selected = "8pt monospace"
-c.fonts.tabs.unselected = "8pt monospace"
-c.fonts.web.family.fixed = "monospace"
+c.fonts.statusbar = "10pt monospace"
+c.fonts.tabs.selected = "10pt monospace"
+c.fonts.tabs.unselected = "9pt monospace"
 
 # Javascript
 c.content.javascript.enabled = False

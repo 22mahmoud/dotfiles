@@ -1,9 +1,6 @@
 #!/bin/sh
 
 # TODO: enahnce this script
-
-echo $MBSYNCRC
-
 if [ -n "$MBSYNCRC" ] 
 then
   alias mbsync="mbsync -c $MBSYNCRC"

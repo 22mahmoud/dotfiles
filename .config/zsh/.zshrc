@@ -42,5 +42,11 @@ eval "$(starship init zsh)"
 # source plugins
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ $(command -v "fzf") ] && source /usr/share/fzf/key-bindings.zsh
+
+# fzf support
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
+# zoxide - fast navigation
 eval "$(zoxide init zsh)"

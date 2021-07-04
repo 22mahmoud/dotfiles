@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# source Xresources file
+# source xresources file
 xrdb -merge /home/ashraf/.config/x11/xresources
 
 # hotkey daemon
@@ -31,9 +31,13 @@ dunst &
 picom --experimental-backend &
 
 # set random wallpaper
-~/.fehbg &
+wallgif $(find $home/pictures/wallpapers/gifs | shuf -n 1) &
 
-styli.sh -s nature &
+# styli.sh -s nature &
 
-# launch the wm
-ssh-agent dwm
+while true; do
+    # log stderror to a file 
+    # dwm 2> ~/.dwm.log
+    # no error logging
+    dwm >/dev/null 2>&1
+done

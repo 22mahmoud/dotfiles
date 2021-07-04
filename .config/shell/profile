@@ -7,7 +7,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # X11
 export XINITRC="/home/ashraf/.config/x11/xinitrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 # android/java
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"

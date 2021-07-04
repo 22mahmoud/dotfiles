@@ -7,3 +7,6 @@
 [submodule ".config/zsh/plugins/zsh-autosuggestions"]
 	path = .config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".config/x11/base16-xresources"]
+	path = .config/x11/base16-xresources
+	url = git@github.com:base16-templates/base16-xresources.git
