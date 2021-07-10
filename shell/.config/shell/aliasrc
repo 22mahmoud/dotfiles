@@ -1,0 +1,131 @@
+# set ft=config
+
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -vI"
+alias mkdir="mkdir -pv"
+alias sudo='sudo -v; sudo '
+
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+# apps
+alias v="nvim"
+alias sv="sudo -E nvim"
+alias za="zathura"
+alias m="mpv"
+alias yt="youtube-dl"
+alias c="code ."
+alias open="xdg-open"
+alias up='topgrade'
+alias vfm=~/.config/vifm/scripts/vifmrun
+alias tsm='transmission-remote'
+alias nnn='nnn -c'
+alias mbsync='mbsync -c $MBSYNCRC'
+alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
+alias cfg='git --git-dir=$XDG_DATA_HOME/cfg/ --work-tree=$HOME'
+alias gwp="wallgif $(find ~/Pictures/wallpapers/gifs | shuf -n 1)"
+alias unvim="$XDG_CONFIG_HOME/nvim/scripts/setup"
+
+# youtube-dl
+alias yta-best="youtube-dl --extract-audio --audio-format best "
+alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
+alias ytb="youtube-dl -f bestvideo+bestaudio "
+
+# paru
+alias p="paru"
+alias pa="paru -S"
+alias pr="paru -Rns"
+
+
+### ARCHIVE EXTRACTION
+# usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;      
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# navigation
+alias ..='cd ..' 
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+alias .6='cd ../../../../..'
+
+# yarn
+alias y="yarn"
+alias yst="yarn start"
+alias yd='yarn dev'
+
+# npm
+alias n='npm'
+alias ni='npm install'
+alias nst='npm run start'
+alias nd='npm run dev'
+
+# tmux
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
+alias tk="t kill-session -t"
+
+# docker 
+alias d="docker"
+alias ds="docker ps"
+alias dexec="docker exec -it"
+
+# kubernetes
+alias k="kubectl"
+alias kps="kubectl get pods"
+alias kds="kubectl get deployments"
+alias kss="kubectl get services"
+alias ka="kubectl apply -f"
+alias kd="kubectl delete pod"
+
+alias ls="ls --color=auto -a"
+alias ll="ls --color=auto -a -l"
+
+# git 
+alias g='git'
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gpl="git pull"
+alias gplom="git pull origin master"
+alias gf="git fetch"
+alias gm='git merge'
+alias gch='git checkout'
+alias gnb='git checkout -b'
+alias gpu="git push"
+alias gcl='git clone'
+alias gundo="git reset --soft HEAD^ && git reset all"
+alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
+  --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
+  %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
+alias gsa="git submodule add"
+
+# scripts
+alias wp='feh --randomize --bg-fil ~/wallpapers/*'
+alias reload='source $ZDOTDIR/.zshrc'

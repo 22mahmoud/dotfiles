@@ -1,0 +1,131 @@
+#!bin/zsh
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# X11
+export XINITRC="/home/ashraf/.config/x11/xinitrc"
+# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
+# android/java
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+# theme
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# pass
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+
+# tmux
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+
+# rust
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# go
+export GOPATH="$XDG_DATA_HOME/go"
+
+# node
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
+export PM2_HOME="$XDG_DATA_HOME/pm2"
+
+# abook
+export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
+export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"
+
+# zoom
+export SSB_HOME="$XDG_DATA_HOME/zoom"
+
+# wget
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+# gnupg
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# mbsync
+export MBSYNCRC="$XDG_CONFIG_HOME/isync/mbsyncrc"
+
+# python
+export PYTHONHISTFILE="$XDG_CACHE_HOME/python_history"
+export PYTHONSTARTUP=~/.config/python/pythonrc
+
+# vscode
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+
+# redis
+export REDISCLI_HISTFILE="$XDG_CACHE_HOME/redis/rediscli_history"
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
+
+# deno
+export DENO_INSTALL="$XDG_DATA_HOME/deno"
+
+# ruby
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
+
+# other
+export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+export LESSHISTFILE=-
+export RANDFILE="$XDG_CACHE_HOME/rnd"
+export HISTFILE="$XDG_DATA_HOME/bash/history"
+export MAIL="$XDG_DATA_HOME/mail"
+
+# Default programs:
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERMINAL="st"
+export BROWSER="qutebrowser"
+export READER="zathura"
+export WM='dwm'
+export VIDEO="mpv"
+export IMAGE="sxiv"
+export COLORTERM="truecolor"
+export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
+
+# Fix for Java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# nnn config
+export GUI=1
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
+export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
+export NNN_TRASH=1
+
+# fzf config
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# path
+typeset -U PATH path
+
+path=(
+  "$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+  "$VOLTA_HOME/bin"
+  "$CARGO_HOME/bin"
+  "$DENO_INSTALL/bin"
+  "$GO_PATH/bin"
+  "$GEM_HOME/bin"
+  "$path[@]"
+)
+
+export PATH
+
+# startx when logged in
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
+  exec startx "$XINITRC"
