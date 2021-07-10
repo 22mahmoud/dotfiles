@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ "$1" == "inc" ]; then
+  xbacklight -inc 10 -fps 30
+fi
+
+if [ "$1" == "dec" ]; then
+  xbacklight -dec 10 -fps 30
+fi
+
+BRIGHTNESS=$(xbacklight -get | cut -d '.' -f 1)
+
+dunstify -t 1500 -u low "🔆 Brightness" "strength: ${BRIGHTNESS}%" \
+   -h string:x-canonical-private-synchronous:"changeVolume"
+
+
+
