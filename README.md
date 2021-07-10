@@ -1,3 +1,3 @@
 # dotfiles
 
-[](./showcase.gif)
+![screenshot](screenshot.gif)
