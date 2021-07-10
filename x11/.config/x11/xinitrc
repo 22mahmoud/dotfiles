@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# source xresources file
+xrdb -merge /home/ashraf/.config/x11/xresources
+
+# hotkey daemon
+sxhkd &
+
+# change the default cross cursor to left pointer cursor
+xsetroot -cursor_name left_ptr &
+
+# hide mouse cursor while not using it
+unclutter -idle 2 &
+
+# set both english and arabic layout
+setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
+
+# launch slstatus for dwm 
+slstatus &
+
+# network manager
+nm-applet &
+
+# speed up keyboard
+xset r rate 280 40 &
+
+# start dunst notification server
+dunst &
+
+# launch picom compositor
+picom --experimental-backend &
+
+# set random wallpaper
+wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)" &
+
+# styli.sh -s nature &
+
+while true; do
+    # log stderror to a file 
+    # dwm 2> ~/.dwm.log
+    # no error logging
+    dwm >/dev/null 2>&1
+done
