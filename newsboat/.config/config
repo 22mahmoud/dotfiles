@@ -1,0 +1,57 @@
+reload-time 5
+auto-reload yes
+reload-time 120
+reload-threads 4
+download-retries 4
+download-timeout 10
+prepopulate-query-feeds yes
+
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+
+color background white default
+color info cyan default 
+color listnormal white default 
+color listfocus blue default 
+color listnormal_unread cyan default
+color listfocus_unread black cyan
+
+highlight all "---.*---" yellow
+highlight feedlist ".*(0/0))" black
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
+
+
+browser linkhandler
+macro , open-in-browser
+macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser linkhandler 
+macro m set browser "mpv --ytdl-format='[height<480]'" ; open-in-browser ; set browser linkhandler 
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+
+bookmark-cmd ~/bookmark.sh
+bookmark-interactive no
+bookmark-autopilot yes

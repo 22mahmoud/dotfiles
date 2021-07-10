@@ -1,0 +1,17 @@
+# vim: syntax=neomuttrc
+
+source "$XDG_CONFIG_HOME/neomutt/normalize"
+
+set folder        = $MAIL/personal
+set realname      = "Mahmoud Ashraf"
+set from          = "hello@mahmoudashraf.dev"
+set sendmail      = "msmtp -a personal"
+set signature     = "$XDG_CONFIG_HOME/neomutt/signature"	
+
+mailboxes         "=INBOX" "=Drafts" "=Junk" "=Sent" "=Trash"
+
+set spoolfile     = "+INBOX"
+set record        = "=Sent"
+set postponed     = "=Drafts"
+set trash         = "=Trash"
+

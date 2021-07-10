@@ -1,0 +1,32 @@
+# vim: syntax=neomuttrc
+
+unmailboxes *
+reset folder
+reset from
+reset header_cache
+reset imap_check_subscribed
+reset imap_idle
+reset imap_keepalive
+reset imap_list_subscribed
+reset imap_pass
+reset imap_passive
+reset imap_pipeline_depth
+reset imap_user
+reset message_cachedir
+reset postponed
+reset realname
+reset record
+reset signature
+reset smtp_authenticators
+reset smtp_pass
+reset smtp_url
+reset spoolfile
+reset ssl_force_tls
+reset ssl_starttls
+reset ssl_use_sslv3
+reset ssl_use_tlsv1
+reset ssl_use_tlsv1_1
+reset ssl_use_tlsv1_2
+reset ssl_verify_dates
+reset ssl_verify_host
+reset trash

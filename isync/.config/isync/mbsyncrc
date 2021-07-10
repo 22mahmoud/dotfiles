@@ -1,0 +1,105 @@
+# default
+Create      Both
+Expunge     Both
+SyncState   *
+
+# personal
+# Remote Store
+IMAPStore        personal-remote
+Host             mail.mahmoudashraf.dev
+Port             993
+User             hello
+PassCmd          "pass mail.mahmoudashraf.dev"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+
+# Local storage
+MaildirStore  personal-local
+Path          ~/.local/share/mail/personal/
+Inbox         ~/.local/share/mail/personal/INBOX
+Subfolders    Verbatim
+
+Channel     personal
+Far         :personal-remote:
+Near        :personal-local:
+Patterns    *
+
+
+# rubikal
+# Remote Store
+IMAPStore        rubikal-remote
+Host             imap.gmail.com
+Port             993
+User             mahmoud.ashraf@rubikal.com
+PassCmd          "pass rubikal"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+AuthMechs        LOGIN
+
+# Local storage
+MaildirStore  rubikal-local
+Path          ~/.local/share/mail/rubikal/
+Inbox         ~/.local/share/mail/rubikal/INBOX
+
+Channel    rubikal-inbox
+Far        :rubikal-remote:
+Near       :rubikal-local:
+patterns   "INBOX"
+
+Channel     rubikal-sent
+Far      :rubikal-remote:"[Gmail]/Sent Mail"
+Near       :rubikal-local:Sent
+
+Channel     rubikal-trash
+Far      :rubikal-remote:"[Gmail]/Trash"
+Near       :rubikal-local:Trash
+
+Channel     rubikal-drafts
+Far      :rubikal-remote:"[Gmail]/Drafts"
+Near       :rubikal-local:Drafts
+
+Group rubikal
+channel rubikal-inbox
+channel rubikal-sent
+channel rubikal-trash
+channel rubikal-drafts
+
+# rtn
+# Remote Store
+IMAPStore        rtn-remote
+Host             imap.gmail.com
+Port             993
+User             mashraf@roadtripnation.org
+PassCmd          "pass rtn"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+AuthMechs        LOGIN
+
+# Local storage
+MaildirStore  rtn-local
+Path          ~/.local/share/mail/rtn/
+Inbox         ~/.local/share/mail/rtn/INBOX
+
+Channel       rtn-inbox
+Far           :rtn-remote:
+Near          :rtn-local:
+patterns      "INBOX"
+
+Channel       rtn-sent
+Far           :rtn-remote:"[Gmail]/Sent Mail"
+Near          :rtn-local:Sent
+
+Channel     rtn-trash
+Far         :rtn-remote:"[Gmail]/Trash"
+Near       :rtn-local:Trash
+
+Channel     rtn-drafts
+Far      :rtn-remote:"[Gmail]/Drafts"
+Near       :rtn-local:Drafts
+
+Group rtn
+channel rtn-inbox
+channel rtn-sent
+channel rtn-trash
+channel rtn-drafts
+

@@ -1,0 +1,51 @@
+super + Return
+  $TERMINAL
+
+super + shift + Return
+  $TERMINAL -t "scratchpad" -g 120x34
+
+super + d
+  dmenu_run
+
+super + shift + x
+  slock
+
+super + b
+  $BROWSER
+
+super + shift + b
+  $BROWSER --target private-window
+
+super + e
+  d-emoji 
+
+super + m
+  $TERMINAL -e neomutt
+
+super + n
+  $TERMINAL -e nnn
+
+super + r
+  $TERMINAL -e newsboat
+
+super + shift + h
+  $TERMINAL -t "scratchpad" -g 110x30 -e htop
+
+super + alt + {0, 9, 8}
+  sound {inc, dec, toggle}
+
+{XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute}
+  sound {inc, dec, toggle}
+
+super + alt + {equal, minus}
+  brightness {inc, dec}
+
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+  brightness {inc, dec}
+
+Print
+  screenshot full &
+
+shift + Print
+  screenshot select &
+

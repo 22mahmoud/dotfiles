@@ -1,0 +1,11 @@
+{
+  "name": "userscripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@mozilla/readability": "^0.3.0",
+    "jsdom": "^16.4.0",
+    "qutejs": "^1.1.1"
+  }
+}
