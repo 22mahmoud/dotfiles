@@ -1,0 +1,17 @@
+#!/bin/sh
+
+CONFIG="$MBSYNCRC" || "$HOME/.mbsyncrc"
+
+pid="$(pgrep -f mbsync)"
+
+if [ "$pid" ]; then
+  echo "there is another mbsync process running. Waiting..."
+  while [ "$(pgrep -f mbsync)" ]; do
+    sleep 1
+  done
+  mbsync -c "$CONFIG" -a
+else
+  mbsync -c "$CONFIG" -a
+fi
+
+
