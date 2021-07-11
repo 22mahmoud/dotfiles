@@ -39,6 +39,9 @@ bindkey -M vicmd v edit-command-line
 # TODO: change to selfmade propmt
 eval "$(starship init zsh)"
 
+# fzf colorscheme
+source "$ZDOTDIR/base16-fzf/bash/base16-materia.config"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match terminal "Xresources" background
 # source plugins
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
