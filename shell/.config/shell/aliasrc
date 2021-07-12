@@ -10,6 +10,7 @@ alias sudo='sudo -v; sudo '
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
 # apps
+alias nvim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 alias v="nvim"
 alias sv="sudo -E nvim"
 alias za="zathura"

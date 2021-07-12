@@ -1,0 +1,180 @@
+#!/bin/sh
+
+xresources="$XDG_CONFIG_HOME/x11/xresources"
+nvim="$XDG_CONFIG_HOME/nvim/lua/ma/theme.lua"
+zshrc="$ZDOTDIR/.zshrc"
+
+theme="$(echo "3024
+apathy
+ashes
+atelier-cave-light
+atelier-cave
+atelier-dune-light
+atelier-dune
+atelier-estuary-light
+atelier-estuary
+atelier-forest-light
+atelier-forest
+atelier-heath-light
+atelier-heath
+atelier-lakeside-light
+atelier-lakeside
+atelier-plateau-light
+atelier-plateau
+atelier-savanna-light
+atelier-savanna
+atelier-seaside-light
+atelier-seaside
+atelier-sulphurpool-light
+atelier-sulphurpool
+atlas
+bespin
+black-metal-bathory
+black-metal-burzum
+black-metal-dark-funeral
+black-metal-gorgoroth
+black-metal-immortal
+black-metal-khold
+black-metal-marduk
+black-metal-mayhem
+black-metal-nile
+black-metal-venom
+black-metal
+brewer
+bright
+brogrammer
+brushtrees-dark
+brushtrees
+chalk
+circus
+classic-dark
+classic-light
+codeschool
+cupcake
+cupertino
+darktooth
+decaf
+default-dark
+default-light
+dracula
+edge-dark
+edge-light
+eighties
+embers
+espresso
+flat
+framer
+fruit-soda
+gigavolt
+github
+google-dark
+google-light
+grayscale-dark
+grayscale-light
+green-screen
+greenscreen
+gruvbox-dark-hard
+gruvbox-dark-medium
+gruvbox-dark-pale
+gruvbox-dark-soft
+gruvbox-light-hard
+gruvbox-light-medium
+gruvbox-light-soft
+harmonic-dark
+harmonic-light
+heetch-light
+heetch
+helios
+hopscotch
+horizon-dark
+horizon-light
+horizon-terminal-dark
+horizon-terminal-light
+ia-dark
+ia-light
+icy
+irblack
+isotope
+macintosh
+marrakesh
+material-darker
+material-lighter
+material-palenight
+material-vivid
+material
+materia
+mellow-purple
+mexico-light
+mocha
+monokai
+nord
+nova
+oceanicnext
+ocean
+onedark
+one-light
+outrun-dark
+papercolor-dark
+papercolor-light
+paraiso
+phd
+pico
+pop
+porple
+railscasts
+rebecca
+sandcastle
+seti
+shapeshifter
+snazzy
+solar-flare
+solarflare
+solarized-dark
+solarized-light
+spacemacs
+summerfruit-dark
+summerfruit-light
+synth-midnight-dark
+tomorrow-night-eighties
+tomorrow-night
+tomorrow
+tube
+twilight
+unikitty-dark
+unikitty-light
+woodland
+xcode-dusk
+zenburn" | dmenu -r -l 20)"
+
+if [ ! "$theme" ]; then exit; fi
+
+# change the color name in Xresources file
+sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme.Xresources/g" "$xresources"
+
+# change the color name in neovim config
+sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme/g" "$nvim"
+
+# change the color name for fzf theme in zsh
+sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme.config/g" "$zshrc"
+
+# reload all opened zsh
+killall -u "$(whoami)" -s USR1 zsh
+
+# source the new theme to be accessible
+xrdb -load "$xresources"
+
+# send signal to st to reload all open instance
+pidof st | xargs -d' ' -I{} echo {} | tr -s '\n' | xargs -n1 kill -USR1
+
+# if qutebrowser running send :config-source command
+[ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
+
+# refresh dwm
+# TODO: save the state of opened windows to restore after restart
+pkill -9 dwm
+
+# update nvim colorscheme
+nvr --remote --nostart -s \
+  -cc "lua package.loaded['ma.theme'] = nil" \
+  -cc "lua require('ma.theme')" \
+  -cc "luafile /home/ashraf/.config/nvim/init.lua"
