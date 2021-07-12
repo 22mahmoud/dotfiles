@@ -1,9 +1,6 @@
 super + Return
   $TERMINAL
 
-super + shift + Return
-  $TERMINAL -t "scratchpad" -g 120x34
-
 super + d
   dmenu_run
 
@@ -17,7 +14,7 @@ super + shift + b
   $BROWSER --target private-window
 
 super + e
-  d-emoji 
+  d-emoji
 
 super + m
   $TERMINAL -e neomutt
@@ -27,9 +24,6 @@ super + n
 
 super + r
   $TERMINAL -e newsboat
-
-super + shift + h
-  $TERMINAL -t "scratchpad" -g 110x30 -e htop
 
 super + alt + {0, 9, 8}
   sound {inc, dec, toggle}
@@ -48,4 +42,3 @@ Print
 
 shift + Print
   screenshot select &
-
