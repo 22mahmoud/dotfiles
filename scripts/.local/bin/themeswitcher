@@ -1,10 +1,13 @@
 #!/bin/sh
 
+# file names
 xresources="$XDG_CONFIG_HOME/x11/xresources"
-nvim="$XDG_CONFIG_HOME/nvim/lua/ma/theme.lua"
+nvim="$XDG_CONFIG_HOME/nvim"
 zshrc="$ZDOTDIR/.zshrc"
+tmux="$XDG_CONFIG_HOME/tmux/tmux.conf"
 
-theme="$(echo "3024
+# TODO: pick only themes that I interested in
+themes="3024
 apathy
 ashes
 atelier-cave-light
@@ -144,37 +147,75 @@ unikitty-dark
 unikitty-light
 woodland
 xcode-dusk
-zenburn" | dmenu -r -l 20)"
+zenburn"
 
-if [ ! "$theme" ]; then exit; fi
+theme_name="$(echo "$themes" | dmenu -r -l 10)"
 
-# change the color name in Xresources file
-sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme.Xresources/g" "$xresources"
+if [ ! "$theme_name" ]; then
+  exit
+fi
 
-# change the color name in neovim config
-sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme/g" "$nvim"
+_update_xresources() {
+  # change the color name in Xresources file
+  sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme_name.Xresources/g" "$xresources"
 
-# change the color name for fzf theme in zsh
-sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme.config/g" "$zshrc"
+  # source the new theme to be accessible
+  xrdb -load "$xresources"
+}
 
-# reload all opened zsh
-killall -u "$(whoami)" -s USR1 zsh
+_update_tmux() {
+  # change the color name in tmux.conf file
+  sed -i "/@colors-base16/c\set -g @colors-base16 '$theme_name'" "$tmux"
 
-# source the new theme to be accessible
-xrdb -load "$xresources"
+  # TODO: source new config in all opned tmux sessions
+}
 
-# send signal to st to reload all open instance
-pidof st | xargs -d' ' -I{} echo {} | tr -s '\n' | xargs -n1 kill -USR1
+_update_nvim() {
+  # change the color name in neovim config
+  sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme_name/g" "$nvim/lua/ma/theme.lua"
 
-# if qutebrowser running send :config-source command
-[ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
+  fzf_opts="$FZF_DEFAULT_OPTS"
 
-# refresh dwm
-# TODO: save the state of opened windows to restore after restart
-pkill -9 dwm
+  # TODO: listen to fzf change
+  # update nvim colorscheme
+  nvr --serverlist | xargs -I{} nvr --remote --nostart -s --servername {} \
+    -c "lua vim.env['FZF_DEFAULT_OPTS'] = [[$fzf_opts]]" \
+    -c "lua package.loaded['ma.theme'] = nil" \
+    -c "lua require('ma.theme')" \
+    -c "so $nvim/init.lua"
+}
 
-# update nvim colorscheme
-nvr --remote --nostart -s \
-  -cc "lua package.loaded['ma.theme'] = nil" \
-  -cc "lua require('ma.theme')" \
-  -cc "luafile /home/ashraf/.config/nvim/init.lua"
+_update_zsh() {
+  # change the color name for fzf theme in zsh
+  sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme_name.config/g" "$zshrc"
+
+  # reload all opened zsh
+  killall -u "$(whoami)" -s USR1 zsh
+}
+
+_update_st() {
+  # send l to st to reload all open instance
+  pidof st | xargs -d' ' -I{} echo {} | tr -s '\n' | xargs -n1 kill -USR1
+}
+
+_update_qutebrowser() {
+  # if qutebrowser running send :config-source command
+  [ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
+}
+
+_restart_dwm() {
+  # refresh dwm xrdb
+  xdotool key Super_L+Shift_L+r
+}
+
+main() {
+  _update_xresources
+  _update_qutebrowser &
+  _restart_dwm &
+  _update_zsh
+  _update_st
+  _update_tmux
+  _update_nvim
+}
+
+main
