@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # file names
-xresources="$XDG_CONFIG_HOME/x11/xresources"
+xresources="$XDG_CONFIG_HOME/x11/theme.Xresources"
 nvim="$XDG_CONFIG_HOME/nvim"
-zshrc="$ZDOTDIR/.zshrc"
-tmux="$XDG_CONFIG_HOME/tmux/tmux.conf"
+zshrc="$ZDOTDIR/theme.zsh"
+tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
 
 # TODO: pick only themes that I interested in
 themes="3024
