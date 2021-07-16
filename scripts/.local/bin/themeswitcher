@@ -167,7 +167,8 @@ _update_tmux() {
   # change the color name in tmux.conf file
   sed -i "/@colors-base16/c\set -g @colors-base16 '$theme_name'" "$tmux"
 
-  # TODO: source new config in all opned tmux sessions
+  # source the tmux.conf
+  [ "$(pidof tmux)" ] && tmux source "$XDG_CONFIG_HOME/tmux/tmux.conf"
 }
 
 _update_nvim() {
@@ -205,6 +206,10 @@ _restart_dwm() {
   xdotool key Super_L+Shift_L+r
 }
 
+_update_wallpaper() {
+  wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)"
+}
+
 main() {
   _update_xresources
   _update_qutebrowser &
@@ -213,6 +218,7 @@ main() {
   _update_st
   _update_tmux
   _update_nvim
+  _update_wallpaper
 }
 
 main
