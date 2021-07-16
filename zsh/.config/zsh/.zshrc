@@ -56,4 +56,4 @@ source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"
 
-colorscript -r | tail -n +2
+# colorscript -r | tail -n +2
