@@ -1,0 +1,72 @@
+#!/bin/sh
+
+cat <<EOF
+a script to handle plug/unplug my dslr nikon d3500 w/ udev events
+download only new images from the camera
+how to use ?
+1 - create a new file /etc/udev/rules.d/nikon-d3500.rules
+2 - add those lines in the file
+  ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="04b0", ATTRS{idProduct}=="0445", RUN+="/home/user_name/.local/bin/d3500 -a add"
+  ACTION=="remove", ENV{DEVTYPE}=="usb_device", ENV{ID_VENDOR_FROM_DATABASE}="Nikon Corp." RUN+="/home/user_name/.local/bin/d3500 -a remove"
+3 - reload udev config
+  sudo udevadm control --reload-rules
+EOF
+
+# environment variables to make notify-send works
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+export DISPLAY=:0
+
+# get the username
+user="$(who | head | awk '{print $1}')"
+
+_su_user() {
+  su "$user" -c "$1"
+}
+
+_get_dir_files_count() {
+  find "$1" -type f | wc -l
+}
+
+_on_plug() {
+  photo_dir="/home/$user/Pictures/d3500"
+  dslr_photos_dir="/store_00010001/DCIM/100D3500"
+  number_before="$(_get_dir_files_count "$photo_dir")"
+  id="$(_su_user 'dunstify -t 0 -p "📸 Nikon D3500" "Download new files... wait!"')"
+  (
+    cd "$photo_dir" && \
+      _su_user "gphoto2 --get-all-files --skip-existing" && \
+      _su_user "gphoto2 -f $dslr_photos_dir --delete-all-files";
+    number_after="$(_get_dir_files_count "$photo_dir")"
+    diff=$((number_after - number_before))
+    _su_user "dunstify -r \"$id\" '📸 Nikon D3500' '$diff files Downloaded successfully'"
+  )
+}
+
+_on_unplug() {
+  _su_user 'dunstify "📷 Nikon D3500" "Disconnected"'
+}
+
+main() {
+  action=
+
+  while getopts a: name; do
+    case $name in
+      a) action="$OPTARG" ;;
+      ?)
+        printf "Usage %s: [-a add|remove] args\n" "$0"
+        exit 2
+        ;;
+    esac
+  done
+
+  shift $((OPTIND - 1))
+
+  if [ -n "$action" ]; then
+    case $action in
+      add) _on_plug ;;
+      remove) _on_unplug ;;
+    esac
+  fi
+}
+
+main "$@"
