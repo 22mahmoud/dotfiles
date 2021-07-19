@@ -1,12 +1,32 @@
 #!/bin/sh
+
 while read -r file; do
   case "$1" in
     "w") feh --bg-fil "$file" & ;;
     "r") convert -rotate 90 "$file" "$file" ;;
     "R") convert -rotate -90 "$file" "$file" ;;
     "f") convert -flop "$file" "$file" ;;
+    "y")
+      printf "%s" "$file" | tr -d '\n' | xclip -sel c -r \
+        && notify-send "$file copied to clipboard" &
+      ;;
+
+    "Y")
+      realpath "$file" | tr -d '\n' | xclip -sel c -r \
+        && notify-send "$(realpath "$file") copied to clipboard" &
+      ;;
     "d")
-      [ "$(printf 'No\nYes' | dmenu -r -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted."
+      [ "$(printf 'No\nYes' | dmenu -r -i -p "Really delete $file?")" = "Yes" ] \
+        && rm "$file" && notify-send "$file deleted."
+      ;;
+
+    "D")
+      dragon-drag-and-drop -x "$file"
+      ;;
+
+    "I")
+      imgur.sh "$file" 2>/dev/null | head -n 1 | xclip -sel c -r \
+        && notify-send "🖼 image uploaded"
       ;;
   esac
 done
