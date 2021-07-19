@@ -8,3 +8,31 @@ export KEYTIMEOUT=1
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE="$ZSH_CACHE_DIR/history"
+
+# nnn config
+export GUI=1
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
+export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
+export NNN_TRASH=1
+
+# fzf config
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# path
+typeset -U PATH path
+
+path=(
+  "$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+  "$VOLTA_HOME/bin"
+  "$CARGO_HOME/bin"
+  "$DENO_INSTALL/bin"
+  "$GO_PATH/bin"
+  "$GEM_HOME/bin"
+  "$path[@]"
+)
+
+export PATH
+
