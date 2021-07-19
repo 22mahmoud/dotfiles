@@ -1,31 +1,31 @@
 # set ft=config
 
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+# utils
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -vI"
 alias mkdir="mkdir -pv"
 alias sudo='sudo -v; sudo '
-
-# Use $XINITRC variable if file exists.
-[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+alias cls='clear'
+alias fork='setsid -f'
+alias mine='sudo chown -R $(whoami):$(whoami)'
 
 # apps
 alias v="nvim"
 alias sv="sudo -E nvim"
-alias za="zathura"
-alias m="mpv"
 alias yt="youtube-dl"
-alias c="code ."
 alias open="xdg-open"
-alias up='topgrade'
-alias vfm=~/.config/vifm/scripts/vifmrun
-alias tsm='transmission-remote'
 alias nnn='nnn -c'
+alias pf='pfetch'
+alias sys='sudo systemctl'
+alias sysu='systemctl --user'
 alias mbsync='mbsync -c $MBSYNCRC'
 alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
-alias cfg='git --git-dir=$XDG_DATA_HOME/cfg/ --work-tree=$HOME'
-alias gwp="wallgif $(find ~/Pictures/wallpapers/gifs | shuf -n 1)"
 alias unvim="$XDG_CONFIG_HOME/nvim/scripts/setup"
+alias reload='source $ZDOTDIR/.zshrc'
 
 # youtube-dl
 alias yta-best="youtube-dl --extract-audio --audio-format best "
@@ -37,41 +37,18 @@ alias p="paru"
 alias pa="paru -S"
 alias pr="paru -Rns"
 
-
-### ARCHIVE EXTRACTION
-# usage: ex <file>
-ex ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   unzstd $1    ;;      
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
 # navigation
-alias ..='cd ..' 
-alias ...='cd ../..'
+alias ..='cd ..'
+alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../..'
 alias .5='cd ../../../..'
 alias .6='cd ../../../../..'
+alias .6='cd ../../../../../..'
+alias .7='cd ../../../../../../..'
+alias .8='cd ../../../../../../../..'
+alias .9='cd ../../../../../../../../..'
+alias .10='cd ../../../../../../../../../..'
 
 # yarn
 alias y="yarn"
@@ -125,7 +102,3 @@ alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
   --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
   %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
 alias gsa="git submodule add"
-
-# scripts
-alias wp='feh --randomize --bg-fil ~/wallpapers/*'
-alias reload='source $ZDOTDIR/.zshrc'

@@ -21,6 +21,9 @@ export NNN_TRASH=1
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# pfetch
+export PF_INFO="ascii os wm host pkgs shell editor"
+
 # path
 typeset -U PATH path
 
