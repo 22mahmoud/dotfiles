@@ -24,6 +24,7 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 
 # aliases
 source "$XDG_CONFIG_HOME/shell/aliasrc"
+source "$XDG_CONFIG_HOME/shell/functions"
 
 # completion
 source "$ZDOTDIR/completion.zsh"
