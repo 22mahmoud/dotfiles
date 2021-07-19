@@ -25,7 +25,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 typeset -U PATH path
 
 path=(
-  "$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
   "$VOLTA_HOME/bin"
   "$CARGO_HOME/bin"
   "$DENO_INSTALL/bin"
