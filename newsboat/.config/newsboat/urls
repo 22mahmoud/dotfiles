@@ -1,8 +1,12 @@
 "query:→ Unread Articles:unread = \"yes\""
-#"query:Twitter:tags # \"Twitter\""
 "query:Youtube:tags # \"Youtube\"" 
+#"query:Twitter:tags # \"Twitter\""
 
-"--- (News) -------------------------------------------"
+"⚜️  comics───────────────────────────────────────────"
+https://xkcd.com/rss.xml meme
+https://www.smbc-comics.com/comic/rss meme
+
+"⚜️  News─────────────────────────────────────────────"
 https://hnrss.org/newest?q=react "~React - hackernews"
 https://hnrss.org/newest?q=svelte "~Svelte - hackernews"
 # https://www.echojs.com/rss "~EchoJs"
@@ -12,7 +16,7 @@ https://smashingmagazine.com/feed "~Smashing Magazine"
 https://suckless.org/atom.xml
 https://www.30pin.com/rss/ "30pin"
 
-"--- (Blogs) -------------------------------------------"
+"⚜️  Blogs─────────────────────────────────────────────"
 https://mahmoudashraf.dev/rss.xml
 https://www.robinwieruch.de/index.xml
 https://kentcdodds.com/blog/rss.xml
@@ -51,9 +55,9 @@ https://cronokirby.com/posts/index.xml
 https://zupzup.org/index.xml
 https://jlelse.blog/posts.rss
 
-# "--- (Facebook) -------------------------------------------"
+# "⚜️  Facebook─────────────────────────────────────────────"
 
-#"--- (Twitter) -------------------------------------------"
+# "⚜️  Twitter─────────────────────────────────────────────"
 #https://nitter.snopyta.org/dan_abramov/rss "~Dan Abramov" "Twitter"
 #https://nitter.snopyta.org/kentcdodds/rss "~Kent C. dodds" "Twitter"
 #https://nitter.snopyta.org/addyosmani/rss "~Addy Osmani" "Twitter"
@@ -84,7 +88,7 @@ https://jlelse.blog/posts.rss
 #https://nitter.snopyta.org/kadikraman/rss "~Kadi Kraman" "Twitter"
 #https://nitter.snopyta.org/kyleshevlin/rss "~Kyle Shevlin" "Twitter"
 
-"--- (Youtube) -------------------------------------------"
+"⚜️  Youtube─────────────────────────────────────────────"
 https://youtube.com/feeds/videos.xml?channel_id=UCy1H38XrN7hi7wHSClfXPqQ "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UCO94PxO3TmChOqJ45ZQ9RLA "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UC-8QAzbLcRglXeN_MY9blyw "Youtube"
@@ -123,4 +127,3 @@ https://youtube.com/feeds/videos.xml?channel_id=UCD0b5d9sqNQTjrXfg5ik3eQ "Youtub
 https://youtube.com/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UCi8XrDg1bK_MJ0goOnbpTMQ "Youtube"
 https://youtube.com/feeds/videos.xml?channel_id=UC_Dqmkd6MsRAMfBXEyXTKYw "Youtube"
-
