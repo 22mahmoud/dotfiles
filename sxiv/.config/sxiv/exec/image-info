@@ -1,0 +1,12 @@
+#!/bin/sh
+
+s="  " # field separator
+
+filename="${1##*/}"
+filesize=$(du -Hh "$1" | awk '{print $1}')
+
+geometry="${2}x${3}"
+
+timestamp="$(exiv2 -qg Exif.Image.DateTime -Pv "$1")"
+
+echo "${filesize}${s}${geometry}${s}${filename}${timestamp:+${s}${timestamp}}"
