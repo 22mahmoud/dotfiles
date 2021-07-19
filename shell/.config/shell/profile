@@ -42,6 +42,9 @@ export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
 export PM2_HOME="$XDG_DATA_HOME/pm2"
 
+# npm
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
 # abook
 export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
 export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"
