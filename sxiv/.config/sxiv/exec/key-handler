@@ -16,8 +16,7 @@ while read -r file; do
         && notify-send "$(realpath "$file") copied to clipboard" &
       ;;
     "d")
-      [ "$(printf 'No\nYes' | dmenu -r -i -p "Really delete $file?")" = "Yes" ] \
-        && rm "$file" && notify-send "$file deleted."
+      trash-put "$file"
       ;;
 
     "D")
