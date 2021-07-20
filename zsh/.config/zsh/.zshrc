@@ -36,7 +36,7 @@ autoload -Uz cursor_mode; cursor_mode
 # Editor mode (keystroke: 'v' in normal mode)
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+bindkey -M vicmd "^v" edit-command-line
 
 # prompt
 # TODO: change to selfmade propmt
