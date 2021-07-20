@@ -28,18 +28,39 @@ _get_dir_files_count() {
 }
 
 _on_plug() {
-  photo_dir="/home/$user/Pictures/d3500"
+  id=
+  local_photos_dir="/home/$user/Pictures/d3500"
   dslr_photos_dir="/store_00010001/DCIM/100D3500"
-  number_before="$(_get_dir_files_count "$photo_dir")"
+
+  files_count_before="$(_get_dir_files_count "$local_photos_dir")"
+
   id="$(_su_user 'dunstify -t 0 -p "📸 Nikon D3500" "Download new files... wait!"')"
-  (
-    cd "$photo_dir" && \
-      _su_user "gphoto2 --get-all-files --skip-existing" && \
-      _su_user "gphoto2 -f $dslr_photos_dir --delete-all-files";
-    number_after="$(_get_dir_files_count "$photo_dir")"
-    diff=$((number_after - number_before))
-    _su_user "dunstify -r \"$id\" '📸 Nikon D3500' '$diff files Downloaded successfully'"
-  )
+
+  # download all photos from the camera into the local dir
+  (cd "$local_photos_dir" && _su_user "gphoto2 --get-all-files --skip-existing")
+
+  files_count_after="$(_get_dir_files_count "$local_photos_dir")"
+  downloaded_files_count=$((files_count_after - files_count_before))
+
+  action="$(
+    _su_user \
+      "dunstify \
+          --action='default,Reply' -t 0 -r \"$id\" \
+          '📸 Nikon D3500' \
+          '$downloaded_files_count files Downloaded successfully\nclick to delete images' \
+      "
+  )"
+
+  case "$action" in
+    "default")
+      answer="$(_su_user "printf 'Yes\nNo' | dmenu -i -r -p 'Do you want to delete all files in the camera?'")"
+      if [ "$answer" = "Yes" ]; then
+        _su_user "gphoto2 -f $dslr_photos_dir --delete-all-files"
+        _su_user "dunstify -r \"$id\" '📸 Nikon D3500' 'all files deleted successfully!'"
+      fi
+      ;;
+    "2") ;;
+  esac
 }
 
 _on_unplug() {
