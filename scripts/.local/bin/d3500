@@ -1,5 +1,4 @@
 #!/bin/sh
-
 cat <<EOF
 a script to handle plug/unplug my dslr nikon d3500 w/ udev events
 download only new images from the camera
@@ -17,7 +16,7 @@ export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 export DISPLAY=:0
 
 # get the username
-user="$(who | head | awk '{print $1}')"
+user="$(who | head -n1 | awk '{print $1}')"
 
 _su_user() {
   su "$user" -c "$1"
