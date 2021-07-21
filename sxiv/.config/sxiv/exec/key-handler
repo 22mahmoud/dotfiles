@@ -2,7 +2,7 @@
 
 while read -r file; do
   case "$1" in
-    "w") feh --bg-fil "$file" & ;;
+    "w") setbg "$file" & ;;
     "r") convert -rotate 90 "$file" "$file" ;;
     "R") convert -rotate -90 "$file" "$file" ;;
     "f") convert -flop "$file" "$file" ;;
