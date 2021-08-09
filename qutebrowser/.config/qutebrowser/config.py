@@ -65,11 +65,6 @@ c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.headers.user_agent = (
     "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 )
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://accounts.google.com/*",
-)
 c.content.headers.accept_language = "en-US,en;q=0.5"
 c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False
