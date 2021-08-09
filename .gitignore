@@ -4,6 +4,8 @@ theme.Xresources
 # nnn
 watch_later
 playlists
+sessions
+.selection
 
 # qutebrowser
 bookmarks
