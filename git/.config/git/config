@@ -22,10 +22,10 @@
   decorate = short
   date = local
 [delta]
-  side-by-side = true
+  side-by-side = false
   line-numbers-left-format = ""
   line-numbers-right-format = "│ "
-  syntax-theme = "gruvbox"
+  syntax-theme = "base16"
 [pull]
   rebase = true
 [init]
