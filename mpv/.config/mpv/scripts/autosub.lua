@@ -6,6 +6,17 @@
 -- local subliminal = '/path/to/your/subliminal'
 local subliminal = '/bin/subliminal'
 --=============================================================================
+-->>    HELPER FUNCTIONS:
+--=============================================================================
+local function execute(cmd) 
+    local handle = io.popen(cmd)
+    local result = handle:read '*a'
+    handle:close()
+
+    -- trim spaces
+    return string.gsub(result, "%s+", "")
+end
+--=============================================================================
 -->>    SUBTITLE LANGUAGE:
 --=============================================================================
 --          Specify languages in this order:
@@ -37,7 +48,7 @@ local languages = {
 local logins = {
 --          { '--addic7ed', 'USERNAME', 'PASSWORD' },
 --          { '--legendastv', 'USERNAME', 'PASSWORD' },
---          { '--opensubtitles', 'USERNAME', 'PASSWORD' },
+            { '--opensubtitles', '22mahmoud', execute "pass opensubtitles" },
 --          { '--subscenter', 'USERNAME', 'PASSWORD' },
 }
 --=============================================================================
