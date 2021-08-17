@@ -1,0 +1,14 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit
+
+case "$1" in
+  *jpg | *jpeg | *png)
+    WALLGIF_PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
+    [ -e "$WALLGIF_PIDFILE" ] && head "${WALLGIF_PIDFILE}" | xargs kill -9
+    feh --bg-fill "$1"
+    ;;
+  *gif | *mp4 | *mkv | *webm | *youtube.com/watch*)
+    wallgif "$1"
+    ;;
+esac

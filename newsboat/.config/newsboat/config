@@ -1,10 +1,15 @@
-reload-time 5
+# vim: ft=apachestyle cms=#\ %s :
+
 auto-reload yes
-reload-time 120
+reload-time 180
 reload-threads 4
-download-retries 4
+download-retries 2
 download-timeout 10
+download-full-page yes
 prepopulate-query-feeds yes
+scrolloff 11
+
+external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 
 bind-key j down
 bind-key k up
@@ -32,7 +37,9 @@ color listfocus blue default
 color listnormal_unread cyan default
 color listfocus_unread black cyan
 
-highlight all "---.*---" yellow
+text-width 80
+
+highlight all "⚜️.*─+$" yellow
 highlight feedlist ".*(0/0))" black
 highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
 highlight article "(^Link:.*|^Date:.*)" default default
@@ -48,10 +55,6 @@ highlight article ":.*\\(embedded flash\\)$" magenta default
 
 browser linkhandler
 macro , open-in-browser
-macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser linkhandler 
-macro m set browser "mpv --ytdl-format='[height<480]'" ; open-in-browser ; set browser linkhandler 
+macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser linkhandler
+macro m set browser "mpv --ytdl-format='[height<480]'" ; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
-
-bookmark-cmd ~/bookmark.sh
-bookmark-interactive no
-bookmark-autopilot yes

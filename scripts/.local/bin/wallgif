@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # The first argument must be an actual file.
-if [ ! -e "${1}" ]; then
-  echo "File \"${1}\" not found. Exiting." 1>&2
-  exit 2
-fi
+# if [ ! -e "${1}" ]; then
+#   echo "File \"${1}\" not found. Exiting." 1>&2
+#   exit 2
+# fi
 
 PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
 
@@ -18,7 +18,6 @@ _set_gif_wp() {
     --loop-file=inf \
     --no-pause \
     --player-operation-mode=cplayer \
-    --no-audio \
     --panscan=1.0 \
     --no-input-default-bindings \
     "$2" >/dev/null 2>&1 &

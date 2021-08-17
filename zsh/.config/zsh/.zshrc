@@ -24,6 +24,7 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 
 # aliases
 source "$XDG_CONFIG_HOME/shell/aliasrc"
+source "$XDG_CONFIG_HOME/shell/functions"
 
 # completion
 source "$ZDOTDIR/completion.zsh"
@@ -35,14 +36,14 @@ autoload -Uz cursor_mode; cursor_mode
 # Editor mode (keystroke: 'v' in normal mode)
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+bindkey -M vicmd "^v" edit-command-line
 
 # prompt
 # TODO: change to selfmade propmt
 eval "$(starship init zsh)"
 
 # fzf colorscheme
-source "$ZDOTDIR/base16-fzf/bash/base16-materia.config"
+source "$ZDOTDIR/theme.zsh"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match terminal "Xresources" background
 
 # source plugins

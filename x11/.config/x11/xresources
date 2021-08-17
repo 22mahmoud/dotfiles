@@ -1,6 +1,6 @@
 ! vim: ft=xdefaults
 
-# include "./base16-xresources/xresources/base16-materia.Xresources"
+# include "./theme.Xresources"
 
 *.alpha: 0.8
 *.font: monospace:pixelsize=13:antialias=true:autohint=true

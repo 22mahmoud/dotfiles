@@ -1,0 +1,20 @@
+# x11
+theme.Xresources
+
+# nnn
+watch_later
+playlists
+sessions
+.selection
+
+# qutebrowser
+bookmarks
+quickmarks
+autoconfig.yml
+qsettings
+
+# zsh
+theme.zsh
+
+# tmux
+theme.conf

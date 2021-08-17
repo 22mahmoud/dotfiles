@@ -8,7 +8,7 @@ xclip -h >/dev/null || exit
 chosen=$(grep -v "#" ~/.local/bin/unicode | dmenu -l 15)
 
 [ "$chosen" != "" ] || exit
-☺
+
 c=$(echo "$chosen" | sed "s/ .*//")
 echo "$c" | tr -d '\n' | xclip -selection clipboard
 notify-send "'$c' copied to clipboard." &
