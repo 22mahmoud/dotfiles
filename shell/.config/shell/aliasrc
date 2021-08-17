@@ -104,8 +104,8 @@ alias kss="kubectl get services"
 alias ka="kubectl apply -f"
 alias kd="kubectl delete pod"
 
-# alias ls="ls --color=auto -a"
-# alias ll="ls --color=auto -a -l"
+alias ls="ls -a"
+alias ll="ls -l -a -p -c -h"
 
 # git 
 alias g='git'
