@@ -19,3 +19,6 @@
 [submodule "nnn/.local/share/nnn/src"]
 	path = nnn/.local/share/nnn/src
 	url = git@github.com:jarun/nnn.git
+[submodule "mpv/.config/mpv/scripts/autosubsync"]
+	path = mpv/.config/mpv/scripts/autosubsync
+	url = git@github.com:joaquintorres/autosubsync-mpv.git
