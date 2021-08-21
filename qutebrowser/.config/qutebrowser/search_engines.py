@@ -1,3 +1,7 @@
+from qutebrowser.config.config import ConfigContainer
+
+c: ConfigContainer = c  # type: ignore
+
 c.url.searchengines = {
     'DEFAULT': 'https://search.brave.com/search?q={}',
     'b': 'https://search.brave.com/search?q={}',
@@ -17,8 +21,10 @@ c.url.searchengines = {
     'npm': 'https://www.npmjs.com/search?q={}',
     'mdn': 'https://developer.mozilla.org/en-US/search?q={}',
     "maps": "https://www.openstreetmap.org/search?query={}",
-    "imdb": "https://www.imdb.com/find?ref_=nv_sr_fn&q={}&s=all",
+    "imdb": "https://www.imdb.com/find?q={}&s=all",
     "souq": "https://egypt.souq.com/eg-en/{}/s/?as=1",
+    "noon": "https://www.noon.com/egypt-ar/search?q={}",
+    "jumia": "https://www.jumia.com.eg/ar/catalog/?q={}",
     "olx": "https://www.olx.com.eg/alexandria/q-{}/",
     "az": "https://www.amazon.com/s?field-keywords={}",
 }
