@@ -106,21 +106,14 @@ c.content.javascript.enabled = False
 js_whitelist = [
     "*://*.github.com/*",
     "*://*.gitlab.com/*",
-    "*://*.youtube.com/*",
     "*://*.duckduckgo.com/*",
     "*://*.mahmoudashraf.dev/*",
-    "*://*.linkedin.com/*",
     "*://*.reddit.com/*",
-    "*://*.element.io/*",
     "*://*.dev.to/*",
     "*://*.brave.com/*",
     "*://fosstodon.org/*",
     "*://odysee.com/*",
     "*://tilvids.com/*",
-    "*://*.twitter.com/*",
-    "*://*.vid.puffyan.us/*",
-    "*://*.yewtu.be/*",
-    "*://*.invidious.fdn.fr/*",
 ]
 
 for website in js_whitelist:
