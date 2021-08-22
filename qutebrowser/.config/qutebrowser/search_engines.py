@@ -18,6 +18,7 @@ c.url.searchengines = {
     'yt': 'https://youtube.com/search?q={}',
     'tw': 'https://twitter.com/search?q={}',
     'twh': 'https://twitter.com/{unquoted}',
+    'insta': 'https://instagram.com/u/{unquoted}',
     'npm': 'https://www.npmjs.com/search?q={}',
     'mdn': 'https://developer.mozilla.org/en-US/search?q={}',
     "maps": "https://www.openstreetmap.org/search?query={}",
