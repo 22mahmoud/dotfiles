@@ -37,7 +37,7 @@ def get_twitter_redirects():
 
 def get_instagram_redirect():
     return random.choice([
-        "https://bibliogram.art",
+        "bibliogram.art",
         "bibliogram.snopyta.org",
         "bibliogram.pussthecat.org",
         "bibliogram.nixnet.services",
