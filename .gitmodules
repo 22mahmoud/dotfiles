@@ -13,9 +13,6 @@
 [submodule "zsh/.config/zsh/base16-fzf"]
 	path = zsh/.config/zsh/base16-fzf
 	url = git@github.com:fnune/base16-fzf.git
-[submodule "nvim/.config/nvim"]
-	path = nvim/.config/nvim
-	url = git@github.com:22mahmoud/nvim.git
 [submodule "nnn/.local/share/nnn/src"]
 	path = nnn/.local/share/nnn/src
 	url = git@github.com:jarun/nnn.git
