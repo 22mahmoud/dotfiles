@@ -23,7 +23,7 @@ c.url.searchengines = {
     'mdn': 'https://developer.mozilla.org/en-US/search?q={}',
     "maps": "https://www.openstreetmap.org/search?query={}",
     "imdb": "https://www.imdb.com/find?q={}&s=all",
-    "souq": "https://egypt.souq.com/eg-en/{}/s/?as=1",
+    "souq": "https://www.amazon.eg/s?field-keywords={}",
     "noon": "https://www.noon.com/egypt-ar/search?q={}",
     "jumia": "https://www.jumia.com.eg/ar/catalog/?q={}",
     "olx": "https://www.olx.com.eg/alexandria/q-{}/",
