@@ -33,6 +33,10 @@ path=(
   "$DENO_INSTALL/bin"
   "$GO_PATH/bin"
   "$GEM_HOME/bin"
+  "$ANDROID_HOME/emulator"
+  "$ANDROID_HOME/tools"
+  "$ANDROID_HOME/tools/bin"
+  "$ANDROID_HOME/platform-tools"
   "$path[@]"
 )
 

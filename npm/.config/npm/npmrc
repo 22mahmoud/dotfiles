@@ -2,3 +2,4 @@ cache=/home/ashraf/.cache/npm
 tmp=/run/user/1000/npm
 init-module=/home/ashraf/.config/npm/config/npm-init.js
 prefix=/home/ashraf/.local/share/npm
+//registry.npmjs.org/:_authToken=f6ceb0c4-4b92-4376-a242-7e65fbe4d9e2
