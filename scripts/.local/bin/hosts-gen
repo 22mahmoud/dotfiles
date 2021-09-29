@@ -30,6 +30,7 @@ _download_blocked_hosts() {
   wget -q --show-progress "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts" -O "$etcdir/20-uncheckyads"
   wget -q --show-progress "https://urlhaus.abuse.ch/downloads/hostfile/" -O "$etcdir/21-urlhaus"
   wget -q --show-progress "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext&useip=0.0.0.0" -O "$etcdir/22-yoy"
+  wget -q --show-progress "https://block.energized.pro/ultimate/formats/hosts.txt" -O "$etcdir/23-energized"
 
   printf "all /etc/hosts.d downloaded\n"
 }
