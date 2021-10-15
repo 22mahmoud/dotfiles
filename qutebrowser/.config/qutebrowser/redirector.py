@@ -56,7 +56,10 @@ REDIRECT_MAP = {
     'www.youtube.com': get_youtube_redirects,
 
     'instagram.com': get_instagram_redirect,
-    'www.instagram.com': get_instagram_redirect
+    'www.instagram.com': get_instagram_redirect,
+
+    'medium.com': lambda: 'scribe.rip',
+    'www.medium.com': lambda: 'scribe.rip',
 }
 
 def redirect(request: Request):
