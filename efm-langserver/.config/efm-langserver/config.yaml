@@ -1,0 +1,67 @@
+---
+version: 2
+log-file: /tmp/efm.log
+root-makers:
+  - .git/
+
+tools:
+  sh-shellcheck: &sh-shellcheck
+    lint-command: 'shellcheck --format=gcc --external-sources -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+
+  sh-shfmt: &sh-shfmt
+    format-command: 'shfmt -ci -s -bn -i 2'
+    format-stdin: true
+
+  prettier-d: &prettier_d
+    format-command: 'prettierd --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - '.prettierrc'
+      - '.prettierrc.json'
+
+  lua-stylua-format: &lua-stylua-format
+    format-command: 'stylua -'
+    format-stdin: true
+    root-markers:
+      - 'stylua.toml'
+
+  luacheck: &luacheck
+    lint-command: 'luacheck --globals vim --filename ${INPUT} --formatter plain -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+languages:
+  sh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+
+  javascript:
+    - <<: *prettier_d
+
+  javascriptreact:
+    - <<: *prettier_d
+
+  typescript:
+    - <<: *prettier_d
+
+  typescriptreact:
+    - <<: *prettier_d
+
+  html:
+    - <<: *prettier_d
+
+  css:
+    - <<: *prettier_d
+
+  json:
+    - <<: *prettier_d
+
+  lua:
+    - <<: *lua-stylua-format
+    - <<: *luacheck
