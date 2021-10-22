@@ -12,6 +12,7 @@
 [core]
   pager = delta
   editor = nvim
+  excludesfile = ~/.config/git/.gitignore
 [difftool]
   trustExistCode = true
 [interactive]
