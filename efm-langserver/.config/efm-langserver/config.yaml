@@ -64,4 +64,4 @@ languages:
 
   lua:
     - <<: *lua-stylua-format
-    - <<: *luacheck
+    #  - <<: *luacheck
