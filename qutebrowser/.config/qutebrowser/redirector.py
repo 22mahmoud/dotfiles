@@ -8,7 +8,6 @@ def get_youtube_redirects():
         "invidious.snopyta.org",
         "invidious.kavin.rocks",
         "vid.puffyan.us",
-        "invidious.exonip.de",
         "ytprivate.com",
         "invidious-us.kavin.rocks",
         "invidious.silkky.cloud",
