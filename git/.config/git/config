@@ -13,16 +13,21 @@
   pager = delta
   editor = nvim
   excludesfile = ~/.config/git/.gitignore
-[difftool]
-  trustExistCode = true
 [interactive]
   diffFilter = delta --color-only
 [push]
   followTags = true
 [merge]
-  tool = nvimdiff4
-[mergetool "nvimdiff4"]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  trustExistCode = true
+  prompt = false
+[diff]
+  tool = vimdiff
 [log]
   decorate = short
   date = local
