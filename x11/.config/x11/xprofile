@@ -31,6 +31,7 @@ dunst &
 picom --experimental-backend &
 
 # set random wallpaper
-wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)" &
+# wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)" &
+# setbg 
 
 # styli.sh -s nature &
