@@ -19,7 +19,7 @@ setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
 slstatus &
 
 # network manager
-nm-applet &
+# nm-applet &
 
 # speed up keyboard
 xset r rate 280 40 &
