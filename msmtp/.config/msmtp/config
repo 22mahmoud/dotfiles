@@ -29,3 +29,11 @@ passwordeval       "pass rtn"
 user               mashraf@roadtripnation.org
 from               mashraf@roadtripnation.org
 
+# rtn
+account            swvl
+host               smtp.gmail.com
+port               587
+passwordeval       "pass swvl"
+user               mahmod.ashraf@swvl.com
+from               mahmod.ashraf@swvl.com
+
