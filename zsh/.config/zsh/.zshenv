@@ -24,6 +24,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # pfetch
 export PF_INFO="ascii os wm host pkgs shell editor"
 
+# git contrib
+export PATH="$PATH:$(du "$HOME/.local/src/git/contrib" | cut -f2 | paste -sd ':')"
+
 # path
 typeset -U PATH path
 

@@ -19,3 +19,6 @@
 [submodule "mpv/.config/mpv/scripts/autosubsync"]
 	path = mpv/.config/mpv/scripts/autosubsync
 	url = git@github.com:joaquintorres/autosubsync-mpv.git
+[submodule "git/.local/src/git"]
+	path = git/.local/src/git
+	url = https://github.com/22mahmoud/git
