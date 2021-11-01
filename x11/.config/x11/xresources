@@ -2,8 +2,8 @@
 
 # include "./theme.Xresources"
 
-*.alpha: 1
-*.alphaUnfocused: 1
+*.alpha: .8
+*.alphaUnfocused: .6
 *.font: monospace:pixelsize=13:antialias=true:autohint=true
 
 ! dwm config
