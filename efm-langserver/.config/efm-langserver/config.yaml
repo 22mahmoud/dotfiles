@@ -1,6 +1,7 @@
 ---
 version: 2
-log-file: /tmp/efm.log
+log-file: /home/mahmod.ashraf/.cache/efm.log
+log-level: 3
 root-makers:
   - .git/
 
@@ -18,7 +19,7 @@ tools:
     format-stdin: true
 
   prettier-d: &prettier_d
-    format-command: 'prettierd --stdin-filename ${INPUT}'
+    format-command: 'prettierd ${INPUT}'
     format-stdin: true
     root-markers:
       - '.prettierrc'
