@@ -20,8 +20,8 @@ Inbox         ~/.local/share/mail/personal/INBOX
 Subfolders    Verbatim
 
 Channel     personal
-Far         :personal-remote:
-Near        :personal-local:
+Master         :personal-remote:
+Slave        :personal-local:
 Patterns    *
 
 # swvl
@@ -41,21 +41,21 @@ Path          ~/.local/share/mail/swvl/
 Inbox         ~/.local/share/mail/swvl/INBOX
 
 Channel       swvl-inbox
-Far           :swvl-remote:
-Near          :swvl-local:
+Master           :swvl-remote:
+Slave          :swvl-local:
 patterns      "INBOX"
 
 Channel       swvl-sent
-Far           :swvl-remote:"[Gmail]/Sent Mail"
-Near          :swvl-local:Sent
+Master           :swvl-remote:"[Gmail]/Sent Mail"
+Slave          :swvl-local:Sent
 
 Channel     swvl-trash
-Far         :swvl-remote:"[Gmail]/Trash"
-Near       :swvl-local:Trash
+Master         :swvl-remote:"[Gmail]/Trash"
+Slave       :swvl-local:Trash
 
 Channel     swvl-drafts
-Far      :swvl-remote:"[Gmail]/Drafts"
-Near       :swvl-local:Drafts
+Master      :swvl-remote:"[Gmail]/Drafts"
+Slave       :swvl-local:Drafts
 
 Group swvl
 channel swvl-inbox

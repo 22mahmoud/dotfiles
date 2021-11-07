@@ -92,10 +92,10 @@ bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
 # not much
-set nm_db_limit = 0
-set nm_default_url = "notmuch:///home/ashraf/.local/share/mail"
-set vfolder_format = "%6n(%6N) %f"
-virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
+#  set nm_db_limit = 0
+#  set nm_default_url = "notmuch:///home/ashraf/.local/share/mail"
+#  set vfolder_format = "%6n(%6N) %f"
+#  virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 
 # open a different virtual folder
 bind index,pager X change-vfolder
@@ -114,4 +114,4 @@ bind index > vfolder-window-forward
 # set pgp_default_key  = 'Mahmoud Ashraf <hello@mahmoudashraf.dev>'
 
 # Default account
-source "$XDG_CONFIG_HOME/neomutt/accounts/personal"
+source "$XDG_CONFIG_HOME/neomutt/accounts/swvl"

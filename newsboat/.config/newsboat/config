@@ -7,7 +7,7 @@ download-retries 2
 download-timeout 10
 download-full-page yes
 prepopulate-query-feeds yes
-scrolloff 11
+# scrolloff 11
 
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 
