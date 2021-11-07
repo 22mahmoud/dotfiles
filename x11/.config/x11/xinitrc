@@ -1,5 +1,8 @@
 #!/bin/sh
 
+DBUSLAUNCH=/usr/bin/dbus-launch
+eval $($DBUSLAUNCH --exit-with-session --sh-syntax) &&
+
 if [ -e "$XDG_CONFIG_HOME/x11/xprofile" ]; then
   . "$XDG_CONFIG_HOME/x11/xprofile"
 fi

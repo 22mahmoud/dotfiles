@@ -4,7 +4,7 @@
 
 *.alpha: .8
 *.alphaUnfocused: .6
-*.font: monospace:pixelsize=13:antialias=true:autohint=true
+*.font: monospace:pixelsize=16:antialias=true:autohint=true
 
 ! dwm config
 dwm.borderpx: 3
