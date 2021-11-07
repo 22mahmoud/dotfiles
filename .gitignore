@@ -6,6 +6,7 @@ watch_later
 playlists
 sessions
 .selection
+.history
 
 # qutebrowser
 bookmarks
@@ -15,6 +16,7 @@ qsettings
 
 # zsh
 theme.zsh
+.zcompdump
 
 # tmux
 theme.conf
