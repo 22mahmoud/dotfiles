@@ -9,7 +9,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # X11
-export XINITRC="/home/ashraf/.config/x11/xinitrc"
+export XINITRC="/home/mahmod.ashraf/.config/x11/xinitrc"
 # export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 # android/java
