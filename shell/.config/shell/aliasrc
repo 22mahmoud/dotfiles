@@ -37,6 +37,19 @@ alias p="paru"
 alias pa="paru -S"
 alias pr="paru -Rns"
 
+# apt
+alias apt="sudo apt"
+alias apti="sudo apt install"
+alias aptr="sudo apt remove"
+alias aptc="sudo apt autoremove --purge"
+
+# flatpak
+alias fp="flatpak"
+alias fpi="flatpak install"
+alias fpr="flatpak remove"
+alias fpc="flatpak remove --unused"
+alias fps="flatpak search"
+
 # navigation
 alias ..='cd ..'
 alias .2='cd ../..'
