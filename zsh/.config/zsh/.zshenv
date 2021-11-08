@@ -34,7 +34,7 @@ path=(
   "$VOLTA_HOME/bin"
   "$CARGO_HOME/bin"
   "$DENO_INSTALL/bin"
-  "$GO_PATH/bin"
+  "$GOPATH/bin"
   "$GEM_HOME/bin"
   "$ANDROID_HOME/emulator"
   "$ANDROID_HOME/tools"

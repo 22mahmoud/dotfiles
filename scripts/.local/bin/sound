@@ -1,30 +1,35 @@
 #!/bin/sh
 
 if [ "$1" = "inc" ]; then
-  pactl set-sink-mute 0 false
-  pactl set-sink-volume 0 +5%
+  amixer -D pulse sset Master 5%+
 fi
 
 if [ "$1" = "dec" ]; then
-  pactl set-sink-mute 0 false
-  pactl set-sink-volume 0 -5%
+  amixer -D pulse sset Master 5%-
 fi
 
 if [ "$1" = "toggle" ]; then
-  pactl set-sink-mute 0 toggle
+  amixer -D pulse set Master toggle
 fi
 
-AMIXER=$(amixer sget Master)
-VOLUME=$(echo "$AMIXER" | grep 'Right:' | awk -F'[][]' '{ print $2 }' | tr -d "%")
-MUTE=$(echo "$AMIXER" | grep -o '\[off\]' | tail -n 1)
+is_mute=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $4 }')
+volume=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $2 }' | sed 's/.$//')
 
-ICON=🔊
-[ "$MUTE" = "[off]" ] || [ "$VOLUME" -eq 0 ] && ICON=🔇
-[ "$VOLUME" -le 20 ] && ICON=🔈
-[ "$VOLUME" -le 60 ] && ICON=🔉
+# ICON=
+if [ "$is_mute" = 'off' ]; then
+  icon=🔇
+elif [ "$volume" -gt 70 ]; then
+  icon=🔊
+elif [ "$volume" -gt 30 ]; then
+  icon=🔉
+elif [ "$volume" -gt 0 ]; then
+  icon=🔈
+else
+  icon=🔇
+fi
 
 dunstify \
   -t 1500 \
   -u low \
-  "$ICON Sound" "Volume: ${VOLUME}%" \
+  "$icon Sound" "Volume: ${volume}%" \
   -h string:x-canonical-private-synchronous:"changeVolume"

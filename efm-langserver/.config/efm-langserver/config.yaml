@@ -18,7 +18,7 @@ tools:
     format-stdin: true
 
   prettier-d: &prettier_d
-    format-command: 'prettierd --stdin-filename ${INPUT}'
+    format-command: 'prettierd ${INPUT}'
     format-stdin: true
     root-markers:
       - '.prettierrc'
