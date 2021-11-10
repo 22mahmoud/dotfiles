@@ -1,19 +1,19 @@
 #!/bin/sh
 
 if [ "$1" = "inc" ]; then
-  amixer -D pipewire sset Master 5%+
+  amixer sset Master 5%+
 fi
 
 if [ "$1" = "dec" ]; then
-  amixer -D pipewire sset Master 5%-
+  amixer sset Master 5%-
 fi
 
 if [ "$1" = "toggle" ]; then
-  amixer -D pipewire set Master toggle
+  amixer set Master toggle
 fi
 
-is_mute=$(amixer -D pipewire sget Master | awk -F"[][]" '/Left:/ { print $4 }')
-volume=$(amixer -D pipewire sget Master | awk -F"[][]" '/Left:/ { print $2 }' | sed 's/.$//')
+is_mute=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $4 }')
+volume=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $2 }' | sed 's/.$//')
 
 # ICON=
 if [ "$is_mute" = 'off' ]; then
