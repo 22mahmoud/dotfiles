@@ -1,0 +1,115 @@
+#!/bin/sh
+
+# c_ prefix stands for config (acts like global state)
+c_type=
+c_mode="full"
+c_pidfile="/tmp/rex.pid"
+c_with_autio=
+
+file_name="$(date '+%y%m%d-%H%M-%S')"
+videos_dir="$HOME/Videos/screencasts"
+pictures_dir="$HOME/Pictures/screenshots"
+
+usage() {
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done <<-EOF
+
+  rex [ -h | -s | -g | -v | -q | -m ] 
+    record a video, a gif, and take a screenshot.
+
+  -h    show this help
+  -s    take a screenshot
+  -v    take a video
+  -g    take a gif
+  -m    mode can be either full(default), or select
+  -q    stop recording a video/gif
+EOF
+}
+
+stop() {
+  [ ! -e "$c_pidfile" ] && exit 0
+
+  {
+    read -r pid file_path
+    kill "$pid"
+
+    dunstify "Rex" "Video taken" --action "default,ok" | {
+      read -r action
+      case "$action" in
+        "default") mpv "$file_path" ;;
+      esac
+    } &
+
+  } <"$c_pidfile"
+
+  rm "$c_pidfile"
+}
+
+while getopts 'hsvqam:' opt; do
+  case "$opt" in
+    h)
+      usage
+      exit 0
+      ;;
+    m) c_mode="$OPTARG" ;;
+    s) c_type="screenshot" ;;
+    v) c_type="video" ;;
+    a) c_with_autio=true ;;
+    q) stop ;;
+    *) exit 0 ;;
+  esac
+done
+
+ffmpeg_record() {
+  unset IFS
+
+  file_path="$videos_dir/screencast-$file_name.mkv"
+
+  ffmpeg \
+    -framerate 60 \
+    -f x11grab \
+    -s "$1" \
+    -i "$2" \
+    -r 30 \
+    ${c_with_autio:+-f alsa -i default} \
+    -c:v h264 -crf 0 -preset ultrafast -c:a aac \
+    "$file_path" &
+
+  echo "$! $file_path" >"$c_pidfile"
+}
+
+video() {
+  case "$c_mode" in
+    full)
+      ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
+      ;;
+
+    select) slop -f "%x %y %w %h" 2>/dev/null | {
+      read -r x y w h
+      [ -z "$x" ] && exit 0
+      ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
+    } ;;
+  esac
+}
+
+screenshot() {
+  case "$c_mode" in
+    full) maim "$pictures_dir/screenshot-$file_name.png" ;;
+    select) maim -s "$pictures_dir/screenshot-$file_name.png" 2>/dev/null ;;
+  esac
+
+  [ ! -e "$pictures_dir/screenshot-$file_name.png" ] && exit 1
+
+  dunstify "Rex" "screenshot taken" --action "default,ok" | {
+    read -r action
+    case "$action" in
+      "default") sxiv "$HOME/Pictures/screenshots/screenshot-$file_name.png" ;;
+    esac
+  } &
+}
+
+case "$c_type" in
+  screenshot) screenshot ;;
+  video) video ;;
+esac
