@@ -1,14 +1,11 @@
 #!/usr/bin/env sh
 
-# The famous "get a menu of emojis to copy" script.
+dmenu -i -l 20 <"$XDG_DATA_HOME/unicodes" | {
+  read -r emoji _
 
-# Must have xclip installed to even show menu.
-xclip -h >/dev/null || exit
+  [ -z "$emoji" ] && exit
 
-chosen=$(grep -v "#" ~/.local/bin/unicode | dmenu -l 15)
+  xdotool type "$emoji"
 
-[ "$chosen" != "" ] || exit
-
-c=$(echo "$chosen" | sed "s/ .*//")
-echo "$c" | tr -d '\n' | xclip -selection clipboard
-notify-send "'$c' copied to clipboard." &
+  echo "$emoji" | xclip -selection clipboard
+}
