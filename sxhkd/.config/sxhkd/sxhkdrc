@@ -14,7 +14,7 @@ super + shift + b
   $BROWSER --target private-window
 
 super + e
-  d-emoji
+  emojiz -d
 
 super + m
   $TERMINAL -e neomutt
