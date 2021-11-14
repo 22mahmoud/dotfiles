@@ -51,8 +51,8 @@ REDIRECT_MAP = {
     'twitter.com': get_twitter_redirects,
     'www.twitter.com': get_twitter_redirects,
 
-    'youtube.com': get_youtube_redirects,
-    'www.youtube.com': get_youtube_redirects,
+    #  'youtube.com': get_youtube_redirects,
+    #  'www.youtube.com': get_youtube_redirects,
 
     'instagram.com': get_instagram_redirect,
     'www.instagram.com': get_instagram_redirect,
