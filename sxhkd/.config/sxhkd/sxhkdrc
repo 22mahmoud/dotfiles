@@ -17,13 +17,13 @@ super + e
   emojiz -d
 
 super + m
-  $TERMINAL -e neomutt
+  $TERMINAL -e bicon eg neomutt
 
 super + n
   $TERMINAL -e nnn
 
 super + r
-  $TERMINAL -e newsboat
+  $TERMINAL -e bicon eg newsboat
 
 super + alt + {0, 9, 8}
   sound {inc, dec, toggle}
