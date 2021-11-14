@@ -10,7 +10,7 @@ sxhkd &
 xsetroot -cursor_name left_ptr &
 
 # hide mouse cursor while not using it
-unclutter -idle 2 &
+xbanish &
 
 # set both english and arabic layout
 setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
