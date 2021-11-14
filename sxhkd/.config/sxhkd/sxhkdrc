@@ -38,7 +38,7 @@ super + alt + {equal, minus}
   brightness {inc, dec}
 
 Print
-  screenshot full &
+  rex -s &
 
 shift + Print
-  screenshot select &
+  rex -s -m select &
