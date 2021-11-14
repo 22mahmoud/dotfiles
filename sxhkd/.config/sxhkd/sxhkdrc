@@ -5,7 +5,7 @@ super + d
   dmenu_run
 
 super + shift + x
-  slock
+  slock & playerctl -a stop & xset dpms force off
 
 super + b
   $BROWSER
