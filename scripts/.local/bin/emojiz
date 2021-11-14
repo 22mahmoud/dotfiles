@@ -1,0 +1,58 @@
+#!/bin/sh
+
+c_emojis_file="$XDG_CACHE_HOME/emojis"
+
+usage() {
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done <<-EOF
+
+  emojiz [ -h | -l | -d | -u ] 
+    list and update emojis w/ dmenu
+
+  -h    show this help
+  -l    list all emojis
+  -u    update all emojis
+  -d    use dmenu
+EOF
+}
+
+list() {
+  while read -r line; do
+    printf "%s\n" "$line"
+  done <"$c_emojis_file"
+}
+
+update() {
+  curl -s \
+    "https://raw.githubusercontent.com/muan/emojilib/main/dist/emoji-en-US.json" \
+    | jq 'to_entries | map_values({ key: .key, value: .value | join(" ") } ) |
+    from_entries' \
+    | tr -d '",{}' \
+    | sed -e 's/://' -e '/^$/d' -e 's/^[ \t]*//' \
+      >"$c_emojis_file"
+}
+
+_dmenu() {
+  dmenu -i -l 20 <"$c_emojis_file" | {
+    read -r emoji _
+
+    [ -z "$emoji" ] && exit 0
+
+    xdotool type "$emoji"
+
+    echo "$emoji" | xclip -selection clipboard
+  }
+}
+
+main() {
+  case "$1" in
+    -h) usage ;;
+    -l) list ;;
+    -u) update ;;
+    -d) _dmenu ;;
+    *) exit 0 ;;
+  esac
+}
+
+main "$@"
