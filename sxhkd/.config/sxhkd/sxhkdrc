@@ -14,16 +14,16 @@ super + shift + b
   $BROWSER --target private-window
 
 super + e
-  d-emoji
+  emojiz -d
 
 super + m
-  $TERMINAL -e neomutt
+  $TERMINAL -e bicon eg neomutt
 
 super + n
   $TERMINAL -e nnn
 
 super + r
-  $TERMINAL -e newsboat
+  $TERMINAL -e bicon eg newsboat
 
 super + alt + {0, 9, 8}
   sound {inc, dec, toggle}
@@ -38,7 +38,7 @@ super + alt + {equal, minus}
   brightness {inc, dec}
 
 Print
-  screenshot full &
+  rex -s &
 
 shift + Print
-  screenshot select &
+  rex -s -m select &
