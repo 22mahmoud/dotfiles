@@ -1,0 +1,91 @@
+#!/bin/sh
+
+c_socket=/tmp/mpvsocket
+
+die() {
+  printf >&2 '%s\n' "$*"
+  exit 1
+}
+
+usage() {
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done <<-EOF
+
+  $(basename "$0") [ -h | -l | -d | -u ] 
+    a commend-line utility to enhance mpv control
+
+  -h    show this help
+  -a    add file or link to the mpv queue
+EOF
+  exit 1
+}
+
+is_active() {
+  [ "$(echo '{ "command": ["get_property", "pid"] }' \  | socat - "$c_socket" 2>/dev/null)" ] \
+    && true
+}
+
+get_file_name() {
+  [ -z "$1" ] && exit
+
+  case "$1" in
+    https://* | http://*) file_name="$1" ;;
+    *)
+      if [ -e "$(realpath "$1" 2>/dev/null)" ]; then
+        file_name=$(realpath "$1")
+      else
+        exit
+      fi
+      ;;
+  esac
+
+  echo "$file_name"
+}
+
+clean_file_name() {
+  [ -z "$1" ] && exit
+
+  case "$1" in
+    https://* | http://*) file_name=$(youtube-dl "$1" -e) ;;
+    *)
+      if [ -e "$(realpath "$1" 2>/dev/null)" ]; then
+        file_name=$(basename "$1")
+      else
+        exit
+      fi
+      ;;
+  esac
+
+  echo "$file_name"
+}
+
+add() {
+  if is_active; then
+    printf 'loadfile "%s" append-play\n' "$1" \
+      | socat - "$c_socket" >/dev/null 2>&1
+  else
+    mpv --no-terminal --really-quiet --idle=once \
+      --input-ipc-server="$c_socket" "$1" &
+  fi
+}
+
+list() {
+  printf '{"command": ["get_property", "playlist"]}\n' \
+    | socat - "$c_socket" 2>/dev/null \
+    | jq -r '.data | .[] | (if .playing == true then "▶ " else "  " end) + .filename' | {
+    read -r file_name
+    clean_file_name "$file_name"
+  }
+}
+
+main() {
+  case "$1" in
+    -h) usage ;;
+    -a) add "$(get_file_name "$2")" ;;
+    -l) list ;;
+    *) exit 0 ;;
+  esac
+}
+
+main "$@"
