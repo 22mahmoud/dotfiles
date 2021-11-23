@@ -41,7 +41,7 @@ _dmenu() {
 
     xdotool type "$emoji"
 
-    echo "$emoji" | xclip -selection clipboard
+    echo "$emoji" | tr -d '\n' | xclip -selection clipboard
   }
 }
 

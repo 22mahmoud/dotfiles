@@ -6,9 +6,9 @@ c_mode="full"
 c_pidfile="/tmp/rex.pid"
 c_with_autio=
 
-file_name="$(date '+%y%m%d-%H%M-%S')"
-videos_dir="$HOME/Videos/screencasts"
-pictures_dir="$HOME/Pictures/screenshots"
+file_name=${REX_FILE_NAME:-$(date '+%y%m%d-%H%M-%S')}
+videos_dir=${REX_VID_DIR:-$HOME/Videos/screencasts}
+pictures_dir=${REX_PIC_DIR:-$HOME/Pictures/screenshots}
 
 usage() {
   while IFS= read -r line; do
@@ -22,7 +22,7 @@ usage() {
   -s    take a screenshot
   -v    take a video
   -g    take a gif
-  -m    mode can be either full(default), or select
+  -m    mode can be either full,f(default), or select,s
   -q    stop recording a video/gif
 EOF
 }
@@ -100,11 +100,11 @@ ffmpeg_record() {
 
 video() {
   case "$c_mode" in
-    full)
+    full|f)
       ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
       ;;
 
-    select) slop -f "%x %y %w %h" 2>/dev/null | {
+    select|s) slop -f "%x %y %w %h" 2>/dev/null | {
       read -r x y w h
       [ -z "$x" ] && exit 0
       ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
@@ -114,8 +114,8 @@ video() {
 
 screenshot() {
   case "$c_mode" in
-    full) maim "$pictures_dir/screenshot-$file_name.png" ;;
-    select) maim -s "$pictures_dir/screenshot-$file_name.png" 2>/dev/null ;;
+    full|f) maim "$pictures_dir/screenshot-$file_name.png" ;;
+    select|s) maim -s "$pictures_dir/screenshot-$file_name.png" 2>/dev/null ;;
   esac
 
   [ ! -e "$pictures_dir/screenshot-$file_name.png" ] && exit 1
