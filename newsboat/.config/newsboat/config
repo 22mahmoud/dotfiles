@@ -55,6 +55,5 @@ highlight article ":.*\\(embedded flash\\)$" magenta default
 
 browser linkhandler
 macro , open-in-browser
-macro v set browser "mpv --ytdl-format='[height=720]'" ; open-in-browser ; set browser linkhandler
-macro m set browser "mpv --ytdl-format='[height<480]'" ; open-in-browser ; set browser linkhandler
+macro v set browser "mpx -a" ; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler

@@ -1,6 +1,6 @@
 ---
 version: 2
-log-file: /tmp/efm.log
+#  log-file: /tmp/efm.log
 root-makers:
   - .git/
 
@@ -38,6 +38,14 @@ tools:
 
 languages:
   sh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+
+  zsh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+
+  bash:
     - <<: *sh-shellcheck
     - <<: *sh-shfmt
 
