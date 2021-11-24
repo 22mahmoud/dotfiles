@@ -1,0 +1,39 @@
+#!/bin/sh
+
+prompt_git_info() {
+  [ -n "$vcs_info_msg_0_" ] \
+    && echo " on %F{magenta} $vcs_info_msg_0_%f"
+}
+
+prompt_git_branch() {
+  autoload -Uz vcs_info
+
+  precmd_vcs_info() {
+    vcs_info
+  }
+
+  precmd_functions+=(precmd_vcs_info)
+
+  zstyle ':vcs_info:git*' check-for-changes true
+  zstyle ':vcs_info:git:*' unstagedstr '!'
+  zstyle ':vcs_info:git:*' stagedstr '+'
+  zstyle ':vcs_info:git:*' formats '%b'
+}
+
+prompt_setup() {
+  setopt prompt_subst
+
+  prompt_git_branch
+
+  typeset -g prompt_newline=$'\n%{\r%}'
+
+  PROMPT=""
+  PROMPT+='${prompt_newline}'
+  PROMPT+='%F{blue}%B%1~%b%f'
+  PROMPT+='$(prompt_git_info)'
+  PROMPT+='${prompt_newline}%(?.%F{green}.%F{red})%B%b%f '
+}
+
+prompt_setup
+
+# vim: ft=zsh

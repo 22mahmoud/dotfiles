@@ -4,16 +4,20 @@ config: ConfigAPI = config # type: ignore
 
 
 # Bindings for normal mode
-config.bind('V', 'spawn mpv --ytdl-format="[height<=?1080]" {url}')
-config.bind(',v', 'hint links spawn mpv --ytdl-format="[height<=?1080]" {hint-url}')
-config.bind('M', 'spawn mpv --ytdl-format="[height<=?480]" {url}')
-config.bind(',m', 'hint links spawn mpv --ytdl-format="[height<=?480]" {hint-url}')
+config.bind('V', 'spawn mpx -a {url}')
+config.bind(',v', 'hint links spawn mpx -a {hint-url}')
+
 config.bind(',pl', 'spawn --userscript qute-bitwarden --auto-lock 60480000')
 config.bind(',pu', 'spawn --userscript qute-bitwarden --user-only --auto-lock 60480000')
 config.bind(',pp', 'spawn --userscript qute-bitwarden --password-only --auto-lock 60480000')
+
 config.bind(',r', 'hint links userscript readability-js')
 config.bind(',R', 'spawn --userscript readability-js')
+
+config.bind('zl', 'spawn --userscript localhost list')
+
 config.bind(',j', 'spawn --userscript format_json')
+
 config.bind(',i', 'hint images run open {hint-url}')
 config.bind(',C', 'config-source')
 config.bind("<", "tab-move -")
@@ -28,7 +32,6 @@ config.unbind('d')
 config.unbind('D')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
-config.bind('zl', 'spawn --userscript localhost list')
 
 # for old.reddit.com expand thread.
 config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
