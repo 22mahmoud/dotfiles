@@ -19,6 +19,7 @@ _set_gif_wp() {
     --no-pause \
     --player-operation-mode=cplayer \
     --panscan=1.0 \
+    --mute=yes \
     --no-input-default-bindings \
     "$2" >/dev/null 2>&1 &
 

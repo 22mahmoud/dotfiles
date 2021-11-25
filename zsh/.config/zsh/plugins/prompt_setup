@@ -15,9 +15,12 @@ prompt_git_branch() {
   precmd_functions+=(precmd_vcs_info)
 
   zstyle ':vcs_info:git*' check-for-changes true
-  zstyle ':vcs_info:git:*' unstagedstr '!'
-  zstyle ':vcs_info:git:*' stagedstr '+'
-  zstyle ':vcs_info:git:*' formats '%b'
+
+  zstyle ':vcs_info:git:*' unstagedstr ' %F{green}!%f'
+  zstyle ':vcs_info:git:*' stagedstr ' %F{yellow}+%f'
+
+  zstyle ':vcs_info:git:*' formats '%b%u%c%m'
+  zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c%m'
 }
 
 prompt_setup() {

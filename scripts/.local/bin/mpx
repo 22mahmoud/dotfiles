@@ -12,7 +12,7 @@ usage() {
     printf '%s\n' "$line"
   done <<-EOF
 
-  $(basename "$0") [ -h | -a {url} | -l ] 
+  ${0##*/} [ -h | -a {url} | -l ] 
     a commend-line utility wrapper to use mpv w/ IPC
 
   -h            show this help

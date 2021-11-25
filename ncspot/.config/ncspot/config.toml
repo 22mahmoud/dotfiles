@@ -1,6 +1,6 @@
 notify=true
 [theme]
-background = "black"
+background = ""
 primary = "light white"
 secondary = "light black"
 title = "green"
