@@ -51,6 +51,7 @@ alias .9='cd ../../../../../../../../..'
 alias .10='cd ../../../../../../../../../..'
 
 # yarn
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias y="yarn"
 alias yst="yarn start"
 alias yd='yarn dev'
