@@ -21,6 +21,7 @@ _set_gif_wp() {
     --panscan=1.0 \
     --mute=yes \
     --no-input-default-bindings \
+    --ytdl-format='bestvideo[height<=?1080]+bestaudio/best' \
     "$2" >/dev/null 2>&1 &
 
   # save the pid of the last command in a pid file
