@@ -51,7 +51,7 @@ export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
 export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"
 
 # zoom
-export SSB_HOME="$XDG_DATA_HOME/zoom"
+# export SSB_HOME="$XDG_DATA_HOME/zoom"
 
 # wget
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
