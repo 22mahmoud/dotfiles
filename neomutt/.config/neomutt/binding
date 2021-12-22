@@ -56,4 +56,3 @@ macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/personal<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/swvl<enter><change-folder>!<enter>'
