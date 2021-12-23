@@ -28,6 +28,7 @@ source "$XDG_CONFIG_HOME/shell/functions"
 
 # completion
 source "$ZDOTDIR/completion.zsh"
+source <(kubectl completion zsh)
 
 # vim
 bindkey -v
