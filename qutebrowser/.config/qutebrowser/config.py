@@ -60,7 +60,7 @@ c.content.blocking.method = "adblock"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
-c.content.cookies.accept = "no-3rdparty"
+c.content.cookies.accept = "never"
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.headers.user_agent = (
     "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
@@ -119,3 +119,4 @@ js_whitelist = [
 for website in js_whitelist:
     with config.pattern(website) as p:
         p.content.javascript.enabled = True
+        p.content.cookies.accept = "no-3rdparty"

@@ -12,12 +12,3 @@ port               587
 passwordeval       "pass mail.mahmoudashraf.dev"
 user               hello
 from               hello@mahmoudashraf.dev
-
-# rtn
-account            swvl
-host               smtp.gmail.com
-port               587
-passwordeval       "pass swvl"
-user               mahmod.ashraf@swvl.com
-from               mahmod.ashraf@swvl.com
-
