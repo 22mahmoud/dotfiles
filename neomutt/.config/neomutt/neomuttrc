@@ -114,4 +114,4 @@ bind index > vfolder-window-forward
 # set pgp_default_key  = 'Mahmoud Ashraf <hello@mahmoudashraf.dev>'
 
 # Default account
-source "$XDG_CONFIG_HOME/neomutt/accounts/swvl"
+source "$XDG_CONFIG_HOME/neomutt/accounts/personal"
