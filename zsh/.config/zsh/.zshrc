@@ -41,7 +41,7 @@ bindkey -M vicmd "^v" edit-command-line
 
 # prompt
 # TODO: change to selfmade propmt
-#  eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 autoload -Uz prompt_setup
 prompt_setup
 
