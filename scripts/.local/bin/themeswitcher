@@ -77,8 +77,7 @@ _update_nvim() {
   # update nvim colorscheme
   nvr --serverlist | xargs -I{} nvr --remote --nostart -s --servername {} \
     -c "lua package.loaded['ma.theme'] = nil" \
-    -c "lua require('ma.theme')" \
-    -c "so $nvim/init.lua"
+    -c "lua require('ma.theme')"
 }
 
 _update_zsh() {
