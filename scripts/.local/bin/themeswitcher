@@ -73,11 +73,9 @@ _update_nvim() {
   # change the color name in neovim config
   sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme_name/g" "$nvim/lua/ma/theme.lua"
 
-  # TODO: listen to fzf change
   # update nvim colorscheme
   nvr --serverlist | xargs -I{} nvr --remote --nostart -s --servername {} \
-    -c "lua package.loaded['ma.theme'] = nil" \
-    -c "lua require('ma.theme')"
+    -c ":colorscheme base16-$theme_name"
 }
 
 _update_zsh() {
