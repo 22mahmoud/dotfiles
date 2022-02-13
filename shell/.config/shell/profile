@@ -87,6 +87,9 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
 export LYNX_CFG="$XDG_CONFIG_HOME/lynx/lynx.cfg"
 export LYNX_LSS="$XDG_CONFIG_HOME/lynx/lynx.lss"
 
+# wine
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
