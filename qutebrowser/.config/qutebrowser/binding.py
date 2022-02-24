@@ -32,6 +32,9 @@ config.unbind('d')
 config.unbind('D')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
+config.bind(',xb', 'config-cycle statusbar.show always never')
+config.bind(',xt', 'config-cycle tabs.show always never')
+config.bind(',xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 
 # for old.reddit.com expand thread.
 config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
