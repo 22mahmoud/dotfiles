@@ -14,7 +14,7 @@ config.source("search_engines.py")
 config.source("binding.py")
 
 # Misc
-c.downloads.location.directory = os.path.expanduser("~/Downloads")
+c.downloads.location.directory = os.path.expanduser("~/Downloads/qute")
 c.downloads.location.prompt = False
 c.downloads.position = "bottom"
 c.confirm_quit = ["downloads"]
@@ -44,7 +44,7 @@ c.qt.args = [
 ]
 
 # startpage
-default_start_page = "file:///home/ashraf/.config/qutebrowser/startpage.html"
+default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
 c.url.start_pages = [default_start_page]
 c.url.default_page = default_start_page
 
@@ -56,7 +56,7 @@ c.colors.webpage.preferred_color_scheme = "dark"
 c.content.pdfjs = False
 c.content.autoplay = False
 c.content.blocking.enabled = True
-c.content.blocking.method = "adblock"
+c.content.blocking.method = "both"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
@@ -66,6 +66,9 @@ c.content.headers.user_agent = (
     "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 )
 c.content.headers.accept_language = "en-US,en;q=0.5"
+c.content.headers.custom = {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+}
 c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False
 c.content.webgl = False
