@@ -4,7 +4,7 @@
 c_type=
 c_mode="full"
 c_pidfile="/tmp/rex.pid"
-c_with_autio=
+c_with_audio=
 
 file_name=${REX_FILE_NAME:-$(date '+%y%m%d-%H%M-%S')}
 videos_dir=${REX_VID_DIR:-$HOME/Videos/screencasts}
@@ -23,6 +23,7 @@ usage() {
   -v    take a video
   -g    take a gif
   -m    mode can be either full,f(default), or select,s
+  -a    enable audio
   -q    stop recording a video/gif
 EOF
 }
@@ -73,7 +74,7 @@ while getopts 'hsvgqam:' opt; do
     s) c_type="screenshot" ;;
     v) c_type="video" ;;
     g) c_type="gif" ;;
-    a) c_with_autio=true ;;
+    a) c_with_audio=true ;;
     q) stop ;;
     *) exit 0 ;;
   esac
@@ -91,7 +92,7 @@ ffmpeg_record() {
     -s "$1" \
     -i "$2" \
     -r 30 \
-    ${c_with_autio:+-f alsa -i default} \
+    ${c_with_audio:+-f alsa -i default} \
     -c:v h264 -crf 0 -preset ultrafast -c:a aac \
     "$file_path" &
 
