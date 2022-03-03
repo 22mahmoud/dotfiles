@@ -1,17 +1,43 @@
 #!/bin/sh
 
-if [ "$1" = "inc" ]; then
+usage() {
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done <<-EOF
+
+  brightness [ -i | -d | -h ] 
+    control screen brightness with notifcations
+
+  -h|help     show this help
+  -i|inc      increase brightness
+  -d|dec      decrease brightness
+EOF
+}
+
+inc() {
   light -A 10
-fi
+}
 
-if [ "$1" = "dec" ]; then
+dec() {
   light -U 10
-fi
+}
 
-BRIGHTNESS=$(light -G | cut -d '.' -f 1)
+notify() {
+  brightness=$(light -G | cut -d '.' -f 1)
 
-dunstify -t 1500 -u low "🔆 Brightness" "strength: ${BRIGHTNESS}%" \
-   -h string:x-canonical-private-synchronous:"changeVolume"
+  dunstify -t 1500 -u low "🔆 Brightness" "strength: ${brightness}%" \
+    -h string:x-canonical-private-synchronous:"changeBrightness"
+}
 
+main() {
+  case "$1" in
+    -h | help) usage ;;
+    -i | inc) inc ;;
+    -d | dec) dec ;;
+    *) exit 0 ;;
+  esac
 
+  notify
+}
 
+main "$@"

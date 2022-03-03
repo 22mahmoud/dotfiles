@@ -1,35 +1,69 @@
 #!/bin/sh
 
-if [ "$1" = "inc" ]; then
-  amixer sset Master 5%+
-fi
+usage() {
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done <<-EOF
 
-if [ "$1" = "dec" ]; then
-  amixer sset Master 5%-
-fi
+  volume [ -i | -d | -t | -h ] 
+    control volume with notifcations
 
-if [ "$1" = "toggle" ]; then
-  amixer set Master toggle
-fi
+  -h|help     show this help
+  -i|inc      increase volume
+  -d|dec      decrease volume
+  -t|toggle   toggle volume mute/unmute
+EOF
+}
 
-is_mute=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $4 }')
-volume=$(amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $2 }' | sed 's/.$//')
+inc() {
+  pamixer -i 5
+}
 
-# ICON=
-if [ "$is_mute" = 'off' ]; then
-  icon=🔇
-elif [ "$volume" -gt 70 ]; then
-  icon=🔊
-elif [ "$volume" -gt 30 ]; then
-  icon=🔉
-elif [ "$volume" -gt 0 ]; then
-  icon=🔈
-else
-  icon=🔇
-fi
+dec() {
+  pamixer -d 5
+}
 
-dunstify \
-  -t 1500 \
-  -u low \
-  "$icon Sound" "Volume: ${volume}%" \
-  -h string:x-canonical-private-synchronous:"changeVolume"
+toggle() {
+  pamixer -t
+}
+
+get_icon() {
+  volume=$(pamixer --get-volume)
+
+  if [ "$(pamixer --get-mute)" = true ]; then
+    icon=🔇
+  elif [ "$volume" -gt 70 ]; then
+    icon=🔊
+  elif [ "$volume" -gt 30 ]; then
+    icon=🔉
+  elif [ "$volume" -gt 0 ]; then
+    icon=🔈
+  else
+    icon=🔇
+  fi
+
+  echo $icon
+}
+
+notify() {
+  notify-send \
+    -t 1500 \
+    -u low \
+    "$(get_icon) Sound" "Volume: $(pamixer --get-volume-human)" \
+    -h string:x-canonical-private-synchronous:"changeVolume"
+
+}
+
+main() {
+  case "$1" in
+    -h|help) usage ;;
+    -i|inc) inc ;;
+    -d|dec) dec ;;
+    -t|toggle) toggle ;;
+    *) exit 0 ;;
+  esac
+
+  notify
+}
+
+main "$@"

@@ -26,10 +26,10 @@ super + r
   $TERMINAL -e bicon eg newsboat
 
 super + alt + {0, 9, 8}
-  sound {inc, dec, toggle}
+  volume {inc, dec, toggle}
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute}
-  sound {inc, dec, toggle}
+  volume {inc, dec, toggle}
 
 super + alt + {equal, minus}
   brightness {inc, dec}
