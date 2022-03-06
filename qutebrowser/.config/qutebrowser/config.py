@@ -74,6 +74,10 @@ c.content.canvas_reading = False
 c.content.webgl = False
 c.content.headers.do_not_track = True
 c.content.tls.certificate_errors = "ask-block-thirdparty"
+c.content.media.audio_capture = 'ask'
+c.content.media.video_capture = 'ask'
+c.content.desktop_capture = 'ask'
+c.content.mouse_lock = 'ask'
 
 # Completion bar
 c.completion.cmd_history_max_items = 500
