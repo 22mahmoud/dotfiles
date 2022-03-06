@@ -46,25 +46,24 @@ def get_instagram_redirect():
 
 REDIRECT_MAP = {
     'reddit.com': lambda: 'old.reddit.com',
-    'www.reddit.com': lambda: 'old.reddit.com',
-
     'twitter.com': get_twitter_redirects,
-    'www.twitter.com': get_twitter_redirects,
-
      'youtube.com': get_youtube_redirects,
-     'www.youtube.com': get_youtube_redirects,
-
     'instagram.com': get_instagram_redirect,
-    'www.instagram.com': get_instagram_redirect,
-
-    # TODO: enhance medium redirect
     'medium.com': lambda: 'scribe.rip',
-    'www.medium.com': lambda: 'scribe.rip',
 }
 
 def redirect(request: Request):
-    url = request.request_url.host()
-    get_redirect_url = REDIRECT_MAP.get(url)
+    url = request.request_url
+    if (request.resource_type != interceptor.ResourceType.main_frame) or (
+        url.scheme() in {"data", "blob",}
+    ):
+        return
+
+    host = url.host()
+    if host[:4] == "www.":
+        host = host[4:]
+
+    get_redirect_url = REDIRECT_MAP.get(host)
 
     redirect_url = None
 
