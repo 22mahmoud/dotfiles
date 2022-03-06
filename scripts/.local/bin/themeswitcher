@@ -87,8 +87,8 @@ _update_zsh() {
 }
 
 _update_st() {
-  # send l to st to reload all open instance
-  pidof st | xargs -d' ' -I{} echo {} | tr -s '\n' | xargs -n1 kill -USR1
+  # send signal to st to reload all open instance
+  killall st -s USR1 st
 }
 
 _update_qutebrowser() {
@@ -107,13 +107,13 @@ _update_wallpaper() {
 
 main() {
   _update_xresources
-  _update_qutebrowser &
   _restart_dwm &
-  _update_zsh
-  _update_st
-  _update_tmux
-  _update_nvim
-  _update_wallpaper
+  _update_qutebrowser &
+  _update_zsh &
+  _update_st &
+  _update_tmux &
+  _update_nvim &
+  _update_wallpaper &
 }
 
 main

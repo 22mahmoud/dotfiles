@@ -1,11 +1,5 @@
 #!/bin/sh
 
-# The first argument must be an actual file.
-# if [ ! -e "${1}" ]; then
-#   echo "File \"${1}\" not found. Exiting." 1>&2
-#   exit 2
-# fi
-
 PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
 
 _set_gif_wp() {
@@ -29,7 +23,7 @@ _set_gif_wp() {
 }
 
 # kill the last pid
-head "${PIDFILE}" | xargs kill -9
+head "${PIDFILE}" | xargs kill -9 >/dev/null 2>&1
 
 # get screen resolution
 res=$(xdpyinfo | awk '/dimensions/ {print $2}')
