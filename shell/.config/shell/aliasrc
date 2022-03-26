@@ -1,41 +1,41 @@
-# set ft=config
+#!/bin/sh
 
 # Use $XINITRC variable if file exists.
-[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+[ -f "$XINITRC" ] && alias startx='startx $XINITRC'
 
 # utils
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -vI"
-alias mkdir="mkdir -pv"
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -vI'
+alias mkdir='mkdir -pv'
 alias sudo='sudo -v; sudo '
 alias cls='clear'
 alias fork='setsid -f'
 alias mine='sudo chown -R $(whoami):$(whoami)'
 
 # apps
-alias v="nvim"
-alias sv="sudo -E nvim"
-alias yt="youtube-dl"
-alias open="xdg-open"
+alias v='nvim'
+alias sv='sudo -E nvim'
+alias yt='youtube-dl'
+alias open='xdg-open'
 alias nnn='nnn -c'
 alias pf='pfetch'
 alias sys='sudo systemctl'
 alias sysu='systemctl --user'
 alias mbsync='mbsync -c $MBSYNCRC'
 alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
-alias unvim="$XDG_CONFIG_HOME/nvim/scripts/setup"
+alias unvim='$XDG_CONFIG_HOME/nvim/scripts/setup'
 alias reload='source $ZDOTDIR/.zshrc'
 
 # youtube-dl
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
-alias ytb="youtube-dl -f bestvideo+bestaudio "
+alias yta-best='youtube-dl --extract-audio --audio-format best '
+alias yta-mp3='youtube-dl --extract-audio --audio-format mp3 '
+alias ytb='youtube-dl -f bestvideo+bestaudio '
 
 # paru
-alias p="paru"
-alias pa="paru -S"
-alias pr="paru -Rns"
+alias p='paru'
+alias pa='paru -S'
+alias pr='paru -Rns'
 
 # navigation
 alias ..='cd ..'
@@ -51,9 +51,9 @@ alias .9='cd ../../../../../../../../..'
 alias .10='cd ../../../../../../../../../..'
 
 # yarn
-alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
-alias y="yarn"
-alias yst="yarn start"
+alias yarn='yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config''
+alias y='yarn'
+alias yst='yarn start'
 alias yd='yarn dev'
 
 # npm
@@ -63,43 +63,46 @@ alias nst='npm run start'
 alias nd='npm run dev'
 
 # tmux
-alias t="tmux"
-alias ta="t a -t"
-alias tls="t ls"
-alias tn="t new -t"
-alias tk="t kill-session -t"
+alias t='tmux'
+alias ta='t a -t'
+alias tls='t ls'
+alias tn='t new -t'
+alias tk='t kill-session -t'
 
-# docker 
-alias d="docker"
-alias ds="docker ps"
-alias dexec="docker exec -it"
+# docker
+alias d='docker'
+alias ds='docker ps'
+alias dexec='docker exec -it'
 
 # kubernetes
-alias k="kubectl"
-alias kps="kubectl get pods"
-alias kds="kubectl get deployments"
-alias kss="kubectl get services"
-alias ka="kubectl apply -f"
-alias kd="kubectl delete pod"
+alias k='kubectl'
+alias kps='kubectl get pods'
+alias kds='kubectl get deployments'
+alias kss='kubectl get services'
+alias ka='kubectl apply -f'
+alias kd='kubectl delete pod'
 
-alias ls="ls --color=auto -a"
-alias ll="ls --color=auto -l -a -p -c -h"
+alias ls='ls --color=auto -a'
+alias ll='ls --color=auto -l -a -p -c -h'
 
-# git 
+# git
 alias g='git'
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit"
-alias gpl="git pull"
-alias gplom="git pull origin master"
-alias gf="git fetch"
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -v'
+alias gpl='git pull'
+alias gf='git fetch'
 alias gm='git merge'
-alias gch='git checkout'
-alias gnb='git checkout -b'
-alias gpu="git push"
+alias gco='git checkout'
+alias gcb='git checkout -b'
+gpu() {
+  if [ -z "$1" ]; then
+    git push -u origin HEAD
+  else
+    git push "$@"
+  fi
+}
 alias gcl='git clone'
-alias gundo="git reset --soft HEAD^ && git reset all"
-alias	gl="git log --graph --abbrev-commit --decorate --date=relative \
-  --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) \
-  %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all"
-alias gsa="git submodule add"
+alias gundo='git reset HEAD~1 --mixed'
+alias gl='git log --color=always --graph --pretty=format:%C(blue)%h %Creset- C(green)(%cr) %Creset%s - %C(cyan)%aN %C(magenta)%d --date=auto:human'
+alias gsa='git submodule add'

@@ -42,9 +42,11 @@
 [init]
   defaultBranch = main
 [alias]
+  s = status
   a = add
   b = branch
-  c = commit
+  c = commit -v
+  f = fetch
   cl = clone
   co = checkout
   cb = checkout -b
@@ -53,7 +55,6 @@
   pu = push
   pl = pull
   r = reset
-  s = status
-  undo = "!git reset --soft HEAD^ && git reset all"
+  undo = reset HEAD~1 --mixed
 	l = log --color=always --graph --pretty=format:\"%C(blue)%h %Creset- %C(green)(%cr) %Creset%s - %C(cyan)%aN %C(magenta)%d\" --date=auto:human
 
