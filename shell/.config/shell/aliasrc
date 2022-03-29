@@ -9,9 +9,15 @@ alias mv='mv -iv'
 alias rm='rm -vI'
 alias mkdir='mkdir -pv'
 alias sudo='sudo -v; sudo '
+alias bc='bc -ql'
 alias cls='clear'
 alias fork='setsid -f'
 alias mine='sudo chown -R $(whoami):$(whoami)'
+alias ls='ls --color=auto -a'
+alias ll='ls --color=auto -l -a -p -c -h'
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ip="ip -color=auto"
 
 # apps
 alias v='nvim'
@@ -81,9 +87,6 @@ alias kds='kubectl get deployments'
 alias kss='kubectl get services'
 alias ka='kubectl apply -f'
 alias kd='kubectl delete pod'
-
-alias ls='ls --color=auto -a'
-alias ll='ls --color=auto -l -a -p -c -h'
 
 # git
 alias g='git'

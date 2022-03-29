@@ -91,11 +91,11 @@ bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
-# not much
-set nm_db_limit = 0
-set nm_default_url = "notmuch:///home/ashraf/.local/share/mail"
-set vfolder_format = "%6n(%6N) %f"
-virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
+# notmuch
+set virtual_spoolfile=yes
+set folder=notmuch-root-folder
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>printf 'Enter a search term to find with notmuch: '; read x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
+source ~/.mailboxes
 
 # open a different virtual folder
 bind index,pager X change-vfolder
@@ -115,3 +115,6 @@ bind index > vfolder-window-forward
 
 # Default account
 source "$XDG_CONFIG_HOME/neomutt/accounts/personal"
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/personal<enter><change-folder>!<enter>'
