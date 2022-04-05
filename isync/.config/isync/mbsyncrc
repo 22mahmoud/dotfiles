@@ -23,3 +23,42 @@ Channel     personal
 Far         :personal-remote:
 Near        :personal-local:
 Patterns    *
+
+# lynks
+# Remote Store
+IMAPStore        lynks-remote
+Host             imap.gmail.com
+Port             993
+User             mashraf@lynks.com
+PassCmd          "pass lynks"
+SSLType          IMAPS
+CertificateFile  /etc/ssl/certs/ca-certificates.crt
+AuthMechs        LOGIN
+
+# Local storage
+MaildirStore  lynks-local
+Path          ~/.local/share/mail/lynks/
+Inbox         ~/.local/share/mail/lynks/INBOX
+
+Channel       lynks-inbox
+Far           :lynks-remote:
+Near          :lynks-local:
+patterns      "INBOX"
+
+Channel       lynks-sent
+Far           :lynks-remote:"[Gmail]/Sent Mail"
+Near          :lynks-local:Sent
+
+Channel     lynks-trash
+Far         :lynks-remote:"[Gmail]/Trash"
+Near       :lynks-local:Trash
+
+Channel     lynks-drafts
+Far      :lynks-remote:"[Gmail]/Drafts"
+Near       :lynks-local:Drafts
+
+Group lynks
+channel lynks-inbox
+channel lynks-sent
+channel lynks-trash
+channel lynks-drafts
