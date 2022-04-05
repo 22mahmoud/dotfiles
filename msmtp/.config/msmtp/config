@@ -12,3 +12,11 @@ port               587
 passwordeval       "pass mail.mahmoudashraf.dev"
 user               hello
 from               hello@mahmoudashraf.dev
+
+# lynks
+account            lynks
+host               smtp.gmail.com
+port               587
+passwordeval       "pass lynks"
+user               mashraf@lynks.com
+from               mashraf@lynks.com
