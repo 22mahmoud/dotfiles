@@ -4,11 +4,12 @@
 
 *.alpha: .8
 *.alphaUnfocused: .6
-*.font: monospace:pixelsize=13:antialias=true:autohint=true
+*.font: monospace:size=10
 
 ! dwm config
-dwm.borderpx: 3
+dwm.borderpx: 4
 dwm.snap: 32
+dwm.gappx: 5
 dwm.showbar: 1
 dwm.topbar: 1
 dwm.nmaster: 1
