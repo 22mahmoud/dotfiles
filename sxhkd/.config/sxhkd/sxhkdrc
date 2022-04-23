@@ -42,3 +42,51 @@ Print
 
 shift + Print
   rex -s -m select &
+
+# dwm
+super + {_,shift,control,control + shift} {1-9}
+	dwm-msg run_command {view,tag,toggleview,toggletag} $((1<<{0-9}))
+
+super + shift + q
+  dwm-msg run_command killclient 0
+
+super + shift + c
+  dwm-msg run_command quit
+
+super + Tab
+  dwm-msg run_command view 0
+
+super + {j,k}
+	dwm-msg run_command focusstack {_,-}1
+
+super + {l,h}
+	dwm-msg run_command setmfact {_,-}0.05
+
+super + z
+  dwm-msg run_command zoom
+
+super + {i, shift + i}
+  dwm-msg run_command incnmaster {1,-1}
+
+super + f
+  dwm-msg run_command togglefullscr
+
+super + {t,y,u}
+  dwm-msg get_layouts | jq ".[{0,1,2}].address" \
+    | xargs dwm-msg run_command setlayoutsafe
+
+super + s
+  dwm-msg run_command togglesticky
+
+super + shift + space
+  dwm-msg run_command togglefloating
+
+super + 0
+  dwm-msg run_command viewall
+
+super + {minus,equal,shift minus,shift equal}
+	dwm-msg run_command setgaps {-5,5,0,100}
+
+# super + shift + {Return,n}
+# 	dwm-msg run_command togglescratch {0,1}
+

@@ -98,7 +98,7 @@ _update_qutebrowser() {
 
 _restart_dwm() {
   # refresh dwm xrdb
-  xdotool key Super_L+Shift_L+r
+  dwm-msg run_command xrdb
 }
 
 _update_wallpaper() {
