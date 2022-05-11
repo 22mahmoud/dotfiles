@@ -110,6 +110,9 @@ export IMAGE="sxiv"
 export COLORTERM="truecolor"
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
+# MongoHud
+export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/ManngoHud/MangoHud.conf"
+
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 

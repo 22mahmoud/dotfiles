@@ -30,6 +30,8 @@ dunst &
 # launch picom compositor
 picom --experimental-backend &
 
+~/.fehbg &
+
 # set random wallpaper
 # wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)" &
 # setbg 
