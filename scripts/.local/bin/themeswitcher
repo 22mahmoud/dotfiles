@@ -113,7 +113,7 @@ main() {
   _update_st &
   _update_tmux &
   _update_nvim &
-  _update_wallpaper &
+  # _update_wallpaper &
 }
 
 main

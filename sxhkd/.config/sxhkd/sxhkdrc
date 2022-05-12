@@ -93,3 +93,8 @@ super + {minus,equal,shift minus,shift equal}
 # super + shift + {Return,n}
 # 	dwm-msg run_command togglescratch {0,1}
 
+super + shift + period
+  dwm-msg run_command tagmon 1
+
+super + shift + comma
+  dwm-msg run_command focusmon 1
