@@ -68,8 +68,8 @@ super + z
 super + {i, shift + i}
   dwm-msg run_command incnmaster {1,-1}
 
-super + f
-  dwm-msg run_command togglefullscr
+super + {f, shift + f}
+  dwm-msg run_command {togglefullscreen, togglefakefullscreen} 0
 
 super + {t,y,u}
   dwm-msg get_layouts | jq ".[{0,1,2}].address" \
