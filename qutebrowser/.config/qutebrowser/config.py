@@ -118,6 +118,8 @@ js_whitelist = [
     "*://fosstodon.org/*",
     "*://odysee.com/*",
     "*://tilvids.com/*",
+    "*://protondb.com/*",
+    "*://localhost:*/*",
 ]
 
 for website in js_whitelist:

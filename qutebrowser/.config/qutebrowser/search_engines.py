@@ -28,4 +28,5 @@ c.url.searchengines = {
     "jumia": "https://www.jumia.com.eg/ar/catalog/?q={}",
     "olx": "https://www.olx.com.eg/alexandria/q-{}/",
     "az": "https://www.amazon.com/s?field-keywords={}",
+    "pdb": "https://www.protondb.com/search?q={}"
 }
