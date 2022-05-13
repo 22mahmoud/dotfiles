@@ -7,7 +7,7 @@
 *.font: monospace:size=10
 
 ! dwm config
-dwm.borderpx: 3
+dwm.borderpx: 4
 dwm.snap: 32
 dwm.gappx: 5
 dwm.showbar: 1
