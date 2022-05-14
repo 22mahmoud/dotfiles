@@ -38,7 +38,6 @@ stop() {
 
     if [ "$rec_type" = "gif" ]; then
       gif_path="${file_path%.mkv}.gif"
-      echo "$gif_path"
 
       dunstify -r "$notify_id" "Rex" "convert the record into GIF..."
 
@@ -114,17 +113,19 @@ video() {
 }
 
 screenshot() {
+  screenshot_path="$pictures_dir/screenshot-$file_name.png"
   case "$c_mode" in
-    full|f) maim "$pictures_dir/screenshot-$file_name.png" ;;
-    select|s) maim -s "$pictures_dir/screenshot-$file_name.png" 2>/dev/null ;;
+    full|f) maim "$screenshot_path";;
+    select|s) maim -s "$screenshot_path" 2>/dev/null ;;
   esac
 
-  [ ! -e "$pictures_dir/screenshot-$file_name.png" ] && exit 1
+  [ ! -e "$screenshot_path" ] && exit 1
 
-  dunstify "Rex" "screenshot taken" --action "default,ok" | {
+
+  dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,ok" | {
     read -r action
     case "$action" in
-      "default") sxiv "$HOME/Pictures/screenshots/screenshot-$file_name.png" ;;
+      "default") sxiv "$screenshot_path" ;;
     esac
   } &
 }
