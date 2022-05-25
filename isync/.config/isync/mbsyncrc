@@ -11,7 +11,7 @@ Port             993
 User             hello
 PassCmd          "pass mail.mahmoudashraf.dev"
 SSLType          IMAPS
-CertificateFile  /etc/ssl/certs/ca-certificates.crt
+# CertificateFile  /etc/ssl/certs/ca-certificates.crt
 
 # Local storage
 MaildirStore  personal-local
@@ -32,7 +32,7 @@ Port             993
 User             mashraf@lynks.com
 PassCmd          "pass lynks"
 SSLType          IMAPS
-CertificateFile  /etc/ssl/certs/ca-certificates.crt
+# CertificateFile  /etc/ssl/certs/ca-certificates.crt
 AuthMechs        LOGIN
 
 # Local storage
