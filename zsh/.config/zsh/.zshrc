@@ -1,3 +1,11 @@
+# env
+KEYTIMEOUT=1
+
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE="$ZSH_CACHE_DIR/history"
+
 fpath=($ZDOTDIR/plugins $fpath)
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
