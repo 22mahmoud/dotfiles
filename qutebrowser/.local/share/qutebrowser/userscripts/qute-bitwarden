@@ -26,21 +26,17 @@ Insert login information using Bitwarden CLI and a dmenu-compatible application
 USAGE = """The domain of the site has to be in the name of the Bitwarden entry, for example: "github.com/cryzed" or
 "websites/github.com".  The login information is inserted by emulating key events using qutebrowser's fake-key command in this manner:
 [USERNAME]<Tab>[PASSWORD], which is compatible with almost all login forms.
-
 If enabled, with the `--totp` flag, it will also move the TOTP code to the
 clipboard, much like the Firefox add-on.
-
 You must log into Bitwarden CLI using `bw login` prior to use of this script.
 The session key will be stored using keyctl for the number of seconds passed to
 the --auto-lock option.
-
 To use in qutebrowser, run: `spawn --userscript qute-bitwarden`
 """
 
 EPILOG = """Dependencies: tldextract (Python 3 module), pyperclip (optional
 Python module, used for TOTP codes), Bitwarden CLI (1.7.4 is known to work
 but older versions may well also work)
-
 WARNING: The login details are viewable as plaintext in qutebrowser's debug log
 (qute://log) and might be shared if you decide to submit a crash report!"""
 
@@ -60,9 +56,9 @@ argument_parser = argparse.ArgumentParser(
     epilog=EPILOG,
 )
 argument_parser.add_argument('url', nargs='?', default=os.getenv('QUTE_URL'))
-argument_parser.add_argument('--dmenu-invocation', '-d', default='dmenu -i -p Bitwarden -l 5',
+argument_parser.add_argument('--dmenu-invocation', '-d', default='rofi -dmenu -i -p Bitwarden',
                              help='Invocation used to execute a dmenu-provider')
-argument_parser.add_argument('--password-prompt-invocation', '-p', default='dmenu -p "Master Password" -P',
+argument_parser.add_argument('--password-prompt-invocation', '-p', default='rofi -dmenu -p "Master Password" -password -lines 0',
                              help='Invocation used to prompt the user for their Bitwarden password')
 argument_parser.add_argument('--no-insert-mode', '-n', dest='insert_mode', action='store_false',
                              help="Don't automatically enter insert mode")
@@ -103,7 +99,7 @@ def qute_command(command):
 def ask_password(password_prompt_invocation):
     process = subprocess.run(
         shlex.split(password_prompt_invocation),
-        universal_newlines=True,
+        text=True,
         stdout=subprocess.PIPE,
     )
     if process.returncode > 0:
@@ -111,7 +107,7 @@ def ask_password(password_prompt_invocation):
     master_pass = process.stdout.strip()
     return subprocess.check_output(
         ['bw', 'unlock', '--raw', master_pass],
-        universal_newlines=True,
+        text=True,
     ).strip()
 
 
@@ -122,7 +118,7 @@ def get_session_key(auto_lock, password_prompt_invocation):
     else:
         process = subprocess.run(
             ['keyctl', 'request', 'user', 'bw_session'],
-            universal_newlines=True,
+            text=True,
             stdout=subprocess.PIPE,
         )
         key_id = process.stdout.strip()
@@ -132,14 +128,14 @@ def get_session_key(auto_lock, password_prompt_invocation):
                 raise Exception('Could not unlock vault')
             key_id = subprocess.check_output(
                 ['keyctl', 'add', 'user', 'bw_session', session, '@u'],
-                universal_newlines=True,
+                text=True,
             ).strip()
 
         if auto_lock > 0:
             subprocess.call(['keyctl', 'timeout', str(key_id), str(auto_lock)])
         return subprocess.check_output(
             ['keyctl', 'pipe', str(key_id)],
-            universal_newlines=True,
+            text=True,
         ).strip()
 
 
@@ -147,8 +143,7 @@ def pass_(domain, encoding, auto_lock, password_prompt_invocation):
     session_key = get_session_key(auto_lock, password_prompt_invocation)
     process = subprocess.run(
         ['bw', 'list', 'items', '--session', session_key, '--url', domain],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
     )
 
     err = process.stderr.decode(encoding).strip()
@@ -168,8 +163,7 @@ def get_totp_code(selection_id, domain_name, encoding, auto_lock, password_promp
     session_key = get_session_key(auto_lock, password_prompt_invocation)
     process = subprocess.run(
         ['bw', 'get', 'totp', '--session', session_key, selection_id],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
     )
 
     err = process.stderr.decode(encoding).strip()
@@ -196,7 +190,7 @@ def dmenu(items, invocation, encoding):
 def fake_key_raw(text):
     for character in text:
         # Escape all characters by default, space requires special handling
-        sequence = '" "' if character == ' ' else '\{}'.format(character)
+        sequence = '" "' if character == ' ' else r'\{}'.format(character)
         qute_command('fake-key {}'.format(sequence))
 
 
@@ -214,7 +208,7 @@ def main(arguments):
     for target in filter(None, [
                 extract_result.fqdn,
                 extract_result.registered_domain,
-                extract_result.subdomain + extract_result.domain,
+                extract_result.subdomain + '.' + extract_result.domain,
                 extract_result.domain,
                 extract_result.ipv4]):
         target_candidates = json.loads(
