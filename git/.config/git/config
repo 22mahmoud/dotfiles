@@ -38,7 +38,7 @@
 [pull]
   rebase = true
 [gpg]
-  program = gpg
+  program = gpg_loopback
 [init]
   defaultBranch = main
 [alias]
