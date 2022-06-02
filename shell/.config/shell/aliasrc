@@ -33,6 +33,15 @@ alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
 alias unvim='$XDG_CONFIG_HOME/nvim/scripts/setup'
 alias reload='source $ZDOTDIR/.zshrc'
 
+# configs
+alias cfz='$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc'
+alias cfv='$EDITOR $XDG_CONFIG_HOME/nvim/init.lua'
+alias cft='$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf'
+alias cfk='$EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc'
+alias cfq='$EDITOR $XDG_CONFIG_HOME/qutebrowser/config.py'
+alias cfs='$EDITOR $XDG_CONFIG_HOME/shell/profile'
+alias cfx='$EDITOR $XDG_CONFIG_HOME/x11/xinitrc'
+
 # youtube-dl
 alias yta-best='youtube-dl --extract-audio --audio-format best '
 alias yta-mp3='youtube-dl --extract-audio --audio-format mp3 '
