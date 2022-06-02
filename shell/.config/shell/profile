@@ -1,7 +1,4 @@
-#!bin/zsh
-
-# adds `~/.local/bin` to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+#!/bin/zsh
 
 # XDG
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -12,6 +9,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XINITRC="/home/ashraf/.config/x11/xinitrc"
 # export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
 # android/java
 export ANDROID_HOME="$XDG_CONFIG_HOME/android"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android/Sdk"
@@ -21,9 +21,6 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # theme
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME="gtk2"
-
-# zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
@@ -90,6 +87,24 @@ export LYNX_LSS="$XDG_CONFIG_HOME/lynx/lynx.lss"
 # wine
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
+# nnn config
+export GUI=1
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
+export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
+export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_PLUG="z:autojump;p:preview-tabbed;u:imgur;d:dragdrop"
+export NNN_TRASH=1
+
+# fzf config
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# pfetch
+export PF_INFO="ascii os wm host pkgs shell editor"
+
+# MongoHud
+export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
+
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
@@ -110,11 +125,28 @@ export IMAGE="sxiv"
 export COLORTERM="truecolor"
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
-# MongoHud
-export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
-
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+# path
+typeset -U PATH path
+
+path=(
+  "$HOME/.local/bin"
+  "$VOLTA_HOME/bin"
+  "$CARGO_HOME/bin"
+  "$DENO_INSTALL/bin"
+  "$GOPATH/bin"
+  "$GEM_HOME/bin"
+  "$ANDROID_HOME/emulator"
+  "$ANDROID_HOME/tools"
+  "$ANDROID_HOME/tools/bin"
+  "$ANDROID_HOME/platform-tools"
+  "$path[@]"
+)
+
+export PATH
+
 
 # startx when logged in
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
