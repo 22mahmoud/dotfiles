@@ -110,7 +110,7 @@ export COLORTERM="truecolor"
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
 # MongoHud
-export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/ManngoHud/MangoHud.conf"
+export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
 
 
 # nnn config

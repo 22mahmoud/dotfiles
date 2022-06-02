@@ -61,10 +61,16 @@ alias yarn='yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config''
 alias y='yarn'
 alias yst='yarn start'
 alias yd='yarn dev'
+alias ya='yarn add'
+alias yr='yarn remove'
+alias yad='yarn add -D'
 
 # npm
 alias n='npm'
 alias ni='npm install'
+alias na='npm install'
+alias nad='npm install --dev'
+alias nr='npm uninstall'
 alias nst='npm run start'
 alias nd='npm run dev'
 
