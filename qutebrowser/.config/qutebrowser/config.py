@@ -39,8 +39,9 @@ c.spellcheck.languages = ["en-US"]
 # qt engin
 c.qt.highdpi = True
 c.qt.args = [
-    "disable-reading-from-canvas",
-    "enable-strict-mixed-content-checking",
+    "enable-gpu-rasterization",
+    "ignore-gpu-blocklist",
+    "enable-accelerated-video-decode",
 ]
 
 # startpage
@@ -90,6 +91,7 @@ c.statusbar.widgets = ["keypress", "progress", "url", "scroll"]
 c.tabs.last_close = "close"
 c.tabs.title.alignment = "left"
 c.tabs.title.format = "{index}{audio}: {current_title}"
+c.tabs.favicons.scale = 1
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
 
 # Fonts
@@ -118,8 +120,12 @@ js_whitelist = [
     "*://fosstodon.org/*",
     "*://odysee.com/*",
     "*://tilvids.com/*",
-    "*://protondb.com/*",
+    "*://*.protondb.com/*",
     "*://localhost:*/*",
+    "chrome-devtools://*",
+    "devtools://*",
+    "chrome://*",
+    "qute://*",
 ]
 
 for website in js_whitelist:
