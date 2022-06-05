@@ -15,11 +15,8 @@ xbanish &
 # set both english and arabic layout
 setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
 
-# launch slstatus for dwm 
+# launch slstatus for dwm
 slstatus &
-
-# network manager
-# nm-applet &
 
 # speed up keyboard
 xset r rate 280 40 &
@@ -30,10 +27,8 @@ dunst &
 # launch picom compositor
 picom --experimental-backend &
 
+# openrgb
+[ "$(command -v openrgb)" ] && openrgb --profile default.orp &
+
+# set last background
 ~/.fehbg &
-
-# set random wallpaper
-# wallgif "$(find "$HOME/Pictures/wallpapers/gifs" | shuf -n 1)" &
-# setbg 
-
-# styli.sh -s nature &

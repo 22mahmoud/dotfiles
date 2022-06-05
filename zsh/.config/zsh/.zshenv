@@ -1,0 +1,9 @@
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+
+export KEYTIMEOUT=1
+
+# History
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE="$ZSH_CACHE_DIR/history"
