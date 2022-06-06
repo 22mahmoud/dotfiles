@@ -11,6 +11,12 @@ export XINITRC="/home/ashraf/.config/x11/xinitrc"
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+export KEYTIMEOUT=1
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE="$ZSH_CACHE_DIR/history"
 
 # android/java
 export ANDROID_HOME="$XDG_CONFIG_HOME/android"
