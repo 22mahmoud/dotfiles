@@ -10,12 +10,12 @@
 [submodule "x11/.config/x11/base16-xresources"]
 	path = x11/.config/x11/base16-xresources
 	url = https://github.com/pinpox/base16-xresources
-[submodule "zsh/.config/zsh/base16-fzf"]
-	path = zsh/.config/zsh/base16-fzf
-	url = git@github.com:fnune/base16-fzf.git
 [submodule "nnn/.local/share/nnn/src"]
 	path = nnn/.local/share/nnn/src
 	url = git@github.com:jarun/nnn.git
 [submodule "mpv/.config/mpv/scripts/autosubsync"]
 	path = mpv/.config/mpv/scripts/autosubsync
 	url = git@github.com:joaquintorres/autosubsync-mpv.git
+[submodule "zsh/.config/zsh/base16-fzf"]
+	path = zsh/.config/zsh/base16-fzf
+	url = git@github.com:base16-project/base16-fzf.git

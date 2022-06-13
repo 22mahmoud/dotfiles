@@ -95,6 +95,9 @@ alias tk='t kill-session -t'
 alias d='docker'
 alias ds='docker ps'
 alias dexec='docker exec -it'
+alias dc='docker compose'
+alias dcup='docker compose up -d'
+alias dcd='docker compose stop'
 
 # kubernetes
 alias k='kubectl'
