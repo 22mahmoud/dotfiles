@@ -7,13 +7,12 @@ while read -r file; do
     "R") convert -rotate -90 "$file" "$file" ;;
     "f") convert -flop "$file" "$file" ;;
     "y")
-      printf "%s" "$file" | tr -d '\n' | xclip -sel c -r \
+      printf "%s" "$file" | tr -d '\n' | xclip -selection clipboard \
         && notify-send "$file copied to clipboard" &
       ;;
-
     "Y")
-      realpath "$file" | tr -d '\n' | xclip -sel c -r \
-        && notify-send "$(realpath "$file") copied to clipboard" &
+      readlink -f "$file" | tr -d '\n' | xclip -selection clipboard \
+        && notify-send "$(readlink -f "$file") copied to clipboard" &
       ;;
     "d")
       trash-put "$file"
