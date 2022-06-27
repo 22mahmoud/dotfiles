@@ -104,7 +104,6 @@ export PF_INFO="ascii os wm host pkgs shell editor"
 
 # MongoHud
 export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
-export MANGOHUD=1
 
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
