@@ -4,10 +4,11 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 
 # X11
 export XINITRC="/home/ashraf/.config/x11/xinitrc"
-# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
@@ -108,7 +109,7 @@ export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
-export LESSHISTFILE=-
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export RANDFILE="$XDG_CACHE_HOME/rnd"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 export MAIL="$XDG_DATA_HOME/mail"
