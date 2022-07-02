@@ -36,6 +36,9 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # go
 export GOPATH="$XDG_DATA_HOME/go"
 
+# Kodi
+export KODI_DATA="$XDG_DATA_HOME"/kodi
+
 # node
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
