@@ -1,0 +1,9 @@
+#!/bin/sh
+
+profiles="default
+default_red
+turnoff"
+
+selected_profile="$(echo "$profiles" | dmenu -l 5)"
+
+openrgb --profile "$selected_profile".orp
