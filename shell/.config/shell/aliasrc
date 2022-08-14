@@ -48,6 +48,7 @@ alias cfx='$EDITOR $XDG_CONFIG_HOME/x11/xinitrc'
 alias yta-best='youtube-dl --extract-audio --audio-format best '
 alias yta-mp3='youtube-dl --extract-audio --audio-format mp3 '
 alias ytb='youtube-dl -f bestvideo+bestaudio '
+alias drm-dl='youtube-dl --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
 
 # paru
 alias p='paru'

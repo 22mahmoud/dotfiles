@@ -145,6 +145,7 @@ path=(
   "/usr/local/sbin"
   "/opt/homebrew/bin"
    "/opt/homebrew/opt/cocoapods/bin"
+  "$HOME/.local/bin/Bento4/bin/"
   "$VOLTA_HOME/bin"
   "$CARGO_HOME/bin"
   "$DENO_INSTALL/bin"
