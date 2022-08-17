@@ -127,6 +127,7 @@ js_whitelist = [
     "devtools://*",
     "chrome://*",
     "qute://*",
+    "file://*",
 ]
 
 for website in js_whitelist:
