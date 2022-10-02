@@ -8,7 +8,7 @@ export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 
 # X11
 export XINITRC="/home/ashraf/.config/x11/xinitrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
