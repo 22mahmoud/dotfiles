@@ -80,8 +80,8 @@ export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
 export DENO_INSTALL="$XDG_DATA_HOME/deno"
 
 # ruby
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export RUBY_BIN="/opt/homebrew/opt/ruby/bin/ruby"
+export GEM_HOME="$("$RUBY_BIN" -e 'puts Gem.user_dir')"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
 # ripgrep
@@ -145,6 +145,7 @@ path=(
   "/usr/local/sbin"
   "/opt/homebrew/bin"
    "/opt/homebrew/opt/cocoapods/bin"
+   "/opt/homebrew/opt/ruby/bin"
   "$HOME/.local/bin/Bento4/bin/"
   "$VOLTA_HOME/bin"
   "$CARGO_HOME/bin"
