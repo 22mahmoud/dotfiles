@@ -79,6 +79,3 @@ eval "$(zoxide init zsh)"
 
 # colorscript -r | tail -n +2
 
-# pnpm
-export PNPM_HOME="/Users/ashraf/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
