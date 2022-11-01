@@ -143,10 +143,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 typeset -U PATH path
 
 path=(
-  "/opt/homebrew/sbin"
-  "/opt/homebrew/bin"
-   "/opt/homebrew/opt/cocoapods/bin"
-   "/opt/homebrew/opt/ruby/bin"
   "$HOME/.local/bin"
   "/usr/local/bin"
   "/usr/local/sbin"
@@ -163,3 +159,5 @@ path=(
 )
 
 export PATH
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
