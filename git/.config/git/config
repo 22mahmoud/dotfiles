@@ -1,7 +1,7 @@
 [user]
   name = Mahmoud Ashraf
-  email = mashraf@lynks.com
-  signingKey = Mahmoud Ashraf <mashraf@lynks.com>
+  email = hello@mahmoudashraf.dev
+  signingKey = Mahmoud Ashraf <hello@mahmoudashraf.dev>
 [commit]
   gpgsign = true
   verbose = true
