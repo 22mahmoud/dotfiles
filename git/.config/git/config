@@ -14,7 +14,7 @@
   editor = nvim
   excludesfile = ~/.config/git/.gitignore
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only --features=interactive
 [push]
   followTags = true
 [merge]

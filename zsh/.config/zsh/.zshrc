@@ -78,3 +78,4 @@ source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 eval "$(zoxide init zsh)"
 
 # colorscript -r | tail -n +2
+export PATH="/opt/homebrew/bin:$PATH"
