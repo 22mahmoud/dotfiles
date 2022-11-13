@@ -31,7 +31,7 @@ setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history fi
 setopt HIST_VERIFY            # Do not execute immediately upon history expansion.
 
 # Override colors
-eval "$(dircolors -b $XDG_CONFIG_HOME/shell/dircolors)"
+eval "$(gdircolors -b $XDG_CONFIG_HOME/shell/dircolors)"
 
 # aliases
 source "$XDG_CONFIG_HOME/shell/aliasrc"
