@@ -15,7 +15,7 @@
 	url = git@github.com:joaquintorres/autosubsync-mpv.git
 [submodule "zsh/.config/zsh/base16-fzf"]
 	path = zsh/.config/zsh/base16-fzf
-	url = git@github.com:base16-project/base16-fzf.git
+	url = git@github.com:tinted-theming/base16-fzf.git
 [submodule "x11/.config/x11/base16-xresources"]
 	path = x11/.config/x11/base16-xresources
-	url = git@github.com:base16-project/base16-xresources.git
+	url = git@github.com:tinted-theming/base16-xresources.git
