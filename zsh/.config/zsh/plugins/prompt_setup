@@ -21,6 +21,18 @@ prompt_git_branch() {
 
   zstyle ':vcs_info:git:*' formats '%b%u%c%m'
   zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c%m'
+
+  zstyle ':vcs_info:*' formats "%u%c%m"
+  zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
+}
+
++vi-git-untracked() {
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+     git status --porcelain | grep -m 1 '^??' &>/dev/null
+  then
+    hook_com[misc]=' %F{red}?'
+  fi
 }
 
 prompt_setup() {
