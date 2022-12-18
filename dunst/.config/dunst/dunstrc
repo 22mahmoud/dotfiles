@@ -60,7 +60,7 @@
     class = Dunst
     startup_notification = false
     verbosity = mesg
-    corner_radius = 8
+    corner_radius = 0
     force_xinerama = false
     mouse_left_click = do_action
     mouse_middle_click = close_all
