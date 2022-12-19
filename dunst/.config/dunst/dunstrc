@@ -2,11 +2,13 @@
     monitor = 0
     follow = mouse
     # [{width}]x{height}[+/-{x}+/-{y}]
-    geometry = "300x5-20+30"
+    # geometry = "300x5-20+30"
+    width = 300
+    height = 100
+    offset = 10x40
     indicate_hidden = yes
     shrink = no
     transparency = 0
-    notification_height = 0
     separator_height = 1
     padding = 10
     horizontal_padding = 10
@@ -43,8 +45,8 @@
     ### Icons ###
     # Align icons left/right/off
     icon_position = left
-    max_icon_size = 124
-    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/legacy/
+    max_icon_size = 48
+    icon_theme = Adwaita
 
     ### History ###
     sticky_history = yes
@@ -58,8 +60,6 @@
     always_run_script = true
     title = Dunst
     class = Dunst
-    startup_notification = false
-    verbosity = mesg
     corner_radius = 0
     force_xinerama = false
     mouse_left_click = do_action
