@@ -61,6 +61,9 @@ languages:
   typescriptreact:
     - <<: *prettier_d
 
+  graphql:
+    - <<: *prettier_d
+
   html:
     - <<: *prettier_d
 
