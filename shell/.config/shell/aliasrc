@@ -18,7 +18,7 @@ alias ll='ls --color=auto -l -a -p -c -h'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
-alias wget='wget --hsts-file=$WGETRC'
+alias wget='wget --hsts-file=$XDG_CACHE_HOME/wget-hsts'
 
 # apps
 alias v='nvim'
