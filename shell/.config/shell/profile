@@ -109,6 +109,9 @@ export PF_INFO="ascii os wm host pkgs shell editor"
 # MongoHud
 export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
 
+# Wakatime
+export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
+
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
