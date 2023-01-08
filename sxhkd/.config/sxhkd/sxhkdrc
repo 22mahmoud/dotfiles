@@ -47,6 +47,9 @@ shift + Print
 super + {_,shift,control,control + shift} {1-9}
 	dwm-msg run_command {view,tag,toggleview,toggletag} $((1<<{0-9}))
 
+super + t
+  dwm-msg run_command togglebar
+
 super + shift + q
   dwm-msg run_command killclient 0
 
