@@ -33,6 +33,7 @@ alias mbsync='mbsync -c $MBSYNCRC'
 alias abook='abook --config $ABOOK_CONFIG --datafile $ABOOK_ADDRESS_BOOK'
 alias unvim='$XDG_CONFIG_HOME/nvim/scripts/setup'
 alias reload='source $ZDOTDIR/.zshrc'
+alias dnd='dragon-drag-and-drop'
 
 # configs
 alias cfz='$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc'
