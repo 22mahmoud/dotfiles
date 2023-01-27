@@ -2,8 +2,8 @@
 
 # include "./theme.Xresources"
 
-*.alpha: 1.0
-*.alphaUnfocused: 1.0
+*.alpha: 0.95
+*.alphaUnfocused: 0.8
 *.font: monospace:size=10
 
 ! dwm config
