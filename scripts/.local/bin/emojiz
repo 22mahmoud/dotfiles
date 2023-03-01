@@ -34,7 +34,7 @@ update() {
 }
 
 _dmenu() {
-  dmenu -i -l 20 <"$c_emojis_file" | {
+  dmenu -c -i -l 20 <"$c_emojis_file" | {
     read -r emoji _
 
     [ -z "$emoji" ] && exit 0
