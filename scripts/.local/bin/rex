@@ -100,11 +100,11 @@ ffmpeg_record() {
 
 video() {
   case "$c_mode" in
-    full|f)
+    full | f)
       ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
       ;;
 
-    select|s) slop -f "%x %y %w %h" 2>/dev/null | {
+    select | s) slop -f "%x %y %w %h" 2>/dev/null | {
       read -r x y w h
       [ -z "$x" ] && exit 0
       ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
@@ -112,15 +112,18 @@ video() {
   esac
 }
 
+_maim() {
+  maim "$@" | tee "$screenshot_path" | xclip -selection clipboard -t image/png
+}
+
 screenshot() {
   screenshot_path="$pictures_dir/screenshot-$file_name.png"
   case "$c_mode" in
-    full|f) maim "$screenshot_path";;
-    select|s) maim -s "$screenshot_path" 2>/dev/null ;;
+    full | f) _maim ;;
+    select | s) _maim -s ;;
   esac
 
   [ ! -e "$screenshot_path" ] && exit 1
-
 
   dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,ok" | {
     read -r action
