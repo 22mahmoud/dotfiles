@@ -76,6 +76,7 @@ c.content.media.audio_capture = 'ask'
 c.content.media.video_capture = 'ask'
 c.content.desktop_capture = 'ask'
 c.content.mouse_lock = 'ask'
+# c.content.proxy = 'socks://localhost:9050/'
 
 # Completion bar
 c.completion.cmd_history_max_items = 500
