@@ -4,7 +4,7 @@
 
 *.alpha: 0.95
 *.alphaUnfocused: 0.8
-*.font: monospace:size=10
+*.font: monospace:size=12
 
 ! dwm config
 dwm.borderpx: 2
