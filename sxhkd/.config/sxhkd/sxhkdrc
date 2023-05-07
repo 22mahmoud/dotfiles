@@ -4,6 +4,9 @@ super + Return
 super + d
   dmenu_run
 
+XF86Search
+  dmenu_run
+
 super + shift + x
   slock
 
@@ -36,6 +39,9 @@ super + alt + {equal, minus}
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
   brightness {inc, dec}
+
+{XF86AudioPlay, XF86AudioNext, XF86AudioPrev}
+  playerctl {play-pause, next, previous}
 
 Print
   rex -s &
