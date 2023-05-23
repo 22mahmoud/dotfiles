@@ -73,6 +73,10 @@ languages:
   json:
     - <<: *prettier_d
 
+  jsonc:
+    - <<: *prettier_d
+
+
   lua:
     - <<: *lua-stylua-format
     #  - <<: *luacheck
