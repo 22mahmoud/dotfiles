@@ -2,10 +2,10 @@
 
 source "$XDG_CONFIG_HOME/neomutt/normalize"
 
-set folder        = "$MAIL/lynks"
+set folder        = "$MAIL/rubikal"
 set realname      = "Mahmoud Ashraf"
-set from          = "mahmod.ashraf@lynks.com"
-set sendmail      = "msmtp -a lynks"
+set from          = "mahmoud.ashraf@rubikal.com"
+set sendmail      = "msmtp -a rubikal"
 set signature     = "$XDG_CONFIG_HOME/neomutt/signature"	
 
 mailboxes         "=INBOX" "=Drafts" "=Sent" "=Trash"

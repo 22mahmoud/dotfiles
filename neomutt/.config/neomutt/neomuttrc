@@ -115,7 +115,3 @@ bind index > vfolder-window-forward
 
 # Default account
 source "$XDG_CONFIG_HOME/neomutt/accounts/personal"
-
-# Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/personal<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/lynks<enter><change-folder>!<enter>'

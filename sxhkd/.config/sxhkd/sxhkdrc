@@ -4,6 +4,9 @@ super + Return
 super + d
   dmenu_run
 
+XF86Search
+  dmenu_run
+
 super + shift + x
   slock
 
@@ -30,6 +33,12 @@ super + alt + {0, 9, 8}
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute}
   volume {inc, dec, toggle}
+
+{XF86AudioPlay, XF86AudioNext, XF86AudioPrev}
+  playerctl {play-pause, next, previous}
+
+super + ctrl + {0, 9, 8}
+  playerctl {play-pause, next, previous}
 
 super + alt + {equal, minus}
   brightness {inc, dec}

@@ -13,10 +13,10 @@ passwordeval       "pass mail.mahmoudashraf.dev"
 user               hello
 from               hello@mahmoudashraf.dev
 
-# lynks
-account            lynks
+# rubikal
+account            rubikal
 host               smtp.gmail.com
 port               587
-passwordeval       "pass lynks"
-user               mashraf@lynks.com
-from               mashraf@lynks.com
+passwordeval       "pass rubikal"
+user               mahmoud.ashraf@rubikal.com
+from               mahmoud.ashraf@rubikal.com

@@ -24,41 +24,41 @@ Far         :personal-remote:
 Near        :personal-local:
 Patterns    *
 
-# lynks
+# rubikal
 # Remote Store
-IMAPStore        lynks-remote
+IMAPStore        rubikal-remote
 Host             imap.gmail.com
 Port             993
-User             mashraf@lynks.com
-PassCmd          "pass lynks"
+User             mahmoud.ashraf@rubikal.com
+PassCmd          "pass rubikal"
 SSLType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
 AuthMechs        LOGIN
 
 # Local storage
-MaildirStore  lynks-local
-Path          ~/.local/share/mail/lynks/
-Inbox         ~/.local/share/mail/lynks/INBOX
+MaildirStore  rubikal-local
+Path          ~/.local/share/mail/rubikal/
+Inbox         ~/.local/share/mail/rubikal/INBOX
 
-Channel       lynks-inbox
-Far           :lynks-remote:
-Near          :lynks-local:
+Channel       rubikal-inbox
+Far           :rubikal-remote:
+Near          :rubikal-local:
 patterns      "INBOX"
 
-Channel       lynks-sent
-Far           :lynks-remote:"[Gmail]/Sent Mail"
-Near          :lynks-local:Sent
+Channel       rubikal-sent
+Far           :rubikal-remote:"[Gmail]/Sent Mail"
+Near          :rubikal-local:Sent
 
-Channel     lynks-trash
-Far         :lynks-remote:"[Gmail]/Trash"
-Near       :lynks-local:Trash
+Channel     rubikal-trash
+Far         :rubikal-remote:"[Gmail]/Trash"
+Near       :rubikal-local:Trash
 
-Channel     lynks-drafts
-Far      :lynks-remote:"[Gmail]/Drafts"
-Near       :lynks-local:Drafts
+Channel     rubikal-drafts
+Far      :rubikal-remote:"[Gmail]/Drafts"
+Near       :rubikal-local:Drafts
 
-Group lynks
-channel lynks-inbox
-channel lynks-sent
-channel lynks-trash
-channel lynks-drafts
+Group rubikal
+channel rubikal-inbox
+channel rubikal-sent
+channel rubikal-trash
+channel rubikal-drafts
