@@ -1,5 +1,19 @@
 #!/bin/sh
 
+remote_sink=$(pamixer --list-sinks | grep "Starship" | awk '{print $1}')
+local_sink=$(pamixer --list-sinks | grep "Built-in" | awk '{print $1}')
+headphone_sink=$(pamixer --list-sinks | grep "WH-CH510" | awk '{print $1}')
+
+
+c_sink=
+if [ -n "$headphone_sink" ]; then
+  c_sink="$headphone_sink"
+elif [ -n "$remote_sink" ]; then
+  c_sink="$remote_sink"
+else
+  c_sink="$local_sink"
+fi
+
 usage() {
   while IFS= read -r line; do
     printf '%s\n' "$line"
@@ -16,21 +30,21 @@ EOF
 }
 
 inc() {
-  pamixer -i 5
+  pamixer --sink "${c_sink}" -i 5
 }
 
 dec() {
-  pamixer -d 5
+  pamixer --sink "${c_sink}" -d 5
 }
 
 toggle() {
-  pamixer -t
+  pamixer --sink "${c_sink}" -t
 }
 
 get_icon() {
-  volume=$(pamixer --get-volume)
+  volume=$(pamixer --sink "${c_sink}" --get-volume)
 
-  if [ "$(pamixer --get-mute)" = true ]; then
+  if [ "$(pamixer --sink "${c_sink}" --get-mute)" = true ]; then
     icon=🔇
   elif [ "$volume" -gt 70 ]; then
     icon=🔊
@@ -49,17 +63,17 @@ notify() {
   notify-send \
     -t 1500 \
     -u low \
-    "$(get_icon) Sound" "Volume: $(pamixer --get-volume-human)" \
+    "$(get_icon) Sound" "Volume: $(pamixer --sink "${c_sink}" --get-volume-human)" \
     -h string:x-canonical-private-synchronous:"changeVolume"
 
 }
 
 main() {
   case "$1" in
-    -h|help) usage ;;
-    -i|inc) inc ;;
-    -d|dec) dec ;;
-    -t|toggle) toggle ;;
+    -h | help) usage ;;
+    -i | inc) inc ;;
+    -d | dec) dec ;;
+    -t | toggle) toggle ;;
     *) exit 0 ;;
   esac
 
