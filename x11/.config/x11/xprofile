@@ -13,7 +13,7 @@ xsetroot -cursor_name left_ptr &
 xbanish &
 
 # set both english and arabic layout
-setxkbmap -layout us,ar -option grp:lalt_lshift_toggle &
+setxkbmap -layout us,ara -option grp:lalt_lshift_toggle &
 
 # launch slstatus for dwm
 slstatus &
