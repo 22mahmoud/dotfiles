@@ -2,9 +2,9 @@
 "query:Youtube:tags # \"Youtube\"" 
 #"query:Twitter:tags # \"Twitter\""
 
-"⚜️  comics───────────────────────────────────────────"
-https://xkcd.com/rss.xml meme
-https://www.smbc-comics.com/comic/rss meme
+# "⚜️  comics───────────────────────────────────────────"
+# https://xkcd.com/rss.xml meme
+# https://www.smbc-comics.com/comic/rss meme
 
 "⚜️  News─────────────────────────────────────────────"
 https://hnrss.org/newest?q=react "~React - hackernews"
