@@ -38,7 +38,7 @@ super + alt + {0, 9, 8}
   playerctl {play-pause, next, previous}
 
 super + ctrl + {0, 9, 8}
-  playerctl {play-pause, next, previous}
+  playerctl {next, previous, play-pause}
 
 super + alt + {equal, minus}
   brightness {inc, dec}
