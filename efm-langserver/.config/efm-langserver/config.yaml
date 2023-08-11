@@ -70,6 +70,9 @@ languages:
   css:
     - <<: *prettier_d
 
+  svg:
+    - <<: *prettier_d
+
   scss:
     - <<: *prettier_d
 

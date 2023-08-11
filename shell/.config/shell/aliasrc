@@ -135,6 +135,7 @@ alias gf='git fetch'
 alias gm='git merge'
 alias gco='git checkout'
 alias gcb='git checkout -b'
+
 gpu() {
   if [ -z "$1" ]; then
     git push -u origin HEAD
@@ -142,7 +143,10 @@ gpu() {
     git push "$@"
   fi
 }
+
+compdef _git gpu=git-push
+
 alias gcl='git clone'
-alias gundo='git reset HEAD~1 --mixed'
-alias gl='git log --color=always --graph --pretty=format:%C(blue)%h %Creset- C(green)(%cr) %Creset%s - %C(cyan)%aN %C(magenta)%d --date=auto:human'
+alias gz='git reset HEAD~1 --mixed'
+alias gl="git log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate=full"
 alias gsa='git submodule add'

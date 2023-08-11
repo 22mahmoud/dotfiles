@@ -56,5 +56,4 @@
   pl = pull
   r = reset
   undo = reset HEAD~1 --mixed
-	l = log --color=always --graph --pretty=format:\"%C(blue)%h %Creset- %C(green)(%cr) %Creset%s - %C(cyan)%aN %C(magenta)%d\" --date=auto:human
-
+  l = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate=full
