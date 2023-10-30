@@ -131,7 +131,7 @@ export VIDEO="mpv"
 export IMAGE="sxiv"
 export COLORTERM="truecolor"
 export FILE_MANAGER='sfm'
-export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
