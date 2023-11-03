@@ -93,6 +93,9 @@ super + shift + t
 super + s
   dwm-msg run_command togglesticky
 
+super + shift + s
+  dwm-msg run_command togglecanfocusfloating
+
 super + shift + space
   dwm-msg run_command togglefloating
 

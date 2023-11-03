@@ -40,7 +40,7 @@ config.bind('x', 'tab-close')
 config.bind('X', 'undo')
 config.bind(',xb', 'config-cycle statusbar.show always never')
 config.bind(',xt', 'config-cycle tabs.show always never')
-config.bind(',xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
+config.bind('<Shift+">', 'config-cycle tabs.width 30 200')
 
 # for old.reddit.com expand thread.
 config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')
@@ -48,6 +48,7 @@ config.bind(';p', 'hint preview')
 
 # Bindings for insert mode
 config.bind('<Ctrl+Shift+e>', 'edit-text', mode='insert')
+config.bind('<Ctrl+Shift+a>', 'fake-key <Ctrl-A>', mode='insert')
 config.bind('<Ctrl-a>', 'fake-key <Home>', mode='insert')
 config.bind('<Ctrl-e>', 'fake-key <End>', mode='insert')
 config.bind('<Ctrl-d>', 'fake-key <Delete>', mode='insert')

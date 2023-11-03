@@ -3,7 +3,7 @@ from qutebrowser.config.config import ConfigContainer
 c: ConfigContainer = c  # type: ignore
 
 c.url.searchengines = {
-    'DEFAULT': 'https://searx.mahmoudashraf.dev/search?q={}',
+    'DEFAULT': 'https://search.mahmoudashraf.dev/search.php?q={}',
     'b': 'https://search.brave.com/search?q={}',
     'sx': 'https://searx.mahmoudashraf.dev/search?q={}',
     'd': 'https://duckduckgo.com/?q={}',

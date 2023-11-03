@@ -35,6 +35,7 @@ c.logging.level.console = "debug"
 c.logging.level.ram = "debug"
 c.url.open_base_url = True
 c.spellcheck.languages = ["en-US"]
+# c.scrolling.smooth = True
 
 # qt engin
 c.qt.highdpi = True
