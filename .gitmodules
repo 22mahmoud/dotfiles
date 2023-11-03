@@ -16,6 +16,3 @@
 [submodule "x11/.config/x11/base16-xresources"]
 	path = x11/.config/x11/base16-xresources
 	url = git@github.com:tinted-theming/base16-xresources.git
-[submodule "nnn/.local/share/nnn/src"]
-	path = nnn/.local/share/nnn/src
-	url = git@github.com:jarun/nnn.git
