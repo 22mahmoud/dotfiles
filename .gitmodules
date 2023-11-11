@@ -16,3 +16,6 @@
 [submodule "x11/.config/x11/base16-xresources"]
 	path = x11/.config/x11/base16-xresources
 	url = git@github.com:tinted-theming/base16-xresources.git
+[submodule "zsh/.config/zsh/plugins/zsh-you-should-use"]
+	path = zsh/.config/zsh/plugins/zsh-you-should-use
+	url = git@github.com:MichaelAquilina/zsh-you-should-use.git

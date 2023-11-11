@@ -55,6 +55,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match ter
 # source plugins
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 
 # fzf support
 # arch
