@@ -46,6 +46,9 @@ export PM2_HOME="$XDG_DATA_HOME/pm2"
 # npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
+# docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
 # abook
 export ABOOK_CONFIG="$XDG_CONFIG_HOME/abook/abookrc"
 export ABOOK_ADDRESS_BOOK="$XDG_DATA_HOME/abook/addressbook"

@@ -105,8 +105,8 @@ super + 0
 super + {minus,equal,shift minus,shift equal}
 	dwm-msg run_command setgaps {-5,5,0,100}
 
-# super + shift + {Return,n}
-# 	dwm-msg run_command togglescratch {0,1}
+super + shift + {Return,m,h}
+  dwm-msg run_command togglescratch {0,1,2}
 
 super + shift + period
   dwm-msg run_command tagmon 1
