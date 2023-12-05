@@ -101,6 +101,7 @@ alias nad='npm install --dev'
 alias nr='npm uninstall'
 alias nst='npm run start'
 alias nd='npm run dev'
+alias nb='npm run build'
 
 # tmux
 alias t='tmux'
