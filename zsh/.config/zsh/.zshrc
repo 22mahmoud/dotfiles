@@ -42,11 +42,6 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^v" edit-command-line
 
-# prompt
-# TODO: change to selfmade propmt
-# eval "$(starship init zsh)"
-autoload -Uz prompt_setup
-prompt_setup
 
 # fzf colorscheme
 source "$ZDOTDIR/theme.zsh"
@@ -56,6 +51,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match ter
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
+source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
+
+# prompt
+autoload -Uz prompt_setup
+prompt_setup
 
 # fzf support
 # arch

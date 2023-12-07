@@ -19,3 +19,6 @@
 [submodule "zsh/.config/zsh/plugins/zsh-you-should-use"]
 	path = zsh/.config/zsh/plugins/zsh-you-should-use
 	url = git@github.com:MichaelAquilina/zsh-you-should-use.git
+[submodule "zsh/.config/zsh/plugins/gitstatus"]
+	path = zsh/.config/zsh/plugins/gitstatus
+	url = git@github.com:romkatv/gitstatus.git
