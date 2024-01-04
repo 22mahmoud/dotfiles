@@ -117,6 +117,8 @@ alias dexec='docker exec -it'
 alias dc='docker compose'
 alias dcup='docker compose up -d'
 alias dcd='docker compose stop'
+alias dcpl='docker compose pull'
+alias dcln='docker system prune -af --volumes'
 
 # kubernetes
 alias k='kubectl'
