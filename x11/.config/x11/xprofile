@@ -27,6 +27,8 @@ dunst &
 # launch picom compositor
 picom &
 
+xmodmap ~/.Xmodmap &
+
 # openrgb
 [ "$(command -v openrgb)" ] && openrgb --profile default.orp &
 
