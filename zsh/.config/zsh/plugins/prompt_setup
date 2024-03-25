@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function gitstatus_prompt_update() {
   emulate -L zsh

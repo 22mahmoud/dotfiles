@@ -140,6 +140,12 @@ alias gf='git fetch'
 alias gm='git merge'
 alias gco='git checkout'
 alias gcb='git checkout -b'
+alias gcl='git clone'
+alias gz='git undo'
+alias gl='git l'
+alias gsa='git submodule add'
+alias gb='git branch'
+alias gbd='git branch -D'
 
 gpu() {
   if [ -z "$1" ]; then
@@ -150,10 +156,3 @@ gpu() {
 }
 
 compdef _git gpu=git-push
-
-alias gcl='git clone'
-alias gz='git undo'
-alias gl='git l'
-alias gsa='git submodule add'
-alias gb='git branch'
-alias gbd='git branch -D'
