@@ -154,6 +154,8 @@ path=(
   "$ANDROID_HOME/tools"
   "$ANDROID_HOME/tools/bin"
   "$ANDROID_HOME/platform-tools"
+  "$HOME/.php-school/bin"
+  "$HOME/.config/composer/vendor/bin"
   "$path[@]"
 )
 

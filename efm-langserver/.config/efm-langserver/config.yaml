@@ -52,6 +52,9 @@ languages:
   javascript:
     - <<: *prettier_d
 
+  php:
+    - <<: *prettier_d
+
   javascriptreact:
     - <<: *prettier_d
 
