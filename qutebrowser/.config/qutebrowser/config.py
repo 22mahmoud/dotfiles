@@ -46,7 +46,8 @@ c.qt.args = [
 ]
 
 # startpage
-default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
+# default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
+default_start_page = "https://glance.maw-s.duckdns.org"
 c.url.start_pages = [default_start_page]
 c.url.default_page = default_start_page
 
@@ -57,8 +58,8 @@ c.colors.webpage.preferred_color_scheme = "dark"
 # Content (js, cookies, encoding, privacy, css, etc)
 c.content.pdfjs = False
 c.content.autoplay = False
-# c.content.blocking.enabled = True
-# c.content.blocking.method = "both"
+c.content.blocking.enabled = True
+c.content.blocking.method = "both"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
@@ -148,6 +149,8 @@ js_whitelist = [
     "*://*.gitlab.com/*",
     "*://*.duckduckgo.com/*",
     "*://*.mahmoudashraf.dev/*",
+    "*://*.maw.sh/*",
+    "*://*.maw-s.duckdns.org/*",
     "*://*.olx.com.eg/*",
     "*://*.reddit.com/*",
     "*://*.dev.to/*",

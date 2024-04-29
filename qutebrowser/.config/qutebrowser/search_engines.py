@@ -3,9 +3,9 @@ from qutebrowser.config.config import ConfigContainer
 c: ConfigContainer = c  # type: ignore
 
 c.url.searchengines = {
-    'DEFAULT': 'https://search.mahmoudashraf.dev/search.php?q={}',
+    'DEFAULT': 'https://search.mahmoudashraf.dev/search?q={}',
     'b': 'https://search.brave.com/search?q={}',
-    'sx': 'https://searx.mahmoudashraf.dev/search?q={}',
+    'sx': 'https://search.mahmoudashraf.dev/search?q={}',
     'd': 'https://duckduckgo.com/?q={}',
     'tr': 'https://translate.google.com/#auto/en/{}',
     'aw': 'https://wiki.archlinux.org/?search={}',
