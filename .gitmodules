@@ -22,3 +22,6 @@
 [submodule "zsh/.config/zsh/plugins/gitstatus"]
 	path = zsh/.config/zsh/plugins/gitstatus
 	url = git@github.com:romkatv/gitstatus.git
+[submodule "tmux/.local/share/tmux/plugins/tpm"]
+	path = tmux/.local/share/tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
