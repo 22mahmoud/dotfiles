@@ -102,6 +102,7 @@ export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG="z:autojump;p:preview-tui;u:imgur;d:dragdrop"
 export NNN_TRASH=1
 export NNN_TERMINAL="st -w"
+export NNN_ICONLOOKUP=1
 
 # fzf config
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
