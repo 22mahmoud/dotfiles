@@ -25,3 +25,6 @@
 [submodule "nnn/.local/src/nnn"]
 	path = nnn/.local/src/nnn
 	url = git@github.com:jarun/nnn.git
+[submodule "tmux/.local/share/tmux/plugins/tpm"]
+	path = tmux/.local/share/tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
