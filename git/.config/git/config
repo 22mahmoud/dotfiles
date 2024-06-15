@@ -58,3 +58,7 @@
   undo = reset HEAD~1 --mixed
   l = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate=full
   jump = "!/usr/share/git/git-jump/git-jump"
+[credential]
+	helper = cache --timeout=31536000
+[submodule]
+	recurse = true
