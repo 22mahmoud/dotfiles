@@ -42,10 +42,16 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^v" edit-command-line
 
-
-# fzf colorscheme
+# fzf config
 source "$ZDOTDIR/theme.zsh"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match terminal "Xresources" background
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_CTRL_T_COMMAND="fd"
+export FZF_COMPLETION_TRIGGER='~~'
 
 # source plugins
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
