@@ -19,6 +19,7 @@ alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
 alias wget='wget --hsts-file=$XDG_CACHE_HOME/wget-hsts'
+alias cpr='rsync -artzP -hh --partial --info=stats1,progress2 --modify-window=1'
 
 # apps
 alias v='nvim'
@@ -115,7 +116,7 @@ alias d='docker'
 alias ds='docker ps'
 alias dexec='docker exec -it'
 alias dc='docker compose'
-alias dcup='docker compose up -d'
+alias dcup='docker compose up -d --build --remove-orphans'
 alias dcd='docker compose stop'
 alias dcpl='docker compose pull'
 alias dcln='docker system prune -af --volumes'
