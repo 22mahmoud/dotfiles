@@ -85,14 +85,14 @@ alias .9='cd ../../../../../../../../..'
 alias .10='cd ../../../../../../../../../..'
 
 # yarn
-alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
-alias y='yarn'
-alias yw='yarn  workspace'
-alias yst='yarn start'
-alias yd='yarn dev'
-alias ya='yarn add'
-alias yr='yarn remove'
-alias yad='yarn add -D'
+alias yarn=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
+alias y=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
+alias yw=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" workspace
+alias yst=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" start
+alias yd=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" dev
+alias ya=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add
+alias yr=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" remove
+alias yad=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add -D
 
 # npm
 alias n='npm'

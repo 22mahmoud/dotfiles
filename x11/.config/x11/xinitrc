@@ -4,6 +4,11 @@ if [ -e "$XDG_CONFIG_HOME/x11/xprofile" ]; then
   . "$XDG_CONFIG_HOME/x11/xprofile"
 fi
 
+systemctl --user import-environment DISPLAY XAUTHORITY
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+   dbus-update-activation-environment DISPLAY XAUTHORITY
+fi
+
 while true; do
   dwm >/dev/null 2>&1
 done

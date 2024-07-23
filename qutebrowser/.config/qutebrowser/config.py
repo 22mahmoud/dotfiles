@@ -14,7 +14,7 @@ config.source("search_engines.py")
 config.source("binding.py")
 
 # Misc
-c.downloads.location.directory = os.path.expanduser("~/Downloads/qute")
+c.downloads.location.directory = os.path.expanduser("~/dls/qute")
 c.downloads.location.prompt = False
 c.downloads.position = "bottom"
 c.confirm_quit = ["downloads"]

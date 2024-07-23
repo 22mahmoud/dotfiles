@@ -1,6 +1,6 @@
 # HTML
 text/plain; $EDITOR %s ;
-text/html;  brave %s; nametemplate=%s.html;
+text/html;  $BROWSER %s; nametemplate=%s.html;
 text/html; qutebrowser %s; needsterminal; nametemplate=%s.html
 text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -collapse_br_tags -dump %s; nametemplate=%s.html; copiousoutput
 
