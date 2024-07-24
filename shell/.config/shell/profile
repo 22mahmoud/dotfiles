@@ -7,8 +7,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 
 # X11
-export XINITRC="/home/ashraf/.config/x11/xinitrc"
-# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+# export XAUTHORITY="$HOME/.Xauthority"
+# export DISPLAY=:0
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
@@ -19,9 +20,10 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 # theme
-export GTK_THEME=adw-gtk3-dark
+# export GTK_THEME=adw-gtk3-dark
 # export QT_STYLE_OVERRIDE=Adwaita-Dark
 # export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export QT_QPA_PLATFORMTHEME=qt6ct
 
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
@@ -125,7 +127,7 @@ export MAIL="$XDG_DATA_HOME/mail"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="st"
-export BROWSER="com.brave.Browser"
+export BROWSER="brave"
 export READER="zathura"
 export WM='dwm'
 export VIDEO="mpv"
@@ -158,7 +160,6 @@ path=(
 )
 
 export PATH
-
 
 # startx when logged in
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
