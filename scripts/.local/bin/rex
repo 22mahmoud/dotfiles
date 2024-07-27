@@ -7,8 +7,8 @@ c_pidfile="/tmp/rex.pid"
 c_with_audio=
 
 file_name=${REX_FILE_NAME:-$(date '+%y%m%d-%H%M-%S')}
-videos_dir=${REX_VID_DIR:-$HOME/Videos/screencasts}
-pictures_dir=${REX_PIC_DIR:-$HOME/Pictures/screenshots}
+videos_dir=${REX_VID_DIR:-$XDG_VIDEOS_DIR/screencasts}
+pictures_dir=${REX_PIC_DIR:-$XDG_PICTURES_DIR/screenshots}
 
 usage() {
   while IFS= read -r line; do

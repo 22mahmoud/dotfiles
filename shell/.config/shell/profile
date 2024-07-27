@@ -4,6 +4,8 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_VIDEOS_DIR="$HOME/vids"
+export XDG_PICTURES_DIR="$HOME/pics"
 export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 
 # X11
@@ -156,6 +158,8 @@ path=(
   "$ANDROID_HOME/platform-tools"
   "$HOME/.php-school/bin"
   "$HOME/.config/composer/vendor/bin"
+  "$XDG_CONFIG_HOME/tizen-studio/tools"
+  "/home/ashraf/.config/tizen-studio/tools/ide/bin"
   "$path[@]"
 )
 
