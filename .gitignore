@@ -23,3 +23,5 @@ tmux/.local/share/tmux/plugins/
 # ncspot
 userstate.cbor
 
+# resolved
+resolved/systemd/resolved.conf
