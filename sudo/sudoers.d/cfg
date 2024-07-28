@@ -1,7 +1,0 @@
-# vim: ft=suoders
-
-%wheel ALL=(ALL:ALL) ALL
-
-Defaults passwd_timeout=0
-Defaults timestamp_type=global
-Defaults timestamp_timeout=20
