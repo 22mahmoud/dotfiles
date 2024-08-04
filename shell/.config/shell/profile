@@ -145,6 +145,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 typeset -U PATH path
 
 path=(
+  "/usr/local/bin/"
   "$HOME/.local/bin"
   "$HOME/.local/bin/Bento4/bin/"
   "$VOLTA_HOME/bin"
