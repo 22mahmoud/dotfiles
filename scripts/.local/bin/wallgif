@@ -2,30 +2,11 @@
 
 PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
 
-_set_gif_wp() {
-  xwinwrap -ov -g "$1" -- mpv \
-    -wid WID \
-    --no-config \
-    --no-terminal \
-    --no-osc \
-    --no-osd-bar \
-    --loop-file=inf \
-    --no-pause \
-    --player-operation-mode=cplayer \
-    --panscan=1.0 \
-    --mute=yes \
-    --no-input-default-bindings \
-    --ytdl-format='bestvideo[height<=?1080]+bestaudio/best' \
-    "$2" >/dev/null 2>&1 &
-
-  # save the pid of the last command in a pid file
-  echo $! >"${PIDFILE}"
-}
 
 # kill the last pid
-head "${PIDFILE}" | xargs kill -9 >/dev/null 2>&1
+if [ -f "${PIDFILE}" ]; then
+  head "${PIDFILE}" | xargs kill -9 >/dev/null 2>&1
+  rm -f "${PIDFILE}"
+fi
 
 # get screen resolution
-res=$(xdpyinfo | awk '/dimensions/ {print $2}')
-
-_set_gif_wp "$res" "${1}"

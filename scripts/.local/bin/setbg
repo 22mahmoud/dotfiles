@@ -1,14 +1,68 @@
 #!/bin/sh
 
-[ -z "$1" ] && exit
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <file_path>
+setbg is a utility to set a wallpaper
+Supported formats: jpg, jpeg, png, gif, mp4, mkv, webm, youtube links
+EOF
+  exit 1
+}
+
+[ $# -eq 0 ] && usage
 
 case "$1" in
-  *jpg | *jpeg | *png)
-    WALLGIF_PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
-    [ -e "$WALLGIF_PIDFILE" ] && head "${WALLGIF_PIDFILE}" | xargs kill -9
-    feh --bg-fill "$1"
-    ;;
-  *gif | *mp4 | *mkv | *webm | *youtube.com/watch*)
-    wallgif "$1"
-    ;;
+http*://*)
+  file_path="$1"
+  ;;
+*)
+  file_path="$(realpath "$1")"
+  if [ ! -f "$file_path" ]; then
+    echo "file not exist"
+    exit 1
+  fi
+  ;;
 esac
+
+killall xwinwrap
+
+wallgif() {
+  nice xwinwrap -ni -s -nf -b -un -ovr -fdt -argb -g "$1" -- mpv \
+    -wid WID \
+    --hwdec=vdpau \
+    --no-config \
+    --no-terminal \
+    --no-osc \
+    --no-osd-bar \
+    --loop-file=inf \
+    --no-pause \
+    --player-operation-mode=cplayer \
+    --panscan=1.0 \
+    --mute=yes \
+    --no-input-default-bindings \
+    --msg-level=vd=v,vo=v,vo/gpu/vaapi-egl=trace \
+    --ytdl-format='bestvideo[height<=?1080]+bestaudio/best' \
+    "$2" &
+}
+
+case "$1" in
+*jpg | *jpeg | *png)
+  feh --no-fehbg --bg-fill "$file_path"
+  ;;
+*gif | *mp4 | *mkv | *webm | *youtube.com/watch*)
+  res=$(xdpyinfo | awk '/dimensions/ {print $2}')
+  wallgif "$res" "$file_path"
+  ;;
+*)
+  echo "Error: Unsupported file format"
+  exit 1
+  ;;
+esac
+
+cat >~/.config/setbg <<EOF
+#!/bin/sh
+
+$(command -v "$0") "$file_path"
+EOF
+
+chmod +x ~/.config/setbg

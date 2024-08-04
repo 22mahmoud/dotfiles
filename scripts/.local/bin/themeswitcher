@@ -1,119 +1,89 @@
 #!/bin/sh
 
 # file names
-xresources="$XDG_CONFIG_HOME/x11/theme.Xresources"
-nvim="$XDG_CONFIG_HOME/nvim"
-zshrc="$ZDOTDIR/theme.zsh"
-tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
+c_xresources="$XDG_CONFIG_HOME/x11/theme.Xresources"
+c_nvim="$XDG_CONFIG_HOME/nvim"
+c_zshrc="$ZDOTDIR/theme.zsh"
+c_tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
 
-# TODO: pick only themes that I interested in
-themes="3024
-ashes
-black-metal
-classic-dark
-codeschool
+themes="gruvbox-dark-hard
 default-dark
-dracula
-github
-google-dark
-gruvbox-dark-hard
-gruvbox-dark-medium
-gruvbox-dark-pale
-gruvbox-dark-soft
-gruvbox-light-hard
-gruvbox-light-medium
-gruvbox-light-soft
-harmonic-dark
-heetch
-hopscotch
-horizon-dark
 ia-dark
-material-darker
-mellow-purple
 monokai
+ashes
+dracula
+gruvbox-light-soft
 nord
 oceanicnext
 onedark
 outrun-dark
-paraiso
 phd
 porple
-rebecca
-seti
-snazzy
 solarflare
 solarized-dark
-spacemacs
 tomorrow-night
 twilight"
 
-theme_name="$(echo "$themes" | dmenu -r -l 10)"
+theme_name="$(echo "$themes" | dmenu -r -l 30)"
 
 if [ ! "$theme_name" ]; then
   exit
 fi
 
-_update_xresources() {
-  # change the color name in Xresources file
-  sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme_name.Xresources/g" "$xresources"
+update_xresources() {
+  sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme_name.Xresources/g" "$c_xresources"
 
-  # source the new theme to be accessible
-  xrdb -load "$xresources"
+  xrdb -merge "$c_xresources"
 }
 
-_update_tmux() {
-  # change the color name in tmux.conf file
-  sed -i "/@colors-base16/c\set -g @colors-base16 '$theme_name'" "$tmux"
+update_tmux() {
+  sed -i "/@colors-base16/c\set -g @colors-base16 '$theme_name'" "$c_tmux"
 
-  # source the tmux.conf
   [ "$(pidof tmux)" ] && tmux source "$XDG_CONFIG_HOME/tmux/tmux.conf"
 }
 
-_update_nvim() {
-  # change the color name in neovim config
-  sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme_name/g" "$nvim/lua/ma/theme.lua"
+update_nvim() {
+  sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme_name/g" "$c_nvim/lua/ma/theme.lua"
 
-  # update nvim colorscheme
-  nvr --serverlist | xargs -I{} nvr --remote --nostart -s --servername {} \
-    -c ":colorscheme base16-$theme_name"
+  nvr --serverlist |
+    xargs -I{} nvr --remote --nostart -s --servername {} \
+      -c ":colorscheme base16-$theme_name"
 }
 
-_update_zsh() {
-  # change the color name for fzf theme in zsh
-  sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme_name.config/g" "$zshrc"
+update_zsh() {
+  sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme_name.config/g" "$c_zshrc"
 
-  # reload all opened zsh
   killall -u "$(whoami)" -s USR1 zsh
 }
 
-_update_st() {
-  # send signal to st to reload all open instance
-  killall st -s USR1 st
+update_st() {
+  killall -s USR1 st
 }
 
-_update_qutebrowser() {
-  # if qutebrowser running send :config-source command
+update_qutebrowser() {
   [ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
 }
 
-_restart_dwm() {
-  # refresh dwm xrdb
+update_dwm() {
   dwm-msg run_command xrdb
 }
 
-_update_wallpaper() {
+update_wallpaper() {
   setbg "$(find "$HOME/Pictures/wallpapers" | shuf -n 1)"
+  find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg
 }
 
 main() {
-  _update_xresources
-  _restart_dwm &
-  _update_qutebrowser &
-  _update_zsh &
-  _update_st &
-  _update_tmux &
-  _update_nvim &
-  # _update_wallpaper &
+  update_xresources
+
+  update_dwm &
+  update_qutebrowser &
+  update_zsh &
+  update_st &
+  update_tmux &
+  update_nvim &
+
+  update_wallpaper &
 }
 
 main
