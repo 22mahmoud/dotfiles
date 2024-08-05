@@ -23,7 +23,7 @@ super + m
   $TERMINAL -T neomuttTerm -e bicon eg neomutt
 
 super + n
-  $TERMINAL -e sfm
+  $TERMINAL -e nnn
 
 super + r
   $TERMINAL -T newsboatTerm -e bicon eg newsboat

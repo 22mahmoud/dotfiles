@@ -13,8 +13,8 @@ alias bc='bc -ql'
 alias cls='clear'
 alias fork='setsid -f'
 alias mine='sudo chown -R $(whoami):$(whoami)'
-alias ls='eza  --icons=always --color=auto -a'
-alias ll='eza  --icons=always --color=auto -l -a -g -h'
+alias ls='eza --icons=always --color=auto -a'
+alias ll='eza --icons=always --color=auto -l -a -g -h'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
@@ -62,11 +62,11 @@ alias cfs='$EDITOR $XDG_CONFIG_HOME/shell/profile'
 alias cfa='$EDITOR $XDG_CONFIG_HOME/shell/aliasrc'
 alias cfx='$EDITOR $XDG_CONFIG_HOME/x11/xinitrc'
 
-# youtube-dl
-alias yta='youtube-dl --extract-audio --audio-format best '
-alias yta-mp3='youtube-dl --extract-audio --audio-format mp3 '
-alias ytb='youtube-dl -f bestvideo+bestaudio '
-alias drm-dl='youtube-dl --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
+# yt-dlp
+alias yta='yt-dlp --extract-audio --audio-format best '
+alias yta-mp3='yt-dlp --extract-audio --audio-format mp3 '
+alias ytb='yt-dlp -f bestvideo+bestaudio '
+alias drm-dl='yt-dlp --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
 
 # paru
 alias p='paru'

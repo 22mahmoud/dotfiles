@@ -28,7 +28,7 @@ dunst &
 picom &
 
 # setup screen rate
-xrandr --verbose --output DisplayPort-2 --mode 1920x1080 --rate 144 &
+xrandr --verbose --output DisplayPort-2 --mode 1920x1080 --rate 120 &
 
 # openrgb
 [ "$(command -v openrgb)" ] && openrgb --profile default.orp &
