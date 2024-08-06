@@ -23,14 +23,17 @@
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  trustExitCode = true
 [difftool]
   trustExistCode = true
   prompt = false
 [diff]
   tool = vimdiff
+  prompt = false
 [log]
   decorate = short
   date = local
+  stat = true
 [delta]
   side-by-side = true
   line-numbers-left-format = ""
