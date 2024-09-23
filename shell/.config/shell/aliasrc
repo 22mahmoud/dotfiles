@@ -87,14 +87,14 @@ alias .9='cd ../../../../../../../../..'
 alias .10='cd ../../../../../../../../../..'
 
 # yarn
-alias yarn=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
-alias y=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
-alias yw=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" workspace
-alias yst=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" start
-alias yd=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" dev
-alias ya=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add
-alias yr=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" remove
-alias yad=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add -D
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias y='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias yw='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" workspace'
+alias yst'=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" start'
+alias yd='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" dev'
+alias ya='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add'
+alias yr='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" remove'
+alias yad='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add -D'
 
 # npm
 alias n='npm'
@@ -105,6 +105,12 @@ alias nr='npm uninstall'
 alias nst='npm run start'
 alias nd='npm run dev'
 alias nb='npm run build'
+
+# volta
+alias vo='volta'
+alias va='volta install'
+alias vp='volta pin'
+alias vu='volta uninstall'
 
 # tmux
 alias t='tmux'
@@ -150,6 +156,7 @@ alias gl='git l'
 alias gsa='git submodule add'
 alias gb='git branch'
 alias gbd='git branch -D'
+alias gcln='git fetch -p && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs -r git branch -D'
 
 gpu() {
   if [ -z "$1" ]; then

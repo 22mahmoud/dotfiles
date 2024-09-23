@@ -10,7 +10,7 @@ Host             mail.mahmoudashraf.dev
 Port             993
 User             hello
 PassCmd          "pass mail.mahmoudashraf.dev"
-SSLType          IMAPS
+TLSType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
 
 # Local storage
@@ -31,7 +31,7 @@ Host             imap.gmail.com
 Port             993
 User             mahmoud.ashraf@rubikal.com
 PassCmd          "pass rubikal"
-SSLType          IMAPS
+TLSType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
 AuthMechs        LOGIN
 
