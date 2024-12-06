@@ -106,6 +106,16 @@ alias nst='npm run start'
 alias nd='npm run dev'
 alias nb='npm run build'
 
+# pnpm
+alias pn='pnpm'
+alias pni='pnpm install'
+alias pna='pnpm add'
+alias pnad='pnpm add -D'
+alias pnr='pnpm remove'
+alias pnst='pnpm start'
+alias pnd='pnpm dev'
+alias pnb='pnpm build'
+
 # volta
 alias vo='volta'
 alias va='volta install'
@@ -125,7 +135,7 @@ alias ds='docker ps'
 alias dexec='docker exec -it'
 alias dc='docker compose'
 alias dcup='docker compose up -d --build --remove-orphans'
-alias dcd='docker compose stop'
+alias dcd='docker compose down'
 alias dcpl='docker compose pull'
 alias dcln='docker system prune -af --volumes'
 
