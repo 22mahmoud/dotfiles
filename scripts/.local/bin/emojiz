@@ -26,6 +26,7 @@ list() {
 update() {
   curl -s \
     "https://raw.githubusercontent.com/muan/emojilib/main/dist/emoji-en-US.json" |
+    fixjson |
     jq 'to_entries | map_values({ key: .key, value: .value | join(" ") } ) |
     from_entries' |
     tr -d '",{}' |

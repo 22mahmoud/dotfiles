@@ -44,8 +44,8 @@ stop() {
       ffmpeg -i "$file_path" \
         -loglevel quiet \
         -vf fps=10 -c:v pam -f \
-        image2pipe - \
-        | convert -delay 10 - -loop 0 -layers optimize "$gif_path"
+        image2pipe - |
+        convert -delay 10 - -loop 0 -layers optimize "$gif_path"
 
       rm "$file_path"
       file_path="$gif_path"
@@ -54,7 +54,7 @@ stop() {
     dunstify -r "$notify_id" "Rex" "Video taken" --action "default,ok" | {
       read -r action
       case "$action" in
-        "default") mpv "$file_path" ;;
+      "default") mpv "$file_path" ;;
       esac
     } &
 
@@ -65,17 +65,17 @@ stop() {
 
 while getopts 'hsvgqam:' opt; do
   case "$opt" in
-    h)
-      usage
-      exit 0
-      ;;
-    m) c_mode="$OPTARG" ;;
-    s) c_type="screenshot" ;;
-    v) c_type="video" ;;
-    g) c_type="gif" ;;
-    a) c_with_audio=true ;;
-    q) stop ;;
-    *) exit 0 ;;
+  h)
+    usage
+    exit 0
+    ;;
+  m) c_mode="$OPTARG" ;;
+  s) c_type="screenshot" ;;
+  v) c_type="video" ;;
+  g) c_type="gif" ;;
+  a) c_with_audio=true ;;
+  q) stop ;;
+  *) exit 0 ;;
   esac
 done
 
@@ -100,27 +100,29 @@ ffmpeg_record() {
 
 video() {
   case "$c_mode" in
-    full | f)
-      ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
-      ;;
+  full | f)
+    ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
+    ;;
 
-    select | s) slop -f "%x %y %w %h" 2>/dev/null | {
-      read -r x y w h
-      [ -z "$x" ] && exit 0
-      ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
-    } ;;
+  select | s) slop -f "%x %y %w %h" 2>/dev/null | {
+    read -r x y w h
+    [ -z "$x" ] && exit 0
+    ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
+  } ;;
   esac
 }
 
 _maim() {
-  maim "$@" | tee "$screenshot_path" | xclip -selection clipboard -t image/png
+  maim | tee "$screenshot_path" | xclip -selection clipboard -t image/png
 }
 
 screenshot() {
   screenshot_path="$pictures_dir/screenshot-$file_name.png"
   case "$c_mode" in
-    full | f) _maim ;;
-    select | s) _maim -s ;;
+  full | f) _maim ;;
+  select | s)
+    slop -f "-i %i -g %g --tolerance 500" 2>/dev/null | xargs maim | tee "$screenshot_path" | xclip -selection clipboard -t image/png
+    ;;
   esac
 
   [ ! -e "$screenshot_path" ] && exit 1
@@ -128,12 +130,12 @@ screenshot() {
   dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,ok" | {
     read -r action
     case "$action" in
-      "default") sxiv "$screenshot_path" ;;
+    "default") sxiv "$screenshot_path" ;;
     esac
   } &
 }
 
 case "$c_type" in
-  screenshot) screenshot ;;
-  video | gif) video ;;
+screenshot) screenshot ;;
+video | gif) video ;;
 esac
