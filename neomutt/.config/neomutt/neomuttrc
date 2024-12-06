@@ -2,8 +2,7 @@
 
 # accounts
 folder-hook 'personal' 'source $XDG_CONFIG_HOME/neomutt/accounts/personal'
-folder-hook 'rubikal'  'source $XDG_CONFIG_HOME/neomutt/accounts/rubikal'
-folder-hook 'rtn'      'source $XDG_CONFIG_HOME/neomutt/accounts/rtn'
+# folder-hook 'work'  'source $XDG_CONFIG_HOME/neomutt/accounts/work'
 
 # pathes
 set tmpdir            = /tmp/mutt

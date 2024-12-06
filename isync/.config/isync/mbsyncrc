@@ -24,41 +24,41 @@ Far         :personal-remote:
 Near        :personal-local:
 Patterns    *
 
-# rubikal
-# Remote Store
-IMAPStore        rubikal-remote
-Host             imap.gmail.com
-Port             993
-User             mahmoud.ashraf@rubikal.com
-PassCmd          "pass rubikal"
-TLSType          IMAPS
-CertificateFile  /etc/ssl/certs/ca-certificates.crt
-AuthMechs        LOGIN
-
-# Local storage
-MaildirStore  rubikal-local
-Path          ~/.local/share/mail/rubikal/
-Inbox         ~/.local/share/mail/rubikal/INBOX
-
-Channel       rubikal-inbox
-Far           :rubikal-remote:
-Near          :rubikal-local:
-patterns      "INBOX"
-
-Channel       rubikal-sent
-Far           :rubikal-remote:"[Gmail]/Sent Mail"
-Near          :rubikal-local:Sent
-
-Channel     rubikal-trash
-Far         :rubikal-remote:"[Gmail]/Trash"
-Near       :rubikal-local:Trash
-
-Channel     rubikal-drafts
-Far      :rubikal-remote:"[Gmail]/Drafts"
-Near       :rubikal-local:Drafts
-
-Group rubikal
-channel rubikal-inbox
-channel rubikal-sent
-channel rubikal-trash
-channel rubikal-drafts
+# # work (gmail)
+# # Remote Store
+# IMAPStore        work-remote
+# Host             imap.gmail.com
+# Port             993
+# User             me@work.com
+# PassCmd          "pass work"
+# TLSType          IMAPS
+# CertificateFile  /etc/ssl/certs/ca-certificates.crt
+# AuthMechs        LOGIN
+#
+# # Local storage
+# MaildirStore  work-local
+# Path          ~/.local/share/mail/work/
+# Inbox         ~/.local/share/mail/work/INBOX
+#
+# Channel       work-inbox
+# Far           :work-remote:
+# Near          :work-local:
+# patterns      "INBOX"
+#
+# Channel       work-sent
+# Far           :work-remote:"[Gmail]/Sent Mail"
+# Near          :work-local:Sent
+#
+# Channel     work-trash
+# Far         :work-remote:"[Gmail]/Trash"
+# Near       :work-local:Trash
+#
+# Channel     work-drafts
+# Far      :work-remote:"[Gmail]/Drafts"
+# Near       :work-local:Drafts
+#
+# Group work
+# channel work-inbox
+# channel work-sent
+# channel work-trash
+# channel work-drafts
