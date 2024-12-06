@@ -16,7 +16,6 @@ xresources = read_xresources('*')
 
 c: ConfigContainer = c # type: ignore
 
-# Base16 color definitions matching DWM configuration
 base00 = xresources['*color0']   # black
 base08 = xresources['*color1']   # red
 base0B = xresources['*color2']   # green
