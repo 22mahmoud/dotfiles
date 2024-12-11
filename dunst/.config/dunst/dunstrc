@@ -2,8 +2,8 @@
     monitor = 0
     follow = mouse
     width = 300
-    height = 100
-    offset = 10x40
+    height = 70
+    offset = (10, 40)
     indicate_hidden = yes
     shrink = no
     transparency = 0
