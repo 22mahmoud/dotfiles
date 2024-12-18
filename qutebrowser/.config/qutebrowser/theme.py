@@ -3,41 +3,43 @@
 import subprocess
 from qutebrowser.config.config import ConfigContainer
 
+
 def read_xresources(prefix):
     props = {}
-    x = subprocess.run(['xrdb', '-query'], stdout=subprocess.PIPE)
-    lines = x.stdout.decode().split('\n')
-    for line in filter(lambda l : l.startswith(prefix), lines):
-        prop, _, value = line.partition(':\t')
+    x = subprocess.run(["xrdb", "-query"], stdout=subprocess.PIPE)
+    lines = x.stdout.decode().split("\n")
+    for line in filter(lambda l: l.startswith(prefix), lines):
+        prop, _, value = line.partition(":\t")
         props[prop] = value
     return props
 
-xresources = read_xresources('*')
 
-c: ConfigContainer = c # type: ignore
+xresources = read_xresources("*")
 
-base00 = xresources['*color0']   # black
-base08 = xresources['*color1']   # red
-base0B = xresources['*color2']   # green
-base0A = xresources['*color3']   # yellow
-base0D = xresources['*color4']   # blue
-base0E = xresources['*color5']   # magenta
-base0C = xresources['*color6']   # cyan
-base05 = xresources['*color7']   # white
-base02 = xresources['*color8']   # bright black
-base08 = xresources['*color9']   # bright red (same as base08)
-base0B = xresources['*color10']  # bright green (same as base0B)
-base0A = xresources['*color11']  # bright yellow (same as base0A)
-base0D = xresources['*color12']  # bright blue (same as base0D)
-base0E = xresources['*color13']  # bright magenta (same as base0E)
-base0C = xresources['*color14']  # bright cyan (same as base0C)
-base07 = xresources['*color15']  # bright white
-base09 = xresources['*color16']  # extra color
-base0F = xresources['*color17']  # extra color
-base01 = xresources['*color18']  # extra color
-base02 = xresources['*color19']  # extra color (same as base02)
-base04 = xresources['*color20']  # extra color
-base06 = xresources['*color21']  # extra color
+c: ConfigContainer = c  # type: ignore
+
+base00 = xresources["*color0"]  # black
+base08 = xresources["*color1"]  # red
+base0B = xresources["*color2"]  # green
+base0A = xresources["*color3"]  # yellow
+base0D = xresources["*color4"]  # blue
+base0E = xresources["*color5"]  # magenta
+base0C = xresources["*color6"]  # cyan
+base05 = xresources["*color7"]  # white
+base02 = xresources["*color8"]  # bright black
+base08 = xresources["*color9"]  # bright red (same as base08)
+base0B = xresources["*color10"]  # bright green (same as base0B)
+base0A = xresources["*color11"]  # bright yellow (same as base0A)
+base0D = xresources["*color12"]  # bright blue (same as base0D)
+base0E = xresources["*color13"]  # bright magenta (same as base0E)
+base0C = xresources["*color14"]  # bright cyan (same as base0C)
+base07 = xresources["*color15"]  # bright white
+base09 = xresources["*color16"]  # extra color
+base0F = xresources["*color17"]  # extra color
+base01 = xresources["*color18"]  # extra color
+base02 = xresources["*color19"]  # extra color (same as base02)
+base04 = xresources["*color20"]  # extra color
+base06 = xresources["*color21"]  # extra color
 
 # Completion widget
 c.colors.completion.fg = base05

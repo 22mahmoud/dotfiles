@@ -12,4 +12,3 @@ js_whitelist = [
     "qute://*",
     "file://*",
 ]
-

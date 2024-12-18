@@ -60,24 +60,26 @@ c.colors.webpage.preferred_color_scheme = "dark"
 # Content (js, cookies, encoding, privacy, css, etc)
 c.content.pdfjs = False
 c.content.autoplay = False
-c.content.blocking.enabled = True
-c.content.blocking.method = "both"
+c.content.blocking.enabled = False
+# c.content.blocking.method = "both"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
 c.content.cookies.accept = "never"
 c.content.headers.accept_language = "en-US,en;q=0.5"
-c.content.headers.custom = {"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+c.content.headers.custom = {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+}
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False
 c.content.webgl = False
 # c.content.headers.do_not_track = True
 c.content.tls.certificate_errors = "ask-block-thirdparty"
-c.content.media.audio_capture = 'ask'
-c.content.media.video_capture = 'ask'
-c.content.desktop_capture = 'ask'
-c.content.mouse_lock = 'ask'
+c.content.media.audio_capture = "ask"
+c.content.media.video_capture = "ask"
+c.content.desktop_capture = "ask"
+c.content.mouse_lock = "ask"
 
 # Completion bar
 c.completion.cmd_history_max_items = 500
@@ -96,7 +98,7 @@ c.tabs.title.alignment = "left"
 c.tabs.title.format = "{index}{audio}: {current_title}"
 c.tabs.favicons.scale = 1
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
-c.tabs.show = 'multiple'
+c.tabs.show = "multiple"
 c.tabs.width = 30
 
 # Fonts
