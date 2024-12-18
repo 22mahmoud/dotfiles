@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=File Manager
-Exec=/usr/local/bin/st -e nnn %f
-Terminal=true
+Exec=/usr/bin/thunar %f
+Terminal=false
 MimeType=inode/directory
-Categories=System;FileTools;FileManager;ConsoleOnly
+Categories=System;FileTools;FileManager;
 Keywords=File;Manager;Management;Explorer;Launcher

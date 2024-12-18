@@ -10,7 +10,7 @@ c: ConfigContainer = c  # type: ignore
 config.load_autoconfig(False)
 
 config.source("theme.py")
-config.source("redirector.py")
+# config.source("redirector.py")
 config.source("search_engines.py")
 config.source("binding.py")
 config.source("whitelist.py")
@@ -60,8 +60,8 @@ c.colors.webpage.preferred_color_scheme = "dark"
 # Content (js, cookies, encoding, privacy, css, etc)
 c.content.pdfjs = False
 c.content.autoplay = False
-c.content.blocking.enabled = False
-# c.content.blocking.method = "both"
+c.content.blocking.enabled = True
+c.content.blocking.method = "adblock"
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.default_encoding = "utf-8"
