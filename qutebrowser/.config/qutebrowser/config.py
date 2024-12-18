@@ -67,9 +67,9 @@ c.content.geolocation = False
 c.content.default_encoding = "utf-8"
 c.content.cookies.accept = "never"
 c.content.headers.accept_language = "en-US,en;q=0.5"
-c.content.headers.custom = {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-}
+# c.content.headers.custom = {
+#     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+# }
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False
