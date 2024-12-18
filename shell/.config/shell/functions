@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 extract() {
   for f in "$@"; do
@@ -8,72 +8,72 @@ extract() {
     fi
 
     case "$f" in
-      *.tar) tar -xf "$f" ;;
-      *.tar.bz | *.tbz | \
-        *.tar.bz2 | *.tbz2)
-        tar -xjf "$f"
-        ;;
-      *.tar.gz | *.tgz)
-        tar -xzf "$f"
-        ;;
-      *.tar.xz | *.txz)
-        tar -xJf "$f"
-        ;;
-      *.tar.[zZ] | *.t[zZ])
-        tar -xZf "$f"
-        ;;
-      *.tar.lz | *.tlz | \
-        *.tar.lzma | *.tlzma | \
-        *.tar.lzo | *.tzo | \
-        *.tar.zst | *.tzst)
-        tar -xaf "$f"
-        ;;
-      *.7z) 7za x -- "$f" ;;
-      *.a | *.ar)
-        ar x -- "$f"
-        ;;
-      *.ace) unace e -- "$f" ;;
-      *.alz) unalz -- "$f" ;;
-      *.arc | *.ark | *.ARC | *.ARK)
-        nomarch -- "$f"
-        ;;
-      *.arj | *.ARJ)
-        arj e -r -- "$f"
-        ;;
-      *.bz | *.bz2)
-        bunzip2 -k -- "$f"
-        ;;
-      *.cab | *.CAB | *.exe | *.EXE)
-        cabextract "$f"
-        ;;
-      *.cpio) cpio -id -F "$f" ;;
-      *.deb) dpkg -x -- "$f" . ;;
-      *.gz) gunzip -k "$f" ;;
-      *.lha | *.lzh)
-        lha x "$f"
-        ;;
-      *.lrz | *.lrzip | *.rz)
-        lrunzip -- "$f"
-        ;;
-      *.lz) lzip -d -k -- "$f" ;;
-      *.lz4) unlz4 -- "$f" ;;
-      *.lzma) xz -d -k "$f" ;;
-      *.lzo) lzop -x "$f" ;;
-      *.rar) unrar x -- "$f" ;;
-      *.src.rpm | *.rpm | *.spm)
-        rpm2cpio "$f" | cpio -dium
-        ;;
-      *.xz) unxz -k -- "$f" ;;
-      *.[zZ]) uncompress -- "$f" ;;
-      *.zip | *.osz) unzip -- "$f" ;;
-      *.zst) unzstd -- "$f" ;;
-      *.AppImage)
-        ./"$f" --appimage-extract
-        ;;
-      *)
-        printf "extract: '%s' - unkwown archive format\n" "$f" >&2
-        return 1
-        ;;
+    *.tar) tar -xf "$f" ;;
+    *.tar.bz | *.tbz | \
+      *.tar.bz2 | *.tbz2)
+      tar -xjf "$f"
+      ;;
+    *.tar.gz | *.tgz)
+      tar -xzf "$f"
+      ;;
+    *.tar.xz | *.txz)
+      tar -xJf "$f"
+      ;;
+    *.tar.[zZ] | *.t[zZ])
+      tar -xZf "$f"
+      ;;
+    *.tar.lz | *.tlz | \
+      *.tar.lzma | *.tlzma | \
+      *.tar.lzo | *.tzo | \
+      *.tar.zst | *.tzst)
+      tar -xaf "$f"
+      ;;
+    *.7z) 7za x -- "$f" ;;
+    *.a | *.ar)
+      ar x -- "$f"
+      ;;
+    *.ace) unace e -- "$f" ;;
+    *.alz) unalz -- "$f" ;;
+    *.arc | *.ark | *.ARC | *.ARK)
+      nomarch -- "$f"
+      ;;
+    *.arj | *.ARJ)
+      arj e -r -- "$f"
+      ;;
+    *.bz | *.bz2)
+      bunzip2 -k -- "$f"
+      ;;
+    *.cab | *.CAB | *.exe | *.EXE)
+      cabextract "$f"
+      ;;
+    *.cpio) cpio -id -F "$f" ;;
+    *.deb) dpkg -x -- "$f" . ;;
+    *.gz) gunzip -k "$f" ;;
+    *.lha | *.lzh)
+      lha x "$f"
+      ;;
+    *.lrz | *.lrzip | *.rz)
+      lrunzip -- "$f"
+      ;;
+    *.lz) lzip -d -k -- "$f" ;;
+    *.lz4) unlz4 -- "$f" ;;
+    *.lzma) xz -d -k "$f" ;;
+    *.lzo) lzop -x "$f" ;;
+    *.rar) unrar x -- "$f" ;;
+    *.src.rpm | *.rpm | *.spm)
+      rpm2cpio "$f" | cpio -dium
+      ;;
+    *.xz) unxz -k -- "$f" ;;
+    *.[zZ]) uncompress -- "$f" ;;
+    *.zip | *.osz) unzip -- "$f" ;;
+    *.zst) unzstd -- "$f" ;;
+    *.AppImage)
+      ./"$f" --appimage-extract
+      ;;
+    *)
+      printf "extract: '%s' - unkwown archive format\n" "$f" >&2
+      return 1
+      ;;
     esac
   done
 }
@@ -88,36 +88,53 @@ archive() {
   shift
 
   case "$archive" in
-    *.tar.bz | *.tbz | \
-      *.tar.bz2 | *.tbz2)
-      tar -cjf "$archive" "$@"
-      ;;
-    *.tar.gz | *.tgz)
-      tar -czf "$archive" "$@"
-      ;;
-    *.tar.xz | *.txz)
-      tar -cJf "$archive" "$@"
-      ;;
-    *.tar.[zZ] | *.t[zZ])
-      tar -cZf "$archive" "$@"
-      ;;
-    *.tar.lzma | *.tlzma | \
-      *.tar.lzo | *.tzo | \
-      *.tar.lz | *.tlz)
-      tar -caf "$archive" "$@"
-      ;;
-    *.tar)
-      tar -cf "$archive" "$@"
-      ;;
-    *.7z)
-      7za a "$archive" "$@"
-      ;;
-    *.zip)
-      zip -r "$archive" "$@"
-      ;;
-    *)
-      printf "'%s' is unknown archive format\n" "$archive" >&2
-      return 1
-      ;;
+  *.tar.bz | *.tbz | \
+    *.tar.bz2 | *.tbz2)
+    tar -cjf "$archive" "$@"
+    ;;
+  *.tar.gz | *.tgz)
+    tar -czf "$archive" "$@"
+    ;;
+  *.tar.xz | *.txz)
+    tar -cJf "$archive" "$@"
+    ;;
+  *.tar.[zZ] | *.t[zZ])
+    tar -cZf "$archive" "$@"
+    ;;
+  *.tar.lzma | *.tlzma | \
+    *.tar.lzo | *.tzo | \
+    *.tar.lz | *.tlz)
+    tar -caf "$archive" "$@"
+    ;;
+  *.tar)
+    tar -cf "$archive" "$@"
+    ;;
+  *.7z)
+    7za a "$archive" "$@"
+    ;;
+  *.zip)
+    zip -r "$archive" "$@"
+    ;;
+  *)
+    printf "'%s' is unknown archive format\n" "$archive" >&2
+    return 1
+    ;;
   esac
 }
+
+vw() {
+  file_path="$(which "$1")"
+
+  if [ ! -e "$file_path" ]; then
+    echo "script not found"
+  else
+    nvim "$file_path"
+  fi
+}
+
+_vw() {
+  local -a binaries=($(find ~/.local/bin -type f -or -type l -executable -printf "%f\n"))
+  _describe 'binaries' binaries
+}
+
+compdef _vw vw

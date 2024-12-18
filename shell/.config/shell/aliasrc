@@ -13,18 +13,19 @@ alias bc='bc -ql'
 alias cls='clear'
 alias fork='setsid -f'
 alias mine='sudo chown -R $(whoami):$(whoami)'
-alias ls='ls --color=auto -a'
-alias ll='ls --color=auto -l -a -p -c -h'
+alias ls='eza --icons=always --color=auto -a'
+alias ll='eza --icons=always --color=auto -l -a -g -h'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
 alias wget='wget --hsts-file=$XDG_CACHE_HOME/wget-hsts'
 alias cpr='rsync -artzP -hh --partial --info=stats1,progress2 --modify-window=1'
+alias srv='python -m http.server -d'
 
 # apps
 alias v='nvim'
 alias sv='sudo -E nvim'
-alias yt='youtube-dl'
+alias yt='yt-dlp'
 alias open='xdg-open'
 alias nnn='nnn -c'
 alias pf='pfetch'
@@ -58,13 +59,14 @@ alias cfp='$EDITOR $XDG_CONFIG_HOME/picom/picom.conf'
 alias cfk='$EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc'
 alias cfq='$EDITOR $XDG_CONFIG_HOME/qutebrowser/config.py'
 alias cfs='$EDITOR $XDG_CONFIG_HOME/shell/profile'
+alias cfa='$EDITOR $XDG_CONFIG_HOME/shell/aliasrc'
 alias cfx='$EDITOR $XDG_CONFIG_HOME/x11/xinitrc'
 
-# youtube-dl
-alias yta-best='youtube-dl --extract-audio --audio-format best '
-alias yta-mp3='youtube-dl --extract-audio --audio-format mp3 '
-alias ytb='youtube-dl -f bestvideo+bestaudio '
-alias drm-dl='youtube-dl --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
+# yt-dlp
+alias yta='yt-dlp --extract-audio --audio-format best '
+alias yta-mp3='yt-dlp --extract-audio --audio-format mp3 '
+alias ytb='yt-dlp -f bestvideo+bestaudio '
+alias drm-dl='yt-dlp --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
 
 # paru
 alias p='paru'
@@ -85,24 +87,40 @@ alias .9='cd ../../../../../../../../..'
 alias .10='cd ../../../../../../../../../..'
 
 # yarn
-alias yarn=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
-alias y=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"
-alias yw=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" workspace
-alias yst=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" start
-alias yd=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" dev
-alias ya=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add
-alias yr=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" remove
-alias yad=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add -D
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias y='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias yw='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" workspace'
+alias yst'=yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" start'
+alias yd='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" dev'
+alias ya='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add'
+alias yr='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" remove'
+alias yad='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config" add -D'
 
 # npm
 alias n='npm'
 alias ni='npm install'
 alias na='npm install'
-alias nad='npm install --dev'
+alias nad='npm install --include=dev'
 alias nr='npm uninstall'
 alias nst='npm run start'
 alias nd='npm run dev'
 alias nb='npm run build'
+
+# pnpm
+alias pn='pnpm'
+alias pni='pnpm install'
+alias pna='pnpm add'
+alias pnad='pnpm add -D'
+alias pnr='pnpm remove'
+alias pnst='pnpm start'
+alias pnd='pnpm dev'
+alias pnb='pnpm build'
+
+# volta
+alias vo='volta'
+alias va='volta install'
+alias vp='volta pin'
+alias vu='volta uninstall'
 
 # tmux
 alias t='tmux'
@@ -117,7 +135,7 @@ alias ds='docker ps'
 alias dexec='docker exec -it'
 alias dc='docker compose'
 alias dcup='docker compose up -d --build --remove-orphans'
-alias dcd='docker compose stop'
+alias dcd='docker compose down'
 alias dcpl='docker compose pull'
 alias dcln='docker system prune -af --volumes'
 
@@ -133,6 +151,7 @@ alias kd='kubectl delete pod'
 alias g='git'
 alias gs='git status'
 alias ga='git add'
+alias gap='git add . -p'
 alias gc='git commit -v'
 alias gcm='git commit -v -m'
 alias gcnm='git commit -v -nm'
@@ -147,6 +166,7 @@ alias gl='git l'
 alias gsa='git submodule add'
 alias gb='git branch'
 alias gbd='git branch -D'
+alias gcln='git fetch -p && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs -r git branch -D'
 
 gpu() {
   if [ -z "$1" ]; then

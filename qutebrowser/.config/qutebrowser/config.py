@@ -47,7 +47,7 @@ c.qt.args = [
 
 # startpage
 # default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
-default_start_page = "https://glance.maw-s.duckdns.org"
+default_start_page = "http://localhost:8580"
 c.url.start_pages = [default_start_page]
 c.url.default_page = default_start_page
 
@@ -65,7 +65,8 @@ c.content.geolocation = False
 c.content.default_encoding = "utf-8"
 c.content.cookies.accept = "never"
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
-# c.content.headers.user_agent = ( "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0")
+c.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
+# c.headers.custom = '{"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}'
 c.content.headers.accept_language = "en-US,en;q=0.5"
 c.content.site_specific_quirks.enabled = False
 c.content.canvas_reading = False

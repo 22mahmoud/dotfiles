@@ -1,14 +1,100 @@
 #!/bin/sh
 
-[ -z "$1" ] && exit
+PIDFILE="/tmp/wallgif.pid"
 
-case "$1" in
+usage() {
+  echo "Usage: $(basename "$0") <file_path>"
+  echo "setbg is a utility to set a wallpaper"
+  echo "Supported formats: jpg, jpeg, png, gif, mp4, mkv, webm, youtube links"
+  exit 0
+}
+
+kill_running_xwinwrap() {
+  if [ -f "$PIDFILE" ]; then
+    pid=$(cat "$PIDFILE")
+
+    if kill -0 "$pid" 2>/dev/null; then
+      kill "$pid"
+      sleep 1
+    fi
+
+    rm -f "$PIDFILE"
+  fi
+}
+
+get_rel_path() {
+  case "$1" in
+
+  http*://*)
+    echo "$1"
+    ;;
+  *)
+    file_path="$(realpath "$1")"
+
+    if [ ! -f "$file_path" ]; then
+      echo "file not exist"
+      exit 1
+    else
+      echo "$file_path"
+    fi
+    ;;
+  esac
+}
+
+wallgif() {
+  nice xwinwrap -ni -s -nf -b -un -ovr -fdt -argb -g "$1" -- mpv \
+    -wid WID \
+    --hwdec=vdpau \
+    --no-config \
+    --no-terminal \
+    --no-osc \
+    --no-osd-bar \
+    --loop-file=inf \
+    --no-pause \
+    --player-operation-mode=cplayer \
+    --panscan=1.0 \
+    --mute=yes \
+    --no-input-default-bindings \
+    --msg-level=vd=v,vo=v,vo/gpu/vaapi-egl=trace \
+    --ytdl-format='bestvideo[height<=?1080]+bestaudio/best' \
+    "$2" &
+
+  echo $! >"$PIDFILE"
+}
+
+create_setbg_script() {
+
+  cat >~/.config/setbg <<EOF
+#!/bin/sh
+
+$(command -v "$0") "$file_path"
+EOF
+
+  chmod +x ~/.config/setbg
+}
+
+main() {
+  [ $# -eq 0 ] && usage
+
+  kill_running_xwinwrap
+
+  file_path="$(get_rel_path "$1")"
+
+  case "$file_path" in
   *jpg | *jpeg | *png)
-    WALLGIF_PIDFILE="$XDG_RUNTIME_DIR/wallgif.pid"
-    [ -e "$WALLGIF_PIDFILE" ] && head "${WALLGIF_PIDFILE}" | xargs kill -9
-    feh --bg-fill "$1"
+    feh --no-fehbg --bg-fill "$file_path"
     ;;
   *gif | *mp4 | *mkv | *webm | *youtube.com/watch*)
-    wallgif "$1"
+    res=$(xdpyinfo | awk '/dimensions/ {print $2}')
+    wallgif "$res" "$file_path"
     ;;
-esac
+  *)
+    echo "Error: Unsupported file format"
+    exit 1
+    ;;
+  esac
+
+  create_setbg_script
+}
+
+main "$@"

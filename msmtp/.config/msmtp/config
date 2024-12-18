@@ -3,6 +3,7 @@
 defaults
 auth              on
 tls               on
+tls_starttls      off
 tls_trust_file    /etc/ssl/certs/ca-certificates.crt
 
 # personal
@@ -13,10 +14,10 @@ passwordeval       "pass mail.mahmoudashraf.dev"
 user               hello
 from               hello@mahmoudashraf.dev
 
-# rubikal
-account            rubikal
-host               smtp.gmail.com
-port               587
-passwordeval       "pass rubikal"
-user               mahmoud.ashraf@rubikal.com
-from               mahmoud.ashraf@rubikal.com
+# # work (gmail)
+# account            wwork
+# host               smtp.gmail.com
+# port               587
+# passwordeval       "pass work"
+# user               me@work.com
+# from               me@work.com

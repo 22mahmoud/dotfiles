@@ -1,5 +1,5 @@
 [user]
-  name = 22mahmoud
+  name = Mahmoud Ashraf
   email = hello@mahmoudashraf.dev
   signingKey = Mahmoud Ashraf <hello@mahmoudashraf.dev>
 [commit]
@@ -23,14 +23,17 @@
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  trustExitCode = true
 [difftool]
   trustExistCode = true
   prompt = false
 [diff]
   tool = vimdiff
+  prompt = false
 [log]
   decorate = short
   date = local
+  stat = true
 [delta]
   side-by-side = true
   line-numbers-left-format = ""
@@ -57,6 +60,7 @@
   r = reset
   undo = reset HEAD~1 --mixed
   l = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate=full
+  up = submodule update --remote --init --recursive
   jump = "!/usr/share/git/git-jump/git-jump"
 [credential]
 	helper = cache --timeout=31536000

@@ -25,11 +25,12 @@ list() {
 
 update() {
   curl -s \
-    "https://raw.githubusercontent.com/muan/emojilib/main/dist/emoji-en-US.json" \
-    | jq 'to_entries | map_values({ key: .key, value: .value | join(" ") } ) |
-    from_entries' \
-    | tr -d '",{}' \
-    | sed -e 's/://' -e '/^$/d' -e 's/^[ \t]*//' \
+    "https://raw.githubusercontent.com/muan/emojilib/main/dist/emoji-en-US.json" |
+    fixjson |
+    jq 'to_entries | map_values({ key: .key, value: .value | join(" ") } ) |
+    from_entries' |
+    tr -d '",{}' |
+    sed -e 's/://' -e '/^$/d' -e 's/^[ \t]*//' \
       >"$c_emojis_file"
 }
 
@@ -47,11 +48,11 @@ _dmenu() {
 
 main() {
   case "$1" in
-    -h) usage ;;
-    -l) list ;;
-    -u) update ;;
-    -d) _dmenu ;;
-    *) exit 0 ;;
+  -h) usage ;;
+  -l) list ;;
+  -u) update ;;
+  -d) _dmenu ;;
+  *) exit 0 ;;
   esac
 }
 
