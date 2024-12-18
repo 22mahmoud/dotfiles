@@ -46,10 +46,10 @@ def get_instagram_redirect():
 
 REDIRECT_MAP = {
     'reddit.com': lambda: 'old.reddit.com',
-    'twitter.com': get_twitter_redirects,
+    # 'twitter.com': get_twitter_redirects,
      # 'youtube.com': get_youtube_redirects,
-    'instagram.com': get_instagram_redirect,
-    'medium.com': lambda: 'scribe.rip',
+    # 'instagram.com': get_instagram_redirect,
+    # 'medium.com': lambda: 'scribe.rip',
 }
 
 def redirect(request: Request):

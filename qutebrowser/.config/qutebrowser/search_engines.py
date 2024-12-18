@@ -3,7 +3,7 @@ from qutebrowser.config.config import ConfigContainer
 c: ConfigContainer = c  # type: ignore
 
 c.url.searchengines = {
-    'DEFAULT': 'https://search.mahmoudashraf.dev/search?q={}',
+    'DEFAULT': 'https://www.google.com/search?&q={}',
     'b': 'https://search.brave.com/search?q={}',
     'sx': 'https://search.mahmoudashraf.dev/search?q={}',
     'd': 'https://duckduckgo.com/?q={}',
@@ -30,5 +30,7 @@ c.url.searchengines = {
     "jumia": "https://www.jumia.com.eg/ar/catalog/?q={}",
     "olx": "https://www.olx.com.eg/alexandria/q-{}/",
     "az": "https://www.amazon.com/s?field-keywords={}",
-    "pdb": "https://www.protondb.com/search?q={}"
+    "pdb": "https://www.protondb.com/search?q={}",
+    'ai': "https://chat.openai.com/?q={}",
+    'gpt': "https://chat.openai.com/?q={}"
 }

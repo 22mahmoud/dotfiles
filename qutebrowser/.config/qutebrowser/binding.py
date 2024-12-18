@@ -16,13 +16,12 @@ config.bind(',po', f'{qute_bitwarden} --totp-only')
 config.bind(',r', 'hint links userscript readability-js')
 config.bind(',R', 'spawn --userscript readability-js')
 
-config.bind(',e', 'config-cycle -p content.javascript.enabled ;; config-cycle -p content.cookies.accept no-3rdparty never ;; reload')
+config.bind(',e', 'config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; config-cycle -p -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload')
 
 
 config.bind('zl', 'spawn --userscript localhost list')
 
 config.bind(',j', 'spawn --userscript format_json')
-config.bind(',t', 'config-cycle tabs.width 30 300')
 
 config.bind(',i', 'hint images run open {hint-url}')
 config.bind(',C', 'config-source')
@@ -40,7 +39,8 @@ config.bind('x', 'tab-close')
 config.bind('X', 'undo')
 config.bind(',xb', 'config-cycle statusbar.show always never')
 config.bind(',xt', 'config-cycle tabs.show always never')
-config.bind('<Shift+">', 'config-cycle tabs.width 30 200')
+config.bind(',xx', 'config-cycle tabs.show always never ;; config-cycle statusbar.show always never')
+config.bind(',t', 'config-cycle tabs.width 30 400')
 
 # for old.reddit.com expand thread.
 config.set('hints.selectors', {'preview': ['.expando-button']}, pattern='*://*.reddit.com/*')

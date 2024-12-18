@@ -30,11 +30,11 @@
 // c.aliases = {"readability" : "spawn --userscript readability-js", ...}
 
 const { Readability } = require('@mozilla/readability');
-const qute = require('qutejs');
+const qute = require('qutejs');
 const JSDOM = require('jsdom').JSDOM;
-const fs = require('fs');
-const path = require('path');
-const util = require('util');
+const fs = require('node:fs');
+const path = require('node:path');
+const util = require('node:util');
 
 const HEADER = `
 <!DOCTYPE html>

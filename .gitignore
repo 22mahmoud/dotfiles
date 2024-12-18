@@ -12,6 +12,8 @@ bookmarks
 quickmarks
 autoconfig.yml
 qsettings
+whitelist.py
+__pycache__
 
 # zsh
 theme.zsh
