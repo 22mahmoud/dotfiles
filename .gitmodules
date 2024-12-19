@@ -34,3 +34,6 @@
 [submodule "mpv/.local/src/thumbfast"]
 	path = mpv/.local/src/thumbfast
 	url = git@github.com:po5/thumbfast.git
+[submodule "mpv/.local/src/memo"]
+	path = mpv/.local/src/memo
+	url = git@github.com:po5/memo.git
