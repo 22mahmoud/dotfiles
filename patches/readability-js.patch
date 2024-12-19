@@ -1,0 +1,301 @@
+Submodule qutebrowser/.local/src/qutebrowser contains modified content
+diff --git a/qutebrowser/.local/src/qutebrowser/misc/userscripts/readability-js b/qutebrowser/.local/src/qutebrowser/misc/userscripts/readability-js
+index 752b759bb..9251798d7 100755
+--- a/qutebrowser/.local/src/qutebrowser/misc/userscripts/readability-js
++++ b/qutebrowser/.local/src/qutebrowser/misc/userscripts/readability-js
+@@ -14,7 +14,7 @@
+ //
+ // - Ensure that node knows where to find your globally installed modules by adding
+ //   the following to ~/.profile or /etc/profile:
+-//     
++//
+ //   export NODE_PATH=$NODE_PATH:$(npm root -g)
+ //
+ // *Note*: On some Linux distros and macOS, it may be easier to set NODE_PATH using qutebrowser's
+@@ -44,64 +44,228 @@ const HEADER = `
+     <meta charset="UTF-8">
+     <title>%s</title>
+     <style type="text/css">
+-        body {
+-            margin: 30px auto;
+-            max-width: 650px;
+-            line-height: 1.4;
+-            padding: 0 10px;
+-        }
+-        h1, h2, h3 {
+-            line-height: 1.2;
+-        }
+-        h1.reader-title {
+-            font-size: 1.85em;
+-            line-height: 1.25em;
+-            width: 100%;
+-            margin: 0 0;
+-        }
+-        img {
+-            max-width:100%;
+-            height:auto;
+-        }
+-        p > img:only-child,
+-        p > a:only-child > img:only-child,
+-        .wp-caption img,
+-        figure img {
+-            display: block;
+-        }
+-        table,
+-        th,
+-        td {
+-            border: 1px solid grey;
+-            border-collapse: collapse;
+-            padding: 6px;
+-            vertical-align: top;
+-        }
+-        table {
+-            margin: 5px;
+-        }
+-        pre {
+-            padding: 16px;
+-            overflow: auto;
+-            line-height: 1.45;
+-            background-color: #dddddd;
+-        }
+-        code { 
+-            padding: .2em .4em;
+-            margin: 0;
+-            background-color: #dddddd;
+-        }
+-        pre > code {
+-            padding-right: 0;
+-            padding-left: 0;
+-        }
+-        blockquote {
+-            border-inline-start: 2px solid grey !important;
+-            padding: 0;
+-            padding-inline-start: 16px;
+-            margin-inline-start: 24px;
+-            border-radius: 5px;
+-        }
++      /* variables */
++      :root {
++        /* fonts */
++        --sans: 1em/1.6 system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
++          Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue,
++          Fira Sans, sans-serif;
++        --mono: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier,
++          'Courier New', monospace;
++
++        /* colors */
++        --c1: #080808;
++        --c2: #f1f2f2;
++        --c3: #2d9dff;
++        --c4: #ebdbb2;
++        --c5: #1d2021;
++      }
++
++      *,
++      :after,
++      :before {
++        box-sizing: border-box;
++      }
++
++      address,
++      area,
++      article,
++      aside,
++      audio,
++      blockquote,
++      datalist,
++      details,
++      dl,
++      fieldset,
++      figure,
++      form,
++      input,
++      iframe,
++      img,
++      meter,
++      nav,
++      ol,
++      optgroup,
++      option,
++      output,
++      p,
++      pre,
++      progress,
++      ruby,
++      section,
++      table,
++      textarea,
++      ul,
++      video {
++        /* Margins for most elements */
++        margin-bottom: 1rem;
++      }
++
++      hr {
++        /* Reset the border of the <hr> separator, then set a better line */
++        border: 0;
++        border-bottom: 1px solid var(--c5);
++        margin: 1rem auto;
++      }
++
++      body {
++        margin: 0 auto;
++        padding: 1em;
++        font: var(--sans);
++        font-weight: 400;
++        line-height: 1.5;
++        background: var(--c1);
++        color: var(--c2);
++        max-width: 40em;
++        display: flex;
++        flex-direction: column;
++        height: 100vh;
++      }
++
++      main {
++        flex: 1;
++      }
++
++      img, video {
++        height: auto;
++        max-width: 100%;
++      }
++
++      a {
++        color: var(--c3);
++        text-decoration: none;
++      }
++
++      a:hover {
++        text-decoration: underline;
++      }
++
++      pre {
++        font: 1em/1.6 var(--mono);
++        background: var(--c5);
++        color: var(--c4);
++        padding: 1em;
++        overflow: auto;
++      }
++
++      code {
++        font: 1em/1.6 var(--mono);
++        color: var(--c4);
++      }
++
++      blockquote {
++        border-left: 5px solid var(--c5);
++        color: var(--c4);
++        padding: 1em 1.5em;
++        margin: 0;
++      }
++
++      /* Headlines */
++      h1,
++      h2,
++      h3,
++      h4,
++      h5,
++      h6 {
++        line-height: 1;
++        padding-top: 0.875rem;
++      }
++
++      h1,
++      h2,
++      h3 {
++        padding-bottom: 2px;
++        margin-bottom: 8px;
++      }
++
++      h4,
++      h5,
++      h6 {
++        margin-bottom: 0.3rem;
++      }
++
++      h1 {
++        font-size: 2.25rem;
++      }
++
++      h2 {
++        font-size: 1.85rem;
++      }
++
++      h3 {
++        font-size: 1.55rem;
++      }
++
++      h4 {
++        font-size: 1.25rem;
++      }
++
++      h5 {
++        font-size: 1rem;
++      }
++
++      h6 {
++        font-size: 0.875rem;
++      }
++
++      ol,
++      ul {
++        /* Replace the browser default padding */
++        padding-left: 2rem;
++      }
++
++      li {
++        margin-top: 0.4rem;
++      }
++
++      ul ul,
++      ol ul,
++      ul ol,
++      ol ol {
++        margin-bottom: 0;
++      }
++
++      footer {
++        padding-top: 1.5em;
++        padding-bottom: 1em;
++      }
++
++      .site-title a {
++        color: var(--c2);
++        font-weight: bold;
++      }
++
++      .nav {
++        margin-bottom: 1em;
++      }
++
++      .nav ul {
++        display: flex;
++        padding: 0;
++        display: flex;
++        flex-wrap: wrap;
++      }
++
++      .nav ul li {
++        list-style-type: none;
++        margin-bottom: 0.3em;
++      }
++
++      .nav ul li:not(:last-child) {
++        margin-right: 0.8em;
++      }
++
++      .theme-toggle a {
++        color: var(--c2);
++        background-color: var(--c5);
++        padding: 0.25em 0.5em;
++        border-radius: 99999999px;
++      }
++
++      .theme-toggle > a:hover {
++        text-decoration: none;
++      }
++
+     </style>
+     <!-- This icon is licensed under the Mozilla Public License 2.0 (available at: https://www.mozilla.org/en-US/MPL/2.0/).
+     The original icon can be found here: https://dxr.mozilla.org/mozilla-central/source/browser/themes/shared/reader/readerMode.svg -->
