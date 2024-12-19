@@ -1,0 +1,1 @@
+../../../.local/src/thumbfast/thumbfast.lua

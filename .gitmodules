@@ -28,3 +28,9 @@
 [submodule "qutebrowser/.local/src/qutebrowser"]
 	path = qutebrowser/.local/src/qutebrowser
 	url = git@github.com:qutebrowser/qutebrowser.git
+[submodule "mpv/.local/src/uosc"]
+	path = mpv/.local/src/uosc
+	url = git@github.com:tomasklaen/uosc.git
+[submodule "mpv/.local/src/thumbfast"]
+	path = mpv/.local/src/thumbfast
+	url = git@github.com:po5/thumbfast.git
