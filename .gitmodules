@@ -7,9 +7,6 @@
 [submodule "zsh/.config/zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/.config/zsh/plugins/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
-[submodule "mpv/.config/mpv/scripts/autosubsync"]
-	path = mpv/.config/mpv/scripts/autosubsync
-	url = git@github.com:joaquintorres/autosubsync-mpv.git
 [submodule "zsh/.config/zsh/base16-fzf"]
 	path = zsh/.config/zsh/base16-fzf
 	url = git@github.com:tinted-theming/base16-fzf.git
