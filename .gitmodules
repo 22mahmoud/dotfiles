@@ -28,3 +28,6 @@
 [submodule "tmux/.local/share/tmux/plugins/tpm"]
 	path = tmux/.local/share/tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm.git
+[submodule "qutebrowser/.local/src/qutebrowser"]
+	path = qutebrowser/.local/src/qutebrowser
+	url = git@github.com:qutebrowser/qutebrowser.git

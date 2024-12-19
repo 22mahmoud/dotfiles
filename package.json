@@ -1,0 +1,17 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mozilla/readability": "github:mozilla/readability",
+    "jsdom": "^25.0.1",
+    "qutejs": "^1.1.1"
+  }
+}

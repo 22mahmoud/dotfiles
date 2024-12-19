@@ -1,3 +1,5 @@
+node_modules
+
 # x11
 theme.Xresources
 
@@ -14,6 +16,7 @@ autoconfig.yml
 qsettings
 whitelist.py
 __pycache__
+readability.html
 
 # zsh
 theme.zsh
