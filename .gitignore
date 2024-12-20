@@ -10,8 +10,6 @@ sessions
 .selection
 
 # qutebrowser
-bookmarks
-quickmarks
 autoconfig.yml
 qsettings
 __pycache__
@@ -26,6 +24,3 @@ tmux/.local/share/tmux/plugins/
 
 # ncspot
 userstate.cbor
-
-# resolved
-resolved/systemd/resolved.conf

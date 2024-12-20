@@ -1,1 +1,3 @@
 qutebrowser/.config/qutebrowser/whitelist.py filter=ageencrypt
+qutebrowser/.config/qutebrowser/bookmarks/urls filter=ageencrypt
+qutebrowser/.config/qutebrowser/quickmarks filter=ageencrypt
