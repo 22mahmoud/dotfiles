@@ -2,6 +2,10 @@
   name = Mahmoud Ashraf
   email = hello@mahmoudashraf.dev
   signingKey = Mahmoud Ashraf <hello@mahmoudashraf.dev>
+[filter "ageencrypt"]
+  clean = age -r age1mupc0qg3uqlcm5zz4twuk7nwf5s3kfj5wmkmdjyswjnfenhme3sscnkzw3 -
+  smudge = pass age | age -d -i -
+  required = true
 [commit]
   gpgsign = true
   verbose = true
@@ -63,6 +67,6 @@
   up = submodule update --remote --init --recursive
   jump = "!/usr/share/git/git-jump/git-jump"
 [credential]
-	helper = cache --timeout=31536000
+  helper = cache --timeout=31536000
 [submodule]
-	recurse = true
+  recurse = true
