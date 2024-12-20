@@ -3,9 +3,9 @@
   email = hello@mahmoudashraf.dev
   signingKey = Mahmoud Ashraf <hello@mahmoudashraf.dev>
 [filter "ageencrypt"]
-  clean = age -r age1mupc0qg3uqlcm5zz4twuk7nwf5s3kfj5wmkmdjyswjnfenhme3sscnkzw3 -
-  smudge = pass age | age -d -i -
-  required = true
+  clean = age -r key -
+  smudge = /bin/sh -c 'age -d -i <(pass age)'
+  required = false
 [commit]
   gpgsign = true
   verbose = true
