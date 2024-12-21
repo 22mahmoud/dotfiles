@@ -112,7 +112,7 @@ update_qutebrowser() {
     echo "config.source('base16.py')" >>"$c_qutebrowser"
   fi
 
-  echo 'c.colors.webpage.bg = "white"' >> "$c_qutebrowser"
+  echo 'c.colors.webpage.bg = "white"' >>"$c_qutebrowser"
 
   [ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
 }
@@ -127,8 +127,10 @@ update_wallpaper() {
 }
 
 main() {
+  touch "$c_xresources" "$c_nvim" "$c_zshrc" "$c_tmux" "$c_qutebrowser"
+
   update_xresources
-  #
+
   update_dwm &
   update_qutebrowser &
   update_zsh &
