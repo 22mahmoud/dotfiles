@@ -13,6 +13,7 @@ sessions
 autoconfig.yml
 qsettings
 __pycache__
+theme.py
 readability.html
 
 # zsh

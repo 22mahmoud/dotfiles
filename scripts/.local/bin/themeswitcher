@@ -112,6 +112,8 @@ update_qutebrowser() {
     echo "config.source('base16.py')" >>"$c_qutebrowser"
   fi
 
+  echo 'c.colors.webpage.bg = "white"' >> "$c_qutebrowser"
+
   [ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
 }
 
