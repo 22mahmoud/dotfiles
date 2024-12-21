@@ -25,6 +25,7 @@ base16-solarflare
 base16-solarized-dark
 base16-tomorrow-night
 base16-twilight
+base16-oxocarbon-dark
 catppuccin-mocha"
 
 theme_name="$(echo "$themes" | dmenu -r -l 30)"
@@ -66,6 +67,8 @@ update_tmux() {
 }
 
 update_nvim() {
+  truncate -s 0 "$c_nvim"
+
   echo "vim.cmd[[silent! colorscheme ""$theme_name""]]" >>"$c_nvim"
 
   nvr --serverlist |
