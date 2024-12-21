@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # source xresources file
-xrdb -merge /home/ashraf/.config/x11/xresources
+xrdb -merge $XDG_CONFIG_HOME/x11/xresources
 
 # hotkey daemon
 sxhkd &
@@ -19,7 +19,7 @@ setxkbmap -layout us,ara -option grp:lalt_lshift_toggle &
 slstatus &
 
 # speed up keyboard
-xset r rate 280 40 &
+xset r rate 200 50 &
 
 # start dunst notification server
 dunst &

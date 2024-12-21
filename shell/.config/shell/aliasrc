@@ -123,7 +123,8 @@ alias vp='volta pin'
 alias vu='volta uninstall'
 
 # tmux
-alias t='tmux'
+cat "$XDG_CONFIG_HOME/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/theme.conf" > /tmp/tmux_combined.conf
+alias t='tmux -f /tmp/tmux_combined.conf'
 alias ta='t a -t'
 alias tls='t ls'
 alias tn='t new -t'

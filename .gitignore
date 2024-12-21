@@ -20,7 +20,6 @@ theme.zsh
 
 # tmux
 theme.conf
-tmux/.local/share/tmux/plugins/
 
 # ncspot
 userstate.cbor

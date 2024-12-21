@@ -7,9 +7,9 @@ color index_number blue default
 color index_subject cyan default '.*'
 
 # New mail is boldened:
-color index brightyellow black "~N"
-color index_author brightred black "~N"
-color index_subject brightcyan black "~N"
+color index bold green default "~N"
+color index_author bold green default "~N"
+color index_subject bold green default "~N"
 
 # Tagged mail is highlighted:
 color index brightyellow blue "~T"

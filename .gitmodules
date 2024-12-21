@@ -22,9 +22,6 @@
 [submodule "nnn/.local/src/nnn"]
 	path = nnn/.local/src/nnn
 	url = git@github.com:jarun/nnn.git
-[submodule "tmux/.local/share/tmux/plugins/tpm"]
-	path = tmux/.local/share/tmux/plugins/tpm
-	url = git@github.com:tmux-plugins/tpm.git
 [submodule "qutebrowser/.local/src/qutebrowser"]
 	path = qutebrowser/.local/src/qutebrowser
 	url = git@github.com:qutebrowser/qutebrowser.git
@@ -37,3 +34,18 @@
 [submodule "mpv/.local/src/memo"]
 	path = mpv/.local/src/memo
 	url = git@github.com:po5/memo.git
+[submodule "tmux/.local/share/tmux/plugins/tmux-yank"]
+	path = tmux/.local/share/tmux/plugins/tmux-yank
+	url = git@github.com:tmux-plugins/tmux-yank.git
+[submodule "tmux/.local/share/tmux/plugins/tinted-tmux"]
+	path = tmux/.local/share/tmux/plugins/tinted-tmux
+	url = git@github.com:tinted-theming/tinted-tmux.git
+[submodule "tmux/.local/share/tmux/plugins/catppuccin"]
+	path = tmux/.local/share/tmux/plugins/catppuccin
+	url = git@github.com:catppuccin/tmux.git
+[submodule "x11/.config/x11/catppuccin-xresources"]
+	path = x11/.config/x11/catppuccin-xresources
+	url = git@github.com:catppuccin/xresources.git
+[submodule "qutebrowser/.config/qutebrowser/catppuccin"]
+	path = qutebrowser/.config/qutebrowser/catppuccin
+	url = git@github.com:catppuccin/qutebrowser.git

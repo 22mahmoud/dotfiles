@@ -10,10 +10,10 @@ c: ConfigContainer = c  # type: ignore
 config.load_autoconfig(False)
 
 config.source("theme.py")
-# config.source("redirector.py")
 config.source("search_engines.py")
 config.source("binding.py")
 config.source("whitelist.py")
+# config.source("redirector.py")
 
 # Misc
 c.downloads.location.directory = os.path.expanduser("~/dls/qute")

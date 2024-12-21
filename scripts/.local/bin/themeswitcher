@@ -2,27 +2,29 @@
 
 # file names
 c_xresources="$XDG_CONFIG_HOME/x11/theme.Xresources"
-c_nvim="$XDG_CONFIG_HOME/nvim"
+c_nvim="$XDG_CONFIG_HOME/nvimrc.lua"
 c_zshrc="$ZDOTDIR/theme.zsh"
 c_tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
+c_qutebrowser="$XDG_CONFIG_HOME/qutebrowser/theme.py"
 
-themes="gruvbox-dark-hard
-default-dark
-ia-dark
-monokai
-ashes
-dracula
-gruvbox-light-soft
-nord
-oceanicnext
-onedark
-outrun-dark
-phd
-porple
-solarflare
-solarized-dark
-tomorrow-night
-twilight"
+themes="base16-gruvbox-dark-hard
+base16-default-dark
+base16-ia-dark
+base16-monokai
+base16-ashes
+base16-dracula
+base16-gruvbox-light-soft
+base16-nord
+base16-oceanicnext
+base16-onedark
+base16-outrun-dark
+base16-phd
+base16-porple
+base16-solarflare
+base16-solarized-dark
+base16-tomorrow-night
+base16-twilight
+catppuccin-mocha"
 
 theme_name="$(echo "$themes" | dmenu -r -l 30)"
 
@@ -31,27 +33,58 @@ if [ ! "$theme_name" ]; then
 fi
 
 update_xresources() {
-  sed -i "s/base16-[a-zA-Z0-9-]*.Xresources/base16-$theme_name.Xresources/g" "$c_xresources"
+  truncate -s 0 "$c_xresources"
+
+  echo "! vim: ft=xdefaults" >>"$c_xresources"
+  echo "" >>"$c_xresources"
+  echo "" >>"$c_xresources"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo "# include \"./catppuccin-xresources/themes/mocha.Xresources\"" >>"$c_xresources"
+  else
+    echo "# include \"./base16-xresources/xresources/$theme_name.Xresources\"" >>"$c_xresources"
+  fi
 
   xrdb -merge "$c_xresources"
 }
 
 update_tmux() {
-  sed -i "/@colors-base16/c\set -g @colors-base16 '$theme_name'" "$c_tmux"
+  truncate -s 0 "$c_tmux"
 
-  [ "$(pidof tmux)" ] && tmux source "$XDG_CONFIG_HOME/tmux/tmux.conf"
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo 'set -g @catppuccin_window_status_style "none"' >>"$c_tmux"
+    echo 'set -g @catppuccin_flavor "mocha"' >>"$c_tmux"
+    echo "run \$XDG_DATA_HOME/tmux/plugins/catppuccin/catppuccin.tmux" >>"$c_tmux"
+  else
+    echo "source-file \$XDG_DATA_HOME/tmux/plugins/tinted-tmux/colors/$theme_name.conf" >>"$c_tmux"
+    echo "set -g @colors-base16 '${theme_name#base16-}'" >>"$c_tmux"
+  fi
+
+  [ "$(pidof tmux)" ] &&
+    tmux source-file "$c_tmux_conf"
 }
 
 update_nvim() {
-  sed -i "s/base16-[a-zA-Z0-9-]*/base16-$theme_name/g" "$c_nvim/lua/ma/theme.lua"
+  sed -i "s/\(colorscheme \)[a-zA-Z0-9-]*/\1$theme_name/" "$c_nvim"
 
   nvr --serverlist |
     xargs -I{} nvr --remote --nostart -s --servername {} \
-      -c ":colorscheme base16-$theme_name"
+      -c "colorscheme $theme_name"
 }
 
 update_zsh() {
-  sed -i "s/base16-[a-zA-Z0-9-]*.config/base16-$theme_name.config/g" "$c_zshrc"
+  truncate -s 0 "$c_zshrc"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo 'export FZF_DEFAULT_OPTS=" \' >>"$c_zshrc"
+    echo '--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \' >>"$c_zshrc"
+    echo '--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \' >>"$c_zshrc"
+    echo '--color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \' >>"$c_zshrc"
+    echo '--color=selected-bg:#494d64 \' >>"$c_zshrc"
+    echo '--multi"' >>"$c_zshrc"
+  else
+    echo "source \"\$ZDOTDIR/base16-fzf/bash/$theme_name.config\"" >"$c_zshrc"
+  fi
 
   killall -u "$(whoami)" -s USR1 zsh
 }
@@ -61,6 +94,24 @@ update_st() {
 }
 
 update_qutebrowser() {
+  truncate -s 0 "$c_qutebrowser"
+
+  echo "from qutebrowser.config.configfiles import ConfigAPI" >>"$c_qutebrowser"
+  echo "from qutebrowser.config.config import ConfigContainer" >>"$c_qutebrowser"
+  echo "" >>"$c_qutebrowser"
+  echo "config: ConfigAPI = config  # type: ignore" >>"$c_qutebrowser"
+  echo "c: ConfigContainer = c  # type: ignore" >>"$c_qutebrowser"
+  echo "" >>"$c_qutebrowser"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo "import catppuccin" >>"$c_qutebrowser"
+    echo "" >>"$c_qutebrowser"
+    echo "config.load_autoconfig()" >>"$c_qutebrowser"
+    echo "catppuccin.setup(c, 'mocha', True)" >>"$c_qutebrowser"
+  else
+    echo "config.source('base16.py')" >>"$c_qutebrowser"
+  fi
+
   [ "$(pgrep -f qutebrowser)" ] && qutebrowser :config-source
 }
 
@@ -75,14 +126,13 @@ update_wallpaper() {
 
 main() {
   update_xresources
-
+  #
   update_dwm &
   update_qutebrowser &
   update_zsh &
   update_st &
   update_tmux &
   update_nvim &
-
   update_wallpaper &
 }
 
