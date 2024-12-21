@@ -6,6 +6,7 @@ c_nvim="$XDG_CONFIG_HOME/nvimrc.lua"
 c_zshrc="$ZDOTDIR/theme.zsh"
 c_tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
 c_qutebrowser="$XDG_CONFIG_HOME/qutebrowser/theme.py"
+c_delta="$XDG_CONFIG_HOME/git/delta-theme.gitconfig"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -65,7 +66,7 @@ update_tmux() {
 }
 
 update_nvim() {
-  sed -i "s/\(colorscheme \)[a-zA-Z0-9-]*/\1$theme_name/" "$c_nvim"
+  echo "vim.cmd[[silent! colorscheme ""$theme_name""]]" >>"$c_nvim"
 
   nvr --serverlist |
     xargs -I{} nvr --remote --nostart -s --servername {} \
@@ -82,8 +83,13 @@ update_zsh() {
     echo '--color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \' >>"$c_zshrc"
     echo '--color=selected-bg:#494d64 \' >>"$c_zshrc"
     echo '--multi"' >>"$c_zshrc"
+
+    echo '' >>"$c_zshrc"
+    echo 'export BAT_THEME="Catppuccin Mocha"' >>"$c_zshrc"
   else
     echo "source \"\$ZDOTDIR/base16-fzf/bash/$theme_name.config\"" >"$c_zshrc"
+    echo '' >>"$c_zshrc"
+    echo 'export BAT_THEME="base16"' >>"$c_zshrc"
   fi
 
   killall -u "$(whoami)" -s USR1 zsh
@@ -126,14 +132,37 @@ update_wallpaper() {
   find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg
 }
 
+update_dwm() {
+  dwm-msg run_command xrdb
+}
+
+update_delta() {
+  truncate -s 0 "$c_delta"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo "[include]" >>"$c_delta"
+    echo "  path = ./catppuccin-delta/catppuccin.gitconfig" >>"$c_delta"
+    echo "[delta]" >>"$c_delta"
+    echo "  features = catppuccin-mocha" >>"$c_delta"
+  else
+
+    echo "[delta]" >>"$c_delta"
+    echo "  syntax-theme = base16" >>"$c_delta"
+  fi
+
+}
+
 main() {
-  touch "$c_xresources" "$c_nvim" "$c_zshrc" "$c_tmux" "$c_qutebrowser"
+  touch \
+    "$c_xresources" "$c_nvim" "$c_zshrc" \
+    "$c_tmux" "$c_qutebrowser" "$c_delta"
 
   update_xresources
 
   update_dwm &
   update_qutebrowser &
   update_zsh &
+  update_delta &
   update_st &
   update_tmux &
   update_nvim &

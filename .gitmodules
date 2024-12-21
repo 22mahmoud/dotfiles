@@ -49,3 +49,9 @@
 [submodule "qutebrowser/.config/qutebrowser/catppuccin"]
 	path = qutebrowser/.config/qutebrowser/catppuccin
 	url = git@github.com:catppuccin/qutebrowser.git
+[submodule "bat/.local/src/catppuccin-bat"]
+	path = bat/.local/src/catppuccin-bat
+	url = git@github.com:catppuccin/bat.git
+[submodule "git/.config/git/catppuccin-delta"]
+	path = git/.config/git/catppuccin-delta
+	url = git@github.com:catppuccin/delta.git

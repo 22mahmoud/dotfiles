@@ -24,3 +24,6 @@ theme.conf
 
 # ncspot
 userstate.cbor
+
+# git
+delta-theme.gitconfig
