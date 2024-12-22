@@ -21,6 +21,7 @@ alias ip="ip -color=auto"
 alias wget='wget --hsts-file=$XDG_CACHE_HOME/wget-hsts'
 alias cpr='rsync -artzP -hh --partial --info=stats1,progress2 --modify-window=1'
 alias srv='python -m http.server -d'
+alias xrdb='xrdb -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing"'
 
 # apps
 alias v='nvim'
@@ -123,8 +124,7 @@ alias vp='volta pin'
 alias vu='volta uninstall'
 
 # tmux
-cat "$XDG_CONFIG_HOME/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/theme.conf" > /tmp/tmux_combined.conf
-alias t='tmux -f /tmp/tmux_combined.conf'
+alias t='tmux'
 alias ta='t a -t'
 alias tls='t ls'
 alias tn='t new -t'

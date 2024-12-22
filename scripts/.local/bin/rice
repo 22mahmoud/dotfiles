@@ -1,12 +1,13 @@
 #!/bin/sh
 
 # file names
-c_xresources="$XDG_CONFIG_HOME/x11/theme.Xresources"
-c_nvim="$XDG_CONFIG_HOME/nvimrc.lua"
-c_zshrc="$ZDOTDIR/theme.zsh"
-c_tmux="$XDG_CONFIG_HOME/tmux/theme.conf"
-c_qutebrowser="$XDG_CONFIG_HOME/qutebrowser/theme.py"
-c_delta="$XDG_CONFIG_HOME/git/delta-theme.gitconfig"
+C_RICINIG="$XDG_CONFIG_HOME/ricing"
+c_xresources="$C_RICINIG/theme.Xresources"
+c_nvim="$C_RICINIG/colorscheme.lua"
+c_zshrc="$C_RICINIG/theme.zsh"
+c_tmux="$C_RICINIG/theme-tmux.conf"
+c_qutebrowser="$C_RICINIG/theme-qutebrowser.py"
+c_delta="$C_RICINIG/delta-theme.gitconfig"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -28,10 +29,18 @@ base16-twilight
 base16-oxocarbon-dark
 catppuccin-mocha"
 
-theme_name="$(echo "$themes" | dmenu -r -l 30)"
-
-if [ ! "$theme_name" ]; then
-  exit
+if [ -n "$1" ]; then
+  if echo "$themes" | grep -q "^$1$"; then
+    theme_name="$1"
+  else
+    echo "Error: Theme '$1' not found in themes list"
+    exit 1
+  fi
+else
+  theme_name="$(echo "$themes" | dmenu -r -l 30)"
+  if [ ! "$theme_name" ]; then
+    exit
+  fi
 fi
 
 update_xresources() {
@@ -42,12 +51,14 @@ update_xresources() {
   echo "" >>"$c_xresources"
 
   if [ "$theme_name" == "catppuccin-mocha" ]; then
-    echo "# include \"./catppuccin-xresources/themes/mocha.Xresources\"" >>"$c_xresources"
+    echo "# include \"catppuccin-xresources/themes/mocha.Xresources\"" >>"$c_xresources"
   else
-    echo "# include \"./base16-xresources/xresources/$theme_name.Xresources\"" >>"$c_xresources"
+    echo "# include \"base16-xresources/xresources/$theme_name.Xresources\"" >>"$c_xresources"
   fi
 
-  xrdb -merge "$c_xresources"
+  xrdb \
+    -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" \
+    -merge "$c_xresources"
 }
 
 update_tmux() {
@@ -63,7 +74,7 @@ update_tmux() {
   fi
 
   [ "$(pidof tmux)" ] &&
-    tmux source-file "$c_tmux_conf"
+    tmux source-file "$XDG_CONFIG_HOME/tmux/tmux.conf"
 }
 
 update_nvim() {
@@ -118,7 +129,7 @@ update_qutebrowser() {
     echo "config.load_autoconfig()" >>"$c_qutebrowser"
     echo "catppuccin.setup(c, 'mocha', True)" >>"$c_qutebrowser"
   else
-    echo "config.source('base16.py')" >>"$c_qutebrowser"
+    echo "config.source('$XDG_CONFIG_HOME/qutebrowser/base16.py')" >>"$c_qutebrowser"
   fi
 
   echo 'c.colors.webpage.bg = "white"' >>"$c_qutebrowser"
@@ -131,7 +142,6 @@ update_dwm() {
 }
 
 update_wallpaper() {
-  setbg "$(find "$HOME/Pictures/wallpapers" | shuf -n 1)"
   find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg
 }
 
@@ -144,11 +154,10 @@ update_delta() {
 
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     echo "[include]" >>"$c_delta"
-    echo "  path = ./catppuccin-delta/catppuccin.gitconfig" >>"$c_delta"
+    echo "  path = $XDG_CONFIG_HOME/git/catppuccin-delta/catppuccin.gitconfig" >>"$c_delta"
     echo "[delta]" >>"$c_delta"
     echo "  features = catppuccin-mocha" >>"$c_delta"
   else
-
     echo "[delta]" >>"$c_delta"
     echo "  syntax-theme = base16" >>"$c_delta"
   fi
@@ -156,10 +165,6 @@ update_delta() {
 }
 
 main() {
-  touch \
-    "$c_xresources" "$c_nvim" "$c_zshrc" \
-    "$c_tmux" "$c_qutebrowser" "$c_delta"
-
   update_xresources
 
   update_dwm &

@@ -9,7 +9,7 @@ c: ConfigContainer = c  # type: ignore
 
 config.load_autoconfig(False)
 
-config.source("theme.py")
+config.source(os.path.expanduser("~/.config/ricing/theme-qutebrowser.py"))
 config.source("search_engines.py")
 config.source("binding.py")
 config.source("whitelist.py")

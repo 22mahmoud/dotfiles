@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # source xresources file
-xrdb -merge $XDG_CONFIG_HOME/x11/xresources
+xrdb \
+  -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" \
+  -merge "$XDG_CONFIG_HOME/x11/xresources"
 
 # hotkey daemon
 sxhkd &

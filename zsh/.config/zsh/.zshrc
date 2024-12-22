@@ -42,8 +42,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^v" edit-command-line
 
-# fzf config
-source "$ZDOTDIR/theme.zsh"
+# FZF config
+source "$XDG_CONFIG_HOME/ricing/theme.zsh"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match terminal "Xresources" background
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_CTRL_T_OPTS="
@@ -64,14 +64,8 @@ autoload -Uz prompt_setup
 prompt_setup
 
 # fzf support
-# arch
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-# ubuntu
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-# mac
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"

@@ -1,6 +1,6 @@
 ! vim: ft=xdefaults
 
-# include "./theme.Xresources"
+# include "theme.Xresources"
 
 *.alpha: 1
 *.alphaUnfocused: 1
