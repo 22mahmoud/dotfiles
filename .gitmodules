@@ -55,3 +55,9 @@
 [submodule "git/.config/git/catppuccin-delta"]
 	path = git/.config/git/catppuccin-delta
 	url = git@github.com:catppuccin/delta.git
+[submodule "lazygit/.local/src/base16-lazygit"]
+	path = lazygit/.local/src/base16-lazygit
+	url = https://git.sr.ht/~blueingreen/base16-lazygit
+[submodule "lazygit/.local/src/catppuccin-lazygit"]
+	path = lazygit/.local/src/catppuccin-lazygit
+	url = git@github.com:catppuccin/lazygit.git

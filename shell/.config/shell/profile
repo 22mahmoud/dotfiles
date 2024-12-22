@@ -102,7 +102,7 @@ export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 # nnn config
 export GUI=1
-export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"	
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"
 export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG="z:autojump;p:preview-tui;u:imgur;d:dragdrop"
@@ -118,6 +118,9 @@ export MANGOHUD_CONFIGFILE="$XDG_CONFIG_HOME/MangoHud/MangoHud.conf"
 
 # Wakatime
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
+
+# lazygit
+export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/ricing/lazygit-theme.yml"
 
 # other
 export PKG_CACHE_PATH="$XDG_DATA_HOME/pkg-cache"

@@ -8,6 +8,7 @@ c_zshrc="$C_RICINIG/theme.zsh"
 c_tmux="$C_RICINIG/theme-tmux.conf"
 c_qutebrowser="$C_RICINIG/theme-qutebrowser.py"
 c_delta="$C_RICINIG/delta-theme.gitconfig"
+c_lazygit="$C_RICINIG/lazygit-theme.yml"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -149,6 +150,14 @@ update_dwm() {
   dwm-msg run_command xrdb
 }
 
+update_lazygit() {
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    cp "$HOME/.local/src/catppuccin-lazygit/themes-mergable/mocha/teal.yml" "$c_lazygit"
+  else
+    cp "$HOME/.local/src/base16-lazygit/colors/$theme_name.yml" "$c_lazygit"
+  fi
+}
+
 update_delta() {
   truncate -s 0 "$c_delta"
 
@@ -174,6 +183,7 @@ main() {
   update_st &
   update_tmux &
   update_nvim &
+  update_lazygit &
   update_wallpaper &
 }
 

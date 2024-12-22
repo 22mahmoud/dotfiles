@@ -1,6 +1,6 @@
 packages := desktop scripts fontconfig bat dunst git gnupg isync isync lynx \
 						mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
-						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser
+						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser lazygit
 
 all: submodule patch stow theming
 
@@ -22,6 +22,13 @@ restow:
 	done
 
 theming:
+	touch "$$XDG_CONFIG_HOME/ricing/theme.Xresources"
+	touch "$$XDG_CONFIG_HOME/ricing/colorscheme.lua"
+	touch "$$XDG_CONFIG_HOME/ricing/theme.zsh"
+	touch "$$XDG_CONFIG_HOME/ricing/theme-tmux.conf"
+	touch "$$XDG_CONFIG_HOME/ricing/theme-qutebrowser.py"
+	touch "$$XDG_CONFIG_HOME/ricing/delta-theme.gitcofig"
+	touch "$$XDG_CONFIG_HOME/ricing/lazygit-theme.yml"
 
 gruvbox:
 	scripts/.local/bin/rice base16-gruvbox-dark-hard
