@@ -2,7 +2,7 @@ packages := desktop scripts fontconfig bat dunst git gnupg isync isync lynx \
 						mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
 						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser
 
-all: submodule stow theming gruvbox
+all: submodule patch stow theming
 
 submodule:
 	git submodule init
@@ -26,5 +26,11 @@ theming:
 gruvbox:
 	scripts/.local/bin/rice base16-gruvbox-dark-hard
 
+patch:
+	@if patch -p1 --forward --dry-run < patches/readability-js.patch >/dev/null 2>&1; then \
+		patch -p1 --forward < patches/readability-js.patch; \
+	else \
+		echo "Patch already applied or cannot be applied"; \
+	fi
 
-.PHONY: all submodule update stow theming gruvbox restow
+.PHONY: all submodule update stow theming gruvbox restow patch
