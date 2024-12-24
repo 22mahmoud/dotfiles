@@ -61,3 +61,9 @@
 [submodule "lazygit/.local/src/catppuccin-lazygit"]
 	path = lazygit/.local/src/catppuccin-lazygit
 	url = git@github.com:catppuccin/lazygit.git
+[submodule "zathura/.local/src/base16-zathura"]
+	path = zathura/.local/src/base16-zathura
+	url = git@github.com:HaoZeke/base16-zathura.git
+[submodule "zathura/.local/src/catppuccin-zathura"]
+	path = zathura/.local/src/catppuccin-zathura
+	url = git@github.com:catppuccin/zathura.git

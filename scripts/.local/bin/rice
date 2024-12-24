@@ -9,6 +9,7 @@ c_tmux="$C_RICINIG/theme-tmux.conf"
 c_qutebrowser="$C_RICINIG/theme-qutebrowser.py"
 c_delta="$C_RICINIG/delta-theme.gitconfig"
 c_lazygit="$C_RICINIG/lazygit-theme.yml"
+c_zathura="$C_RICINIG/zathura-theme"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -158,6 +159,15 @@ update_lazygit() {
   fi
 }
 
+update_zathura() {
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    cp "$HOME/.local/src/catppuccin-zathura/src/catppuccin-mocha" "$c_zathura"
+  else
+    cp "$HOME/.local/src/base16-zathura/build_schemes/recolors/$theme_name.config" "$c_zathura"
+  fi
+}
+
+
 update_delta() {
   truncate -s 0 "$c_delta"
 
@@ -184,6 +194,7 @@ main() {
   update_tmux &
   update_nvim &
   update_lazygit &
+  update_zathura &
   update_wallpaper &
 }
 

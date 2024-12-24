@@ -1,12 +1,15 @@
 # vim: syntax=config
 
+set recolor "true"
+include zathura-theme
+
 set selection-clipboard clipboard
 set window-title-basename true
 set window-title-page true
 set statusbar-home-tilde true
 set page-padding 1
 
-set font "monospace normal 9"
+set font "monospace normal 11"
 set render-loading false
 set adjust-open "best-fit"
 
@@ -24,39 +27,3 @@ set scroll-full-overlap 0.01
 set scroll-step 50
 set incremental-search true
 set guioptions ""
-
-# Base16 Gruvbox dark, hard
-# Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
-
-set default-bg                  "#1d2021"
-set default-fg                  "#3c3836"
-
-set statusbar-fg                "#bdae93"
-set statusbar-bg                "#504945"
-
-set inputbar-bg                 "#1d2021"
-set inputbar-fg                 "#fbf1c7"
-
-set notification-bg             "#1d2021"
-set notification-fg             "#fbf1c7"
-
-set notification-error-bg       "#1d2021"
-set notification-error-fg       "#fb4934"
-
-set notification-warning-bg     "#1d2021"
-set notification-warning-fg     "#fb4934"
-
-# set highlight-color             "#fabd2f"
-set highlight-active-color      "#83a598"
-
-set completion-bg               "#3c3836"
-set completion-fg               "#83a598"
-
-set completion-highlight-fg     "#fbf1c7"
-set completion-highlight-bg     "#83a598"
-
-set recolor-lightcolor          "#1d2021"
-set recolor-darkcolor           "#ebdbb2"
-
-set recolor                     "false"
-set recolor-keephue             "false"

@@ -29,6 +29,7 @@ theming:
 	touch "$$XDG_CONFIG_HOME/ricing/theme-qutebrowser.py"
 	touch "$$XDG_CONFIG_HOME/ricing/delta-theme.gitcofig"
 	touch "$$XDG_CONFIG_HOME/ricing/lazygit-theme.yml"
+	touch "$$XDG_CONFIG_HOME/ricing/zathura-theme"
 
 gruvbox:
 	scripts/.local/bin/rice base16-gruvbox-dark-hard
