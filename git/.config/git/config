@@ -7,7 +7,7 @@
 [filter "ageencrypt"]
   clean = age -r age1mupc0qg3uqlcm5zz4twuk7nwf5s3kfj5wmkmdjyswjnfenhme3sscnkzw3 -
   smudge = /bin/sh -c 'age -d -i <(pass age)'
-  required = false
+  required = true
 [commit]
   gpgsign = true
   verbose = true

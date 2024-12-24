@@ -61,6 +61,3 @@
 [submodule "lazygit/.local/src/catppuccin-lazygit"]
 	path = lazygit/.local/src/catppuccin-lazygit
 	url = git@github.com:catppuccin/lazygit.git
-[submodule "tmux/.local/share/tmux/plugins/tmux-open-nvim"]
-	path = tmux/.local/share/tmux/plugins/tmux-open-nvim
-	url = git@github.com:trevarj/tmux-open-nvim.git
