@@ -1,7 +1,7 @@
 # vim: syntax=config
 
 set recolor "true"
-include zathura-theme
+include /home/ashraf/.config/ricing/zathura-theme
 
 set selection-clipboard clipboard
 set window-title-basename true
