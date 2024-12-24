@@ -1,11 +1,5 @@
-# source plugins
 fpath=($ZDOTDIR/plugins $fpath)
 fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
-source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
-source "$ZDOTDIR/plugins/cursor_mode"
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
 
@@ -59,9 +53,16 @@ export FZF_COMPLETION_TRIGGER='~~'
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
+# zoxide - fast navigation
+eval "$(zoxide init zsh)"
+
+# source plugins
+source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
+source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
+source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/plugins/cursor_mode"
+
 # prompt
 autoload -Uz prompt_setup
 prompt_setup
-
-# zoxide - fast navigation
-eval "$(zoxide init zsh)"
