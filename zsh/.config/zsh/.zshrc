@@ -5,6 +5,7 @@ source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
+source "$ZDOTDIR/plugins/cursor_mode"
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
 
@@ -38,15 +39,10 @@ eval "$(dircolors -b $XDG_CONFIG_HOME/shell/dircolors)"
 source "$XDG_CONFIG_HOME/shell/aliasrc"
 source "$XDG_CONFIG_HOME/shell/functions"
 
-# vim
-bindkey -v
-autoload -Uz cursor_mode
-cursor_mode
-
-# Editor mode (keystroke: 'v' in normal mode)
+# Editor mode (keystroke: '^e' in normal mode)
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd "^v" edit-command-line
+bindkey -M vicmd "^e" edit-command-line
 
 # FZF config
 source "$XDG_CONFIG_HOME/ricing/theme.zsh"
@@ -58,6 +54,10 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export FZF_CTRL_T_COMMAND="fd"
 export FZF_COMPLETION_TRIGGER='~~'
+
+# fzf support
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 # prompt
 autoload -Uz prompt_setup
