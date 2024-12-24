@@ -1,91 +1,121 @@
 #!/bin/zsh
 
+typeset -gA GITSTATUS_SYMBOLS=(
+  [ahead]='⇡'
+  [behind]='⇣'
+  [push_ahead]='⇢'
+  [push_behind]='⇠'
+  [stash]='*'
+  [staged]='+'
+  [unstaged]='!'
+  [untracked_files]='?'
+  [merge_conflict]='~'
+  [separator]=' '
+)
+
+typeset -gA GITSTATUS_COLORS=(
+  [path]='%F{blue}'
+  [prompt_success]='%F{green}'
+  [prompt_error]='%F{red}'
+  [branch]='%F{magenta}'
+  [clean]='%F{green}'
+  [modified]='%F{yellow}'
+  [untracked]='%F{blue}'
+  [conflicted]='%F{red}'
+  [stash]='%F{cyan}'
+)
+
+# Configuration
+typeset -gi GITSTATUS_MAX_BRANCH_LENGTH=32
+
+# git_status_fromat
+function gsf() {
+  local symbol="$1"
+  local count="$2"
+  local color="$3"
+  [[ $count -gt 0 ]] && echo "${GITSTATUS_SYMBOLS[separator]}${GITSTATUS_COLORS[$color]}${GITSTATUS_SYMBOLS[$symbol]}${count}"
+}
+
+# git_status_fromat_branch
+function gs_fb() {
+  local branch=" $1"
+  if (( $#branch > GITSTATUS_MAX_BRANCH_LENGTH )); then
+    local half_length=$(( (GITSTATUS_MAX_BRANCH_LENGTH - 1) / 2 ))
+    echo "${branch[1,$half_length]}…${branch[-$half_length,-1]}"
+  else
+    echo "$branch"
+  fi
+}
+
+# Update Git status prompt
 function gitstatus_prompt_update() {
   emulate -L zsh
   typeset -g  GITSTATUS_PROMPT=''
   typeset -gi GITSTATUS_PROMPT_LEN=0
 
-  # Call gitstatus_query synchronously. Note that gitstatus_query can also be called
-  # asynchronously; see documentation in gitstatus.plugin.zsh.
-  gitstatus_query 'MY'                  || return 1  # error
-  [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return 0  # not a git repo
+  # Query git status
+  gitstatus_query 'MY' || return 1
+  [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return 0
 
-  local      clean='%F{green}'   # green foreground
-  local   modified='%F{yellow}'  # yellow foreground
-  local  untracked='%F{blue}'   # blue foreground
-  local conflicted='%F{red}'  # red foreground
-  local branch='%F{magenta}'
+  local p=" on ${GITSTATUS_COLORS[branch]}"
 
-  local p=" on ${branch} "
-
-  local where  # branch name, tag or commit
+  # Determine branch/tag/commit
   if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-    where=$VCS_STATUS_LOCAL_BRANCH
+    p+="$(gs_fb "${VCS_STATUS_LOCAL_BRANCH}")"
   elif [[ -n $VCS_STATUS_TAG ]]; then
-    p+='#'
-    where=$VCS_STATUS_TAG
+    p+="#$(gs_fb "${VCS_STATUS_TAG}")"
   else
-    p+='@'
-    where=${VCS_STATUS_COMMIT[1,8]}
+    p+=" @${VCS_STATUS_COMMIT[1,8]}"
   fi
 
-  (( $#where > 32 )) && where[13,-13]="…"  # truncate long branch names and tags
-  p+="${branch}${where//\%/%%}"             # escape %
+  # Remote status
+  if (( VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_COMMITS_AHEAD )); then
+    p+="${GITSTATUS_SYMBOLS[separator]}"
+    (( VCS_STATUS_COMMITS_BEHIND )) && p+=$(gsf behind "$VCS_STATUS_COMMITS_BEHIND" clean)
+    (( VCS_STATUS_COMMITS_AHEAD )) && p+=$(gsf ahead "$VCS_STATUS_COMMITS_AHEAD" clean)
+  fi
 
-  # ⇣42 if behind the remote.
-  (( VCS_STATUS_COMMITS_BEHIND )) && p+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
-  # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-  (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && p+=" "
-  (( VCS_STATUS_COMMITS_AHEAD  )) && p+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
-  # ⇠42 if behind the push remote.
-  (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
-  (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" "
-  # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
-  (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && p+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
-  # *42 if have stashes.
-  (( VCS_STATUS_STASHES        )) && p+=" ${clean}*${VCS_STATUS_STASHES}"
-  # 'merge' if the repo is in an unusual state.
-  [[ -n $VCS_STATUS_ACTION     ]] && p+=" ${conflicted}${VCS_STATUS_ACTION}"
-  # ~42 if have merge conflicts.
-  (( VCS_STATUS_NUM_CONFLICTED )) && p+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
-  # +42 if have staged changes.
-  (( VCS_STATUS_NUM_STAGED     )) && p+=" ${clean}+${VCS_STATUS_NUM_STAGED}"
-  # !42 if have unstaged changes.
-  (( VCS_STATUS_NUM_UNSTAGED   )) && p+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
-  # ?42 if have untracked files. It's really a question mark, your font isn't broken.
-  (( VCS_STATUS_NUM_UNTRACKED  )) && p+=" ${untracked}?${VCS_STATUS_NUM_UNTRACKED}"
+  # Push remote status
+  if (( VCS_STATUS_PUSH_COMMITS_BEHIND || VCS_STATUS_PUSH_COMMITS_AHEAD )); then
+    p+="${GITSTATUS_SYMBOLS[separator]}"
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=$(gsf push_behind "$VCS_STATUS_PUSH_COMMITS_BEHIND" clean)
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD )) && p+=$(gsf push_ahead "$VCS_STATUS_PUSH_COMMITS_AHEAD" clean)
+  fi
+
+  # Repository status
+  (( VCS_STATUS_STASHES )) && p+=$(gsf stash "$VCS_STATUS_STASHES" stash)
+  [[ -n $VCS_STATUS_ACTION ]] && p+="${GITSTATUS_SYMBOLS[separator]}${GITSTATUS_COLORS[conflicted]}${VCS_STATUS_ACTION}"
+  (( VCS_STATUS_NUM_CONFLICTED )) && p+=$(gsf merge_conflict "$VCS_STATUS_NUM_CONFLICTED" conflicted)
+  (( VCS_STATUS_NUM_STAGED )) && p+=$(gsf staged "$VCS_STATUS_NUM_STAGED" clean)
+  (( VCS_STATUS_NUM_UNSTAGED )) && p+=$(gsf unstaged "$VCS_STATUS_NUM_UNSTAGED" modified)
+  (( VCS_STATUS_NUM_UNTRACKED )) && p+=$(gsf untracked_files "$VCS_STATUS_NUM_UNTRACKED" untracked)
 
   GITSTATUS_PROMPT="${p}%f"
-
-  # The length of GITSTATUS_PROMPT after removing %f and %F.
   GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/x}//\%(f|<->F)}}"
 }
 
-# Start gitstatusd instance with name "MY". The same name is passed to
-# gitstatus_query in gitstatus_prompt_update. The flags with -1 as values
-# enable staged, unstaged, conflicted and untracked counters.
-gitstatus_stop 'MY' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY'
-
-# On every prompt, fetch git status and set GITSTATUS_PROMPT.
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd gitstatus_prompt_update
-
-# Enable/disable the right prompt options.
-setopt no_prompt_bang prompt_percent prompt_subst
-
-
-prompt_setup() {
+# Setup prompt
+function prompt_setup() {
   setopt prompt_subst
-
   typeset -g prompt_newline=$'\n%{\r%}'
 
+  # Initialize gitstatus
+  gitstatus_stop 'MY' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY'
+
+  # Set up hooks
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd gitstatus_prompt_update
+
+  # Configure prompt options
+  setopt no_prompt_bang prompt_percent prompt_subst
+
+  # Build prompt
   PROMPT=""
   PROMPT+='${prompt_newline}'
-  PROMPT+='%F{blue}%B%1~%b%f'
+  PROMPT+='${GITSTATUS_COLORS[path]}%B%1~%b%f'
   PROMPT+='$GITSTATUS_PROMPT'
-  PROMPT+='${prompt_newline}%(?.%F{green}.%F{red})%B%b%f '
+  PROMPT+='${prompt_newline}%(?.${GITSTATUS_COLORS[prompt_success]}.${GITSTATUS_COLORS[prompt_error]})%B%b%f '
 }
 
+# Initialize the prompt
 prompt_setup
-
-# vim: ft=zsh

@@ -1,5 +1,3 @@
-fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
-
 # enable completion
 autoload -Uz zcompinit; zcompinit
 

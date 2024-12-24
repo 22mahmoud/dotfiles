@@ -144,6 +144,10 @@ export FILE_MANAGER='thunar'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
+# fzf support
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
 # Fix for Java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 

@@ -1,4 +1,10 @@
+# source plugins
 fpath=($ZDOTDIR/plugins $fpath)
+fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
+source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
+source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
 
@@ -44,7 +50,7 @@ bindkey -M vicmd "^v" edit-command-line
 
 # FZF config
 source "$XDG_CONFIG_HOME/ricing/theme.zsh"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1" # background match terminal "Xresources" background
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
@@ -53,21 +59,9 @@ export FZF_CTRL_T_OPTS="
 export FZF_CTRL_T_COMMAND="fd"
 export FZF_COMPLETION_TRIGGER='~~'
 
-# source plugins
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
-source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
-
 # prompt
 autoload -Uz prompt_setup
 prompt_setup
 
-# fzf support
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"
-
-# colorscript -r | tail -n +2
