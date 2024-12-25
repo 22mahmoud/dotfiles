@@ -30,14 +30,14 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-color background white default
-color info cyan default 
-color listnormal white default 
-color listfocus blue default 
-color listnormal_unread cyan default
-color listfocus_unread black cyan
-
 text-width 80
+
+color background white default
+color info blue default
+color listnormal white default
+color listfocus blue default bold
+color listnormal_unread cyan default
+color listfocus_unread black cyan bold
 
 highlight all "⚜️.*─+$" yellow
 highlight feedlist ".*(0/0))" black
@@ -51,7 +51,6 @@ highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
 highlight article ":.*\\(link\\)$" cyan default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
-
 
 browser linkhandler
 macro , open-in-browser
