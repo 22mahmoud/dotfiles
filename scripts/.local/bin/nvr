@@ -1,0 +1,183 @@
+#!/bin/bash
+# vim: ft=bash
+
+shopt -s globstar
+
+bin=$(basename "${0}")
+c_servers=
+c_is_tmux=
+
+usage() {
+  cat <<EOF
+Usage: ${bin} [OPTIONS]
+
+A utility script to manage Neovim instances, including socket handling,
+sending commands, and editing files.
+It supports integration with tmux for working with Neovim in tmux panes.
+
+Options:
+    -h              Show this help message and exit
+    -l              List all currently open Neovim sockets
+                    located in \$XDG_RUNTIME_DIR
+    -c <command>    Send the specified Neovim command to the
+                    target servers or panes
+    -s <servers>    Specify target Neovim server socket paths (space-separated)
+    -e <files>      Open the specified files in the target servers or
+                    panes (format: <file>:<line>:<col>)
+    -t              Enable tmux integration. If set, commands will be sent to
+                    the tmux pane containing Neovim
+EOF
+  exit 1
+}
+
+servers() {
+  ls "${XDG_RUNTIME_DIR}"/**/nvim.*.0 2>/dev/null
+}
+
+cmd() {
+  : "${c_servers:=$(servers)}"
+
+  echo "$c_servers" |
+    xargs -I{} nvim --server {} --remote-send "$1" &>/dev/null
+}
+
+edit() {
+  : "${c_servers:=$(servers)}"
+
+  local file line col
+  IFS=':' read -r file line col <<<"$1"
+
+  echo "$c_servers" | xargs -I{} \
+    nvim --server {} \
+    --remote-send \
+    ":e ${file} | :call cursor(${line:-1}, ${col:-1})<cr>" \
+    &>/dev/null
+}
+
+get_pane_pid() {
+  local socket
+  socket=$(echo "${1}" | awk -F . '{print $2}')
+  ps -o ppid= -p "$socket" | xargs ps -o ppid= | tr -d ' '
+}
+
+get_socket_path() {
+  local socket
+  local pane_pid="$1"
+  socket_pid=$(ps -o pid= --ppid "$pane_pid" | xargs ps -o pid= --ppid | tr -d ' ')
+  echo "$XDG_RUNTIME_DIR/nvim.$socket_pid.0"
+}
+
+get_nvim_panes() {
+  local filter_by=""
+
+  for server in $(servers); do
+    local pane_pid
+    pane_pid=$(get_pane_pid "$server")
+
+    if [ -z "$filter_by" ]; then
+      filter_by="#{==:#{pane_pid},$pane_pid}"
+    else
+      filter_by="#{||:$filter_by,#{==:#{pane_pid},$pane_pid}}"
+    fi
+  done
+
+  tmux list-panes -s -f "$filter_by" \
+    -F "#{window_index} #{window_name} #{pane_index} #{pane_pid}"
+}
+
+switch_pane() {
+  local win_idx="$1"
+  local pane_idx="$2"
+
+  tmux selectw -t "${win_idx}" && tmux selectp -t "${pane_idx}"
+}
+
+select_and_action() {
+  local action="${2} \"${1}\""
+  local panes
+
+  panes=$(get_nvim_panes)
+
+  case $(echo "$panes" | wc -l) in
+  0)
+    echo "No panes found."
+    ;;
+  1)
+    IFS=' ' read -r win_idx win_name pane_idx pane_pid <<<"$panes"
+
+    c_servers=$(get_socket_path "$pane_pid")
+    eval "${action}"
+    switch_pane "${win_idx}" "${pane_idx}"
+    ;;
+  *)
+    local menu_args=()
+    local socket_idx=1
+    local fifo_file
+
+    fifo_file=$(mktemp -u)
+    mkfifo "$fifo_file"
+
+    while read -r win_idx win_name pane_idx pane_pid; do
+      menu_args+=(
+        "[${win_idx} ${win_name}]: pane ${pane_idx}"
+        "$socket_idx"
+        "run 'echo \"${win_idx} ${win_name} ${pane_idx} ${pane_pid}\" > ${fifo_file}'"
+      )
+
+      socket_idx=$((socket_idx + 1))
+    done <<<"$panes"
+
+    tmux display-menu -T "#[fg=green]Edit on nvim" "${menu_args[@]}"
+
+    # TODO: fix when menu closed with no selection
+    read -r win_idx win_name pane_idx pane_pid <"$fifo_file"
+    rm "${fifo_file}"
+
+    c_servers=$(get_socket_path "${pane_pid}")
+    eval "${action}"
+    switch_pane "${win_idx}" "${pane_idx}"
+    ;;
+  esac
+}
+
+main() {
+  while getopts ':hte:c:s:l' opt; do
+    case "${opt}" in
+    h) usage ;;
+    l) servers ;;
+    t) c_is_tmux=true ;;
+    c)
+      if [[ "$c_is_tmux" = true ]]; then
+        select_and_action "$OPTARG" "cmd"
+      else
+        cmd "$OPTARG"
+      fi
+      ;;
+    e)
+      if [[ "$c_is_tmux" = true ]]; then
+        select_and_action "$OPTARG" "edit"
+      else
+        edit "$OPTARG"
+      fi
+      ;;
+    s) c_servers=$(echo "${OPTARG}" | tr '[:space:]' '\n') ;;
+    :)
+      echo "Option -${OPTARG} requires an argument."
+      echo ""
+      usage
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      echo ""
+      usage
+      ;;
+    *) exit 0 ;;
+    esac
+  done
+}
+
+if [[ "${#@}" -eq 0 ]]; then
+  usage
+fi
+
+main "$@"

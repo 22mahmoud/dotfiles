@@ -5,7 +5,7 @@ usage() {
     printf '%s\n' "$line"
   done <<-EOF
 
-  volume [ -i | -d | -t | -h ] 
+  volume [ -i | -d | -t | -h ]
     control volume with notifcations
 
   -h|help     show this help

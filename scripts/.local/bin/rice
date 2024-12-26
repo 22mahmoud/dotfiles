@@ -84,9 +84,7 @@ update_nvim() {
 
   echo "vim.cmd[[silent! colorscheme ""$theme_name""]]" >>"$c_nvim"
 
-  nvr --serverlist |
-    xargs -I{} nvr --remote --nostart -s --servername {} \
-      -c "colorscheme $theme_name"
+  nvr -c ":silent! colorscheme $theme_name<cr>"
 }
 
 update_zsh() {
@@ -166,7 +164,6 @@ update_zathura() {
     cp "$HOME/.local/src/base16-zathura/build_schemes/recolors/$theme_name.config" "$c_zathura"
   fi
 }
-
 
 update_delta() {
   truncate -s 0 "$c_delta"
