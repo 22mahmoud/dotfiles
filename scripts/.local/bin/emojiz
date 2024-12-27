@@ -7,13 +7,14 @@ usage() {
     printf '%s\n' "$line"
   done <<-EOF
 
-  emojiz [ -h | -l | -d | -u ] 
+  emojiz [ -h | -l | -d | -u ]
     list and update emojis w/ dmenu
 
   -h    show this help
   -l    list all emojis
   -u    update all emojis
   -d    use dmenu
+  -f    use fzf-menu
 EOF
 }
 
@@ -46,13 +47,29 @@ _dmenu() {
   }
 }
 
+_fzf() {
+  active_window=$(xdotool getactivewindow)
+  selected=$(fzf-menu <"$c_emojis_file")
+
+  if [ -z "$selected" ]; then
+    exit 0
+  fi
+
+  emoji="$(echo "$selected" | awk '{print $1}' | tr -d '\n')"
+
+  xdotool type --delay 55 --window "$active_window" "$emoji"
+
+  echo "$emoji" | xclip -selection clipboard
+}
+
 main() {
   case "$1" in
   -h) usage ;;
   -l) list ;;
   -u) update ;;
   -d) _dmenu ;;
-  *) exit 0 ;;
+  -f) _fzf ;;
+  *) _fzf ;;
   esac
 }
 

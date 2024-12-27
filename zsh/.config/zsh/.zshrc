@@ -41,6 +41,7 @@ bindkey -M vicmd "^e" edit-command-line
 # FZF config
 source "$XDG_CONFIG_HOME/ricing/theme.zsh"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1"
+export FZF_TMUX_OPTS="-p"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target

@@ -2,7 +2,7 @@ super + Return
   $TERMINAL
 
 super + d
-  dmenu_run
+  dmenu_path | ~/.local/bin/fzf-menu | bash
 
 XF86Search
   dmenu_run
@@ -17,7 +17,7 @@ super + shift + b
   $BROWSER --target private-window
 
 super + e
-  emojiz -d
+  emojiz -f
 
 super + m
   $TERMINAL -T neomuttTerm -e bicon eg neomutt
