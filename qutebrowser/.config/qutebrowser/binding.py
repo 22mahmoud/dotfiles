@@ -7,16 +7,13 @@ config: ConfigAPI = config  # type: ignore
 config.bind("V", "spawn mpx -a {url}")
 config.bind(",v", "hint links spawn mpx -a {hint-url}")
 
-qute_bitwarden = (
-    "spawn --userscript qute-bitwarden "
-    "-p \"dmenu -p 'Master Password' -P\" "
-    '-d "dmenu -i -p Bitwarden -l 5" '
-    "--auto-lock 60480000 -t"
+qute_rbw = (
+    "spawn --userscript qute-rbw "
 )
-config.bind(",pl", qute_bitwarden)
-config.bind(",pu", f"{qute_bitwarden} --username-only")
-config.bind(",pp", f"{qute_bitwarden} --password-only")
-config.bind(",po", f"{qute_bitwarden} --totp-only")
+config.bind(",pl", qute_rbw)
+config.bind(",pu", f"{qute_rbw} --username-only")
+config.bind(",pp", f"{qute_rbw} --password-only")
+config.bind(",po", f"{qute_rbw} --totp-only")
 
 config.bind(",r", "hint links userscript readability-js")
 config.bind(",R", "spawn --userscript readability-js")

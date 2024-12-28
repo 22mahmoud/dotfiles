@@ -59,7 +59,7 @@ _fzf() {
 
   xdotool type --delay 55 --window "$active_window" "$emoji"
 
-  echo "$emoji" | xclip -selection clipboard
+  echo "$emoji" | tr -d '\n' | xclip -selection clipboard
 }
 
 main() {

@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+
+"""
+qute-rbw: A qutebrowser userscript for Bitwarden password manager integration.
+
+This script allows you to automatically fill login credentials from your Bitwarden vault
+into web forms using qutebrowser. It uses fzf-rbw as a backend for Bitwarden CLI
+interaction and supports username, password, and TOTP code insertion.
+"""
+
+USAGE = """
+Usage Examples:
+    - Fill both username and password:
+        spawn --userscript qute-rbw
+
+    - Fill only username:
+        spawn --userscript qute-rbw --username-only
+
+    - Fill only password:
+        spawn --userscript qute-rbw --password-only
+
+    - Copy TOTP code:
+        spawn --userscript qute-rbw --totp-only
+
+Requirements:
+    1. rbw CLI must be installed and logged in (run 'rbw login' first)
+    2. fzf-rbw must be installed and configured
+
+Notes:
+    - The script uses qutebrowser's fake-key command to simulate keyboard input
+    - Login form compatibility is achieved using the [USERNAME]<Tab>[PASSWORD] sequence
+    - Domain matching is done using the tldextract library for reliable results
+"""
+
+EPILOG = """
+Dependencies:
+    - tldextract (Python 3 module)
+    - fzf-rbw (Bitwarden CLI wrapper)
+    - rbw CLI
+
+Security Note:
+    Login details may appear in plaintext in qutebrowser's debug log (qute://log)
+    and crash reports. Use with caution when sharing debug information.
+"""
+
+import argparse
+import enum
+import functools
+import os
+import subprocess
+import sys
+import tldextract
+from typing import Union
+
+argument_parser = argparse.ArgumentParser(
+    description=__doc__,
+    usage=USAGE,
+    epilog=EPILOG,
+)
+argument_parser.add_argument("url", nargs="?", default=os.getenv("QUTE_URL"))
+group = argument_parser.add_mutually_exclusive_group()
+group.add_argument(
+    "--username-only", "-e", action="store_true", help="Only insert username"
+)
+group.add_argument(
+    "--password-only", "-w", action="store_true", help="Only insert password"
+)
+group.add_argument(
+    "--totp-only", "-T", action="store_true", help="Only insert totp code"
+)
+
+stderr = functools.partial(print, file=sys.stderr)
+
+
+class ExitCodes(enum.IntEnum):
+    SUCCESS = 0
+    FAILURE = 1
+
+
+def qute_command(command):
+    with open(os.environ["QUTE_FIFO"], "w") as fifo:
+        fifo.write(command + "\n")
+        fifo.flush()
+
+
+def fake_key_raw(text):
+    for character in text:
+        # Escape all characters by default, space requires special handling
+        sequence = '" "' if character == " " else r"\{}".format(character)
+        qute_command("fake-key {}".format(sequence))
+
+
+def fzfrbw(domain: str, action: str) -> Union[str, ExitCodes]:
+    try:
+        process = subprocess.run(
+            ["fzf-rbw", "-r", "-q", domain, "-a", action],
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+
+    except subprocess.CalledProcessError as e:
+        stderr(f"FZF-RBW CLI failed for {domain}: {e}")
+        return ExitCodes.FAILURE
+
+    if process.stderr:
+        stderr(f"FZF-RBW CLI returned for {domain} - {process.stderr.strip()}")
+        return ExitCodes.FAILURE
+
+    return process.stdout.strip()
+
+
+def main(arguments):
+    if not arguments.url:
+        argument_parser.print_help()
+        return ExitCodes.FAILURE
+
+    extract_result = tldextract.extract(arguments.url)
+
+    action = "login"
+    if arguments.username_only:
+        action = "user"
+    elif arguments.password_only:
+        action = "pass"
+    elif arguments.totp_only:
+        action = "otp"
+
+    result = fzfrbw(extract_result.fqdn, action)
+
+    if isinstance(result, ExitCodes):
+        return result
+
+    result = result.splitlines()
+
+    if not len(result):
+        return ExitCodes.SUCCESS
+
+    if arguments.username_only or arguments.password_only or arguments.totp_only:
+        fake_key_raw(result[0])
+    else:
+        import pyperclip
+
+        fake_key_raw(result[0])
+        qute_command("fake-key <Tab>")
+        fake_key_raw(result[1])
+
+        pyperclip.copy(result[2])
+
+    qute_command("mode-enter insert")
+
+    return ExitCodes.SUCCESS
+
+
+if __name__ == "__main__":
+    arguments = argument_parser.parse_args()
+    sys.exit(main(arguments))

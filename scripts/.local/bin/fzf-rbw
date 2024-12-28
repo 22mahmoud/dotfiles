@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+set -eu
+set -o pipefail
+
+c_is_raw=
+c_query=
+c_action=pass
+selection=
+fzf_rbw_args="$(mktemp -u)"
+
+trap 'rm -f "${fzf_rbw_args}"' EXIT
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Description:
+  This script provides an interactive interface to the Bitwarden CLI (rbw) using fzf.
+  You can select an entry from your vault and copy the desired information to the clipboard.
+
+Options:
+  -r            Output raw credentials (no clipboard interaction).
+  -h            Display this help message and exit.
+  -q <TERM>     A predefined query to filter out the search result
+  -a <ACTION>   The default action for "Enter",
+                available options are pass, user, login, otp [default: pass]
+
+Key Bindings (fzf):
+  Ctrl-X   Copy the password to the clipboard.
+  Ctrl-L   Copy the login credentials (username + password + OTP) to the clipboard.
+  Ctrl-U   Copy the username to the clipboard.
+  Ctrl-O   Copy the OTP to the clipboard.
+EOF
+  exit 1
+}
+
+notify() {
+  notify-send -t 2500 -u low \
+    -h string:x-canonical-private-synchronous:"fzf-rbw" \
+    "🔑 password manager" "$1"
+}
+
+clipboard() {
+  echo "$1" | tr -d '\n' | xclip -selection clipboard
+  notify "$2"
+}
+
+unlock() {
+  rbw unlocked >/dev/null 2>&1 || rbw unlock
+}
+
+fzf_rbw_menu() {
+  rbw ls --fields folder,name,user | fzf-menu \
+    --query "$c_query" \
+    --layout=reverse \
+    --delimiter '\t' \
+    --with-nth=2,3 \
+    --bind "enter:execute(echo ${c_action} > $fzf_rbw_args)+accept" \
+    --bind "ctrl-l:execute(echo 'login' > $fzf_rbw_args)+accept" \
+    --bind "ctrl-u:execute(echo 'user' > $fzf_rbw_args)+accept" \
+    --bind "ctrl-x:execute(echo 'pass' > $fzf_rbw_args)+accept" \
+    --bind "ctrl-o:execute(echo 'otp' > $fzf_rbw_args)+accept" \
+    --preview 'echo "Entry: {2}\nUsername: {3}"' \
+    --preview-window 'bottom:2:wrap'
+}
+
+get_pass() {
+  local password
+
+  password="$(echo "$selection" | xargs -r rbw get)"
+
+  if [[ -n "${c_is_raw}" ]]; then
+    echo "${password}"
+    exit
+  fi
+
+  clipboard "$password" "Password copied to clipboard."
+}
+
+get_login() {
+  local username
+  local password
+  local otp
+  local result
+
+  username="$(echo "${selection}" | awk '{print $2}')"
+  password="$(echo "$selection" | xargs -r rbw get)"
+  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
+  result=$(echo -e "${username}\n${password}\n${otp}" | sed '/^$/d')
+
+  if [[ -n "${c_is_raw}" ]]; then
+    echo "${result}"
+    exit
+  fi
+
+  result="$(echo "${result}" | tr '\n' ' ')"
+
+  clipboard "${result}" "Credentials copied to clipboard."
+}
+
+get_user() {
+  local username
+  username="$(echo "${selection}" | awk '{print $2}')"
+
+  if [[ -n "${c_is_raw}" ]]; then
+    echo "${username}"
+    exit
+  fi
+
+  clipboard "$username" "Username copied to clipboard."
+}
+
+get_otp() {
+  local otp
+  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
+
+  if [[ -n "${c_is_raw}" ]]; then
+    echo "$otp"
+    exit
+  fi
+
+  clipboard "$otp" "Otp copied to clipboard."
+}
+
+main() {
+  while getopts ':hrq:a:' opt; do
+    case "${opt}" in
+    r) c_is_raw=true ;;
+    h) usage ;;
+    q) c_query="$OPTARG" ;;
+    a) c_action="$OPTARG" ;;
+    :)
+      echo "Option -${OPTARG} requires an argument."
+      echo ""
+      usage
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      echo ""
+      usage
+      ;;
+    *) ;;
+    esac
+  done
+
+  unlock
+
+  local action
+  selection="$(fzf_rbw_menu)"
+
+  if [[ -f "${fzf_rbw_args}" ]]; then
+    action="$(cat "${fzf_rbw_args}")"
+    rm "${fzf_rbw_args}"
+  else
+    exit 0
+  fi
+
+  case "$action" in
+  pass) get_pass ;;
+  login) get_login ;;
+  user) get_user ;;
+  otp) get_otp ;;
+  *) exit ;;
+  esac
+}
+
+main "$@"

@@ -4,6 +4,9 @@ super + Return
 super + d
   dmenu_path | ~/.local/bin/fzf-menu | bash
 
+super + p
+  fzf-rbw
+
 XF86Search
   dmenu_run
 

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-} \
+  --layout=reverse \
+  --prompt='~ '"
+
+input=$(mktemp -u --suffix .fzfmenu.input)
+output=$(mktemp -u --suffix .fzfmenu.output)
+
+mkfifo "$input"
+mkfifo "$output"
+
+chmod 600 "$input" "$output"
+
+st -c fzf-menu -n fzf-menu \
+  -e sh -c \
+  "cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
+
+disown
+
+cleanup() {
+  rm -rf "$input" "$output"
+  kill $! 2>/dev/null
+}
+
+trap cleanup EXIT INT TERM
+
+cat >"$input"
+cat "$output"
