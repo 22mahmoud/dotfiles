@@ -54,6 +54,7 @@ unlock() {
 fzf_rbw_menu() {
   rbw ls --fields folder,name,user | fzf-menu \
     --query "$c_query" \
+    --prompt="🔑rbw ~ " \
     --layout=reverse \
     --delimiter '\t' \
     --with-nth=2,3 \

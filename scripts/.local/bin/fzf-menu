@@ -5,6 +5,11 @@ export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-} \
   --layout=reverse \
   --prompt='~ '"
 
+cleanup() {
+  rm -rf "$input" "$output"
+  kill $! 2>/dev/null
+}
+
 input=$(mktemp -u --suffix .fzfmenu.input)
 output=$(mktemp -u --suffix .fzfmenu.output)
 
@@ -18,11 +23,6 @@ st -c fzf-menu -n fzf-menu \
   "cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
 
 disown
-
-cleanup() {
-  rm -rf "$input" "$output"
-  kill $! 2>/dev/null
-}
 
 trap cleanup EXIT INT TERM
 

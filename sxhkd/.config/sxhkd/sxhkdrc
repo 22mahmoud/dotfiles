@@ -2,7 +2,7 @@ super + Return
   $TERMINAL
 
 super + d
-  dmenu_path | ~/.local/bin/fzf-menu | bash
+  dmenu_path | fzf-menu | bash
 
 super + p
   fzf-rbw
