@@ -138,13 +138,14 @@ def main(arguments):
     if arguments.username_only or arguments.password_only or arguments.totp_only:
         fake_key_raw(result[0])
     else:
-        import pyperclip
-
         fake_key_raw(result[0])
         qute_command("fake-key <Tab>")
         fake_key_raw(result[1])
 
-        pyperclip.copy(result[2])
+        if len(result) == 3:
+            import pyperclip
+
+            pyperclip.copy(result[2])
 
     qute_command("mode-enter insert")
 
