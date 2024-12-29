@@ -13,6 +13,8 @@ c_zathura="$C_RICINIG/zathura-theme"
 c_dunst="$C_RICINIG/theme.dunstrc"
 
 themes="base16-gruvbox-dark-hard
+catppuccin-mocha
+tokyonight
 base16-default-dark
 base16-ia-dark
 base16-monokai
@@ -29,8 +31,7 @@ base16-solarflare
 base16-solarized-dark
 base16-tomorrow-night
 base16-twilight
-base16-oxocarbon-dark
-catppuccin-mocha"
+base16-oxocarbon-dark"
 
 if [ -n "$1" ]; then
   if echo "$themes" | grep -q "^$1$"; then
@@ -55,12 +56,14 @@ update_xresources() {
 
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     echo "# include \"catppuccin-xresources/themes/mocha.Xresources\"" >>"$c_xresources"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    echo "# include \"tokyonight.nvim/extras/xresources/tokyonight_night.Xresources\"" >>"$c_xresources"
   else
     echo "# include \"base16-xresources/xresources/$theme_name.Xresources\"" >>"$c_xresources"
   fi
 
   xrdb \
-    -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" \
+    -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" -I"${HOME}/.local/src" \
     -merge "$c_xresources"
 }
 
@@ -71,6 +74,8 @@ update_tmux() {
     echo 'set -g @catppuccin_window_status_style "none"' >>"$c_tmux"
     echo 'set -g @catppuccin_flavor "mocha"' >>"$c_tmux"
     echo "run \$XDG_DATA_HOME/tmux/plugins/catppuccin/catppuccin.tmux" >>"$c_tmux"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    echo "run \$HOME/.local/src/tokyonight.nvim/extras/tmux/tokyonight_night.tmux" >>"$c_tmux"
   else
     echo "source-file \$XDG_DATA_HOME/tmux/plugins/tinted-tmux/colors/$theme_name.conf" >>"$c_tmux"
     echo "set -g @colors-base16 '${theme_name#base16-}'" >>"$c_tmux"
@@ -83,7 +88,11 @@ update_tmux() {
 update_nvim() {
   truncate -s 0 "$c_nvim"
 
-  echo "vim.cmd[[silent! colorscheme ""$theme_name""]]" >>"$c_nvim"
+  if [ "$theme_name" == "tokyonight" ]; then
+    echo "vim.cmd[[silent! colorscheme tokyonight-night]]" >>"$c_nvim"
+  else
+    echo "vim.cmd[[silent! colorscheme ""$theme_name""]]" >>"$c_nvim"
+  fi
 
   nvr -c ":silent! colorscheme $theme_name<cr>"
 }
@@ -101,6 +110,32 @@ update_zsh() {
 
     echo '' >>"$c_zshrc"
     echo 'export BAT_THEME="Catppuccin Mocha"' >>"$c_zshrc"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    echo 'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \' >>"$c_zshrc"
+    echo '--highlight-line \' >>"$c_zshrc"
+    echo '--info=inline-right \' >>"$c_zshrc"
+    echo '--ansi \' >>"$c_zshrc"
+    echo '--layout=reverse \' >>"$c_zshrc"
+    echo '--border=none' >>"$c_zshrc"
+    echo '--color=bg+:#283457 \' >>"$c_zshrc"
+    echo '--color=bg:#16161e \' >>"$c_zshrc"
+    echo '--color=border:#27a1b9 \' >>"$c_zshrc"
+    echo '--color=fg:#c0caf5 \' >>"$c_zshrc"
+    echo '--color=gutter:#16161e \' >>"$c_zshrc"
+    echo '--color=header:#ff9e64 \' >>"$c_zshrc"
+    echo '--color=hl+:#2ac3de \' >>"$c_zshrc"
+    echo '--color=hl:#2ac3de \' >>"$c_zshrc"
+    echo '--color=info:#545c7e \' >>"$c_zshrc"
+    echo '--color=marker:#ff007c \' >>"$c_zshrc"
+    echo '--color=pointer:#ff007c \' >>"$c_zshrc"
+    echo '--color=prompt:#2ac3de \' >>"$c_zshrc"
+    echo '--color=query:#c0caf5:regular \' >>"$c_zshrc"
+    echo '--color=scrollbar:#27a1b9 \' >>"$c_zshrc"
+    echo '--color=separator:#ff9e64 \' >>"$c_zshrc"
+    echo '--color=spinner:#ff007c"' >>"$c_zshrc"
+
+    echo '' >>"$c_zshrc"
+    echo 'export BAT_THEME="tokyonight_night"' >>"$c_zshrc"
   else
     echo "source \"\$ZDOTDIR/base16-fzf/bash/$theme_name.config\"" >"$c_zshrc"
     echo '' >>"$c_zshrc"
@@ -124,7 +159,7 @@ update_qutebrowser() {
   echo "c: ConfigContainer = c  # type: ignore" >>"$c_qutebrowser"
   echo "" >>"$c_qutebrowser"
 
-  if [ "$theme_name" == "catppuccin-mocha" ]; then
+  if [ "$theme_name" = "catppuccin-mocha" ] || [ "$theme_name" = "tokyonight" ]; then
     echo "import catppuccin" >>"$c_qutebrowser"
     echo "" >>"$c_qutebrowser"
     echo "config.load_autoconfig()" >>"$c_qutebrowser"
@@ -153,6 +188,8 @@ update_dwm() {
 update_lazygit() {
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     cp "$HOME/.local/src/catppuccin-lazygit/themes-mergable/mocha/teal.yml" "$c_lazygit"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    cp "$HOME/.local/src/tokyonight.nvim/extras/lazygit/tokyonight_night.yml" "$c_lazygit"
   else
     cp "$HOME/.local/src/base16-lazygit/colors/$theme_name.yml" "$c_lazygit"
   fi
@@ -161,6 +198,8 @@ update_lazygit() {
 update_zathura() {
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     cp "$HOME/.local/src/catppuccin-zathura/src/catppuccin-mocha" "$c_zathura"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    cp "$HOME/.local/src/tokyonight.nvim/extras/zathura/tokyonight_night.zathurarc" "$c_zathura"
   else
     cp "$HOME/.local/src/base16-zathura/build_schemes/recolors/$theme_name.config" "$c_zathura"
   fi
@@ -171,6 +210,8 @@ update_dunst() {
 
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     cp "$HOME/.local/src/catppuccin-dunst/themes/mocha.conf" "$c_dunst"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    cp "$HOME/.local/src/tokyonight.nvim/extras/dunst/tokyonight_night.dunstrc" "$c_dunst"
   else
     cp "$HOME/.local/src/base16-dunst/themes/$theme_name.dunstrc" "$c_dunst"
   fi
@@ -186,6 +227,9 @@ update_delta() {
     echo "  path = $XDG_CONFIG_HOME/git/catppuccin-delta/catppuccin.gitconfig" >>"$c_delta"
     echo "[delta]" >>"$c_delta"
     echo "  features = catppuccin-mocha" >>"$c_delta"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    echo "[include]" >>"$c_delta"
+    echo "  path = $HOME/.local/src/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig" >>"$c_delta"
   else
     echo "[delta]" >>"$c_delta"
     echo "  syntax-theme = base16" >>"$c_delta"

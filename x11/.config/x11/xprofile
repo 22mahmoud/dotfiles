@@ -2,7 +2,7 @@
 
 # source xresources file
 xrdb \
-  -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" \
+  -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing" -I"${HOME}/.local/src"  \
   -merge "$XDG_CONFIG_HOME/x11/xresources"
 
 # hotkey daemon

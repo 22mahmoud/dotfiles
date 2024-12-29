@@ -76,3 +76,6 @@
 [submodule "dunst/.local/src/catppuccin-dunst"]
 	path = dunst/.local/src/catppuccin-dunst
 	url = git@github.com:catppuccin/dunst.git
+[submodule "src/.local/src/tokyonight.nvim"]
+	path = src/.local/src/tokyonight.nvim
+	url = git@github.com:folke/tokyonight.nvim.git

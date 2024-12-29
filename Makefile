@@ -1,5 +1,5 @@
-packages := desktop scripts fontconfig bat dunst git gnupg isync isync lynx \
-						mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
+packages := desktop src scripts fontconfig bat dunst git gnupg isync isync \
+						lynx mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
 						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser lazygit \
 						gtk qt
 
@@ -31,6 +31,7 @@ theming:
 	touch "$$XDG_CONFIG_HOME/ricing/delta-theme.gitcofig"
 	touch "$$XDG_CONFIG_HOME/ricing/lazygit-theme.yml"
 	touch "$$XDG_CONFIG_HOME/ricing/zathura-theme"
+	touch "$$XDG_CONFIG_HOME/ricing/theme.dunstrc"
 
 gruvbox:
 	scripts/.local/bin/rice base16-gruvbox-dark-hard
