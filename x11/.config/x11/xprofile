@@ -24,7 +24,7 @@ slstatus &
 xset r rate 200 50 &
 
 # start dunst notification server
-dunst &
+start-dunst &
 
 # launch picom compositor
 picom &

@@ -32,6 +32,7 @@ Key Bindings (fzf):
   Ctrl-L   Copy the login credentials (username + password + OTP) to the clipboard.
   Ctrl-U   Copy the username to the clipboard.
   Ctrl-O   Copy the OTP to the clipboard.
+  Ctrl-R   Sync the bitwarden vault store
 EOF
   exit 1
 }
@@ -54,7 +55,7 @@ unlock() {
 fzf_rbw_menu() {
   rbw ls --fields folder,name,user | fzf-menu \
     --query "$c_query" \
-    --prompt="🔑rbw ~ " \
+    --prompt="🔑 rbw ~ " \
     --layout=reverse \
     --delimiter '\t' \
     --with-nth=2,3 \
@@ -63,6 +64,7 @@ fzf_rbw_menu() {
     --bind "ctrl-u:execute(echo 'user' > $fzf_rbw_args)+accept" \
     --bind "ctrl-x:execute(echo 'pass' > $fzf_rbw_args)+accept" \
     --bind "ctrl-o:execute(echo 'otp' > $fzf_rbw_args)+accept" \
+    --bind "ctrl-r:execute(rbw sync && notify-send \"🔑 password manager\" \"Successfully synced passwords\")" \
     --preview 'echo "Entry: {2}\nUsername: {3}"' \
     --preview-window 'bottom:2:wrap'
 }
