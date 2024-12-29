@@ -70,3 +70,9 @@
 [submodule "tmux/.local/share/tmux/plugins/tmux-fingers"]
 	path = tmux/.local/share/tmux/plugins/tmux-fingers
 	url = git@github.com:Morantron/tmux-fingers.git
+[submodule "dunst/.local/src/base16-dunst"]
+	path = dunst/.local/src/base16-dunst
+	url = git@github.com:tinted-theming/base16-dunst.git
+[submodule "dunst/.local/src/catppuccin-dunst"]
+	path = dunst/.local/src/catppuccin-dunst
+	url = git@github.com:catppuccin/dunst.git

@@ -10,6 +10,7 @@ c_qutebrowser="$C_RICINIG/theme-qutebrowser.py"
 c_delta="$C_RICINIG/delta-theme.gitconfig"
 c_lazygit="$C_RICINIG/lazygit-theme.yml"
 c_zathura="$C_RICINIG/zathura-theme"
+c_dunst="$C_RICINIG/theme.dunstrc"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -39,7 +40,7 @@ if [ -n "$1" ]; then
     exit 1
   fi
 else
-  theme_name="$(echo "$themes" | dmenu -r -l 30)"
+  theme_name="$(echo "$themes" | fzf-menu)"
   if [ ! "$theme_name" ]; then
     exit
   fi
@@ -165,6 +166,18 @@ update_zathura() {
   fi
 }
 
+update_dunst() {
+  pkill -9 dunst
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    cp "$HOME/.local/src/catppuccin-dunst/themes/mocha.conf" "$c_dunst"
+  else
+    cp "$HOME/.local/src/base16-dunst/themes/$theme_name.dunstrc" "$c_dunst"
+  fi
+
+  start-dunst
+}
+
 update_delta() {
   truncate -s 0 "$c_delta"
 
@@ -192,6 +205,7 @@ main() {
   update_nvim &
   update_lazygit &
   update_zathura &
+  update_dunst &
   update_wallpaper &
 }
 

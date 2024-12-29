@@ -31,36 +31,43 @@ get_icon() {
   volume=$(pamixer --get-volume)
 
   if [ "$(pamixer --get-mute)" = true ]; then
-    icon=🔇
+    icon="audio-volume-muted"
   elif [ "$volume" -gt 70 ]; then
-    icon=🔊
+    icon="audio-volume-high"
   elif [ "$volume" -gt 30 ]; then
-    icon=🔉
+    icon="audio-volume-medium"
   elif [ "$volume" -gt 0 ]; then
-    icon=🔈
+    icon="audio-volume-low"
   else
-    icon=🔇
+    icon="audio-volume-muted"
   fi
 
   echo $icon
 }
 
 notify() {
-  notify-send \
-    -t 1500 \
-    -u low \
-    "$(get_icon) Sound" "Volume: $(pamixer --get-volume-human)" \
-    -h string:x-canonical-private-synchronous:"changeVolume"
+  volume="$(pamixer --get-volume)"
+  is_muted="$(pamixer --get-mute)"
 
+  volume_human="$volume%"
+  if [ "$(pamixer --get-mute)" = true ]; then
+    volume_human="$volume% (muted)"
+  fi
+
+  dunstify -t 1500 \
+    -i "$(get_icon)" \
+    -h int:value:"$volume" \
+    -h string:x-canonical-private-synchronous:"changeVolume" \
+    "Volume: $volume_human"
 }
 
 main() {
   case "$1" in
-    -h|help) usage ;;
-    -i|inc) inc ;;
-    -d|dec) dec ;;
-    -t|toggle) toggle ;;
-    *) exit 0 ;;
+  -h | help) usage ;;
+  -i | inc) inc ;;
+  -d | dec) dec ;;
+  -t | toggle) toggle ;;
+  *) exit 0 ;;
   esac
 
   notify

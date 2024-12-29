@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rc="/tmp/dunstrc"
+
+cat \
+  "$XDG_CONFIG_HOME/dunst/dunstrc" "$XDG_CONFIG_HOME/ricing/theme.dunstrc" \
+  >"$rc"
+
+dunst -config <(cat <"$rc")
