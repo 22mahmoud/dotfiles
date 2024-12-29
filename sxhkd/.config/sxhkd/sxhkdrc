@@ -8,7 +8,7 @@ super + p
   fzf-rbw
 
 XF86Search
-  dmenu_run
+  dmenu_path | fzf-menu | bash
 
 super + shift + x
   slock
