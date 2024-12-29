@@ -2,6 +2,9 @@
 
 # include "theme.Xresources"
 
+Xcursor.theme: Adwaita
+Xcursor.size: 16
+
 *.alpha: 1
 *.alphaUnfocused: 1
 *.font: monospace:size=11

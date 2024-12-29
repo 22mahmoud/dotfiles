@@ -1,6 +1,7 @@
 packages := desktop scripts fontconfig bat dunst git gnupg isync isync lynx \
 						mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
-						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser lazygit
+						zsh zathura x11 tmux sxhkd shell ripgrep qutebrowser lazygit \
+						gtk qt
 
 all: submodule patch stow theming
 
