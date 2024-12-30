@@ -7,9 +7,6 @@
 [submodule "zsh/.config/zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/.config/zsh/plugins/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh/.config/zsh/base16-fzf"]
-	path = zsh/.config/zsh/base16-fzf
-	url = git@github.com:tinted-theming/base16-fzf.git
 [submodule "x11/.config/x11/base16-xresources"]
 	path = x11/.config/x11/base16-xresources
 	url = git@github.com:tinted-theming/base16-xresources.git
@@ -79,3 +76,12 @@
 [submodule "src/.local/src/tokyonight.nvim"]
 	path = src/.local/src/tokyonight.nvim
 	url = git@github.com:folke/tokyonight.nvim.git
+[submodule "ghostty/.local/src/catppuccin-ghostty"]
+	path = ghostty/.local/src/catppuccin-ghostty
+	url = git@github.com:catppuccin/ghostty.git
+[submodule "zsh/.local/src/tinted-fzf"]
+	path = zsh/.local/src/tinted-fzf
+	url = git@github.com:tinted-theming/tinted-fzf.git
+[submodule "zsh/.local/src/catppuccin-fzf"]
+	path = zsh/.local/src/catppuccin-fzf
+	url = git@github.com:catppuccin/fzf.git

@@ -59,6 +59,7 @@ fzf_rbw_menu() {
     --layout=reverse \
     --delimiter '\t' \
     --with-nth=2,3 \
+    --tabstop=38 \
     --bind "enter:execute(echo ${c_action} > $fzf_rbw_args)+accept" \
     --bind "ctrl-l:execute(echo 'login' > $fzf_rbw_args)+accept" \
     --bind "ctrl-u:execute(echo 'user' > $fzf_rbw_args)+accept" \

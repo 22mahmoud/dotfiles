@@ -11,6 +11,7 @@ c_delta="$C_RICINIG/delta-theme.gitconfig"
 c_lazygit="$C_RICINIG/lazygit-theme.yml"
 c_zathura="$C_RICINIG/zathura-theme"
 c_dunst="$C_RICINIG/theme.dunstrc"
+c_ghostty="$C_RICINIG/ghostty-theme"
 
 themes="base16-gruvbox-dark-hard
 catppuccin-mocha
@@ -73,11 +74,12 @@ update_tmux() {
   if [ "$theme_name" == "catppuccin-mocha" ]; then
     echo 'set -g @catppuccin_window_status_style "none"' >>"$c_tmux"
     echo 'set -g @catppuccin_flavor "mocha"' >>"$c_tmux"
-    echo "run \$XDG_DATA_HOME/tmux/plugins/catppuccin/catppuccin.tmux" >>"$c_tmux"
+    echo "run \"\$XDG_DATA_HOME/tmux/plugins/catppuccin/catppuccin.tmux\"" >>"$c_tmux"
   elif [ "$theme_name" == "tokyonight" ]; then
-    echo "run \$HOME/.local/src/tokyonight.nvim/extras/tmux/tokyonight_night.tmux" >>"$c_tmux"
+    echo "source-file \"\$HOME/.local/src/tokyonight.nvim/extras/tmux/tokyonight_night.tmux\"" >>"$c_tmux"
   else
-    echo "source-file \$XDG_DATA_HOME/tmux/plugins/tinted-tmux/colors/$theme_name.conf" >>"$c_tmux"
+    echo 'setenv TINTED_TMUX_OPTION_STATUSBAR 1' >>"$c_tmux"
+    echo "source-file \"\$XDG_DATA_HOME/tmux/plugins/tinted-tmux/colors/$theme_name.conf\"" >>"$c_tmux"
     echo "set -g @colors-base16 '${theme_name#base16-}'" >>"$c_tmux"
   fi
 
@@ -101,43 +103,20 @@ update_zsh() {
   truncate -s 0 "$c_zshrc"
 
   if [ "$theme_name" == "catppuccin-mocha" ]; then
-    echo 'export FZF_DEFAULT_OPTS=" \' >>"$c_zshrc"
-    echo '--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \' >>"$c_zshrc"
-    echo '--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \' >>"$c_zshrc"
-    echo '--color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \' >>"$c_zshrc"
-    echo '--color=selected-bg:#494d64 \' >>"$c_zshrc"
-    echo '--multi"' >>"$c_zshrc"
+    awk '
+      /🌿 Mocha/ {flag=1}
+      flag && /Bash\/Zsh/ {subflag=1; next}
+      flag && subflag && /Fish/ {subflag=0; flag=0}
+      flag && subflag {print}
+    ' "$HOME/.local/src/catppuccin-fzf/README.md" | sed '/^```/d' >"$c_zshrc"
 
-    echo '' >>"$c_zshrc"
     echo 'export BAT_THEME="Catppuccin Mocha"' >>"$c_zshrc"
   elif [ "$theme_name" == "tokyonight" ]; then
-    echo 'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \' >>"$c_zshrc"
-    echo '--highlight-line \' >>"$c_zshrc"
-    echo '--info=inline-right \' >>"$c_zshrc"
-    echo '--ansi \' >>"$c_zshrc"
-    echo '--layout=reverse \' >>"$c_zshrc"
-    echo '--border=none' >>"$c_zshrc"
-    echo '--color=bg+:#283457 \' >>"$c_zshrc"
-    echo '--color=bg:#16161e \' >>"$c_zshrc"
-    echo '--color=border:#27a1b9 \' >>"$c_zshrc"
-    echo '--color=fg:#c0caf5 \' >>"$c_zshrc"
-    echo '--color=gutter:#16161e \' >>"$c_zshrc"
-    echo '--color=header:#ff9e64 \' >>"$c_zshrc"
-    echo '--color=hl+:#2ac3de \' >>"$c_zshrc"
-    echo '--color=hl:#2ac3de \' >>"$c_zshrc"
-    echo '--color=info:#545c7e \' >>"$c_zshrc"
-    echo '--color=marker:#ff007c \' >>"$c_zshrc"
-    echo '--color=pointer:#ff007c \' >>"$c_zshrc"
-    echo '--color=prompt:#2ac3de \' >>"$c_zshrc"
-    echo '--color=query:#c0caf5:regular \' >>"$c_zshrc"
-    echo '--color=scrollbar:#27a1b9 \' >>"$c_zshrc"
-    echo '--color=separator:#ff9e64 \' >>"$c_zshrc"
-    echo '--color=spinner:#ff007c"' >>"$c_zshrc"
-
+    echo "source \"\$HOME/.local/src/tokyonight.nvim/extras/fzf/tokyonight_night.sh\"" >"$c_zshrc"
     echo '' >>"$c_zshrc"
     echo 'export BAT_THEME="tokyonight_night"' >>"$c_zshrc"
   else
-    echo "source \"\$ZDOTDIR/base16-fzf/bash/$theme_name.config\"" >"$c_zshrc"
+    echo "source \"$HOME/.local/src/tinted-fzf/sh/$theme_name.sh\"" >"$c_zshrc"
     echo '' >>"$c_zshrc"
     echo 'export BAT_THEME="base16"' >>"$c_zshrc"
   fi
@@ -237,6 +216,23 @@ update_delta() {
 
 }
 
+update_ghostty() {
+  truncate -s 0 "$c_ghostty"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    echo "theme = catppuccin-flavor.conf" >>"$c_ghostty"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    echo "theme = tokyonight_night" >>"$c_ghostty"
+  elif [ "$theme_name" == "base16-gruvbox-dark-hard" ]; then
+    echo "theme = GruvboxDarkHard" >>"$c_ghostty"
+  else
+    echo ''
+    # echo "[delta]" >>"$c_ghostty"
+    # echo "  syntax-theme = base16" >>"$c_ghostty"
+  fi
+
+}
+
 main() {
   update_xresources
 
@@ -250,6 +246,7 @@ main() {
   update_lazygit &
   update_zathura &
   update_dunst &
+  update_ghostty &
   update_wallpaper &
 }
 

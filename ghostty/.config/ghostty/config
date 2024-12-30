@@ -1,0 +1,7 @@
+config-file = ../ricing/ghostty-theme
+font-size = 10
+gtk-titlebar = false
+confirm-close-surface = false
+keybind = alt+u=scroll_page_up
+keybind = alt+d=scroll_page_down
+window-padding-x = 6

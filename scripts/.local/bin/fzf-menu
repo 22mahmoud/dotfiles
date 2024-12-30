@@ -19,8 +19,8 @@ mkfifo "$output"
 chmod 600 "$input" "$output"
 
 st -c fzf-menu -n fzf-menu \
-  -e sh -c \
-  "cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
+  -e zsh -c \
+  "source \"${ZDOTDIR}/.zshrc\"; cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
 
 disown
 
