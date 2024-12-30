@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # vim: ft=bash
 
-export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-} \
-  --layout=reverse \
-  --prompt='~ '"
-
 cleanup() {
   rm -rf "$input" "$output"
   kill $! 2>/dev/null
@@ -20,7 +16,12 @@ chmod 600 "$input" "$output"
 
 st -c fzf-menu -n fzf-menu \
   -e zsh -c \
-  "source \"${ZDOTDIR}/.zshrc\"; cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
+  "cat $input |
+  fzf \
+    --layout=reverse \
+    --prompt='~ ' \
+    $(printf -- " '%s'" "$@" | sed "s/^ ''$//") |
+  tee $output" &
 
 disown
 

@@ -38,18 +38,6 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^e" edit-command-line
 
-# FZF config
-source "$XDG_CONFIG_HOME/ricing/theme.zsh"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1"
-export FZF_TMUX_OPTS="-p"
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-export FZF_CTRL_T_COMMAND="fd"
-export FZF_COMPLETION_TRIGGER='~~'
-
 # fzf support
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
