@@ -42,7 +42,7 @@ if [ -n "$1" ]; then
     exit 1
   fi
 else
-  theme_name="$(echo "$themes" | fzf-menu)"
+  theme_name="$(echo "$themes" | fzf-menu --prompt='🎨 Choose a theme ~ ' )"
   if [ ! "$theme_name" ]; then
     exit
   fi
