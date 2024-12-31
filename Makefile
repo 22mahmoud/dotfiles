@@ -33,8 +33,8 @@ theming:
 	touch "$$XDG_CONFIG_HOME/ricing/zathura-theme"
 	touch "$$XDG_CONFIG_HOME/ricing/theme.dunstrc"
 
-gruvbox:
-	scripts/.local/bin/rice base16-gruvbox-dark-hard
+rice:
+	scripts/.local/bin/rice tokyonight
 
 patch:
 	@if patch -p1 --forward --dry-run < patches/readability-js.patch >/dev/null 2>&1; then \
