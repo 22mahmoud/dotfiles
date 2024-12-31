@@ -1,5 +1,6 @@
 [global]
   urgency = normal
+  separator_color= frame
   monitor = 0
   follow = mouse
   width = 300
@@ -12,7 +13,6 @@
   padding = 10
   horizontal_padding = 10
   frame_width = 2
-  separator_color = auto
   sort = yes
   idle_threshold = 120
 

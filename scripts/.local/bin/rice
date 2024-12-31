@@ -42,7 +42,7 @@ if [ -n "$1" ]; then
     exit 1
   fi
 else
-  theme_name="$(echo "$themes" | fzf-menu --prompt='🎨 Choose a theme ~ ' )"
+  theme_name="$(echo "$themes" | fzf-menu --prompt='🎨 Choose a theme ~ ')"
   if [ ! "$theme_name" ]; then
     exit
   fi
@@ -193,6 +193,16 @@ update_dunst() {
     cp "$HOME/.local/src/tokyonight.nvim/extras/dunst/tokyonight_night.dunstrc" "$c_dunst"
   else
     cp "$HOME/.local/src/base16-dunst/themes/$theme_name.dunstrc" "$c_dunst"
+  fi
+
+  local frame_color
+  local highlight_color
+
+  frame_color="$(grep -m 1 "frame_color = \"#" "$c_dunst" | awk -F'"' '{print $2}')"
+  highlight_color="$(grep -m 1 "highlight = \"#" "$c_dunst" | awk -F'"' '{print $2}')"
+
+  if [ -z "$highlight_color" ]; then
+    sed -i "1i [global]\n\thighlight = \"$frame_color\"\n" "$c_dunst"
   fi
 
   start-dunst
