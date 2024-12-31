@@ -71,9 +71,9 @@ c.content.headers.accept_language = "en-US,en;q=0.5"
 #     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 # }
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
-c.content.site_specific_quirks.enabled = False
-c.content.canvas_reading = False
-c.content.webgl = False
+# c.content.site_specific_quirks.enabled = False
+# c.content.webgl = False
+# c.content.canvas_reading = False
 # c.content.headers.do_not_track = True
 c.content.tls.certificate_errors = "ask-block-thirdparty"
 c.content.media.audio_capture = "ask"

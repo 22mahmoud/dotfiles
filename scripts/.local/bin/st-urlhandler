@@ -14,13 +14,13 @@ s/^www./http:\/\/www\./")" # xdg-open will not detect url without http
 while getopts "hoc" o; do case "${o}" in
   h) printf "Optional arguments for custom use:\\n  -c: copy\\n  -o: xdg-open\\n  -h: Show this message\\n" && exit 1 ;;
   o)
-    chosen=$(echo "${urls}" | fzf-menu --prompt='Follow which url? ')
+    chosen=$(echo "${urls}" | fzf-menu --prompt='🔗 Follow which url? ')
     if [[ -n "${chosen}" ]]; then
       setsid xdg-open "${chosen}" >/dev/null 2>&1 &
     fi
     ;;
   c)
-    chosen=$(echo "$urls" | fzf-menu --prompt='Copy which url? ')
+    chosen=$(echo "$urls" | fzf-menu --prompt='📎 Copy which url? ')
 
     if [[ -n "${chosen}" ]]; then
       echo -n "${chosen}" |
