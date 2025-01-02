@@ -4,6 +4,8 @@ profiles="default
 default_red
 turnoff"
 
-selected_profile="$(echo "$profiles" | dmenu -l 5)"
+selected_profile="$(echo "$profiles" | fzf-menu --prompt '🔆 Profile ~ ')"
+
+[ -z "$selected_profile" ] && exit
 
 openrgb --profile "$selected_profile".orp
