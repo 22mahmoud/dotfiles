@@ -21,7 +21,7 @@ setxkbmap -layout us,ara -option grp:lalt_lshift_toggle &
 slstatus &
 
 # speed up keyboard
-xset r rate 200 50 &
+xset r rate 300 30 &
 
 # start dunst notification server
 start-dunst &
