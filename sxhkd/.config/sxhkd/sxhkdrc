@@ -7,6 +7,9 @@ super + d
 super + p
   fzf-rbw
 
+super + shift + p
+  fzf-power
+
 XF86Search
   dmenu_path | fzf-menu | bash
 

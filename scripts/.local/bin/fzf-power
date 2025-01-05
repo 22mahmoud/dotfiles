@@ -1,0 +1,49 @@
+#!/bin/bash
+
+all=(shutdown reboot suspend hibernate logout lockscreen)
+
+declare -A texts
+texts[lockscreen]="lock screen"
+texts[switchuser]="switch user"
+texts[logout]="log out"
+texts[suspend]="suspend"
+texts[hibernate]="hibernate"
+texts[reboot]="reboot"
+texts[shutdown]="shut down"
+
+declare -A icons
+icons[lockscreen]="\Uf033e"
+icons[switchuser]="\Uf0019"
+icons[logout]="\Uf0343"
+icons[suspend]="\Uf04b2"
+icons[hibernate]="\Uf02ca"
+icons[reboot]="\Uf0709"
+icons[shutdown]="\Uf0425"
+icons[cancel]="\Uf0156"
+
+declare -A actions
+actions[lockscreen]="loginctl lock-session ${XDG_SESSION_ID-}"
+#actions[switchuser]="???"
+actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
+actions[suspend]="systemctl suspend"
+actions[hibernate]="systemctl hibernate"
+actions[reboot]="systemctl reboot"
+actions[shutdown]="systemctl poweroff"
+
+selection="$(echo "${all[@]}" | tr ' ' '\n' |
+  fzf-menu --with-nth 'hey' --prompt "💡 Power Menu ~ ")"
+
+case $selection in
+*"Lock")
+  slock
+  ;;
+*"Log out")
+  killall xinit
+  ;;
+*"Reboot")
+  systemctl reboot
+  ;;
+*"Shutdown")
+  systemctl poweroff
+  ;;
+esac
