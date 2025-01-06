@@ -7,9 +7,7 @@ config: ConfigAPI = config  # type: ignore
 config.bind("V", "spawn mpx -a {url}")
 config.bind(",v", "hint links spawn mpx -a {hint-url}")
 
-qute_rbw = (
-    "spawn --userscript qute-rbw "
-)
+qute_rbw = "spawn --userscript qute-rbw "
 config.bind(",pl", qute_rbw)
 config.bind(",pu", f"{qute_rbw} --username-only")
 config.bind(",pp", f"{qute_rbw} --password-only")

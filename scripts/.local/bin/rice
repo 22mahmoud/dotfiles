@@ -141,7 +141,6 @@ update_qutebrowser() {
   if [ "$theme_name" = "catppuccin-mocha" ] || [ "$theme_name" = "tokyonight" ]; then
     echo "import catppuccin" >>"$c_qutebrowser"
     echo "" >>"$c_qutebrowser"
-    echo "config.load_autoconfig()" >>"$c_qutebrowser"
     echo "catppuccin.setup(c, 'mocha', True)" >>"$c_qutebrowser"
   else
     echo "config.source('$XDG_CONFIG_HOME/qutebrowser/base16.py')" >>"$c_qutebrowser"
