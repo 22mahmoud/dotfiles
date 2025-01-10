@@ -6,9 +6,9 @@ SyncState   *
 # personal
 # Remote Store
 IMAPStore        personal-remote
-Host             mail.mahmoudashraf.dev
+Host             imap.startmail.com
 Port             993
-User             hello
+User             hey@maw.sh
 PassCmd          "pass mail.mahmoudashraf.dev"
 TLSType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
@@ -17,12 +17,31 @@ CertificateFile  /etc/ssl/certs/ca-certificates.crt
 MaildirStore  personal-local
 Path          ~/.local/share/mail/personal/
 Inbox         ~/.local/share/mail/personal/INBOX
-Subfolders    Verbatim
 
-Channel     personal
-Far         :personal-remote:
-Near        :personal-local:
-Patterns    *
+Channel       personal-inbox
+Far           :personal-remote:
+Near          :personal-local:
+patterns      "INBOX"
+
+Channel       personal-sent
+Far           :personal-remote:"Sent Messages"
+Near          :personal-local:Sent
+
+Channel     personal-trash
+Far         :personal-remote:"Deleted Messages"
+Near        :personal-local:Trash
+
+Channel     personal-drafts
+Far         :personal-remote:"Drafts"
+Near        :personal-local:Drafts
+
+Channel     personal-junk
+Far         :personal-remote:"Junk"
+Near        :personal-local:Junk
+
+Channel     personal-Social
+Far         :personal-remote:"Social"
+Near        :personal-local:Social
 
 # # work (gmail)
 # # Remote Store

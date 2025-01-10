@@ -8,10 +8,10 @@ tls_trust_file    /etc/ssl/certs/ca-certificates.crt
 
 # personal
 account            personal
-host               mail.mahmoudashraf.dev
+host               smtp.startmail.com
 port               465
 passwordeval       "pass mail.mahmoudashraf.dev"
-user               hello
+user               hey@maw.sh
 from               hello@mahmoudashraf.dev
 
 # # work (gmail)
