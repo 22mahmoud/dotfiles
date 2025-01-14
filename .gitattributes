@@ -1,4 +1,4 @@
-qutebrowser/.config/qutebrowser/whitelist.py filter=ageencrypt eol=lf
-qutebrowser/.config/qutebrowser/bookmarks/urls filter=ageencrypt eol=lf
-qutebrowser/.config/qutebrowser/quickmarks filter=ageencrypt eol=lf
-shell/.config/shell/private-envs filter=ageencrypt eol=lf
+qutebrowser/.config/qutebrowser/whitelist.py eol=lf filter=ageencrypt
+qutebrowser/.config/qutebrowser/bookmarks/urls eol=lf filter=ageencrypt
+qutebrowser/.config/qutebrowser/quickmarks eol=lf filter=ageencrypt
+shell/.config/shell/private-envs eol=lf filter=ageencrypt
