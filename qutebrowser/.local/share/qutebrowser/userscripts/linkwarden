@@ -1,0 +1,10 @@
+#!/bin/bash
+
+token="$LINKWARDEN_API_TOKEN"
+base="$LINKWARDEN_BASE_URL"
+
+curl -X POST -H "Authorization: Bearer ${token}" \
+  --json "{\"name\":\"$QUTE_TITLE\",\"url\":\"$QUTE_URL\"}" \
+  "$base/api/v1/links"
+
+echo "message-info 'Bookmark saved'" >"$QUTE_FIFO"
