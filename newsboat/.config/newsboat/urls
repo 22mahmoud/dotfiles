@@ -1,3 +1,4 @@
 "query:→ Unread Articles:unread = \"yes\""
 "query:Youtube:(tags # \"youtube\")"
+"query:Reddit:(tags # \"reddit\")"
 "query:⚜️  Feeds─────────────────────────────────────────────:(tags # \"\")"
