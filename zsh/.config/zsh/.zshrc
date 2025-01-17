@@ -41,6 +41,8 @@ bindkey -M vicmd "^e" edit-command-line
 # fzf support
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completions.zsh ] && source /usr/share/doc/fzf/examples/completions.zsh
 
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"
