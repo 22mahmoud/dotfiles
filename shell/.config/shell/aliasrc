@@ -119,6 +119,17 @@ alias pnst='pnpm start'
 alias pnd='pnpm dev'
 alias pnb='pnpm build'
 
+# bun
+alias b='bun'
+alias bi='bun install'
+alias ba='bun add'
+alias bad='bun add --dev'
+alias br='bun remove'
+alias bst='bun run start'
+alias bd='bun run dev'
+alias bb='bun run build'
+alias bp='bun patch --commit'
+
 # volta
 alias vo='volta'
 alias va='volta install'

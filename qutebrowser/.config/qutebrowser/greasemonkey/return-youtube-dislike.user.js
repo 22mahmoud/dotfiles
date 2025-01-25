@@ -53,8 +53,8 @@ let isShorts = () => location.pathname.startsWith("/shorts");
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   if (!extConfig.disableLogging) {
-    subtext = subtext.trim() === "" ? "" : `(${subtext})`; 
-    console.log(`[Return YouTube Dislikes] ${text} ${subtext}`); 
+    subtext = subtext.trim() === "" ? "" : `(${subtext})`;
+    console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
   }
 }
 
@@ -321,7 +321,7 @@ function getLikeCountFromButton() {
     ytd-menu-renderer.ytd-watch-metadata {
       overflow-y: visible !important;
     }
-    
+
     #top-level-buttons-computed {
       position: relative !important;
     }
