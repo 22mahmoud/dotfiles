@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 usage() {
   while IFS= read -r line; do
@@ -46,11 +46,14 @@ get_icon() {
 }
 
 notify() {
+  local volume
+  local is_muted
+
   volume="$(pamixer --get-volume)"
   is_muted="$(pamixer --get-mute)"
 
   volume_human="$volume%"
-  if [ "$(pamixer --get-mute)" = true ]; then
+  if [ "${is_muted}" = true ]; then
     volume_human="$volume% (muted)"
   fi
 
