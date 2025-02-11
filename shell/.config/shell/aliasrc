@@ -117,6 +117,7 @@ alias pnad='pnpm add -D'
 alias pnr='pnpm remove'
 alias pnst='pnpm start'
 alias pnd='pnpm dev'
+alias pnc='pnpm create'
 alias pnb='pnpm build'
 
 # bun
