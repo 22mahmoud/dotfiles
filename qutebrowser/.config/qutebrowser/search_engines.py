@@ -33,4 +33,5 @@ c.url.searchengines = {
     "pdb": "https://www.protondb.com/search?q={}",
     "ai": "https://chat.openai.com/?q={}",
     "gpt": "https://chat.openai.com/?q={}",
+    "ciu": "https://caniuse.com/?search={}",
 }
