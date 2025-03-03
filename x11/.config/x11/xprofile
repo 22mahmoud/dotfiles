@@ -33,7 +33,7 @@ picom &
 xrandr --verbose --output DisplayPort-2 --mode 1920x1080 --rate 144 &
 
 # openrgb
-[ "$(command -v openrgb)" ] && openrgb --profile default.orp &
+[ "$(command -v openrgb)" ] && openrgb --profile default_red.orp &
 
 # set last background
 ~/.config/setbg &
