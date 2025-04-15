@@ -78,7 +78,6 @@ update_tmux() {
   elif [ "$theme_name" == "tokyonight" ]; then
     echo "source-file \"\$HOME/.local/src/tokyonight.nvim/extras/tmux/tokyonight_night.tmux\"" >>"$c_tmux"
   else
-    echo 'setenv TINTED_TMUX_OPTION_STATUSBAR 1' >>"$c_tmux"
     echo "source-file \"\$XDG_DATA_HOME/tmux/plugins/tinted-tmux/colors/$theme_name.conf\"" >>"$c_tmux"
     echo "set -g @colors-base16 '${theme_name#base16-}'" >>"$c_tmux"
   fi

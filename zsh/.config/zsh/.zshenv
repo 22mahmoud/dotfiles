@@ -17,3 +17,5 @@ export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export FZF_CTRL_T_COMMAND="fd"
+
+export TINTED_TMUX_OPTION_STATUSBAR=1
