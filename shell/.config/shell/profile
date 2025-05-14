@@ -91,6 +91,9 @@ export DENO_INSTALL="$XDG_DATA_HOME/deno"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
+# php
+export PHP_CS_FIXER_IGNORE_ENV=1
+
 # ripgrep
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
 
