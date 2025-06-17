@@ -137,6 +137,18 @@ alias va='volta install'
 alias vp='volta pin'
 alias vu='volta uninstall'
 
+# poetry
+alias py='poetry'
+alias pyi='poetry install'
+alias pyu='poetry update'
+alias pya='poetry add'
+alias pyr='poetry remove'
+alias pyx='poetry run'
+
+# uv
+alias uvm='uv run python manage.py'
+
+
 # tmux
 alias t='tmux'
 alias ta='t a -t'
