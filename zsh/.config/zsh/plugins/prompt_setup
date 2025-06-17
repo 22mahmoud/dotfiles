@@ -36,6 +36,15 @@ function gsf() {
   [[ $count -gt 0 ]] && echo "${GITSTATUS_SYMBOLS[separator]}${GITSTATUS_COLORS[$color]}${GITSTATUS_SYMBOLS[$symbol]}${count}"
 }
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+function venv_prompt() {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    local venv_name="${VIRTUAL_ENV:t}"
+    echo " %F{cyan}(${venv_name})%f"
+  fi
+}
+
 # git_status_fromat_branch
 function gs_fb() {
   local branch=" $1"
@@ -113,6 +122,7 @@ function prompt_setup() {
   PROMPT=""
   PROMPT+='${prompt_newline}'
   PROMPT+='${GITSTATUS_COLORS[path]}%B%1~%b%f'
+  PROMPT+='$(venv_prompt)'
   PROMPT+='$GITSTATUS_PROMPT'
   PROMPT+='${prompt_newline}%(?.${GITSTATUS_COLORS[prompt_success]}.${GITSTATUS_COLORS[prompt_error]})%B%b%f '
 }
