@@ -119,6 +119,8 @@ alias pnst='pnpm start'
 alias pnd='pnpm dev'
 alias pnc='pnpm create'
 alias pnb='pnpm build'
+alias pnx='pnpm run'
+alias pnxd='pnpm run "/^dev:/"'
 
 # bun
 alias b='bun'
