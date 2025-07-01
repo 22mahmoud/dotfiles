@@ -22,6 +22,7 @@ alias wget='wget --hsts-file=$XDG_CACHE_HOME/wget-hsts'
 alias cpr='rsync -artzP -hh --partial --info=stats1,progress2 --modify-window=1'
 alias srv='python -m http.server -d'
 alias xrdb='xrdb -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing"'
+alias myip='curl ifconfig.me'
 
 # apps
 alias v='nvim'
@@ -150,7 +151,6 @@ alias pyx='poetry run'
 # uv
 alias uvm='uv run python manage.py'
 
-
 # tmux
 alias t='tmux'
 alias ta='t a -t'
@@ -196,6 +196,7 @@ alias gsa='git submodule add'
 alias gb='git branch'
 alias gbd='git branch -D'
 alias gcln='git fetch -p && git branch -vv | grep ": gone]" | awk "{print \$1}" | xargs -r git branch -D'
+alias gd='git diff'
 
 gpu() {
   if [ -z "$1" ]; then
