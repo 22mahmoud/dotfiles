@@ -51,7 +51,7 @@ eval "$(zoxide init zsh)"
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "$ZDOTDIR/plugins/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh"
 source "$ZDOTDIR/plugins/cursor_mode"
 

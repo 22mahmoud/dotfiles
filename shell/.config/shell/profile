@@ -18,6 +18,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # android/java
 export ANDROID_HOME="$XDG_CONFIG_HOME/android/Sdk"
+export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/android/avd"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
