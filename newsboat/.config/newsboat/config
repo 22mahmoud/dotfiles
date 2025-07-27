@@ -29,6 +29,7 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
+bind-key D delete-article
 
 text-width 80
 
