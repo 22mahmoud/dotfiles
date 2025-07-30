@@ -5,7 +5,7 @@
 [include]
   path = ~/.config/ricing/delta-theme.gitconfig
 [filter "ageencrypt"]
-  clean = age -r age1mupc0qg3uqlcm5zz4twuk7nwf5s3kfj5wmkmdjyswjnfenhme3sscnkzw3 -r age104dafrjnrgx2e0mpp3u63d2qswd3ak8pwcc5k0awxm5k0aunw5zs0sdzqv -
+  clean = age -r age12vmcmhd0qtde8a3h0dtf5muhkke4smtru72y2dh0drkg5aupha4qvlq457 -r age1mupc0qg3uqlcm5zz4twuk7nwf5s3kfj5wmkmdjyswjnfenhme3sscnkzw3 -r age104dafrjnrgx2e0mpp3u63d2qswd3ak8pwcc5k0awxm5k0aunw5zs0sdzqv -
   smudge = /bin/sh -c 'age -d -i <(pass age)'
   required = true
 [commit]
