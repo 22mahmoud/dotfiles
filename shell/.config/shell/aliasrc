@@ -13,8 +13,10 @@ alias bc='bc -ql'
 alias cls='clear'
 alias fork='setsid -f'
 alias mine='sudo chown -R $(whoami):$(whoami)'
-alias ls='eza --icons=always --color=auto -a'
-alias ll='eza --icons=always --color=auto -l -a -g -h'
+alias ls='lsd --icon=always --color=auto -a'
+alias ll='lsd --icon=always --color=auto -l -a -g -h'
+alias lst='lsd -lt --icon=always --reverse'
+alias lt='lsd --tree --depth=2'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ip="ip -color=auto"
