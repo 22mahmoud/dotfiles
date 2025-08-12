@@ -94,6 +94,7 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
 # php
 export PHP_CS_FIXER_IGNORE_ENV=1
+export PHPENV_ROOT="$HOME/.phpenv"
 
 # ripgrep
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
@@ -134,6 +135,8 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export RANDFILE="$XDG_CACHE_HOME/rnd"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 export MAIL="$XDG_DATA_HOME/mail"
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+
 
 # Default programs:
 export EDITOR="nvim"
@@ -172,11 +175,13 @@ path=(
   "$HOME/.config/composer/vendor/bin"
   "$XDG_CONFIG_HOME/tizen-studio/tools"
   "$XDG_CONFIG_HOME/tizen-studio/tools/ide/bin"
+  "${ASDF_DATA_DIR}/shims"
+  # "$PHPENV_ROOT/bin"
   "$path[@]"
 )
 
 export PATH
 
 # startx when logged in
-[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && \
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 &&
   exec startx "$XINITRC"

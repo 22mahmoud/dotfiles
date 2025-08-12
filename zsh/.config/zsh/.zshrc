@@ -1,5 +1,6 @@
 fpath=($ZDOTDIR/plugins $fpath)
 fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
+fpath=(${ASDF_DATA_DIR}/completions $fpath)
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
 
@@ -46,6 +47,11 @@ bindkey -M vicmd "^e" edit-command-line
 
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"
+
+# phpenv
+# if [ -d "${PHPENV_ROOT}" ]; then
+#   eval "$(phpenv init -)"
+# fi
 
 # source plugins
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
