@@ -1,14 +1,15 @@
 #!/bin/sh
-if [ -e "$XDG_CONFIG_HOME/x11/xprofile" ]; then
-  . "$XDG_CONFIG_HOME/x11/xprofile"
-fi
 
 # a workaround to make flatpak apps work with the xdg portal
 systemctl --user import-environment DISPLAY XAUTHORITY
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-  dbus-update-activation-environment DISPLAY XAUTHORITY
+  dbus-update-activation-environment --all
+fi
+
+if [ -e "$XDG_CONFIG_HOME/x11/xprofile" ]; then
+  . "$XDG_CONFIG_HOME/x11/xprofile"
 fi
 
 while true; do
-  dwm >> ~/.dwm.log 2>&1
+  dwm >>~/.dwm.log 2>&1
 done

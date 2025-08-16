@@ -2,7 +2,7 @@
 
 # include "theme.Xresources"
 
-Xcursor.theme: Adwaita
+Xcursor.theme: Qogir-Dark
 Xcursor.size: 16
 
 *.alpha: 1
