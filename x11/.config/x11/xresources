@@ -3,7 +3,7 @@
 # include "theme.Xresources"
 
 Xcursor.theme: Qogir-Dark
-Xcursor.size: 16
+Xcursor.size: 28
 
 *.alpha: 1
 *.alphaUnfocused: 1
