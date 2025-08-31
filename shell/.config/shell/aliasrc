@@ -152,6 +152,7 @@ alias pyx='poetry run'
 # uv
 alias uvm='uv run python manage.py'
 alias uva='uv add'
+alias uvad='uv add --dev'
 alias uvr='uv remove'
 alias uvi='uv sync'
 

@@ -1,4 +1,5 @@
 .nvimrc
 .luarc.json
 .nvimrc.lua
+.nvim.lua
 .ccls-cache/
