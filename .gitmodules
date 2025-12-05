@@ -64,9 +64,6 @@
 [submodule "zathura/.local/src/catppuccin-zathura"]
 	path = zathura/.local/src/catppuccin-zathura
 	url = git@github.com:catppuccin/zathura.git
-[submodule "tmux/.local/share/tmux/plugins/tmux-fingers"]
-	path = tmux/.local/share/tmux/plugins/tmux-fingers
-	url = git@github.com:Morantron/tmux-fingers.git
 [submodule "dunst/.local/src/base16-dunst"]
 	path = dunst/.local/src/base16-dunst
 	url = git@github.com:tinted-theming/base16-dunst.git
