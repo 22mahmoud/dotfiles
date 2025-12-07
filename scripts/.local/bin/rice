@@ -232,7 +232,7 @@ update_ghostty() {
   elif [ "$theme_name" == "tokyonight" ]; then
     echo "theme = tokyonight_night" >>"$c_ghostty"
   elif [ "$theme_name" == "base16-gruvbox-dark-hard" ]; then
-    echo "theme = GruvboxDarkHard" >>"$c_ghostty"
+    echo "theme = Gruvbox Dark Hard" >>"$c_ghostty"
   else
     echo ''
     # echo "[delta]" >>"$c_ghostty"
