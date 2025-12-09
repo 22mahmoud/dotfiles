@@ -1,7 +1,9 @@
 config-file = ../ricing/ghostty-theme
-font-size = 10
-gtk-titlebar = false
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 11
 confirm-close-surface = false
 keybind = alt+u=scroll_page_up
 keybind = alt+d=scroll_page_down
 window-padding-x = 6
+window-padding-y = 6
+window-decoration = none

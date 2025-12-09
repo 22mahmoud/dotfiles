@@ -1,10 +1,7 @@
 fpath=($ZDOTDIR/plugins $fpath)
 fpath=("$ZDOTDIR/plugins/zsh-completions/src" $fpath)
-fpath=(${ASDF_DATA_DIR}/completions $fpath)
 
 trap "source $ZDOTDIR/.zshrc && rehash" USR1
-
-setopt no_nomatch
 
 # navigation
 setopt AUTO_CD           # Go to folder path without using cd.
@@ -42,18 +39,10 @@ zle -N edit-command-line
 bindkey -M vicmd "^e" edit-command-line
 
 # fzf support
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completions.zsh ] && source /usr/share/doc/fzf/examples/completions.zsh
+source <(fzf --zsh)
 
 # zoxide - fast navigation
 eval "$(zoxide init zsh)"
-
-# phpenv
-# if [ -d "${PHPENV_ROOT}" ]; then
-#   eval "$(phpenv init -)"
-# fi
 
 # source plugins
 source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"

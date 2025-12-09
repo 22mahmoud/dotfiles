@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# ─────────────────────────────────────────────────────────────
+# Symbols
+# ─────────────────────────────────────────────────────────────
 typeset -gA GITSTATUS_SYMBOLS=(
   [ahead]='⇡'
   [behind]='⇣'
@@ -13,6 +16,12 @@ typeset -gA GITSTATUS_SYMBOLS=(
   [separator]=' '
 )
 
+# Cached separator for faster repeated use
+typeset -g GIT_SEP="${GITSTATUS_SYMBOLS[separator]}"
+
+# ─────────────────────────────────────────────────────────────
+# Colors
+# ─────────────────────────────────────────────────────────────
 typeset -gA GITSTATUS_COLORS=(
   [path]='%F{blue}'
   [prompt_success]='%F{green}'
@@ -25,101 +34,114 @@ typeset -gA GITSTATUS_COLORS=(
   [stash]='%F{cyan}'
 )
 
+typeset -g RESET='%f'
+
+# ─────────────────────────────────────────────────────────────
 # Configuration
+# ─────────────────────────────────────────────────────────────
 typeset -gi GITSTATUS_MAX_BRANCH_LENGTH=32
 
-# git_status_fromat
-function gsf() {
+# ─────────────────────────────────────────────────────────────
+# Shortcut function for git-status tokens
+# ─────────────────────────────────────────────────────────────
+gsf() {
   local symbol="$1"
   local count="$2"
   local color="$3"
-  [[ $count -gt 0 ]] && echo "${GITSTATUS_SYMBOLS[separator]}${GITSTATUS_COLORS[$color]}${GITSTATUS_SYMBOLS[$symbol]}${count}"
+  (( count > 0 )) && printf '%s%s%s%s' "$GIT_SEP" "${GITSTATUS_COLORS[$color]}" "${GITSTATUS_SYMBOLS[$symbol]}" "$count"
 }
 
+# ─────────────────────────────────────────────────────────────
+# Python/virtualenv prompt component
+# ─────────────────────────────────────────────────────────────
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-function venv_prompt() {
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    local venv_name="${VIRTUAL_ENV:t}"
-    echo " %F{cyan}(${venv_name})%f"
-  fi
+venv_prompt() {
+  [[ $VIRTUAL_ENV ]] || return
+  printf ' %F{cyan}(%s)%f' "${VIRTUAL_ENV:t}"
 }
 
-# git_status_fromat_branch
-function gs_fb() {
-  local branch=" $1"
-  if (( $#branch > GITSTATUS_MAX_BRANCH_LENGTH )); then
-    local half_length=$(( (GITSTATUS_MAX_BRANCH_LENGTH - 1) / 2 ))
-    echo "${branch[1,$half_length]}…${branch[-$half_length,-1]}"
+# ─────────────────────────────────────────────────────────────
+# Branch truncation
+# ─────────────────────────────────────────────────────────────
+gs_fb() {
+  local raw="$1"
+  local icon=" "
+  local full="${icon}${raw}"
+
+  if (( ${#raw} > GITSTATUS_MAX_BRANCH_LENGTH )); then
+    local half=$(( (GITSTATUS_MAX_BRANCH_LENGTH - 1) / 2 ))
+    printf '%s…%s' "${raw[1,$half]}" "${raw[-$half,-1]}"
   else
-    echo "$branch"
+    printf '%s' "$full"
   fi
 }
 
-# Update Git status prompt
-function gitstatus_prompt_update() {
+# ─────────────────────────────────────────────────────────────
+# Gitstatus update hook
+# ─────────────────────────────────────────────────────────────
+gitstatus_prompt_update() {
   emulate -L zsh
-  typeset -g  GITSTATUS_PROMPT=''
+  typeset -g GITSTATUS_PROMPT=''
   typeset -gi GITSTATUS_PROMPT_LEN=0
 
-  # Query git status
-  gitstatus_query 'MY' || return 1
-  [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return 0
+  # Skip work when outside git repos
+  [[ -d .git || -d ../.git ]] || return
+
+  # Query daemon
+  gitstatus_query 'MY' || { GITSTATUS_PROMPT=''; return; }
+  [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return
 
   local p=" on ${GITSTATUS_COLORS[branch]}"
 
   # Determine branch/tag/commit
-  if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-    p+="$(gs_fb "${VCS_STATUS_LOCAL_BRANCH}")"
-  elif [[ -n $VCS_STATUS_TAG ]]; then
-    p+="#$(gs_fb "${VCS_STATUS_TAG}")"
+  if [[ $VCS_STATUS_LOCAL_BRANCH ]]; then
+    p+="$(gs_fb "$VCS_STATUS_LOCAL_BRANCH")"
+  elif [[ $VCS_STATUS_TAG ]]; then
+    p+="#$(gs_fb "$VCS_STATUS_TAG")"
   else
     p+=" @${VCS_STATUS_COMMIT[1,8]}"
   fi
 
   # Remote status
   if (( VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_COMMITS_AHEAD )); then
-    p+="${GITSTATUS_SYMBOLS[separator]}"
+    p+="$GIT_SEP"
     (( VCS_STATUS_COMMITS_BEHIND )) && p+=$(gsf behind "$VCS_STATUS_COMMITS_BEHIND" clean)
     (( VCS_STATUS_COMMITS_AHEAD )) && p+=$(gsf ahead "$VCS_STATUS_COMMITS_AHEAD" clean)
   fi
 
   # Push remote status
   if (( VCS_STATUS_PUSH_COMMITS_BEHIND || VCS_STATUS_PUSH_COMMITS_AHEAD )); then
-    p+="${GITSTATUS_SYMBOLS[separator]}"
+    p+="$GIT_SEP"
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=$(gsf push_behind "$VCS_STATUS_PUSH_COMMITS_BEHIND" clean)
     (( VCS_STATUS_PUSH_COMMITS_AHEAD )) && p+=$(gsf push_ahead "$VCS_STATUS_PUSH_COMMITS_AHEAD" clean)
   fi
 
   # Repository status
-  (( VCS_STATUS_STASHES )) && p+=$(gsf stash "$VCS_STATUS_STASHES" stash)
-  [[ -n $VCS_STATUS_ACTION ]] && p+="${GITSTATUS_SYMBOLS[separator]}${GITSTATUS_COLORS[conflicted]}${VCS_STATUS_ACTION}"
-  (( VCS_STATUS_NUM_CONFLICTED )) && p+=$(gsf merge_conflict "$VCS_STATUS_NUM_CONFLICTED" conflicted)
-  (( VCS_STATUS_NUM_STAGED )) && p+=$(gsf staged "$VCS_STATUS_NUM_STAGED" clean)
-  (( VCS_STATUS_NUM_UNSTAGED )) && p+=$(gsf unstaged "$VCS_STATUS_NUM_UNSTAGED" modified)
-  (( VCS_STATUS_NUM_UNTRACKED )) && p+=$(gsf untracked_files "$VCS_STATUS_NUM_UNTRACKED" untracked)
+  (( VCS_STATUS_STASHES ))          && p+=$(gsf stash "$VCS_STATUS_STASHES" stash)
+  [[ $VCS_STATUS_ACTION ]]          && p+="$GIT_SEP${GITSTATUS_COLORS[conflicted]}${VCS_STATUS_ACTION}"
+  (( VCS_STATUS_NUM_CONFLICTED ))   && p+=$(gsf merge_conflict "$VCS_STATUS_NUM_CONFLICTED" conflicted)
+  (( VCS_STATUS_NUM_STAGED ))       && p+=$(gsf staged "$VCS_STATUS_NUM_STAGED" clean)
+  (( VCS_STATUS_NUM_UNSTAGED ))     && p+=$(gsf unstaged "$VCS_STATUS_NUM_UNSTAGED" modified)
+  (( VCS_STATUS_NUM_UNTRACKED ))    && p+=$(gsf untracked_files "$VCS_STATUS_NUM_UNTRACKED" untracked)
 
-  GITSTATUS_PROMPT="${p}%f"
-  GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/x}//\%(f|<->F)}}"
+  GITSTATUS_PROMPT="${p}${RESET}"
+  GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/X}//\%(f|<->F)}}"
 }
 
-# Setup prompt
-function prompt_setup() {
-  setopt prompt_subst
+# ─────────────────────────────────────────────────────────────
+# Prompt setup
+# ─────────────────────────────────────────────────────────────
+prompt_setup() {
+  setopt no_prompt_bang prompt_percent prompt_subst
   typeset -g prompt_newline=$'\n%{\r%}'
 
-  # Initialize gitstatus
   gitstatus_stop 'MY' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY'
 
-  # Set up hooks
   autoload -Uz add-zsh-hook
   add-zsh-hook precmd gitstatus_prompt_update
 
-  # Configure prompt options
-  setopt no_prompt_bang prompt_percent prompt_subst
-
-  # Build prompt
-  PROMPT=""
+  PROMPT=''
   PROMPT+='${prompt_newline}'
   PROMPT+='${GITSTATUS_COLORS[path]}%B%1~%b%f'
   PROMPT+='$(venv_prompt)'
@@ -127,5 +149,5 @@ function prompt_setup() {
   PROMPT+='${prompt_newline}%(?.${GITSTATUS_COLORS[prompt_success]}.${GITSTATUS_COLORS[prompt_error]})%B%b%f '
 }
 
-# Initialize the prompt
+# Initialize immediately
 prompt_setup
