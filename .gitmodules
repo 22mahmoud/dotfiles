@@ -88,3 +88,6 @@
 [submodule "zsh/.config/zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/.config/zsh/plugins/fast-syntax-highlighting
 	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
+[submodule "src/.local/src/tinted-terminal"]
+	path = src/.local/src/tinted-terminal
+	url = git@github.com:tinted-theming/tinted-terminal.git
