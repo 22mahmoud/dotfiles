@@ -32,6 +32,7 @@ typeset -gA GITSTATUS_COLORS=(
   [untracked]='%F{blue}'
   [conflicted]='%F{red}'
   [stash]='%F{cyan}'
+  [venv]='%F{cyan}'
 )
 
 typeset -g RESET='%f'
@@ -54,11 +55,20 @@ gsf() {
 # ─────────────────────────────────────────────────────────────
 # Python/virtualenv prompt component
 # ─────────────────────────────────────────────────────────────
+# Disable the default virtualenv text so we can build our own
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-venv_prompt() {
-  [[ $VIRTUAL_ENV ]] || return
-  printf ' %F{cyan}(%s)%f' "${VIRTUAL_ENV:t}"
+# We use a global variable to store the string to avoid subshell lag
+typeset -g VENV_PROMPT=""
+
+venv_prompt_update() {
+  if [[ -n $VIRTUAL_ENV ]]; then
+    # Get the basename of the folder (e.g., /blah/my-venv -> my-venv)
+    local venv_name="${VIRTUAL_ENV:t}"
+    VENV_PROMPT=" ${GITSTATUS_COLORS[venv]}( ${venv_name})${RESET}"
+  else
+    VENV_PROMPT=""
+  fi
 }
 
 # ─────────────────────────────────────────────────────────────
@@ -136,15 +146,20 @@ prompt_setup() {
   setopt no_prompt_bang prompt_percent prompt_subst
   typeset -g prompt_newline=$'\n%{\r%}'
 
+  # Start Gitstatus
   gitstatus_stop 'MY' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY'
 
   autoload -Uz add-zsh-hook
+
+  # Hook 1: Update Git
   add-zsh-hook precmd gitstatus_prompt_update
+  # Hook 2: Update Venv (this replaces the $(venv_prompt) call)
+  add-zsh-hook precmd venv_prompt_update
 
   PROMPT=''
   PROMPT+='${prompt_newline}'
   PROMPT+='${GITSTATUS_COLORS[path]}%B%1~%b%f'
-  PROMPT+='$(venv_prompt)'
+  PROMPT+='${VENV_PROMPT}'
   PROMPT+='$GITSTATUS_PROMPT'
   PROMPT+='${prompt_newline}%(?.${GITSTATUS_COLORS[prompt_success]}.${GITSTATUS_COLORS[prompt_error]})%B%b%f '
 }
