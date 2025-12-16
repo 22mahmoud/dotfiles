@@ -75,9 +75,14 @@ alias ytb='yt-dlp -f bestvideo+bestaudio '
 alias drm-dl='yt-dlp --external-downloader axel --no-warnings --allow-unplayable-formats --no-check-certificate --concurrent-fragments 10'
 
 # paru
-alias p='paru'
-alias pa='paru -S'
-alias pr='paru -Rns'
+# alias p='paru'
+# alias pa='paru -S'
+# alias pr='paru -Rns'
+
+# yay
+alias p='yay'
+alias pa='yay -S'
+alias pr='yay -Rns'
 
 # navigation
 alias ..='cd ..'
