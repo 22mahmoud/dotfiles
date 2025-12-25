@@ -15,7 +15,7 @@ usage() {
     printf '%s\n' "$line"
   done <<-EOF
 
-  rex [ -h | -s | -g | -v | -q | -m ] 
+  rex [ -h | -s | -g | -v | -q | -m ]
     record a video, a gif, and take a screenshot.
 
   -h    show this help
