@@ -42,7 +42,7 @@
   history_length = 20
 
   ### Misc/Advanced ###
-  dmenu = /usr/bin/dmenu -p dunst:
+  dmenu = ~/.local/bin/fzf-menu
   browser = $BROWSER --new-tab
 
   # Always run rule-defined scripts, even if the notification is suppressed
