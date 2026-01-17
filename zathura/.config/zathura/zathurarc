@@ -1,13 +1,15 @@
 # vim: syntax=config
 
-set recolor "true"
+# set recolor "true"
 include /home/ashraf/.config/ricing/zathura-theme
 
+
+set index-bg              "#1a1b26"
+set index-fg              "#c0caf5"
 set selection-clipboard clipboard
 set window-title-basename true
-set window-title-page true
+set true
 set statusbar-home-tilde true
-set page-padding 1
 
 set font "monospace normal 11"
 set render-loading false

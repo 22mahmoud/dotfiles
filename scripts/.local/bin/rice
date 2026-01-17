@@ -130,11 +130,13 @@ update_st() {
 update_qutebrowser() {
   truncate -s 0 "$c_qutebrowser"
 
+  echo "from typing import cast" >>"$c_qutebrowser"
   echo "from qutebrowser.config.configfiles import ConfigAPI" >>"$c_qutebrowser"
   echo "from qutebrowser.config.config import ConfigContainer" >>"$c_qutebrowser"
   echo "" >>"$c_qutebrowser"
-  echo "config: ConfigAPI = config  # type: ignore" >>"$c_qutebrowser"
-  echo "c: ConfigContainer = c  # type: ignore" >>"$c_qutebrowser"
+
+  echo "config = cast(ConfigAPI, config)  # type: ignore  # noqa: F821" >>"$c_qutebrowser"
+  echo "c = cast(ConfigContainer, c)  # type: ignore  # noqa: F821" >>"$c_qutebrowser"
   echo "" >>"$c_qutebrowser"
 
   if [ "$theme_name" = "catppuccin-mocha" ] || [ "$theme_name" = "tokyonight" ]; then

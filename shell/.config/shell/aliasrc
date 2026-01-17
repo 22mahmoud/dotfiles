@@ -25,10 +25,11 @@ alias cpr='rsync -artzP -hh --partial --info=stats1,progress2 --modify-window=1'
 alias srv='python -m http.server -d'
 alias xrdb='xrdb -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing"'
 alias myip='curl ifconfig.me'
+alias rwall='find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg'
 
 # apps
 alias v='nvim'
-alias sv='sudo -E nvim'
+alias sv='sudoedit'
 alias yt='yt-dlp'
 alias open='xdg-open'
 alias nnn='nnn -c'

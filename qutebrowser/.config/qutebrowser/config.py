@@ -1,11 +1,12 @@
 import os
+from typing import cast
 
-from qutebrowser.config.configfiles import ConfigAPI
 from qutebrowser.config.config import ConfigContainer
+from qutebrowser.config.configfiles import ConfigAPI
 from whitelist import js_whitelist
 
-config: ConfigAPI = config  # type: ignore
-c: ConfigContainer = c  # type: ignore
+config = cast(ConfigAPI, config)  # type: ignore  # noqa: F821
+c = cast(ConfigContainer, c)  # type: ignore  # noqa: F821
 
 config.load_autoconfig(False)
 
