@@ -83,7 +83,9 @@ alias drm-dl='yt-dlp --external-downloader axel --no-warnings --allow-unplayable
 # yay
 alias p='yay'
 alias pa='yay -S'
+alias pi='yay -Si'
 alias pr='yay -Rns'
+alias pc='yay -Ycc'
 
 # navigation
 alias ..='cd ..'
