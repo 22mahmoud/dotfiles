@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # file names
 C_RICINIG="$XDG_CONFIG_HOME/ricing"

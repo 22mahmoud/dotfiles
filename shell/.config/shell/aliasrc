@@ -189,6 +189,9 @@ alias kss='kubectl get services'
 alias ka='kubectl apply -f'
 alias kd='kubectl delete pod'
 
+# opencode
+alias oc='opencode'
+
 # git
 alias g='git'
 alias gs='git status'
