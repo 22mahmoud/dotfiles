@@ -91,3 +91,6 @@
 [submodule "src/.local/src/tinted-terminal"]
 	path = src/.local/src/tinted-terminal
 	url = git@github.com:tinted-theming/tinted-terminal.git
+[submodule "alacritty/.config/alacritty/themes/catppuccin-alacritty"]
+	path = alacritty/.config/alacritty/themes/catppuccin-alacritty
+	url = git@github.com:catppuccin/alacritty.git

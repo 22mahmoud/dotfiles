@@ -27,6 +27,12 @@ alias xrdb='xrdb -I"${XDG_CONFIG_HOME}/x11" -I"${XDG_CONFIG_HOME}/ricing"'
 alias myip='curl ifconfig.me'
 alias rwall='find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg'
 
+# rm override (trash-cli)
+alias rm='trash-put'
+alias rml='trash-list'
+alias rmr='trash-restore'
+alias rme='trash-empty'
+
 # apps
 alias v='nvim'
 alias sv='sudoedit'
@@ -191,6 +197,7 @@ alias kd='kubectl delete pod'
 
 # opencode
 alias oc='opencode'
+alias occ='opencode -c'
 
 # git
 alias g='git'

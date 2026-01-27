@@ -26,13 +26,13 @@ super + e
   emojiz -f
 
 super + m
-  $TERMINAL -T neomuttTerm -e bicon eg neomutt
+  $TERMINAL -t neomuttTerm -e bicon eg neomutt
 
 super + n
   $FILE_MANAGER
 
 super + r
-  $TERMINAL -T newsboatTerm -e bicon eg newsboat
+  $TERMINAL -t newsboatTerm -e bicon eg newsboat
 
 super + alt + {0, 9, 8}
   volume {inc, dec, toggle}

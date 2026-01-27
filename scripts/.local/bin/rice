@@ -12,6 +12,7 @@ c_lazygit="$C_RICINIG/lazygit-theme.yml"
 c_zathura="$C_RICINIG/zathura-theme"
 c_dunst="$C_RICINIG/theme.dunstrc"
 c_ghostty="$C_RICINIG/ghostty-theme"
+c_alacritty="$C_RICINIG/alacritty-theme.toml"
 
 themes="base16-gruvbox-dark-hard
 catppuccin-mocha
@@ -226,6 +227,27 @@ update_delta() {
 
 }
 
+update_alacritty() {
+  truncate -s 0 "$c_alacritty"
+
+  echo "[general]" >>"$c_alacritty"
+  echo "" >>"$c_alacritty"
+
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    # catppuccin-alacritty typically ships toml/yaml; adjust filename if your repo differs
+    echo "import = [\"$HOME/.config/alacritty/themes/catppuccin-alacritty/catppuccin-mocha.toml\"]" >>"$c_alacritty"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    # tokyonight.nvim extras usually include an alacritty toml
+    echo "import = [\"$HOME/.local/src/tokyonight.nvim/extras/alacritty/tokyonight_night.toml\"]" >>"$c_alacritty"
+  elif [[ "$theme_name" == base16-* ]]; then
+    # tinted-terminal base16 themes
+    echo "import = [\"$HOME/.local/src/tinted-terminal/themes/alacritty/$theme_name.toml\"]" >>"$c_alacritty"
+  else
+    # fallback: try same name as-is in tinted-terminal
+    echo "import = [\"$HOME/.local/src/tinted-terminal/themes/alacritty/$theme_name.toml\"]" >>"$c_alacritty"
+  fi
+}
+
 update_ghostty() {
   truncate -s 0 "$c_ghostty"
 
@@ -255,6 +277,7 @@ main() {
   update_zathura &
   update_dunst &
   update_ghostty &
+  update_alacritty &
   update_wallpaper &
 }
 

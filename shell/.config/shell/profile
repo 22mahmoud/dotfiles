@@ -8,6 +8,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_VIDEOS_DIR="$HOME/vids"
 export XDG_PICTURES_DIR="$HOME/pics"
+export XDG_DOWNLOAD_DIR="$HOME/dls"
 export XCURSOR_PATH="$XCURSOR_PATH:/usr/share/icons:${XDG_DATA_HOME}/icons"
 
 # X11
@@ -113,7 +114,7 @@ export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG="z:autojump;p:preview-tui;u:imgur;d:dragdrop"
 export NNN_TRASH=1
-export NNN_TERMINAL="st -w"
+export NNN_TERMINAL="alacritty -e"
 export NNN_ICONLOOKUP=1
 
 # pfetch
@@ -140,7 +141,7 @@ export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 # Default programs:
 export EDITOR="$XDG_DATA_HOME/bob/nightly/bin/nvim"
 export VISUAL="$XDG_DATA_HOME/bob/nightly/bin/nvim"
-export TERMINAL="st"
+export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
 export WM='dwm'

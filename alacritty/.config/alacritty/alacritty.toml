@@ -1,0 +1,18 @@
+[general]
+live_config_reload = true
+import = [
+  "~/.config/ricing/alacritty-theme.toml",
+]
+
+[window]
+padding = { x = 6, y = 6 }
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 800
+
+[keyboard]
+bindings = [
+  { key = "K", mods = "Alt", action = "ScrollLineUp" },
+  { key = "J", mods = "Alt", action = "ScrollLineDown" },
+]

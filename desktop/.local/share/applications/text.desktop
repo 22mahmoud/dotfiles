@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Vim
 Comment=Text Editor
-Exec=/usr/local/bin/nvim %F
+Exec=$EDITOR %F
 Terminal=true
 Type=Application
 Categories=TextEditor;
