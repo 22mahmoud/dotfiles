@@ -17,7 +17,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 
 ### Software
 
-- Terminal: [St](https://github.com/22mahmoud/st)
+- Terminal: [Alacritty](https://github.com/22mahmoud/dotfiles/blob/main/alacritty/.config/alacritty/alacritty.toml)
 - WM: [Dwm](https://github.com/22mahmoud/dwm)
 - Menu: [fzf-menu](https://github.com/22mahmoud/dotfiles/blob/main/scripts/.local/bin/fzf-menu)
 - Shell: [zsh](https://www.zsh.org/)
@@ -28,7 +28,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 - PDF viewer: [zathura](https://pwmt.org/projects/zathura/)
 - Video Player: [mpv](https://mpv.io/)
 - Syntax highlighting [bat](https://github.com/sharkdp/bat), [delta](https://github.com/dandavison/delta)
-- ls: [eza](https://github.com/eza-community/eza)
+- ls: [lsd](https://github.com/lsd-rs/lsd)
 - Email:
   - [neomutt](https://neomutt.org/)
   - [msmtp](https://marlam.de/msmtp/)
