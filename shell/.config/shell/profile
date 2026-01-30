@@ -139,8 +139,8 @@ export MAIL="$XDG_DATA_HOME/mail"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 
 # Default programs:
-export EDITOR="$XDG_DATA_HOME/bob/nightly/bin/nvim"
-export VISUAL="$XDG_DATA_HOME/bob/nightly/bin/nvim"
+export EDITOR="$XDG_DATA_HOME/bob/nvim-bin/nvim"
+export VISUAL="$XDG_DATA_HOME/bob/nvim-bin/nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
@@ -177,7 +177,7 @@ path=(
   "$XDG_CONFIG_HOME/tizen-studio/tools/ide/bin"
   "${ASDF_DATA_DIR}/shims"
   # "$PHPENV_ROOT/bin"
-  "$HOME/.local/share/bob/nightly/bin/"
+  "$HOME/.local/share/bob/nvim-bin"
   "$path[@]"
 )
 

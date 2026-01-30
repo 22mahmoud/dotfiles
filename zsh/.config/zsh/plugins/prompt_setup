@@ -43,16 +43,6 @@ typeset -g RESET='%f'
 typeset -gi GITSTATUS_MAX_BRANCH_LENGTH=32
 
 # ─────────────────────────────────────────────────────────────
-# Shortcut function for git-status tokens
-# ─────────────────────────────────────────────────────────────
-gsf() {
-  local symbol="$1"
-  local count="$2"
-  local color="$3"
-  (( count > 0 )) && printf '%s%s%s%s' "$GIT_SEP" "${GITSTATUS_COLORS[$color]}" "${GITSTATUS_SYMBOLS[$symbol]}" "$count"
-}
-
-# ─────────────────────────────────────────────────────────────
 # Python/virtualenv prompt component
 # ─────────────────────────────────────────────────────────────
 # Disable the default virtualenv text so we can build our own
@@ -95,9 +85,6 @@ gitstatus_prompt_update() {
   typeset -g GITSTATUS_PROMPT=''
   typeset -gi GITSTATUS_PROMPT_LEN=0
 
-  # Skip work when outside git repos
-  [[ -d .git || -d ../.git ]] || return
-
   # Query daemon
   gitstatus_query 'MY' || { GITSTATUS_PROMPT=''; return; }
   [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return
@@ -116,24 +103,24 @@ gitstatus_prompt_update() {
   # Remote status
   if (( VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_COMMITS_AHEAD )); then
     p+="$GIT_SEP"
-    (( VCS_STATUS_COMMITS_BEHIND )) && p+=$(gsf behind "$VCS_STATUS_COMMITS_BEHIND" clean)
-    (( VCS_STATUS_COMMITS_AHEAD )) && p+=$(gsf ahead "$VCS_STATUS_COMMITS_AHEAD" clean)
+    (( VCS_STATUS_COMMITS_BEHIND )) && p+="$GIT_SEP${GITSTATUS_COLORS[clean]}${GITSTATUS_SYMBOLS[behind]}${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_AHEAD )) && p+="$GIT_SEP${GITSTATUS_COLORS[clean]}${GITSTATUS_SYMBOLS[ahead]}${VCS_STATUS_COMMITS_AHEAD}"
   fi
 
   # Push remote status
   if (( VCS_STATUS_PUSH_COMMITS_BEHIND || VCS_STATUS_PUSH_COMMITS_AHEAD )); then
     p+="$GIT_SEP"
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=$(gsf push_behind "$VCS_STATUS_PUSH_COMMITS_BEHIND" clean)
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD )) && p+=$(gsf push_ahead "$VCS_STATUS_PUSH_COMMITS_AHEAD" clean)
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+="$GIT_SEP${GITSTATUS_COLORS[clean]}${GITSTATUS_SYMBOLS[push_behind]}${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD )) && p+="$GIT_SEP${GITSTATUS_COLORS[clean]}${GITSTATUS_SYMBOLS[push_ahead]}${VCS_STATUS_PUSH_COMMITS_AHEAD}"
   fi
 
   # Repository status
-  (( VCS_STATUS_STASHES ))          && p+=$(gsf stash "$VCS_STATUS_STASHES" stash)
+  (( VCS_STATUS_STASHES ))          && p+="$GIT_SEP${GITSTATUS_COLORS[stash]}${GITSTATUS_SYMBOLS[stash]}${VCS_STATUS_STASHES}"
   [[ $VCS_STATUS_ACTION ]]          && p+="$GIT_SEP${GITSTATUS_COLORS[conflicted]}${VCS_STATUS_ACTION}"
-  (( VCS_STATUS_NUM_CONFLICTED ))   && p+=$(gsf merge_conflict "$VCS_STATUS_NUM_CONFLICTED" conflicted)
-  (( VCS_STATUS_NUM_STAGED ))       && p+=$(gsf staged "$VCS_STATUS_NUM_STAGED" clean)
-  (( VCS_STATUS_NUM_UNSTAGED ))     && p+=$(gsf unstaged "$VCS_STATUS_NUM_UNSTAGED" modified)
-  (( VCS_STATUS_NUM_UNTRACKED ))    && p+=$(gsf untracked_files "$VCS_STATUS_NUM_UNTRACKED" untracked)
+  (( VCS_STATUS_NUM_CONFLICTED ))   && p+="$GIT_SEP${GITSTATUS_COLORS[conflicted]}${GITSTATUS_SYMBOLS[merge_conflict]}${VCS_STATUS_NUM_CONFLICTED}"
+  (( VCS_STATUS_NUM_STAGED ))       && p+="$GIT_SEP${GITSTATUS_COLORS[clean]}${GITSTATUS_SYMBOLS[staged]}${VCS_STATUS_NUM_STAGED}"
+  (( VCS_STATUS_NUM_UNSTAGED ))     && p+="$GIT_SEP${GITSTATUS_COLORS[modified]}${GITSTATUS_SYMBOLS[unstaged]}${VCS_STATUS_NUM_UNSTAGED}"
+  (( VCS_STATUS_NUM_UNTRACKED ))    && p+="$GIT_SEP${GITSTATUS_COLORS[untracked]}${GITSTATUS_SYMBOLS[untracked_files]}${VCS_STATUS_NUM_UNTRACKED}"
 
   GITSTATUS_PROMPT="${p}${RESET}"
   GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/X}//\%(f|<->F)}}"
@@ -143,6 +130,11 @@ gitstatus_prompt_update() {
 # Prompt setup
 # ─────────────────────────────────────────────────────────────
 prompt_setup() {
+  if (( ${+PROMPT_SETUP_DONE} )); then
+    return
+  fi
+  typeset -g PROMPT_SETUP_DONE=1
+
   setopt no_prompt_bang prompt_percent prompt_subst
   typeset -g prompt_newline=$'\n%{\r%}'
 
@@ -164,5 +156,5 @@ prompt_setup() {
   PROMPT+='${prompt_newline}%(?.${GITSTATUS_COLORS[prompt_success]}.${GITSTATUS_COLORS[prompt_error]})%B%b%f '
 }
 
-# Initialize immediately
+# Initialize once (guarded inside prompt_setup).
 prompt_setup

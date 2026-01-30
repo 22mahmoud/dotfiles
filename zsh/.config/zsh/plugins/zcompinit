@@ -3,8 +3,10 @@
 zcompinit() {
   setopt extendedglob local_options
   autoload -Uz compinit
-  local zcd=${ZSH_CACHE_DIR:-$HOME/.cache/zsh}/zcompdump
+  local zcd=${ZSH_CACHE_DIR:-$HOME/.cache/zsh}/zcompdump-${ZSH_VERSION}
   local zcdc="$zcd.zwc"
+
+  [[ -d ${zcd:h} ]] || mkdir -p -- ${zcd:h} 2>/dev/null
 
   # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
   # in the background as this doesn't affect the current session
@@ -17,4 +19,5 @@ zcompinit() {
   fi
 }
 
-zcompinit
+# Intentionally does not auto-run.
+# Callers should `autoload -Uz zcompinit` and invoke it once.
