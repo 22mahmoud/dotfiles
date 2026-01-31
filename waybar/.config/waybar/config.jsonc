@@ -1,0 +1,100 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 24,
+	"spacing": 4,
+
+	"modules-right": [
+		"disk#home",
+		"custom/sep",
+		"cpu",
+		"custom/sep",
+		"memory",
+		"custom/mail",
+		"pulseaudio",
+		"clock#date",
+		"clock#time",
+		"tray"
+	],
+
+	"modules-left": ["niri/workspaces", "niri/window"],
+
+	"niri/window": {
+		"format": "{}"
+	},
+
+	"niri/workspaces": {
+		"format": "{icon}",
+		"hide-empty": true,
+		"format-icons": {
+			"browser": "",
+			"terminal": "󰅩",
+			"lab": "",
+			"gaming": "",
+			"video": "",
+			"email": "󰛮",
+			"rss": "󰑫",
+			"chat": "󰭹",
+			"music": "󰓇",
+			"default": "󰄯"
+		}
+	},
+
+	"tray": {
+		"icon-size": 16,
+		"spacing": 6
+	},
+
+	"disk#home": {
+		"path": "/home",
+		"interval": 60,
+		"format": "[DISK {free}]"
+	},
+
+	"cpu": {
+		"interval": 2,
+		"format": "[CPU {usage}%]"
+	},
+
+	"memory": {
+		"interval": 2,
+		"format": "[RAM {percentage}%]"
+	},
+
+	"custom/sep": {
+		"format": "~",
+		"tooltip": false
+	},
+
+	"custom/mail": {
+		"interval": 10,
+		"exec": "~/.config/waybar/scripts/mail-count.sh",
+		"format": "󰇮  {}",
+		"tooltip": false
+	},
+
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-muted": "󰝟 muted",
+		"format-icons": {
+			"phone": ["󰋋", "󰕿", "󰖀", "󰕾"],
+			"default": ["󰕿", "󰖀", "󰖀", "󰕾"]
+		},
+		"scroll-step": 2,
+		"on-click": "pavucontrol",
+		"on-click-right": "volume -t",
+		"tooltip": true
+	},
+
+	"clock#date": {
+		"interval": 60,
+		"format": "󰃭 {:%A, %b %d}",
+		"tooltip": false
+	},
+
+	"clock#time": {
+		"interval": 10,
+		"format": "󰥔 {:%I:%M %p}",
+		"tooltip": false
+	}
+}

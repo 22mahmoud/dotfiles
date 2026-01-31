@@ -1,6 +1,6 @@
 ## Mahmoud Ashraf's Dotfiles 🎨
 
-![screenshot](screenshot.png)
+![screenshot](screenshot-niri.png)
 
 ### Note
 
@@ -18,7 +18,8 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 ### Software
 
 - Terminal: [Alacritty](https://github.com/22mahmoud/dotfiles/blob/main/alacritty/.config/alacritty/alacritty.toml)
-- WM: [Dwm](https://github.com/22mahmoud/dwm)
+- WM: [Niri](https://github.com/YaLTeR/niri/)
+- Bar: [Waybar](https://github.com/Alexays/Waybar/)
 - Menu: [fzf-menu](https://github.com/22mahmoud/dotfiles/blob/main/scripts/.local/bin/fzf-menu)
 - Shell: [zsh](https://www.zsh.org/)
 - Font: [Nerd Fonts](https://www.nerdfonts.com/)
@@ -34,7 +35,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
   - [msmtp](https://marlam.de/msmtp/)
   - [mbsync](https://isync.sourceforge.io/mbsync.html)
   - [lynx](https://lynx.invisible-island.net/)
-- Image Viewer: [nsxiv](https://github.com/22mahmoud/nsxiv)
+- Image Viewer: [imv](https://github.com/eXeC64/imv)
 - Browser: [qutebrowser](https://qutebrowser.org/)
 - Notification: [dunst](https://dunst-project.org)
 - RSS:

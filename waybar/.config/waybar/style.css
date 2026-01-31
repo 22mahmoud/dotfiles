@@ -1,0 +1,251 @@
+@import "colors-tokyonight.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 16px;
+}
+
+window#waybar {
+  background: @background;
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#disk,
+#cpu,
+#memory,
+#custom-mail,
+#pulseaudio,
+#clock.date,
+#clock.time,
+#tray {
+  margin: 0 4px;
+  padding: 0 6px;
+  border: 0;
+}
+
+#disk,
+#cpu,
+#memory {
+  color: @color2;
+  background: alpha(@background, 0.55);
+}
+
+#custom-sep {
+  background: transparent;
+  color: @color7;
+}
+
+#custom-mail {
+  background: alpha(@color5, 0.15);
+  color: @color5;
+}
+
+#pulseaudio {
+  background: alpha(@color6, 0.15);
+  color: @color6;
+}
+
+#pulseaudio.muted {
+  background: alpha(@color1, 0.15);
+  color: @color1;
+}
+
+#clock.date {
+  background: alpha(@color4, 0.15);
+  color: @color4;
+}
+
+#clock.time {
+  background: alpha(@color2, 0.15);
+  color: @color2;
+}
+
+#workspaces {
+  margin: 0;
+}
+
+#workspaces button {
+  padding: 0 6px;
+  margin: 0;
+  color: @color7;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#workspaces button.empty {
+  color: @color8;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: @color0;
+  background: @foreground;
+}
+
+#workspaces button.focused label,
+#workspaces button.active label {
+  color: @color0;
+}
+
+#workspaces button.urgent {
+  background: @color1;
+  color: @background;
+}
+
+/* Active but empty - transparent bg with accent text */
+#workspaces button.focused.empty,
+#workspaces button.active.empty {
+  background: transparent;
+}
+
+/* Per-workspace active colors */
+#workspaces button#niri-workspace-browser.focused,
+#workspaces button#niri-workspace-browser.active {
+  background: @color3;
+}
+
+#workspaces button#niri-workspace-browser.active.empty,
+#workspaces button#niri-workspace-browser.focused.empty {
+  background: transparent;
+  color: @color3;
+}
+
+#workspaces button#niri-workspace-browser.active.empty label,
+#workspaces button#niri-workspace-browser.focused.empty label {
+  color: @color3;
+}
+
+#workspaces button#niri-workspace-terminal.focused,
+#workspaces button#niri-workspace-terminal.active {
+  background: @color2;
+}
+
+#workspaces button#niri-workspace-terminal.active.empty,
+#workspaces button#niri-workspace-terminal.focused.empty {
+  background: transparent;
+  color: @color2;
+}
+
+#workspaces button#niri-workspace-terminal.active.empty label,
+#workspaces button#niri-workspace-terminal.focused.empty label {
+  color: @color2;
+}
+
+#workspaces button#niri-workspace-lab.focused,
+#workspaces button#niri-workspace-lab.active {
+  background: @color6;
+}
+
+#workspaces button#niri-workspace-lab.active.empty,
+#workspaces button#niri-workspace-lab.focused.empty {
+  background: transparent;
+  color: @color6;
+}
+
+#workspaces button#niri-workspace-lab.active.empty label,
+#workspaces button#niri-workspace-lab.focused.empty label {
+  color: @color6;
+}
+
+#workspaces button#niri-workspace-gaming.focused,
+#workspaces button#niri-workspace-gaming.active {
+  background: @color4;
+}
+
+#workspaces button#niri-workspace-gaming.active.empty,
+#workspaces button#niri-workspace-gaming.focused.empty {
+  background: transparent;
+  color: @color4;
+}
+
+#workspaces button#niri-workspace-gaming.active.empty label,
+#workspaces button#niri-workspace-gaming.focused.empty label {
+  color: @color4;
+}
+
+#workspaces button#niri-workspace-video.focused,
+#workspaces button#niri-workspace-video.active {
+  background: @color5;
+}
+
+#workspaces button#niri-workspace-video.active.empty,
+#workspaces button#niri-workspace-video.focused.empty {
+  background: transparent;
+  color: @color5;
+}
+
+#workspaces button#niri-workspace-video.active.empty label,
+#workspaces button#niri-workspace-video.focused.empty label {
+  color: @color5;
+}
+
+#workspaces button#niri-workspace-email.focused,
+#workspaces button#niri-workspace-email.active {
+  background: @color14;
+}
+
+#workspaces button#niri-workspace-email.active.empty,
+#workspaces button#niri-workspace-email.focused.empty {
+  background: transparent;
+  color: @color14;
+}
+
+#workspaces button#niri-workspace-email.active.empty label,
+#workspaces button#niri-workspace-email.focused.empty label {
+  color: @color14;
+}
+
+#workspaces button#niri-workspace-rss.focused,
+#workspaces button#niri-workspace-rss.active {
+  background: @color1;
+}
+
+#workspaces button#niri-workspace-rss.active.empty,
+#workspaces button#niri-workspace-rss.focused.empty {
+  background: transparent;
+  color: @color1;
+}
+
+#workspaces button#niri-workspace-rss.active.empty label,
+#workspaces button#niri-workspace-rss.focused.empty label {
+  color: @color1;
+}
+
+#workspaces button#niri-workspace-chat.focused,
+#workspaces button#niri-workspace-chat.active {
+  background: @color11;
+}
+
+#workspaces button#niri-workspace-chat.active.empty,
+#workspaces button#niri-workspace-chat.focused.empty {
+  background: transparent;
+  color: @color11;
+}
+
+#workspaces button#niri-workspace-chat.active.empty label,
+#workspaces button#niri-workspace-chat.focused.empty label {
+  color: @color11;
+}
+
+#workspaces button#niri-workspace-music.focused,
+#workspaces button#niri-workspace-music.active {
+  background: @color13;
+}
+
+#workspaces button#niri-workspace-music.active.empty,
+#workspaces button#niri-workspace-music.focused.empty {
+  background: transparent;
+  color: @color13;
+}
+
+#workspaces button#niri-workspace-music.active.empty label,
+#workspaces button#niri-workspace-music.focused.empty label {
+  color: @color13;
+}
