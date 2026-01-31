@@ -48,8 +48,7 @@ _dmenu() {
 }
 
 _fzf() {
-  active_window=$(xdotool getactivewindow)
-  selected=$(fzf-menu <"$c_emojis_file")
+  selected=$(fzf-menu --title="fzf-menu: Emoji 😀🪅🥳" <"$c_emojis_file")
 
   if [ -z "$selected" ]; then
     exit 0
@@ -57,9 +56,9 @@ _fzf() {
 
   emoji="$(echo "$selected" | awk '{print $1}' | tr -d '\n')"
 
-  xdotool type --delay 55 --window "$active_window" "$emoji"
+  printf '%s' "$emoji" | wl-copy
 
-  echo "$emoji" | tr -d '\n' | xclip -selection clipboard
+  wtype -M ctrl -M shift -k v -m shift -m ctrl
 }
 
 main() {

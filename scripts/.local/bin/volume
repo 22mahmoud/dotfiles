@@ -6,7 +6,7 @@ usage() {
   done <<-EOF
 
   volume [ -i | -d | -t | -h ]
-    control volume with notifcations
+    control volume with notifications
 
   -h|help     show this help
   -i|inc      increase volume
@@ -28,7 +28,9 @@ toggle() {
 }
 
 get_icon() {
-  volume=$(pamixer --get-volume)
+  local volume icon
+
+  volume="$(pamixer --get-volume)"
 
   if [ "$(pamixer --get-mute)" = true ]; then
     icon="audio-volume-muted"
@@ -42,23 +44,24 @@ get_icon() {
     icon="audio-volume-muted"
   fi
 
-  echo $icon
+  echo "$icon"
 }
 
 notify() {
-  local volume
-  local is_muted
+  local volume is_muted volume_human icon
 
   volume="$(pamixer --get-volume)"
   is_muted="$(pamixer --get-mute)"
+  icon="$(get_icon)"
 
-  volume_human="$volume%"
-  if [ "${is_muted}" = true ]; then
-    volume_human="$volume% (muted)"
+  volume_human="${volume}%"
+  if [ "$is_muted" = true ]; then
+    volume_human="${volume}% (muted)"
   fi
 
-  dunstify -t 1500 \
-    -i "$(get_icon)" \
+  notify-send \
+    -t 1500 \
+    -i "$icon" \
     -h int:value:"$volume" \
     -h string:x-canonical-private-synchronous:"changeVolume" \
     "Volume: $volume_human"

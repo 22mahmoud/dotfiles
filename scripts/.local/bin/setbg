@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PIDFILE="/tmp/wallgif.pid"
+LOCKDIR="/tmp/setbg.lock"
 
 usage() {
   echo "Usage: $(basename "$0") <file_path>"
@@ -9,87 +10,129 @@ usage() {
   exit 0
 }
 
-kill_running_xwinwrap() {
-  if [ -f "$PIDFILE" ]; then
-    pid=$(cat "$PIDFILE")
-
-    if kill -0 "$pid" 2>/dev/null; then
-      kill "$pid"
-      sleep 1
-    fi
-
-    rm -f "$PIDFILE"
+acquire_lock() {
+  if ! mkdir "$LOCKDIR" 2>/dev/null; then
+    echo "setbg: another instance is running (lock: $LOCKDIR)" >&2
+    exit 1
   fi
+  trap 'rm -rf "$LOCKDIR"' EXIT INT TERM HUP
+}
+
+write_pid() {
+  # $1 = pid, $2 = tag (swaybg|mpvpaper)
+  printf '%s %s\n' "$1" "$2" >"$PIDFILE"
+}
+
+read_pid() {
+  [ -f "$PIDFILE" ] || return 1
+  # shellcheck disable=SC2162
+  read pid tag <"$PIDFILE" || return 1
+  [ -n "$pid" ] || return 1
+  echo "$pid $tag"
+}
+
+pid_is_ours() {
+  pid="$1"
+  expected="$2"
+
+  kill -0 "$pid" 2>/dev/null || return 1
+
+  if [ -r "/proc/$pid/comm" ]; then
+    comm="$(cat "/proc/$pid/comm" 2>/dev/null)"
+    [ "$comm" = "$expected" ] || return 1
+  fi
+
+  return 0
+}
+
+stop_running_wallpaper() {
+  if ! info="$(read_pid)"; then
+    return 0
+  fi
+
+  pid="${info%% *}"
+  tag="${info#* }"
+
+  if ! pid_is_ours "$pid" "$tag"; then
+    rm -f "$PIDFILE"
+    return 0
+  fi
+
+  kill "$pid" 2>/dev/null || true
+
+  i=0
+  while kill -0 "$pid" 2>/dev/null; do
+    i=$((i + 1))
+    [ "$i" -ge 20 ] && break
+    sleep 0.1
+  done
+
+  if kill -0 "$pid" 2>/dev/null; then
+    kill -9 "$pid" 2>/dev/null || true
+  fi
+
+  rm -f "$PIDFILE"
 }
 
 get_rel_path() {
   case "$1" in
-
   http*://*)
     echo "$1"
     ;;
   *)
-    file_path="$(realpath "$1")"
-
+    file_path="$(realpath "$1")" || exit 1
     if [ ! -f "$file_path" ]; then
-      echo "file not exist"
+      echo "file not exist" >&2
       exit 1
-    else
-      echo "$file_path"
     fi
+    echo "$file_path"
     ;;
   esac
 }
 
 wallgif() {
-  nice xwinwrap -ni -s -nf -b -un -ovr -fdt -argb -g "$1" -- mpv \
-    -wid WID \
-    --hwdec=vdpau \
+  nohup mpvpaper -o "\
+    --loop-file=inf \
     --no-config \
     --no-terminal \
     --no-osc \
     --no-osd-bar \
-    --loop-file=inf \
     --no-pause \
-    --player-operation-mode=cplayer \
     --panscan=1.0 \
     --mute=yes \
-    --no-input-default-bindings \
-    --msg-level=vd=v,vo=v,vo/gpu/vaapi-egl=trace \
-    --ytdl-format='bestvideo[height<=?1080]+bestaudio/best' \
-    "$2" &
+    --player-operation-mode=cplayer \
+    --ytdl-format=bestvideo[height<=?1080]+bestaudio/best" \
+    ALL "$1" >/dev/null 2>&1 &
 
-  echo $! >"$PIDFILE"
+  write_pid "$!" "mpvpaper"
 }
 
 create_setbg_script() {
-
   cat >~/.config/setbg <<EOF
 #!/bin/sh
-
-$(command -v "$0") "$file_path"
+nohup $(command -v "$0") "$file_path" >/dev/null 2>&1 &
 EOF
-
   chmod +x ~/.config/setbg
 }
 
 main() {
   [ $# -eq 0 ] && usage
 
-  kill_running_xwinwrap
+  acquire_lock
+  stop_running_wallpaper
 
   file_path="$(get_rel_path "$1")"
 
   case "$file_path" in
-  *jpg | *jpeg | *png)
-    feh --no-fehbg --bg-fill "$file_path"
+  *.jpg | *.jpeg | *.JPG | *.png | *.PNG)
+    swaybg -i "$file_path" -m fill >/dev/null 2>&1 &
+    write_pid "$!" "swaybg"
     ;;
-  *gif | *mp4 | *mkv | *webm | *youtube.com/watch*)
-    res=$(xdpyinfo | awk '/dimensions/ {print $2}')
-    wallgif "$res" "$file_path"
+  *.gif | *.mp4 | *.mkv | *.webm | *youtube.com/watch* | *youtu.be/*)
+    # wallgif "$file_path"
     ;;
   *)
-    echo "Error: Unsupported file format"
+    echo "Error: Unsupported file format" >&2
     exit 1
     ;;
   esac

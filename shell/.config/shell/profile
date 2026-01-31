@@ -156,33 +156,36 @@ export MANROFFOPT="-c"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # path
-typeset -U PATH path
-
-path=(
-  "/usr/local/bin/"
-  "$HOME/.local/bin"
-  "$HOME/.local/bin/Bento4/bin/"
-  "$VOLTA_HOME/bin"
-  "$CARGO_HOME/bin"
-  "$DENO_INSTALL/bin"
-  "$GOPATH/bin"
-  "$GEM_HOME/bin"
-  "$ANDROID_HOME/emulator"
-  "$ANDROID_HOME/tools"
-  "$ANDROID_HOME/tools/bin"
-  "$ANDROID_HOME/platform-tools"
-  "$HOME/.php-school/bin"
-  "$HOME/.config/composer/vendor/bin"
-  "$XDG_CONFIG_HOME/tizen-studio/tools"
-  "$XDG_CONFIG_HOME/tizen-studio/tools/ide/bin"
-  "${ASDF_DATA_DIR}/shims"
-  # "$PHPENV_ROOT/bin"
-  "$HOME/.local/share/bob/nvim-bin"
-  "$path[@]"
-)
+PATH="/usr/local/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.local/bin/Bento4/bin:$PATH"
+PATH="$VOLTA_HOME/bin:$PATH"
+PATH="$CARGO_HOME/bin:$PATH"
+PATH="$DENO_INSTALL/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
+PATH="$GEM_HOME/bin:$PATH"
+PATH="$ANDROID_HOME/emulator:$PATH"
+PATH="$ANDROID_HOME/tools:$PATH"
+PATH="$ANDROID_HOME/tools/bin:$PATH"
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+PATH="$HOME/.php-school/bin:$PATH"
+PATH="$HOME/.config/composer/vendor/bin:$PATH"
+PATH="$XDG_CONFIG_HOME/tizen-studio/tools:$PATH"
+PATH="$XDG_CONFIG_HOME/tizen-studio/tools/ide/bin:$PATH"
+PATH="$ASDF_DATA_DIR/shims:$PATH"
+PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
 export PATH
 
+
+# a workaround to make flatpak apps work with the xdg portal
+# systemctl --user import-environment DISPLAY XAUTHORITY
+# if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+#   dbus-update-activation-environment --all
+# fi
+
+niri-session
+
 # startx when logged in
-[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 &&
-  exec startx "$XINITRC"
+# [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 &&
+#   exec startx "$XINITRC"

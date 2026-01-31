@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 selection="$(printf "🔒 Lock\n🚪 Log out\n🔄 Reboot\n⭐ Shutdown" |
   fzf-menu --prompt "💡 Power Menu ~ ")"
 
-case $selection in
+case "$selection" in
 *"Lock")
-  slock
+  swaylock -f
   ;;
 *"Log out")
-  killall xinit
+  loginctl terminate-user "$USER"
   ;;
 *"Reboot")
   systemctl reboot

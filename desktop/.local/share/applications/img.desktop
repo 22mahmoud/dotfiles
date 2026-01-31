@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Image viewer
-Exec=/usr/local/bin/sxiv -a %f
+Exec=/bin/imv %f

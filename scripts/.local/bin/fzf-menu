@@ -1,10 +1,53 @@
 #!/usr/bin/env bash
 # vim: ft=bash
 
+fzf_args=()
+c_ub=0
+alacritty_title=""
+
+for arg in "$@"; do
+  if [[ "$arg" == "-ub" ]]; then
+    c_ub=1
+    continue
+  fi
+
+  case "$arg" in
+  -T | --title)
+    shift
+    if [[ -z "${1-}" ]]; then
+      echo "error: missing value for $arg" >&2
+      exit 2
+    fi
+    alacritty_title="$1"
+    continue
+    ;;
+  --title=*)
+    alacritty_title="${arg#--title=}"
+    continue
+    ;;
+  esac
+
+  fzf_args+=("$arg")
+done
+
+UEBERZUG_TMP_DIR="/tmp"
+
 cleanup() {
   rm -rf "$input" "$output"
+
+  if [[ "$c_ub" -eq 1 ]]; then
+    ueberzugpp cmd -s "$SOCKET" -a exit
+  fi
+
   kill $! 2>/dev/null
 }
+
+if [[ "$c_ub" -eq 1 ]]; then
+  UB_PID_FILE="$UEBERZUG_TMP_DIR/.$(uuidgen)"
+  ueberzugpp layer --no-stdin --silent --use-escape-codes --pid-file "$UB_PID_FILE"
+  UB_PID=$(cat "$UB_PID_FILE")
+  export SOCKET="$UEBERZUG_TMP_DIR"/ueberzugpp-"$UB_PID".socket
+fi
 
 input=$(mktemp -u --suffix .fzfmenu.input)
 output=$(mktemp -u --suffix .fzfmenu.output)
@@ -14,21 +57,42 @@ mkfifo "$output"
 
 chmod 600 "$input" "$output"
 
+preview_cmd=""
+
+alacritty_title_args=()
+if [[ -n "$alacritty_title" ]]; then
+  alacritty_title_args=(-T "$alacritty_title")
+fi
+
+if [[ "$c_ub" -eq 1 ]]; then
+  preview_cmd='--preview=ueberzugpp\ cmd\ -s\ "$SOCKET"\ -i\ fzfpreview\ -a\ add\ -x\ "$FZF_PREVIEW_LEFT"\ -y\ "$FZF_PREVIEW_TOP"\ --max-width\ "$FZF_PREVIEW_COLUMNS"\ --max-height\ "$FZF_PREVIEW_LINES"\ -f\ "{}"'
+fi
+
 alacritty \
   --class fzf-menu,fzf-menu \
-  --title fzf-menu \
+  "${alacritty_title_args[@]}" \
   --command zsh -c "
+    if [[ $c_ub -eq 1 ]]; then
+      UEBERZUG_TMP_DIR=/tmp
+      UB_PID_FILE=\"\$UEBERZUG_TMP_DIR/.\$(uuidgen)\"
+      ueberzugpp layer --no-stdin --silent --use-escape-codes --pid-file \"\$UB_PID_FILE\" &
+      UB_PID=\$(cat \"\$UB_PID_FILE\")
+      export SOCKET=\"\$UEBERZUG_TMP_DIR/ueberzugpp-\$UB_PID.socket\"
+    fi
+
     cat $input |
-    fzf \
-      --layout=reverse \
-      --prompt='~ ' \
-      $(printf -- " '%s'" "$@" | sed "s/^ ''$//") |
+    fzf --layout=reverse --prompt='~ ' $preview_cmd \
+      $(printf -- " '%s'" "${fzf_args[@]}" | sed "s/^ ''$//") |
     tee $output
+
+    if [[ $c_ub -eq 1 ]]; then
+      ueberzugpp cmd -s \"\$SOCKET\" -a exit >/dev/null 2>&1
+    fi
   " &
 
 disown
 
-trap cleanup EXIT INT TERM
+trap cleanup HUP INT QUIT TERM EXIT
 
 cat >"$input"
 cat "$output"
