@@ -1,0 +1,33 @@
+layout {
+  gaps 6
+
+  focus-ring {
+    width 2
+    active-color "#82aaff"
+    inactive-color "#3b4261"
+    urgent-color "#ff5370"
+  }
+
+  tab-indicator {
+    on
+    place-within-column
+    active-color "red"
+    inactive-color "gray"
+    urgent-color "blue"
+  }
+
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 0.96
+    proportion 1.0
+  }
+
+  preset-window-heights {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 1.0
+  }
+}

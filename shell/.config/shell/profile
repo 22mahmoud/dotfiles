@@ -11,9 +11,6 @@ export XDG_PICTURES_DIR="$HOME/pics"
 export XDG_DOWNLOAD_DIR="$HOME/dls"
 export XCURSOR_PATH="$XCURSOR_PATH:/usr/share/icons:${XDG_DATA_HOME}/icons"
 
-# X11
-export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
-
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
@@ -22,11 +19,6 @@ export ANDROID_HOME="$XDG_CONFIG_HOME/android/Sdk"
 export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/android/avd"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-
-# theme (force dark only)
-# export GTK_THEME=Adwaita:dark
-# export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
-# export QT_STYLE_OVERRIDE=Adwaita-Dark
 
 # theme (dynamic)
 export QT_QPA_PLATFORMTHEME=qt6ct
@@ -144,7 +136,7 @@ export VISUAL="$XDG_DATA_HOME/bob/nvim-bin/nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
-export WM='dwm'
+export WM='niri'
 export VIDEO="mpv"
 export IMAGE="sxiv"
 export COLORTERM="truecolor"
@@ -177,11 +169,20 @@ PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
 export PATH
 
+if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
+  export XDG_SESSION_TYPE=wayland
+  export XDG_CURRENT_DESKTOP=niri
+  export XDG_SESSION_DESKTOP=niri
 
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri
+  if command -v systemctl >/dev/null 2>&1; then
+    systemctl --user import-environment \
+      XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP WAYLAND_DISPLAY
+  fi
 
-niri-session
+  if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment --systemd \
+      XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP WAYLAND_DISPLAY
+  fi
 
-# startx when logged in
-# [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 &&
-#   exec startx "$XINITRC"
+  exec niri-session
+fi

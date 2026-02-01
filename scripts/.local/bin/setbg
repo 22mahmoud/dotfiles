@@ -129,7 +129,7 @@ main() {
     write_pid "$!" "swaybg"
     ;;
   *.gif | *.mp4 | *.mkv | *.webm | *youtube.com/watch* | *youtu.be/*)
-    # wallgif "$file_path"
+    wallgif "$file_path"
     ;;
   *)
     echo "Error: Unsupported file format" >&2

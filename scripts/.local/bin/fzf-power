@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 selection="$(printf "🔒 Lock\n🚪 Log out\n🔄 Reboot\n⭐ Shutdown" |
-  fzf-menu --prompt "💡 Power Menu ~ ")"
+  fzf-menu --class="fzf-menu-power" --prompt "💡 Power Menu ~ ")"
 
 case "$selection" in
 *"Lock")

@@ -48,7 +48,7 @@ _dmenu() {
 }
 
 _fzf() {
-  selected=$(fzf-menu --title="fzf-menu: Emoji 😀🪅🥳" <"$c_emojis_file")
+  selected=$(fzf-menu --class='fzf-menu-emojiz' --title="fzf-menu: Emoji 😀🪅🥳" <"$c_emojis_file")
 
   if [ -z "$selected" ]; then
     exit 0

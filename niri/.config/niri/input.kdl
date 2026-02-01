@@ -1,0 +1,13 @@
+input {
+  keyboard {
+    xkb {
+      layout "us,ara"
+      options "grp:lalt_lshift_toggle"
+    }
+    repeat-delay 300
+    repeat-rate 30
+  }
+
+
+   focus-follows-mouse max-scroll-amount="0%"
+}

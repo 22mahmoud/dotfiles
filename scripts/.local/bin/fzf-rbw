@@ -54,7 +54,7 @@ unlock() {
 }
 
 fzf_rbw_menu() {
-  rbw ls --fields folder,name,user | fzf-menu \
+  rbw ls --fields folder,name,user | fzf-menu --title="🔑 rbw password picker" --class="fzf-menu-rbw" \
     --query "$c_query" \
     --prompt="🔑 rbw ~ " \
     --layout=reverse \

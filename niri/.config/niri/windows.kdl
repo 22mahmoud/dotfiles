@@ -1,0 +1,53 @@
+window-rule {
+  clip-to-geometry true
+}
+
+window-rule{
+  match app-id="fzf-menu*"
+  match app-id="pavucontrol"
+  match app-id="xdg-desktop-portal-gtk"
+  match app-id="xdg-desktop-portal-gnome"
+  match app-id="org.gnome.Nautilus"
+  match app-id="system-config-printer"
+  open-floating true
+  default-column-width { proportion 0.45; }
+  default-window-height { proportion 0.65; }
+}
+
+window-rule {
+  match app-id="brave-browser"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="neomutt-term"
+  open-on-workspace "email"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="newsboat-term"
+  open-on-workspace "rss"
+  open-maximized true
+}
+
+window-rule {
+  match app-id="ferdium"
+  match app-id="org.telegram.desktop"
+  match app-id="Slack"
+  open-on-workspace "chat"
+  default-column-width { proportion 0.96; }
+}
+
+window-rule {
+  match app-id="sp-htop"
+  open-floating true
+  default-column-width { proportion 0.75; }
+  default-window-height { proportion 0.75; }
+}
+
+window-rule {
+  match app-id="gcr-prompter"
+  match app-id="fzf-menu-rbw"
+  block-out-from "screencast"
+}
