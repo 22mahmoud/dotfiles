@@ -178,11 +178,7 @@ PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH
 
 
-# a workaround to make flatpak apps work with the xdg portal
-# systemctl --user import-environment DISPLAY XAUTHORITY
-# if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-#   dbus-update-activation-environment --all
-# fi
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri
 
 niri-session
 
