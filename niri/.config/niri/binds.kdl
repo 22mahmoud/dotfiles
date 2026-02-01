@@ -8,28 +8,30 @@ binds {
 
   Mod+P { spawn "fzf-rbw"; }
 
-  Mod+Shift+p { spawn "fzf-power"; }
+  Mod+Shift+P { spawn "fzf-power"; }
 
   Mod+B { spawn-sh "$BROWSER"; }
   Mod+Shift+B { spawn-sh "$BROWSER --incognito"; }
 
-  Mod+n { spawn-sh "$FILE_MANAGER"; }
+  Mod+N { spawn-sh "$FILE_MANAGER"; }
 
   Mod+M { spawn-sh "$TERMINAL --class=neomutt-term -e bicon eg neomutt"; }
-  Mod+s { spawn-sh "$TERMINAL --class=newsboat-term -e bicon eg newsboat"; }
+  Mod+S { spawn-sh "$TERMINAL --class=newsboat-term -e bicon eg newsboat"; }
   Mod+Z { spawn-sh "cliphist list | fzf-menu -ub | cliphist decode | wl-copy"; }
 
+  Mod+A { spawn-sh "$TERMINAL --class=sp-bc-term -o font.size=20 -e bc -ql"; }
+  Mod+T { spawn-sh "$TERMINAL --class=sp-trans-term -o font.size=14 -e trans -v -I --speak -d en:ar"; }
+
   Mod+Shift+X { spawn "swaylock"; }
-  Mod+Shift+M { spawn-sh "$TERMINAL --class sp-htop -e htop"; }
+  Mod+Shift+M { spawn-sh "$TERMINAL --class sp-htop-term -e htop"; }
 
-  Mod+Alt+0 { spawn "volume" "inc"; }
-  Mod+Alt+9 { spawn "volume" "dec"; }
-  Mod+Alt+8 { spawn "volume" "toggle"; }
-  XF86AudioRaiseVolume { spawn "volume" "inc"; }
-  XF86AudioLowerVolume { spawn "volume" "dec"; }
-  XF86AudioMute        { spawn "volume" "toggle"; }
+  Mod+Alt+0 allow-when-locked=true { spawn "volume" "inc"; }
+  Mod+Alt+9 allow-when-locked=true { spawn "volume" "dec"; }
+  Mod+Alt+8 allow-when-locked=true { spawn "volume" "toggle"; }
+  XF86AudioRaiseVolume allow-when-locked=true  { spawn "volume" "inc"; }
+  XF86AudioLowerVolume allow-when-locked=true  { spawn "volume" "dec"; }
+  XF86AudioMute        allow-when-locked=true  { spawn "volume" "toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
 
   XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
   XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
@@ -146,9 +148,8 @@ binds {
 
   Mod+W { toggle-column-tabbed-display; }
 
-  Print { screenshot; }
-  Ctrl+Print { screenshot-screen; }
-  Alt+Print { screenshot-window; }
+  Print { spawn "rex" "-s"; }
+  Shift+Print { spawn "rex" "-s" "-m" "s"; }
 
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 

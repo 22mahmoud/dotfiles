@@ -16,23 +16,44 @@ EOF
 }
 
 inc() {
-  pamixer -i 5
+  wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%+
 }
 
 dec() {
-  pamixer -d 5
+  wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 }
 
 toggle() {
-  pamixer -t
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+}
+
+get_volume() {
+  local output volume
+
+  output="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+  volume="${output#Volume: }"
+  volume="${volume%% *}"
+
+  awk -v v="$volume" 'BEGIN { printf "%d", (v * 100) + 0.5 }'
+}
+
+get_mute() {
+  local output
+
+  output="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+
+  case "$output" in
+  *MUTED*) echo true ;;
+  *) echo false ;;
+  esac
 }
 
 get_icon() {
   local volume icon
 
-  volume="$(pamixer --get-volume)"
+  volume="$(get_volume)"
 
-  if [ "$(pamixer --get-mute)" = true ]; then
+  if [ "$(get_mute)" = true ]; then
     icon="audio-volume-muted"
   elif [ "$volume" -gt 70 ]; then
     icon="audio-volume-high"
@@ -50,8 +71,8 @@ get_icon() {
 notify() {
   local volume is_muted volume_human icon
 
-  volume="$(pamixer --get-volume)"
-  is_muted="$(pamixer --get-mute)"
+  volume="$(get_volume)"
+  is_muted="$(get_mute)"
   icon="$(get_icon)"
 
   volume_human="${volume}%"

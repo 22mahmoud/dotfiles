@@ -14,6 +14,11 @@ window#waybar {
   text-shadow: none;
 }
 
+#window {
+  margin: 0 12px;
+  color: @foreground;
+}
+
 #disk,
 #cpu,
 #memory,

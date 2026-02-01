@@ -2,8 +2,7 @@ window-rule {
   clip-to-geometry true
 }
 
-window-rule{
-  match app-id="fzf-menu*"
+window-rule {
   match app-id="pavucontrol"
   match app-id="xdg-desktop-portal-gtk"
   match app-id="xdg-desktop-portal-gnome"
@@ -16,6 +15,7 @@ window-rule{
 
 window-rule {
   match app-id="brave-browser"
+  open-on-workspace "browser"
   open-maximized true
 }
 
@@ -32,6 +32,12 @@ window-rule {
 }
 
 window-rule {
+  match app-id="spotify"
+  open-on-workspace "music"
+  default-column-width { proportion 0.96; }
+}
+
+window-rule {
   match app-id="ferdium"
   match app-id="org.telegram.desktop"
   match app-id="Slack"
@@ -40,14 +46,52 @@ window-rule {
 }
 
 window-rule {
-  match app-id="sp-htop"
+  match app-id="fzf-menu*"
+  open-floating true
+}
+
+window-rule {
+  match app-id="sp-bc-term"
+  match app-id="sp-trans-term"
+  open-floating true
+  default-column-width { proportion 0.45; }
+  default-window-height { proportion 0.65; }
+}
+
+window-rule {
+  match app-id="sp-htop-term"
   open-floating true
   default-column-width { proportion 0.75; }
   default-window-height { proportion 0.75; }
 }
 
 window-rule {
+  match app-id="steam"
+  match app-id="com.usebottles.bottles"
+  match app-id="Azahar"
+  match app-id="faugus-launcher"
+  open-on-workspace "gaming"
+}
+
+window-rule {
+  match app-id="mpv"
+  match app-id="io.mpv.Mpv"
+  match app-id="vlc"
+  match app-id="org.videolan.VLC"
+  open-on-workspace "video"
+}
+
+window-rule {
   match app-id="gcr-prompter"
   match app-id="fzf-menu-rbw"
+  match app-id="neomutt-term"
   block-out-from "screencast"
+}
+
+window-rule {
+  match is-window-cast-target=true
+
+  focus-ring {
+    active-color "#f38ba8"
+  }
 }

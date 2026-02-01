@@ -3,11 +3,8 @@
 # c_ prefix stands for config (acts like global state)
 c_type=
 c_mode="full"
-c_pidfile="/tmp/rex.pid"
-c_with_audio=
 
 file_name=${REX_FILE_NAME:-$(date '+%y%m%d-%H%M-%S')}
-videos_dir=${REX_VID_DIR:-$XDG_VIDEOS_DIR/screencasts}
 pictures_dir=${REX_PIC_DIR:-$XDG_PICTURES_DIR/screenshots}
 
 usage() {
@@ -15,52 +12,13 @@ usage() {
     printf '%s\n' "$line"
   done <<-EOF
 
-  rex [ -h | -s | -g | -v | -q | -m ]
-    record a video, a gif, and take a screenshot.
+  rex [ -h | -s | -m ]
+    take a screenshot.
 
   -h    show this help
   -s    take a screenshot
-  -v    take a video
-  -g    take a gif
   -m    mode can be either full,f(default), or select,s
-  -a    enable audio
-  -q    stop recording a video/gif
 EOF
-}
-
-stop() {
-  notify_id="4398"
-  [ ! -e "$c_pidfile" ] && exit 0
-
-  {
-    read -r pid file_path rec_type
-    kill "$pid"
-
-    if [ "$rec_type" = "gif" ]; then
-      gif_path="${file_path%.mkv}.gif"
-
-      dunstify -r "$notify_id" "Rex" "convert the record into GIF..."
-
-      ffmpeg -i "$file_path" \
-        -loglevel quiet \
-        -vf fps=10 -c:v pam -f \
-        image2pipe - |
-        convert -delay 10 - -loop 0 -layers optimize "$gif_path"
-
-      rm "$file_path"
-      file_path="$gif_path"
-    fi
-
-    dunstify -r "$notify_id" "Rex" "Video taken" --action "default,ok" | {
-      read -r action
-      case "$action" in
-      "default") mpv "$file_path" ;;
-      esac
-    } &
-
-  } <"$c_pidfile"
-
-  rm "$c_pidfile"
 }
 
 while getopts 'hsvgqam:' opt; do
@@ -71,71 +29,39 @@ while getopts 'hsvgqam:' opt; do
     ;;
   m) c_mode="$OPTARG" ;;
   s) c_type="screenshot" ;;
-  v) c_type="video" ;;
-  g) c_type="gif" ;;
-  a) c_with_audio=true ;;
-  q) stop ;;
-  *) exit 0 ;;
+  *)
+    usage
+    exit 0
+    ;;
   esac
 done
 
-ffmpeg_record() {
-  unset IFS
-
-  file_path="$videos_dir/screencast-$file_name.mkv"
-
-  ffmpeg \
-    -loglevel quiet \
-    -framerate 60 \
-    -f x11grab \
-    -s "$1" \
-    -i "$2" \
-    -r 30 \
-    ${c_with_audio:+-f alsa -i default} \
-    -c:v h264 -crf 0 -preset ultrafast -c:a aac \
-    "$file_path" &
-
-  echo "$! $file_path" "$c_type" >"$c_pidfile"
-}
-
-video() {
-  case "$c_mode" in
-  full | f)
-    ffmpeg_record "$(xdpyinfo | awk '/dimensions/{print $2}')" "$DISPLAY"
-    ;;
-
-  select | s) slop -f "%x %y %w %h" 2>/dev/null | {
-    read -r x y w h
-    [ -z "$x" ] && exit 0
-    ffmpeg_record "$w"+"$h" :0.0+"$x","$y"
-  } ;;
-  esac
-}
-
-_maim() {
-  maim | tee "$screenshot_path" | xclip -selection clipboard -t image/png
-}
-
 screenshot() {
   screenshot_path="$pictures_dir/screenshot-$file_name.png"
+
   case "$c_mode" in
-  full | f) _maim ;;
+  full | f)
+    grim -t png "$screenshot_path"
+    ;;
   select | s)
-    slop -f "-i %i -g %g --tolerance 500" 2>/dev/null | xargs maim | tee "$screenshot_path" | xclip -selection clipboard -t image/png
+    geom="$(slurp)" || exit 0
+    [ -z "$geom" ] && exit 0
+    grim -g "$geom" -t png "$screenshot_path"
     ;;
   esac
 
   [ ! -e "$screenshot_path" ] && exit 1
 
+  wl-copy --type image/png <"$screenshot_path"
+
   dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,ok" | {
     read -r action
     case "$action" in
-    "default") sxiv "$screenshot_path" ;;
+    "default") imv "$screenshot_path" ;;
     esac
   } &
 }
 
 case "$c_type" in
 screenshot) screenshot ;;
-video | gif) video ;;
 esac
