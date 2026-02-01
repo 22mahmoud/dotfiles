@@ -50,6 +50,7 @@ source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
 source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "$ZDOTDIR/plugins/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh"
 source "$ZDOTDIR/plugins/cursor_mode"
+source "$ZDOTDIR/plugins/foot"
 source <(tdl completion zsh)
 
 # prompt

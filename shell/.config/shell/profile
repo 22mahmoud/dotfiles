@@ -106,7 +106,7 @@ export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG="z:autojump;p:preview-tui;u:imgur;d:dragdrop"
 export NNN_TRASH=1
-export NNN_TERMINAL="alacritty -e"
+export NNN_TERMINAL="foot -e"
 export NNN_ICONLOOKUP=1
 
 # pfetch
@@ -133,7 +133,7 @@ export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 # Default programs:
 export EDITOR="$XDG_DATA_HOME/bob/nvim-bin/nvim"
 export VISUAL="$XDG_DATA_HOME/bob/nvim-bin/nvim"
-export TERMINAL="alacritty"
+export TERMINAL="foot"
 export BROWSER="brave"
 export READER="zathura"
 export WM='niri'

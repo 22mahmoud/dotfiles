@@ -35,10 +35,10 @@ mkfifo "$output"
 
 chmod 600 "$input" "$output"
 
-alacritty \
-  --class "$class" \
+foot \
+  --app-id "$class" \
   --title "$title" \
-  --command zsh -c "
+  -e zsh -c "
     cat $input |
     fzf \
       --layout=reverse \

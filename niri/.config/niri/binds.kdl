@@ -15,15 +15,16 @@ binds {
 
   Mod+N { spawn-sh "$FILE_MANAGER"; }
 
-  Mod+M { spawn-sh "$TERMINAL --class=neomutt-term -e bicon eg neomutt"; }
-  Mod+S { spawn-sh "$TERMINAL --class=newsboat-term -e bicon eg newsboat"; }
-  Mod+Z { spawn-sh "cliphist list | fzf-menu -ub | cliphist decode | wl-copy"; }
+  Mod+M { spawn-sh "$TERMINAL --app-id=neomutt-term -e bicon eg neomutt"; }
+  Mod+S { spawn-sh "$TERMINAL --app-id=newsboat-term -e bicon eg newsboat"; }
+  Mod+Z { spawn-sh "cliphist list | fzf-menu --class=fzf-menu-clip | cliphist decode | wl-copy"; }
 
-  Mod+A { spawn-sh "$TERMINAL --class=sp-bc-term -o font.size=20 -e bc -ql"; }
-  Mod+T { spawn-sh "$TERMINAL --class=sp-trans-term -o font.size=14 -e trans -v -I --speak -d en:ar"; }
+  Mod+A { spawn-sh "$TERMINAL --app-id=sp-bc-term --font=monospace:size=24  -e bc -ql"; }
+  Mod+T { spawn-sh "$TERMINAL --app-id=sp-trans-term --font=monospace:size=16 -e trans -v -I --speak -d en:ar"; }
+
 
   Mod+Shift+X { spawn "swaylock"; }
-  Mod+Shift+M { spawn-sh "$TERMINAL --class sp-htop-term -e htop"; }
+  Mod+Shift+M { spawn-sh "$TERMINAL --app-id=sp-htop-term -e htop"; }
 
   Mod+Alt+0 allow-when-locked=true { spawn "volume" "inc"; }
   Mod+Alt+9 allow-when-locked=true { spawn "volume" "dec"; }

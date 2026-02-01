@@ -84,6 +84,7 @@ window-rule {
 window-rule {
   match app-id="gcr-prompter"
   match app-id="fzf-menu-rbw"
+  match app-id="fzf-menu-clip"
   match app-id="neomutt-term"
   block-out-from "screencast"
 }
