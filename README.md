@@ -17,7 +17,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 
 ### Software
 
-- Terminal: [Alacritty](https://github.com/22mahmoud/dotfiles/blob/main/alacritty/.config/alacritty/alacritty.toml)
+- Terminal: [Foot](https://codeberg.org/dnkl/foot)
 - WM: [Niri](https://github.com/YaLTeR/niri/)
 - Bar: [Waybar](https://github.com/Alexays/Waybar/)
 - Menu: [fzf-menu](https://github.com/22mahmoud/dotfiles/blob/main/scripts/.local/bin/fzf-menu)
