@@ -91,3 +91,9 @@
 [submodule "alacritty/.config/alacritty/themes/catppuccin-alacritty"]
 	path = alacritty/.config/alacritty/themes/catppuccin-alacritty
 	url = git@github.com:catppuccin/alacritty.git
+[submodule "foot/.local/src/catppuccin-foot"]
+	path = foot/.local/src/catppuccin-foot
+	url = git@github.com:catppuccin/foot.git
+[submodule "waybar/.local/src/base16-waybar"]
+	path = waybar/.local/src/base16-waybar
+	url = git@github.com:tinted-theming/base16-waybar.git

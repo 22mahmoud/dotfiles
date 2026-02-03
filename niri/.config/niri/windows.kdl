@@ -15,6 +15,7 @@ window-rule {
 
 window-rule {
   match app-id="brave-browser"
+  match app-id="org.qutebrowser.qutebrowser"
   open-on-workspace "browser"
   open-maximized true
 }

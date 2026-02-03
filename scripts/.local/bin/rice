@@ -13,6 +13,8 @@ c_zathura="$C_RICINIG/zathura-theme"
 c_dunst="$C_RICINIG/theme.dunstrc"
 c_ghostty="$C_RICINIG/ghostty-theme"
 c_alacritty="$C_RICINIG/alacritty-theme.toml"
+c_foot="$C_RICINIG/foot-theme.ini"
+c_waybar="$C_RICINIG/waybar.css"
 
 themes="base16-gruvbox-dark-hard
 catppuccin-mocha
@@ -248,6 +250,76 @@ update_alacritty() {
   fi
 }
 
+update_foot() {
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    cp "$HOME/.local/src/catppuccin-foot/themes/catppuccin-mocha.ini" "$c_foot"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    awk '
+      /^\[cursor\]/ { in_cursor=1; next }
+      in_cursor && /^color=/ { cursor_val=substr($0, 7); next }
+      in_cursor && /^$/ { in_cursor=0; next }
+      /^\[colors\]/ { print; if (cursor_val) print "cursor=" cursor_val; next }
+      !in_cursor { print }
+    ' "$HOME/.local/src/tokyonight.nvim/extras/foot/tokyonight_night.ini" > "$c_foot"
+  elif [[ "$theme_name" == base16-* ]]; then
+    cp "$HOME/.local/src/tinted-terminal/themes/foot/$theme_name.ini" "$c_foot"
+  else
+    cp "$HOME/.local/src/tinted-terminal/themes/foot/$theme_name.ini" "$c_foot"
+  fi
+}
+
+update_waybar() {
+  if [ "$theme_name" == "catppuccin-mocha" ]; then
+    cp "$HOME/.config/waybar/themes/catppuccin.css" "$c_waybar"
+  elif [ "$theme_name" == "tokyonight" ]; then
+    cp "$HOME/.config/waybar/themes/tokyonight.css" "$c_waybar"
+  else
+    local src="/home/ashraf/.local/src/base16-waybar/colors/$theme_name.css"
+    awk '
+      /@define-color base00/ { base00=$3; gsub(";", "", base00) }
+      /@define-color base01/ { base01=$3; gsub(";", "", base01) }
+      /@define-color base02/ { base02=$3; gsub(";", "", base02) }
+      /@define-color base03/ { base03=$3; gsub(";", "", base03) }
+      /@define-color base04/ { base04=$3; gsub(";", "", base04) }
+      /@define-color base05/ { base05=$3; gsub(";", "", base05) }
+      /@define-color base06/ { base06=$3; gsub(";", "", base06) }
+      /@define-color base07/ { base07=$3; gsub(";", "", base07) }
+      /@define-color base08/ { base08=$3; gsub(";", "", base08) }
+      /@define-color base09/ { base09=$3; gsub(";", "", base09) }
+      /@define-color base0A/ { base0A=$3; gsub(";", "", base0A) }
+      /@define-color base0B/ { base0B=$3; gsub(";", "", base0B) }
+      /@define-color base0C/ { base0C=$3; gsub(";", "", base0C) }
+      /@define-color base0D/ { base0D=$3; gsub(";", "", base0D) }
+      /@define-color base0E/ { base0E=$3; gsub(";", "", base0E) }
+      /@define-color base0F/ { base0F=$3; gsub(";", "", base0F) }
+      END {
+        print "@define-color background " base00 ";"
+        print "@define-color foreground " base05 ";"
+        print ""
+        print "@define-color color0 " base00 ";"
+        print "@define-color color1 " base08 ";"
+        print "@define-color color2 " base0B ";"
+        print "@define-color color3 " base0A ";"
+        print "@define-color color4 " base0D ";"
+        print "@define-color color5 " base0E ";"
+        print "@define-color color6 " base0C ";"
+        print "@define-color color7 " base05 ";"
+        print ""
+        print "@define-color color8 " base03 ";"
+        print "@define-color color9 " base08 ";"
+        print "@define-color color10 " base0B ";"
+        print "@define-color color11 " base0A ";"
+        print "@define-color color12 " base0D ";"
+        print "@define-color color13 " base0E ";"
+        print "@define-color color14 " base0C ";"
+        print "@define-color color15 " base07 ";"
+      }
+    ' "$src" >"$c_waybar"
+  fi
+
+  pkill -SIGUSR2 waybar
+}
+
 update_ghostty() {
   truncate -s 0 "$c_ghostty"
 
@@ -266,11 +338,11 @@ update_ghostty() {
 main() {
   update_xresources
 
-  update_dwm &
+  # update_dwm &
   update_qutebrowser &
   update_zsh &
   update_delta &
-  update_st &
+  # update_st &
   update_tmux &
   update_nvim &
   update_lazygit &
@@ -278,6 +350,8 @@ main() {
   update_dunst &
   update_ghostty &
   update_alacritty &
+  update_foot &
+  update_waybar &
   update_wallpaper &
 }
 

@@ -5,10 +5,10 @@ selection="$(printf "🔒 Lock\n🚪 Log out\n🔄 Reboot\n⭐ Shutdown" |
 
 case "$selection" in
 *"Lock")
-  swaylock -f
+  swaylock
   ;;
 *"Log out")
-  loginctl terminate-user "$USER"
+  niri msg action quit -s
   ;;
 *"Reboot")
   systemctl reboot
