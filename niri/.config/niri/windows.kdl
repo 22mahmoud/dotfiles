@@ -33,6 +33,7 @@ window-rule {
 
 window-rule {
   match app-id="spotify"
+  match app-id="org.strawberrymusicplayer.strawberry"
   open-on-workspace "music"
   default-column-width { proportion 0.96; }
 }

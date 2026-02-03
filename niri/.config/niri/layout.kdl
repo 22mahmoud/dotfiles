@@ -1,11 +1,21 @@
 layout {
-  gaps 6
+  gaps 0
+  background-color "transparent"
 
   focus-ring {
+    on
     width 2
     active-color "#82aaff"
     inactive-color "#3b4261"
     urgent-color "#ff5370"
+  }
+
+  border {
+    off
+    width 2
+    active-color "#82aaff"
+    inactive-color "#505050"
+    urgent-color "#9b0000"
   }
 
   tab-indicator {
@@ -30,4 +40,8 @@ layout {
     proportion 0.66667
     proportion 1.0
   }
+}
+
+overview {
+  zoom 0.60
 }

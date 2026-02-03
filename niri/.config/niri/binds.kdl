@@ -26,18 +26,27 @@ binds {
   Mod+Shift+X { spawn "swaylock"; }
   Mod+Shift+M { spawn-sh "$TERMINAL --app-id=sp-htop-term -e htop"; }
 
+  Mod+Shift+W { spawn "killall" "-SIGUSR1" "waybar"; }
+
+  Print { spawn "rex" "-s"; }
+  Shift+Print { spawn "rex" "-s" "-m" "s"; }
+
   Mod+Alt+0 allow-when-locked=true { spawn "volume" "inc"; }
   Mod+Alt+9 allow-when-locked=true { spawn "volume" "dec"; }
   Mod+Alt+8 allow-when-locked=true { spawn "volume" "toggle"; }
   XF86AudioRaiseVolume allow-when-locked=true  { spawn "volume" "inc"; }
   XF86AudioLowerVolume allow-when-locked=true  { spawn "volume" "dec"; }
-  XF86AudioMute        allow-when-locked=true  { spawn "volume" "toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+  XF86AudioMute allow-when-locked=true  { spawn "volume" "toggle"; }
+  XF86AudioMicMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
-  XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-  XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-  XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-  XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+  Mod+Alt+Slash allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+  Mod+Alt+Comma  allow-when-locked=true { spawn-sh "playerctl previous"; }
+  Mod+Alt+Period allow-when-locked=true { spawn-sh "playerctl next"; }
+
+  XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+  XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
+  XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+  XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
 
   Mod+O repeat=false { toggle-overview; }
 
@@ -149,8 +158,6 @@ binds {
 
   Mod+W { toggle-column-tabbed-display; }
 
-  Print { spawn "rex" "-s"; }
-  Shift+Print { spawn "rex" "-s" "-m" "s"; }
 
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 

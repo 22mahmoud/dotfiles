@@ -13,7 +13,6 @@ spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "text-scaling-f
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
-spawn-at-startup "ferdium"
-spawn-at-startup "spotify-launcher"
+spawn-at-startup "strawberry"
 spawn-sh-at-startup "$TERMINAL --class=neomutt-term -e bicon eg neomutt"
 spawn-sh-at-startup "$TERMINAL --class=newsboat-term -e bicon eg newsboat"

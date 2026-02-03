@@ -2,9 +2,11 @@
   "layer": "top",
   "position": "top",
   "height": 34,
-  "spacing": 4,
+  "start_hidden": true,
 
+  "modules-left": ["niri/workspaces", "niri/window"],
   "modules-right": [
+    "privacy",
     "disk#home",
     "custom/sep",
     "cpu",
@@ -12,53 +14,96 @@
     "memory",
     "custom/mail",
     "pulseaudio",
-    "clock#date",
-    "clock#time",
+    "group/clock",
     "tray"
   ],
 
-  "modules-left": ["niri/workspaces", "niri/window"],
+  "privacy": {
+    "icon-spacing": 12,
+    "icon-size": 16,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 18
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 18
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 18
+      }
+    ],
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava"
+      },
+      {
+        "type": "screenshare",
+        "name": "obs"
+      },
+      {
+        "type": "audio-out",
+        "name": "spotify"
+      },
+      {
+        "type": "audio-out",
+        "name": "Strawberry"
+      }
+    ]
+  },
 
   "niri/window": {
-    "format": "{}"
+    "format": "{}",
+    "tooltip": false
   },
 
   "niri/workspaces": {
     "format": "{icon}",
     "hide-empty": true,
     "format-icons": {
-      "browser": "",
-      "terminal": "󰅩",
-      "lab": "",
-      "gaming": "",
-      "video": "",
-      "email": "󰛮",
-      "rss": "󰑫",
-      "chat": "󰭹",
-      "music": "󰓇",
-      "default": "󰄯"
+      "browser": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "terminal": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "lab": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "gaming": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "video": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "email": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "rss": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "chat": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "music": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>",
+      "default": "<span font_family='Font Awesome 7 Free' font_weight='900' size='small'></span>"
     }
   },
 
   "tray": {
     "icon-size": 16,
-    "spacing": 6
+    "spacing": 8
   },
 
   "disk#home": {
     "path": "/home",
     "interval": 60,
-    "format": "[DISK {free}]"
+    "format": "[DISK {free}]",
+    "tooltip": false
   },
 
   "cpu": {
     "interval": 2,
-    "format": "[CPU {usage}%]"
+    "format": "[CPU {usage}%]",
+    "tooltip": false
   },
 
   "memory": {
     "interval": 2,
-    "format": "[RAM {percentage}%]"
+    "format": "[RAM {percentage}%]",
+    "tooltip": false
   },
 
   "custom/sep": {
@@ -69,16 +114,17 @@
   "custom/mail": {
     "interval": 10,
     "exec": "~/.config/waybar/scripts/mail-count.sh",
-    "format": "󰇮  {}",
-    "tooltip": false
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{text}</span>",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/mail-open.sh",
+    "return-type": "json"
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟 muted",
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'>{icon}</span> <span color='#c0caf5'>{volume}%</span>",
+    "format-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>muted</span>",
     "format-icons": {
-      "phone": ["󰋋", "󰕿", "󰖀", "󰕾"],
-      "default": ["󰕿", "󰖀", "󰖀", "󰕾"]
+      "default": ["", "", ""]
     },
     "scroll-step": 2,
     "on-click": "pavucontrol",
@@ -86,15 +132,30 @@
     "tooltip": true
   },
 
-  "clock#date": {
-    "interval": 60,
-    "format": "󰃭 {:%A, %b %d}",
-    "tooltip": false
+  "group/clock": {
+    "orientation": "horizontal",
+
+    "drawer": {
+      "transition-duration": 200,
+      "children-class": "clock-drawer",
+      "click-to-reveal": false,
+      "transition-left-to-right": false
+    },
+
+    "modules": ["clock#time", "clock#date"]
   },
 
   "clock#time": {
     "interval": 10,
-    "format": "󰥔 {:%I:%M %p}",
-    "tooltip": false
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{:%I:%M %p}</span>",
+    "tooltip": false,
+    "class": "time"
+  },
+
+  "clock#date": {
+    "interval": 60,
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{:%A, %b %d}</span>",
+    "tooltip": false,
+    "class": "date"
   }
 }

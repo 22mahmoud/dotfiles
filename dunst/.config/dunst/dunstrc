@@ -52,7 +52,7 @@
   corner_radius = 0
   force_xinerama = false
   mouse_left_click = do_action
-  mouse_middle_click = close_all
+  mouse_middle_click = context
   mouse_right_click = close_current
 
 [experimental]

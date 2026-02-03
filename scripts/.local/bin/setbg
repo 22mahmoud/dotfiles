@@ -19,7 +19,6 @@ acquire_lock() {
 }
 
 write_pid() {
-  # $1 = pid, $2 = tag (swaybg|mpvpaper)
   printf '%s %s\n' "$1" "$2" >"$PIDFILE"
 }
 

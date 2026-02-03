@@ -54,10 +54,11 @@ screenshot() {
 
   wl-copy --type image/png <"$screenshot_path"
 
-  dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,ok" | {
+  dunstify -i "$screenshot_path" "Rex" "screenshot taken" --action "default,Edit" --action "view,View" | {
     read -r action
     case "$action" in
-    "default") imv "$screenshot_path" ;;
+    "default") satty --filename "$screenshot_path" ;;
+    "view") imv "$screenshot_path" ;;
     esac
   } &
 }

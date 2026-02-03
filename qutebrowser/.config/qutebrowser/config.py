@@ -34,8 +34,8 @@ c.editor.command = [
     "-c",
     "normal {line}G{column0}l",
 ]
-c.logging.level.console = "debug"
-c.logging.level.ram = "debug"
+c.logging.level.console = "error"
+c.logging.level.ram = "error"
 c.url.open_base_url = True
 c.spellcheck.languages = ["en-US"]
 # c.scrolling.smooth = True
@@ -49,8 +49,8 @@ c.qt.args = [
 ]
 
 # startpage
-# default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
-default_start_page = "http://localhost:8580"
+default_start_page = os.path.expanduser("~/.config/qutebrowser/startpage.html")
+# default_start_page = "http://localhost:8580"
 c.url.start_pages = [default_start_page]
 c.url.default_page = default_start_page
 
@@ -90,7 +90,13 @@ c.completion.timestamp_format = "%Y-%m-%d %H:%M"
 
 # Status bar
 c.statusbar.show = "always"
-c.statusbar.widgets = ["keypress", "progress", "url", "scroll"]
+c.statusbar.widgets = [
+    "keypress",
+    "progress",
+    "url",
+    "clock",
+    "scroll",
+]
 
 # Tabs
 c.tabs.position = "left"
@@ -100,19 +106,19 @@ c.tabs.title.format = "{index}{audio}: {current_title}"
 c.tabs.favicons.scale = 1
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
 c.tabs.show = "multiple"
-c.tabs.width = 30
+c.tabs.width = 35
 
 # Fonts
-c.fonts.completion.entry = "9pt monospace"
-c.fonts.downloads = "8pt monospace"
-c.fonts.hints = "bold 10pt monospace"
-c.fonts.keyhint = "9pt monospace"
-c.fonts.messages.error = "9pt monospace"
-c.fonts.messages.info = "9pt monospace"
-c.fonts.messages.warning = "9pt monospace"
-c.fonts.statusbar = "9pt monospace"
-c.fonts.tabs.selected = "9pt monospace"
-c.fonts.tabs.unselected = "9pt monospace"
+c.fonts.completion.entry = "11pt monospace"
+c.fonts.downloads = "11pt monospace"
+c.fonts.hints = "bold 11pt monospace"
+c.fonts.keyhint = "11pt monospace"
+c.fonts.messages.error = "11pt monospace"
+c.fonts.messages.info = "11pt monospace"
+c.fonts.messages.warning = "11pt monospace"
+c.fonts.statusbar = "11pt monospace"
+c.fonts.tabs.selected = "11pt monospace"
+c.fonts.tabs.unselected = "11pt monospace"
 
 # Javascript
 c.content.javascript.enabled = False

@@ -8,10 +8,9 @@ c_is_raw=
 c_query=
 c_action=pass
 selection=
+fzf_rbw_args="$(mktemp -u)"
 
-tmpdir="$(mktemp -d)"
-fzf_rbw_args="$tmpdir/action"
-trap 'rm -rf "$tmpdir"' EXIT
+trap 'rm -f "${fzf_rbw_args}"' EXIT
 
 usage() {
   cat <<EOF
@@ -71,57 +70,61 @@ fzf_rbw_menu() {
     --preview-window 'bottom:2:wrap'
 }
 
-get_fields() {
-  _folder="$(printf '%s' "$selection" | awk -F'\t' '{print $1}')"
-  entry_name="$(printf '%s' "$selection" | awk -F'\t' '{print $2}')"
-  username="$(printf '%s' "$selection" | awk -F'\t' '{print $3}')"
-}
-
 get_pass() {
-  get_fields
-  password="$(rbw get "$entry_name")"
+  local password
+
+  password="$(echo "$selection" | xargs -r rbw get)"
 
   if [[ -n "${c_is_raw}" ]]; then
-    printf '%s\n' "$password"
-    exit 0
+    echo "${password}"
+    exit
   fi
 
   clipboard "$password" "Password copied to clipboard."
 }
 
 get_login() {
-  get_fields
-  password="$(rbw get "$entry_name")"
-  otp="$(rbw code "$entry_name" 2>/dev/null || true)"
+  local username
+  local password
+  local otp
+  local result
 
-  result="$(printf '%s\n%s\n%s\n' "$username" "$password" "$otp" | sed '/^$/d')"
+  username="$(echo "${selection}" | awk '{print $2}')"
+  password="$(echo "$selection" | xargs -r rbw get)"
+  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
+  result=$(echo -e "${username}\n${password}\n${otp}" | sed '/^$/d')
 
   if [[ -n "${c_is_raw}" ]]; then
-    printf '%s\n' "$result"
-    exit 0
+    echo "${result}"
+    exit
   fi
 
-  result="$(printf '%s' "$result" | tr '\n' ' ')"
-  clipboard "$result" "Credentials copied to clipboard."
+  result="$(echo "${result}" | tr '\n' ' ')"
+
+  clipboard "${result}" "Credentials copied to clipboard."
 }
 
 get_user() {
-  get_fields
+  local username
+  username="$(echo "${selection}" | awk '{print $2}')"
+
   if [[ -n "${c_is_raw}" ]]; then
-    printf '%s\n' "$username"
-    exit 0
+    echo "${username}"
+    exit
   fi
+
   clipboard "$username" "Username copied to clipboard."
 }
 
 get_otp() {
-  get_fields
-  otp="$(rbw code "$entry_name" 2>/dev/null || true)"
+  local otp
+  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
 
   if [[ -n "${c_is_raw}" ]]; then
-    printf '%s\n' "$otp"
-    exit 0
+    echo "$otp"
+    exit
   fi
+
   clipboard "$otp" "Otp copied to clipboard."
 }
 

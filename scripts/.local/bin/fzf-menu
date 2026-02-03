@@ -45,7 +45,7 @@ foot \
       --prompt='~ ' \
       $(printf -- " '%s'" "${args[@]}" | sed "s/^ ''$//") |
     tee $output
-  " &
+  " 2> >(grep -v "warn:" >&2) &
 
 disown
 
