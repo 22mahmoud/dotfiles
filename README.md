@@ -19,7 +19,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 
 - Terminal: [Foot](https://codeberg.org/dnkl/foot)
 - WM: [Niri](https://github.com/YaLTeR/niri/)
-- Bar: [Waybar](https://github.com/Alexays/Waybar/)
+- Bar: [Waybar](https://github.com/22mahmoud/Waybar) (fork with `hide-empty` option for niri workspaces)
 - Menu: [fzf-menu](https://github.com/22mahmoud/dotfiles/blob/main/scripts/.local/bin/fzf-menu)
 - Shell: [zsh](https://www.zsh.org/)
 - Font: [Nerd Fonts](https://www.nerdfonts.com/)
