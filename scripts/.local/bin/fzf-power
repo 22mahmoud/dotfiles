@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selection="$(printf "🔒 Lock\n🚪 Log out\n🔄 Reboot\n⭐ Shutdown" |
+selection="$(printf "🔒 Lock\n🚪 Log out\n😴 Sleep\n🔄 Reboot\n⭐ Shutdown" |
   fzf-menu --class="fzf-menu-power" --prompt "💡 Power Menu ~ ")"
 
 case "$selection" in
@@ -9,6 +9,9 @@ case "$selection" in
   ;;
 *"Log out")
   niri msg action quit -s
+  ;;
+*"Sleep")
+  systemctl suspend
   ;;
 *"Reboot")
   systemctl reboot

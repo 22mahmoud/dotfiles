@@ -260,7 +260,7 @@ update_foot() {
       in_cursor && /^$/ { in_cursor=0; next }
       /^\[colors\]/ { print; if (cursor_val) print "cursor=" cursor_val; next }
       !in_cursor { print }
-    ' "$HOME/.local/src/tokyonight.nvim/extras/foot/tokyonight_night.ini" > "$c_foot"
+    ' "$HOME/.local/src/tokyonight.nvim/extras/foot/tokyonight_night.ini" >"$c_foot"
   elif [[ "$theme_name" == base16-* ]]; then
     cp "$HOME/.local/src/tinted-terminal/themes/foot/$theme_name.ini" "$c_foot"
   else

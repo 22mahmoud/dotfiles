@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CONFIG_DIR="$HOME/.config/OpenRGB"
+
+profiles="$(find "$CONFIG_DIR" -type f -name "*.orp" -exec basename -s .orp {} +)"
+
+selected_profile="$(echo "$profiles" | fzf-menu --prompt '🔆 Profile ~ ')"
+
+[ -z "$selected_profile" ] && exit
+
+openrgb --profile "$selected_profile"

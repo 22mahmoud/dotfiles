@@ -30,8 +30,6 @@ config.bind(
 
 config.bind("zl", "spawn --userscript localhost list")
 
-config.bind(",j", "spawn --userscript format_json")
-
 config.bind(",i", "hint images run open {hint-url}")
 config.bind(",C", "config-source")
 config.bind("<", "tab-move -")
@@ -53,6 +51,13 @@ config.bind(
     "config-cycle tabs.show always never ;; config-cycle statusbar.show always never",
 )
 config.bind(",t", "config-cycle tabs.width 30 400")
+
+config.unbind("+")
+config.unbind("-")
+config.unbind("=")
+config.bind("<Ctrl+=>", ":zoom-in")
+config.bind("<Ctrl+->", ":zoom-out")
+config.bind("<Ctrl+0>", ":zoom")
 
 # for old.reddit.com expand thread.
 config.set(

@@ -43,12 +43,15 @@ window-rule {
   match app-id="ferdium"
   match app-id="org.telegram.desktop"
   match app-id="Slack"
+  match app-id="discord"
   open-on-workspace "chat"
   default-column-width { proportion 0.96; }
 }
 
 window-rule {
   match app-id="fzf-menu*"
+  match app-id=r#"^thunar$"# title=r#"^Rename "#
+  match app-id=r#"FileRoller$"#
   open-floating true
 }
 

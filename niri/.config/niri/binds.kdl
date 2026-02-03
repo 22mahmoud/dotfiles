@@ -11,7 +11,7 @@ binds {
   Mod+Shift+P { spawn "fzf-power"; }
 
   Mod+B { spawn-sh "$BROWSER"; }
-  Mod+Shift+B { spawn-sh "$BROWSER --incognito"; }
+  Mod+Shift+B { spawn-sh "$BROWSER --target private-window"; }
 
   Mod+N { spawn-sh "$FILE_MANAGER"; }
 
