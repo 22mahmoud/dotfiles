@@ -1,36 +1,61 @@
 #!/bin/bash
 
-usage() {
-  while IFS= read -r line; do
-    printf '%s\n' "$line"
-  done <<-EOF
+# Default target is audio output (sink)
+TARGET="@DEFAULT_AUDIO_SINK@"
+DEVICE_TYPE="output"
 
-  volume [ -i | -d | -t | -h ]
-    control volume with notifications
+usage() {
+  cat <<EOF
+
+  volume [ --input ] [ -i | -d | -t | -h ]
+    control volume/microphone with notifications
 
   -h|help     show this help
+  --input     control microphone (input) instead of speakers
   -i|inc      increase volume
   -d|dec      decrease volume
   -t|toggle   toggle volume mute/unmute
+  -s|select   select default sink/source
 EOF
 }
 
 inc() {
-  wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+  wpctl set-volume --limit 1.0 "$TARGET" 5%+
 }
 
 dec() {
-  wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+  wpctl set-volume "$TARGET" 5%-
 }
 
 toggle() {
-  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  wpctl set-mute "$TARGET" toggle
+}
+
+select_device() {
+  local devices selection id media_class title
+
+  if [ "$DEVICE_TYPE" = "input" ]; then
+    media_class="Audio/Source"
+    title="Select Source"
+  else
+    media_class="Audio/Sink"
+    title="Select Sink"
+  fi
+
+  devices=$(pw-dump | jq -r --arg mc "$media_class" '.[] | select(.info.props["media.class"] == $mc) | "\(.id) \(.info.props["node.description"])"')
+
+  selection=$(echo "$devices" | fzf-menu --class="fzf-menu-sink" --title="$title")
+
+  if [ -n "$selection" ]; then
+    id="${selection%% *}"
+    wpctl set-default "$id"
+  fi
 }
 
 get_volume() {
   local output volume
 
-  output="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+  output="$(wpctl get-volume "$TARGET")"
   volume="${output#Volume: }"
   volume="${volume%% *}"
 
@@ -40,7 +65,7 @@ get_volume() {
 get_mute() {
   local output
 
-  output="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+  output="$(wpctl get-volume "$TARGET")"
 
   case "$output" in
   *MUTED*) echo true ;;
@@ -53,27 +78,42 @@ get_icon() {
 
   volume="$(get_volume)"
 
-  if [ "$(get_mute)" = true ]; then
+  if [ "$DEVICE_TYPE" = "input" ]; then
+    if [ "$(get_mute)" = true ] || [ "$volume" -eq 0 ]; then
+      icon="audio-volume-muted"
+    else
+      icon="audio-input-microphone"
+    fi
+
+    echo "$icon"
+    return
+  fi
+
+  if [ "$(get_mute)" = true ] || [ "$volume" -eq 0 ]; then
     icon="audio-volume-muted"
   elif [ "$volume" -gt 70 ]; then
     icon="audio-volume-high"
   elif [ "$volume" -gt 30 ]; then
     icon="audio-volume-medium"
-  elif [ "$volume" -gt 0 ]; then
-    icon="audio-volume-low"
   else
-    icon="audio-volume-muted"
+    icon="audio-volume-low"
   fi
 
   echo "$icon"
 }
 
 notify() {
-  local volume is_muted volume_human icon
+  local volume is_muted volume_human icon title
 
   volume="$(get_volume)"
   is_muted="$(get_mute)"
   icon="$(get_icon)"
+
+  if [ "$DEVICE_TYPE" = "input" ]; then
+    title="Microphone"
+  else
+    title="Volume"
+  fi
 
   volume_human="${volume}%"
   if [ "$is_muted" = true ]; then
@@ -85,15 +125,25 @@ notify() {
     -i "$icon" \
     -h int:value:"$volume" \
     -h string:x-canonical-private-synchronous:"changeVolume" \
-    "Volume: $volume_human"
+    "$title: $volume_human"
 }
 
 main() {
+  if [ "$1" = "--input" ] || [ "$1" = "input" ]; then
+    TARGET="@DEFAULT_AUDIO_SOURCE@"
+    DEVICE_TYPE="input"
+    shift
+  fi
+
   case "$1" in
-  -h | help) usage ;;
+  -h | help | --help)
+    usage
+    exit 0
+    ;;
   -i | inc) inc ;;
   -d | dec) dec ;;
   -t | toggle) toggle ;;
+  -s | select) select_device ;;
   *) exit 0 ;;
   esac
 

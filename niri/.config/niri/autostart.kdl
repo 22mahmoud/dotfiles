@@ -1,3 +1,4 @@
+spawn-at-startup "kdeconnectd"
 spawn-at-startup "~/.config/setbg"
 spawn-at-startup "wl-paste" "--type" "text"  "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
@@ -5,7 +6,7 @@ spawn-at-startup "swayidle" "-w"
 spawn-at-startup "start-dunst"
 spawn-at-startup "waybar"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "openrgb" "--profile" "default_red.orp"
+spawn-at-startup "openrgb" "--profile" "red.orp"
 
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Qogir-Round-Dark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Qogir-Dark"

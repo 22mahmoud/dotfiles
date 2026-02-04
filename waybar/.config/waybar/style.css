@@ -15,14 +15,16 @@ window#waybar {
 
 /* modules */
 #custom-mail,
-#pulseaudio,
+#pulseaudio.input,
+#pulseaudio.output,
 #disk.home,
 #cpu,
 #memory,
 #clock.time,
 #clock.date,
 #tray,
-#privacy {
+#privacy,
+#mpris {
   margin: 0 12px;
   padding: 0;
 }
@@ -31,11 +33,13 @@ window#waybar {
   color: @color5;
 }
 
-#pulseaudio {
+#pulseaudio.output,
+#pulseaudio.input {
   color: @color14;
 }
 
-#pulseaudio.muted {
+#pulseaudio.output.muted,
+#pulseaudio.input.source-muted {
   color: @color3;
 }
 

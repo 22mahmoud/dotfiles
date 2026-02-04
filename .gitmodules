@@ -4,9 +4,6 @@
 [submodule "zsh/.config/zsh/plugins/zsh-completions"]
 	path = zsh/.config/zsh/plugins/zsh-completions
 	url = git@github.com:zsh-users/zsh-completions.git
-[submodule "x11/.config/x11/base16-xresources"]
-	path = x11/.config/x11/base16-xresources
-	url = git@github.com:tinted-theming/base16-xresources.git
 [submodule "zsh/.config/zsh/plugins/zsh-you-should-use"]
 	path = zsh/.config/zsh/plugins/zsh-you-should-use
 	url = git@github.com:MichaelAquilina/zsh-you-should-use.git
@@ -37,9 +34,6 @@
 [submodule "tmux/.local/share/tmux/plugins/catppuccin"]
 	path = tmux/.local/share/tmux/plugins/catppuccin
 	url = git@github.com:catppuccin/tmux.git
-[submodule "x11/.config/x11/catppuccin-xresources"]
-	path = x11/.config/x11/catppuccin-xresources
-	url = git@github.com:catppuccin/xresources.git
 [submodule "qutebrowser/.config/qutebrowser/catppuccin"]
 	path = qutebrowser/.config/qutebrowser/catppuccin
 	url = git@github.com:catppuccin/qutebrowser.git

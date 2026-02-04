@@ -19,11 +19,11 @@ layout {
   }
 
   tab-indicator {
-    on
+    width 6
+    gap 0
+    length total-proportion=1.0
+    position "top"
     place-within-column
-    active-color "red"
-    inactive-color "gray"
-    urgent-color "blue"
   }
 
   preset-column-widths {

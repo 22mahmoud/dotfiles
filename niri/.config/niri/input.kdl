@@ -2,12 +2,12 @@ input {
   keyboard {
     xkb {
       layout "us,ara"
-      options "grp:lalt_lshift_toggle"
+      options "grp:lalt_lshift_toggle,caps:none"
     }
     repeat-delay 300
     repeat-rate 30
   }
 
 
-   focus-follows-mouse max-scroll-amount="0%"
+  focus-follows-mouse max-scroll-amount="0%"
 }

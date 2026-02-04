@@ -31,16 +31,4 @@ animations {
   window-close {
     off
   }
-
-  horizontal-view-movement {
-    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-  }
-
-  window-movement {
-    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-  }
-
-  window-resize {
-    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-  }
 }

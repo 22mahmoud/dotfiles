@@ -6,6 +6,7 @@
 
   "modules-left": ["niri/workspaces", "niri/window"],
   "modules-right": [
+    "mpris",
     "privacy",
     "disk#home",
     "custom/sep",
@@ -13,10 +14,22 @@
     "custom/sep",
     "memory",
     "custom/mail",
-    "pulseaudio",
+    "group/pulseaudio",
     "group/clock",
     "tray"
   ],
+
+  "mpris": {
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'>{player_icon}</span> {title} - {artist}",
+    "format-paused": "<span font_family='Font Awesome 7 Free' font_weight='900'>{status_icon}</span> {title} - {artist}",
+    "player-icons": {
+      "default": "󰐊"
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "max-length": 2000
+  },
 
   "privacy": {
     "icon-spacing": 12,
@@ -84,7 +97,8 @@
 
   "tray": {
     "icon-size": 16,
-    "spacing": 8
+    "spacing": 8,
+    "cursor": true
   },
 
   "disk#home": {
@@ -97,13 +111,21 @@
   "cpu": {
     "interval": 2,
     "format": "[CPU {usage}%]",
-    "tooltip": false
+    "tooltip": false,
+    "states": {
+      "warning": 75,
+      "critical": 90
+    }
   },
 
   "memory": {
     "interval": 2,
     "format": "[RAM {percentage}%]",
-    "tooltip": false
+    "tooltip": false,
+    "states": {
+      "warning": 75,
+      "critical": 90
+    }
   },
 
   "custom/sep": {
@@ -120,16 +142,39 @@
     "return-type": "json"
   },
 
-  "pulseaudio": {
+  "group/pulseaudio": {
+    "orientation": "horizontal",
+    "modules": ["pulseaudio#output", "pulseaudio#input"],
+    "drawer": {
+      "transition-left-to-right": false
+    }
+  },
+
+  "pulseaudio#output": {
     "format": "<span font_family='Font Awesome 7 Free' font_weight='900'>{icon}</span> <span color='#c0caf5'>{volume}%</span>",
-    "format-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>muted</span>",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": ["", "", ""],
+      "default-muted": "",
+      "headphone": "",
+      "headphone-muted": "󰟎",
+      "headset": "󰋎",
+      "headset-muted": "󰋐"
     },
     "scroll-step": 2,
     "on-click": "pavucontrol",
     "on-click-right": "volume -t",
+    "on-click-middle": "volume -s",
     "tooltip": true
+  },
+
+  "pulseaudio#input": {
+    "format": "{format_source}",
+    "format-source": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
+    "format-source-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
+    "on-click-right": "volume --input -t",
+    "on-scroll-up": "volume --input inc",
+    "on-scroll-down": "volume --input dec",
+    "on-click-middle": "volume --input -s"
   },
 
   "group/clock": {
