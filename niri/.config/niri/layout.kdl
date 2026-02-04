@@ -11,7 +11,7 @@ layout {
   }
 
   border {
-    off
+    on
     width 2
     active-color "#82aaff"
     inactive-color "#505050"

@@ -17,19 +17,19 @@ window-rule {
   match app-id="brave-browser"
   match app-id="org.qutebrowser.qutebrowser"
   open-on-workspace "browser"
-  open-maximized true
+  open-maximized-to-edges true
 }
 
 window-rule {
   match app-id="neomutt-term"
   open-on-workspace "email"
-  open-maximized true
+  open-maximized-to-edges true
 }
 
 window-rule {
   match app-id="newsboat-term"
   open-on-workspace "rss"
-  open-maximized true
+  open-maximized-to-edges true
 }
 
 window-rule {

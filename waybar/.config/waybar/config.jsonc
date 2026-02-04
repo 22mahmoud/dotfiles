@@ -67,8 +67,16 @@
         "name": "spotify"
       },
       {
+        "type": "audio-in",
+        "name": "capture.rnnoise_source"
+      },
+      {
         "type": "audio-out",
         "name": "Strawberry"
+      },
+      {
+        "type": "audio-out",
+        "name": "mpv"
       }
     ]
   },
