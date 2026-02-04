@@ -1,3 +1,3 @@
-timeout 200 swaylock -f
-timeout 300 'niri msg action power-off-monitors'
-before-sleep swaylock -f
+timeout 300 'swaylock --daemonize'
+timeout 600 'niri msg action power-off-monitors'
+before-sleep 'swaylock --daemonize'

@@ -1,7 +1,7 @@
-packages := desktop src scripts fontconfig bat dunst git gnupg isync isync \
-						lynx mangohud mpv msmtp neomutt newsboat nnn npm paru nsxiv picom \
-						zsh zathura tmux sxhkd shell ripgrep qutebrowser lazygit \
-						gtk qt ghostty alacritty niri waybar foot swayidle swaylock pipewire
+packages := desktop src scripts fontconfig bat dunst git gnupg isync \
+						lynx mangohud mpv msmtp neomutt newsboat nnn npm paru picom \
+						zsh zathura tmux shell ripgrep qutebrowser lazygit gtk qt \
+						ghostty alacritty niri waybar foot swayidle swaylock pipewire mise
 
 all: submodule patch stow theming
 

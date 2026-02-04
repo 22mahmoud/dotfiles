@@ -1,0 +1,37 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["node"]
+python.uv_venv_auto = "source"
+
+[settings.npm]
+package_manager = "pnpm"
+
+[tools]
+node = "latest"
+go = "latest"
+bun = "latest"
+uv = "latest"
+pnpm = "latest"
+rust = "latest"
+# npm tools
+"npm:@fsouza/prettierd" = "latest"
+"npm:bash-language-server" = "latest"
+"npm:typescript" = "latest"
+"npm:typescript-language-server" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:vim-language-server" = "latest"
+"npm:yaml-language-server" = "latest"
+"npm:graphql-language-service-cli" = "latest"
+"npm:svelte-language-server" = "latest"
+"npm:@biomejs/biome" = "latest"
+"npm:fixjson" = "latest"
+"npm:@astrojs/language-server" = "latest"
+"npm:eslint_d" = "latest"
+"npm:prettier" = "latest"
+"npm:css-variables-language-server" = "latest"
+"npm:dockerfile-language-server-nodejs" = "latest"
+"npm:@microsoft/compose-language-service" = "latest"
+"npm:@tailwindcss/language-server" = "latest"
+# go tools
+"go:golang.org/x/tools/gopls" = "latest"
+python = "latest"

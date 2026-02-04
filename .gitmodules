@@ -73,9 +73,6 @@
 [submodule "zsh/.local/src/catppuccin-fzf"]
 	path = zsh/.local/src/catppuccin-fzf
 	url = git@github.com:catppuccin/fzf.git
-[submodule "zsh/.config/zsh/plugins/zsh-autoswitch-virtualenv"]
-	path = zsh/.config/zsh/plugins/zsh-autoswitch-virtualenv
-	url = git@github.com:MichaelAquilina/zsh-autoswitch-virtualenv.git
 [submodule "zsh/.config/zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/.config/zsh/plugins/fast-syntax-highlighting
 	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
