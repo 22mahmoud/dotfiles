@@ -52,6 +52,7 @@ window-rule {
   match app-id="fzf-menu*"
   match app-id=r#"^thunar$"# title=r#"^Rename "#
   match app-id=r#"FileRoller$"#
+  match app-id="XEyes"
   open-floating true
 }
 

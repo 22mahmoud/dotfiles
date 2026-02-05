@@ -13,6 +13,7 @@ bun = "latest"
 uv = "latest"
 pnpm = "latest"
 rust = "latest"
+python = "system"
 # npm tools
 "npm:@fsouza/prettierd" = "latest"
 "npm:bash-language-server" = "latest"
@@ -34,4 +35,6 @@ rust = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 # go tools
 "go:golang.org/x/tools/gopls" = "latest"
-python = "latest"
+"go:github.com/mattn/efm-langserver" = "latest"
+# cargo tools
+"cargo:alass-cli" = "latest"
