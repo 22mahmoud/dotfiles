@@ -8,7 +8,7 @@ set from          = "hello@mahmoudashraf.dev"
 set sendmail      = "msmtp -a personal"
 set signature     = "$XDG_CONFIG_HOME/neomutt/signature"
 
-mailboxes         "=INBOX" "=Social" "=Drafts" "=Sent" "=Junk" "=Trash"
+mailboxes         "=INBOX" "=Drafts" "=Sent" "=Junk" "=Trash"
 
 set spoolfile     = "+INBOX"
 set record        = "=Sent"

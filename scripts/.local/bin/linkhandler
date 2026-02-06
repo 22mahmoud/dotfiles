@@ -1,25 +1,23 @@
 #!/bin/sh
 
-dim="$(xrandr | grep '\*' | awk '{print $1}')"
-
 [ -z "$1" ] && {
   "$BROWSER"
   exit
 }
 
 case "$1" in
-  *mkv | *webm | *mp4 | *youtube.com/watch* | *youtube.com/playlist* | *youtu.be* | *hooktube.com* | *bitchute.com*)
-    setsid -f mpx -a "$1" >/dev/null 2>&1
-    ;;
-  *png | *jpg | *jpe | *jpeg | *gif)
-    curl -sL "$1" >"/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")" >/dev/null 2>&1 &
-    ;;
-  *gif*)
-    curl -sL "$1" >"/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")" /dev/null 2>&1 &
-    ;;
-  *)
-    if [ -f "$1" ]; then
-      "$TERMINAL" -e "$EDITOR $1"
-    else setsid -f "$BROWSER" "$1" >/dev/null 2>&1; fi
-    ;;
+*mkv | *webm | *mp4 | *youtube.com/watch* | *youtube.com/playlist* | *youtu.be* | *hooktube.com* | *bitchute.com*)
+  setsid -f mpx -a "$1" >/dev/null 2>&1
+  ;;
+*png | *jpg | *jpe | *jpeg | *gif)
+  imv "$1"
+  ;;
+*gif*)
+  imv "$1"
+  ;;
+*)
+  if [ -f "$1" ]; then
+    "$TERMINAL" -e "$EDITOR $1"
+  else setsid -f "$BROWSER" "$1" >/dev/null 2>&1; fi
+  ;;
 esac

@@ -1,7 +1,9 @@
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["node"]
-python.uv_venv_auto = "source"
+
+[settings.python]
+uv_venv_auto = "source"
 
 [settings.npm]
 package_manager = "pnpm"
@@ -13,7 +15,7 @@ bun = "latest"
 uv = "latest"
 pnpm = "latest"
 rust = "latest"
-python = "system"
+python = "latest"
 # npm tools
 "npm:@fsouza/prettierd" = "latest"
 "npm:bash-language-server" = "latest"

@@ -43,6 +43,14 @@ Channel     personal-Social
 Far         :personal-remote:"Social"
 Near        :personal-local:Social
 
+Group personal
+channel personal-inbox
+channel personal-sent
+channel personal-trash
+channel personal-drafts
+channel personal-junk
+# channel personal-Social
+
 # # work (gmail)
 # # Remote Store
 # IMAPStore        work-remote

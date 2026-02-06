@@ -1,0 +1,17 @@
+configurations:
+  - host: imap.startmail.com
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    idleLogoutTimeout: 15
+    username: hey@maw.sh
+    alias: personal
+    passwordCMD: pass mail.mahmoudashraf.dev | head -n1
+    boxes:
+      - mailbox: INBOX
+        onNewMail: mbsync -c ~/.config/isync/mbsyncrc personal-inbox
+        onNewMailPost: notify-send -a "Mail" -i mail-unread "New Mail" "INBOX updated"
+        onChangedMail: "mbsync -c ~/.config/isync/mbsyncrc personal-inbox"
+        onChangedMailPost: SKIP
