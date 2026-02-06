@@ -44,6 +44,7 @@ window-rule {
   match app-id="org.telegram.desktop"
   match app-id="Slack"
   match app-id="discord"
+  match app-id="vesktop"
   open-on-workspace "chat"
   default-column-width { proportion 0.96; }
 }

@@ -131,8 +131,8 @@ export MAIL="$XDG_DATA_HOME/mail"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 
 # Default programs:
-export EDITOR="$XDG_DATA_HOME/bob/nvim-bin/nvim"
-export VISUAL="$XDG_DATA_HOME/bob/nvim-bin/nvim"
+export EDITOR="$XDG_DATA_HOME/mise/installs/neovim/nightly/bin/nvim"
+export VISUAL="$XDG_DATA_HOME/mise/installs/neovim/nightly/bin/nvim"
 export TERMINAL="foot"
 export BROWSER="qutebrowser"
 export READER="zathura"

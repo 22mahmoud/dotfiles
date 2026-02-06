@@ -9,13 +9,7 @@ uv_venv_auto = "source"
 package_manager = "pnpm"
 
 [tools]
-node = "latest"
-go = "latest"
-bun = "latest"
-uv = "latest"
-pnpm = "latest"
-rust = "latest"
-python = "latest"
+"tree-sitter" = "latest"
 # npm tools
 "npm:@fsouza/prettierd" = "latest"
 "npm:bash-language-server" = "latest"
@@ -36,7 +30,10 @@ python = "latest"
 "npm:@microsoft/compose-language-service" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 # go tools
-"go:golang.org/x/tools/gopls" = "latest"
 "go:github.com/mattn/efm-langserver" = "latest"
 # cargo tools
 "cargo:alass-cli" = "latest"
+# ruby tools
+"gem:neovim" = "latest"
+# neovim
+neovim = "nightly"
