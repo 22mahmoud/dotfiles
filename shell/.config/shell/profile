@@ -166,6 +166,7 @@ PATH="$XDG_CONFIG_HOME/tizen-studio/tools:$PATH"
 PATH="$XDG_CONFIG_HOME/tizen-studio/tools/ide/bin:$PATH"
 PATH="$ASDF_DATA_DIR/shims:$PATH"
 PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+PATH="$HOME/.local/share/npm/bin:$PATH"
 
 export PATH
 

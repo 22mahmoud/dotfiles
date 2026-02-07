@@ -16,7 +16,7 @@ binds {
   // Terminal Apps
   Mod+M { spawn-sh "$TERMINAL --app-id=neomutt-term -e bicon eg neomutt"; }
   Mod+S { spawn-sh "$TERMINAL --app-id=newsboat-term -e bicon eg newsboat"; }
-  Mod+C { spawn-sh "$TERMINAL --app-id=sp-bc-term --font=monospace:size=24  -e bc -ql"; }
+  Mod+C { spawn-sh "qalculate-gtk"; }
   Mod+T { spawn-sh "$TERMINAL --app-id=sp-trans-term --font=monospace:size=16 -e trans -v -I --speak -d en:ar"; }
   Mod+Shift+M { spawn-sh "$TERMINAL --app-id=sp-htop-term -e htop"; }
 

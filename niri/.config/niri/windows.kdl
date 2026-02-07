@@ -58,6 +58,13 @@ window-rule {
 }
 
 window-rule {
+  match app-id="qalculate-gtk"
+  open-floating true
+  default-column-width { fixed 600; }
+  default-window-height { fixed 600; }
+}
+
+window-rule {
   match app-id="sp-bc-term"
   match app-id="sp-trans-term"
   open-floating true
