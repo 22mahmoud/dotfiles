@@ -6,12 +6,13 @@ DEVICE_TYPE="output"
 
 usage() {
   cat <<EOF
+volume [ input | output ] [ -i | -d | -t | -s | -h ]
+  control volume/microphone with notifications
 
-  volume [ --input ] [ -i | -d | -t | -h ]
-    control volume/microphone with notifications
+  input|in    control microphone (input) instead of speakers
+  output|out  control speakers (output) [default]
 
   -h|help     show this help
-  --input     control microphone (input) instead of speakers
   -i|inc      increase volume
   -d|dec      decrease volume
   -t|toggle   toggle volume mute/unmute
@@ -64,7 +65,6 @@ get_volume() {
 
 get_mute() {
   local output
-
   output="$(wpctl get-volume "$TARGET")"
 
   case "$output" in
@@ -75,14 +75,17 @@ get_mute() {
 
 get_icon() {
   local volume icon
-
   volume="$(get_volume)"
 
   if [ "$DEVICE_TYPE" = "input" ]; then
     if [ "$(get_mute)" = true ] || [ "$volume" -eq 0 ]; then
-      icon="audio-volume-muted"
+      icon="microphone-sensitivity-muted"
+    elif [ "$volume" -gt 80 ]; then
+      icon="microphone-sensitivity-high"
+    elif [ "$volume" -gt 40 ]; then
+      icon="microphone-sensitivity-medium"
     else
-      icon="audio-input-microphone"
+      icon="microphone-sensitivity-low"
     fi
 
     echo "$icon"
@@ -129,11 +132,22 @@ notify() {
 }
 
 main() {
-  if [ "$1" = "--input" ] || [ "$1" = "input" ]; then
+  # First arg can be: input|output (output is default)
+  case "$1" in
+  input | in)
     TARGET="@DEFAULT_AUDIO_SOURCE@"
     DEVICE_TYPE="input"
     shift
-  fi
+    ;;
+  output | out)
+    TARGET="@DEFAULT_AUDIO_SINK@"
+    DEVICE_TYPE="output"
+    shift
+    ;;
+  *)
+    # default stays output (sink)
+    ;;
+  esac
 
   case "$1" in
   -h | help | --help)

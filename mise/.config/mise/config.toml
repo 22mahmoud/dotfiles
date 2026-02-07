@@ -6,9 +6,10 @@ idiomatic_version_file_enable_tools = ["node"]
 uv_venv_auto = "source"
 
 [settings.npm]
-package_manager = "pnpm"
+package_manager = "npm"
 
 [tools]
+"usage" = "latest"
 "tree-sitter" = "latest"
 # npm tools
 "npm:@fsouza/prettierd" = "latest"
@@ -36,4 +37,5 @@ package_manager = "pnpm"
 # ruby tools
 "gem:neovim" = "latest"
 # neovim
-neovim = "nightly"
+"neovim" = "nightly"
+"npm:neovim" = "latest"

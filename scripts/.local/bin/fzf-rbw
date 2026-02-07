@@ -4,15 +4,28 @@
 set -eu
 set -o pipefail
 
+c_action=pass
 c_is_raw=
 c_query=
-c_action=pass
+
 selection=
-fzf_rbw_args="$(mktemp -u)"
+selected_user=
+selected_id=
+fzf_rbw_args="$(mktemp)"
+
+ICON_TITLE="🔐"
+ICON_PASS="🔑"
+ICON_LOGIN="🪪"
+ICON_USER="👤"
+ICON_OTP="⏱️"
+ICON_SYNC="🔄"
+ICON_ENTRY="📄"
 
 trap 'rm -f "${fzf_rbw_args}"' EXIT
 
 usage() {
+  local status="${1:-1}"
+
   cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
 
@@ -34,18 +47,53 @@ Key Bindings (fzf):
   Ctrl-O   Copy the OTP to the clipboard.
   Ctrl-R   Sync the bitwarden vault store
 EOF
-  exit 1
+  exit "$status"
+}
+
+require_cmd() {
+  command -v "$1" >/dev/null 2>&1 || {
+    printf 'Missing required command: %s\n' "$1" >&2
+    exit 1
+  }
+}
+
+check_dependencies() {
+  require_cmd rbw
+  require_cmd fzf-menu
+
+  if [[ -z "${c_is_raw}" ]]; then
+    require_cmd wl-copy
+    require_cmd notify-send
+  fi
+}
+
+validate_action() {
+  case "$c_action" in
+  pass | user | login | otp) ;;
+  *)
+    printf 'Invalid action: %s\n' "$c_action" >&2
+    usage 1
+    ;;
+  esac
 }
 
 notify() {
+  local emoji="${1:-}"
+  local msg="${2:-}"
+  local title="Password Manager"
+
+  if [[ -n "$emoji" ]]; then
+    title="${emoji} ${title}"
+  fi
+
   notify-send -t 2500 -u low \
     -h string:x-canonical-private-synchronous:"fzf-rbw" \
-    "🔑 password manager" "$1"
+    "$title" "$msg"
 }
 
 clipboard() {
   printf '%s' "$1" | tr -d '\n' | wl-copy
-  notify "$2"
+  notify "${3:-}" "$2"
 }
 
 unlock() {
@@ -53,34 +101,50 @@ unlock() {
 }
 
 fzf_rbw_menu() {
-  rbw ls --fields folder,name,user | fzf-menu --title="🔑 rbw password picker" --class="fzf-menu-rbw" \
+  rbw list --fields id,name,user,folder | fzf-menu --title="${ICON_TITLE} rbw password picker" --class="fzf-menu-rbw" \
     --query "$c_query" \
-    --prompt="🔑 rbw ~ " \
+    --prompt="${ICON_PASS} rbw ~ " \
     --layout=reverse \
     --delimiter '\t' \
     --with-nth=2,3 \
     --tabstop=38 \
-    --bind "enter:execute(echo ${c_action} > $fzf_rbw_args)+accept" \
-    --bind "ctrl-l:execute(echo 'login' > $fzf_rbw_args)+accept" \
-    --bind "ctrl-u:execute(echo 'user' > $fzf_rbw_args)+accept" \
-    --bind "ctrl-x:execute(echo 'pass' > $fzf_rbw_args)+accept" \
-    --bind "ctrl-o:execute(echo 'otp' > $fzf_rbw_args)+accept" \
-    --bind "ctrl-r:execute(rbw sync && notify-send \"🔑 password manager\" \"Successfully synced passwords\")" \
-    --preview 'echo "Entry: {2}\nUsername: {3}"' \
-    --preview-window 'bottom:2:wrap'
+    --bind "enter:execute(printf '%s' '${c_action}' > '${fzf_rbw_args}')+accept" \
+    --bind "ctrl-l:execute(printf '%s' 'login' > '${fzf_rbw_args}')+accept" \
+    --bind "ctrl-u:execute(printf '%s' 'user' > '${fzf_rbw_args}')+accept" \
+    --bind "ctrl-x:execute(printf '%s' 'pass' > '${fzf_rbw_args}')+accept" \
+    --bind "ctrl-o:execute(printf '%s' 'otp' > '${fzf_rbw_args}')+accept" \
+    --bind "ctrl-r:execute(rbw sync && notify-send \"${ICON_SYNC} Password Manager\" \"Successfully synced passwords\")" \
+    --preview "echo \"${ICON_ENTRY} Entry: {2}\\n${ICON_USER} Username: {3}\"" \
+    --preview-window 'bottom:2:wrap:border-sharp'
+}
+
+parse_selection() {
+  IFS=$'\t' read -r selected_id _ selected_user <<<"$selection"
+
+  if [[ -z "$selected_id" ]]; then
+    printf 'Unable to parse selected entry id\n' >&2
+    exit 1
+  fi
+}
+
+output_result() {
+  local value="$1"
+  local message="$2"
+  local icon="$3"
+
+  if [[ -n "${c_is_raw}" ]]; then
+    printf '%s\n' "$value"
+    exit 0
+  fi
+
+  clipboard "$value" "$message" "$icon"
 }
 
 get_pass() {
   local password
 
-  password="$(echo "$selection" | xargs -r rbw get)"
-
-  if [[ -n "${c_is_raw}" ]]; then
-    echo "${password}"
-    exit
-  fi
-
-  clipboard "$password" "Password copied to clipboard."
+  password="$(rbw get "$selected_id")"
+  output_result "$password" "Password copied to clipboard." "$ICON_PASS"
 }
 
 get_login() {
@@ -89,50 +153,42 @@ get_login() {
   local otp
   local result
 
-  username="$(echo "${selection}" | awk '{print $2}')"
-  password="$(echo "$selection" | xargs -r rbw get)"
-  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
-  result=$(echo -e "${username}\n${password}\n${otp}" | sed '/^$/d')
+  username="$selected_user"
+  password="$(rbw get "$selected_id")"
+  otp="$(rbw code "$selected_id" 2>/dev/null || true)"
 
-  if [[ -n "${c_is_raw}" ]]; then
-    echo "${result}"
-    exit
+  result="$username"
+  result+=$'\n'
+  result+="$password"
+  if [[ -n "$otp" ]]; then
+    result+=$'\n'
+    result+="$otp"
   fi
 
-  result="$(echo "${result}" | tr '\n' ' ')"
+  if [[ -n "${c_is_raw}" ]]; then
+    output_result "$result" "" ""
+  fi
 
-  clipboard "${result}" "Credentials copied to clipboard."
+  output_result "${result//$'\n'/ }" "Credentials copied to clipboard." "$ICON_LOGIN"
 }
 
 get_user() {
   local username
-  username="$(echo "${selection}" | awk '{print $2}')"
-
-  if [[ -n "${c_is_raw}" ]]; then
-    echo "${username}"
-    exit
-  fi
-
-  clipboard "$username" "Username copied to clipboard."
+  username="$selected_user"
+  output_result "$username" "Username copied to clipboard." "$ICON_USER"
 }
 
 get_otp() {
   local otp
-  otp="$(echo "$selection" | xargs -r rbw code 2>/dev/null || echo '')"
-
-  if [[ -n "${c_is_raw}" ]]; then
-    echo "$otp"
-    exit
-  fi
-
-  clipboard "$otp" "Otp copied to clipboard."
+  otp="$(rbw code "$selected_id" 2>/dev/null || true)"
+  output_result "$otp" "OTP copied to clipboard." "$ICON_OTP"
 }
 
 main() {
   while getopts ':hrq:a:' opt; do
     case "${opt}" in
     r) c_is_raw=true ;;
-    h) usage ;;
+    h) usage 0 ;;
     q) c_query="$OPTARG" ;;
     a) c_action="$OPTARG" ;;
     :)
@@ -149,16 +205,29 @@ main() {
     esac
   done
 
+  validate_action
+  check_dependencies
+
   unlock
 
   local action
   selection="$(fzf_rbw_menu)"
 
+  if [[ -z "$selection" ]]; then
+    exit 0
+  fi
+
+  parse_selection
+
   if [[ -f "${fzf_rbw_args}" ]]; then
-    action="$(cat "${fzf_rbw_args}")"
-    rm "${fzf_rbw_args}"
+    action="$(<"${fzf_rbw_args}")"
+    rm -f "${fzf_rbw_args}"
   else
     exit 0
+  fi
+
+  if [[ -z "$action" ]]; then
+    action="$c_action"
   fi
 
   case "$action" in

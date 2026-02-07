@@ -179,10 +179,10 @@
     "format": "{format_source}",
     "format-source": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
     "format-source-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
-    "on-click-right": "volume --input -t",
-    "on-scroll-up": "volume --input inc",
-    "on-scroll-down": "volume --input dec",
-    "on-click-middle": "volume --input -s"
+    "on-click-right": "volume input -t",
+    "on-scroll-up": "volume input inc",
+    "on-scroll-down": "volume input dec",
+    "on-click-middle": "volume input -s"
   },
 
   "group/clock": {

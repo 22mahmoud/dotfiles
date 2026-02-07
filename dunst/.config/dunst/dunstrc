@@ -32,9 +32,9 @@
 
   ### Icons ###
   # Align icons left/right/off
-  icon_position = left
-  max_icon_size = 32
-  icon_theme = Qogir-Dark
+  # icon_position = left
+  max_icon_size = 24
+  # icon_theme = Qogir-Dark
   enable_recursive_icon_lookup = true
 
   ### History ###
@@ -43,7 +43,7 @@
 
   ### Misc/Advanced ###
   dmenu = ~/.local/bin/fzf-menu
-  browser = $BROWSER --new-tab
+  browser = $BROWSER
 
   # Always run rule-defined scripts, even if the notification is suppressed
   always_run_script = true

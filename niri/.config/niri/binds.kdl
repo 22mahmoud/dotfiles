@@ -36,7 +36,7 @@ binds {
   XF86AudioRaiseVolume allow-when-locked=true { spawn "volume" "-i"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn "volume" "-d"; }
   XF86AudioMute allow-when-locked=true { spawn "volume" "-t"; }
-  XF86AudioMicMute allow-when-locked=true { spawn "volume" "--input" "-t"; }
+  XF86AudioMicMute allow-when-locked=true { spawn "volume" "input" "-t"; }
 
   // Media Playback
   Mod+Alt+Slash allow-when-locked=true { spawn-sh "playerctl play-pause"; }
