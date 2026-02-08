@@ -11,7 +11,7 @@ configurations:
     passwordCMD: pass mail.mahmoudashraf.dev | head -n1
     boxes:
       - mailbox: INBOX
-        onNewMail: mbsync -c ~/.config/isync/mbsyncrc personal-inbox
+        onNewMail: mailsync personal-inbox
         onNewMailPost: notify-send -a "Mail" -i mail-unread "New Mail" "INBOX updated"
-        onChangedMail: "mbsync -c ~/.config/isync/mbsyncrc personal-inbox"
+        onChangedMail: mailsync personal-inbox
         onChangedMailPost: SKIP

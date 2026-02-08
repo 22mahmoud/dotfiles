@@ -92,6 +92,7 @@ window-rule {
   match app-id="io.mpv.Mpv"
   match app-id="vlc"
   match app-id="org.videolan.VLC"
+  open-maximized-to-edges true
   open-on-workspace "video"
 }
 

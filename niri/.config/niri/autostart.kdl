@@ -1,3 +1,4 @@
+spawn-at-startup "mailsync"
 spawn-at-startup "goimapnotify"
 spawn-at-startup "kdeconnectd"
 spawn-at-startup "~/.config/setbg"

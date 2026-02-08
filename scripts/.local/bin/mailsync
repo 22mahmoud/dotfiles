@@ -1,17 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-CONFIG="$MBSYNCRC" || "$HOME/.mbsyncrc"
+set -euo pipefail
 
-pid="$(pgrep -f mbsync)"
+CONFIG="${MBSYNCRC:-$HOME/.mbsyncrc}"
+LOCKFILE="${XDG_RUNTIME_DIR:-/tmp}/mailsync.lock"
 
-if [ "$pid" ]; then
-  echo "there is another mbsync process running. Waiting..."
-  while [ "$(pgrep -f mbsync)" ]; do
-    sleep 1
-  done
-  mbsync -c "$CONFIG" -a
-else
-  mbsync -c "$CONFIG" -a
+[[ ! -f "$CONFIG" ]] && {
+  printf 'mailsync: config not found: %s\n' "$CONFIG" >&2
+  exit 1
+}
+
+exec {LOCK_FD}>"$LOCKFILE"
+if ! flock -n "$LOCK_FD"; then
+  printf 'mailsync: another mbsync is running. Waiting...\n' >&2
+  flock "$LOCK_FD"
 fi
 
-
+(($# == 0)) && set -- -a
+exec mbsync -c "$CONFIG" "$@"

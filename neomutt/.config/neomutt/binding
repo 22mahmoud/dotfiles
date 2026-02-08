@@ -43,7 +43,7 @@ bind index <tab> sync-mailbox
 bind index <space> collapse-thread
 
 # Sync all email
-macro index,pager O "<shell-escape>mailsync -a<enter>" "run mbsync to sync all mail"
+macro index,pager O "<shell-escape>mailsync<enter>" "run mbsync to sync all mail"
 
 # add calendar into the dav server
 macro attach K "<enter-command>unset wait_key<enter> <shell-escape>rm -f /tmp/events.ics<enter> <save-entry><kill-line>/tmp/events.ics<enter> <shell-escape> vkhal -k /tmp/events.ics<enter>"
