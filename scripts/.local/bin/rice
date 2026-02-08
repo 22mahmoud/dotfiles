@@ -147,7 +147,7 @@ update_qutebrowser() {
     echo "" >>"$c_qutebrowser"
     echo "catppuccin.setup(c, 'mocha', True)" >>"$c_qutebrowser"
   else
-    echo "config.source('$XDG_CONFIG_HOME/qutebrowser/base16.py')" >>"$c_qutebrowser"
+    echo "config.source('$XDG_CONFIG_HOME/qutebrowser/base16-qutebrowser/themes/default/$theme_name.config.py')" >>"$c_qutebrowser"
   fi
 
   echo 'c.colors.webpage.bg = "white"' >>"$c_qutebrowser"

@@ -13,7 +13,7 @@ Additionally, update the recipient key in the Git [configuration file](https://g
 
 1. Install [Gnu Stow](https://www.gnu.org/software/stow/)
 1. Run `make`
-1. Run `make rice` to install `tokyonight` theme as the default theme
+1. Run `make rice` to install `base16-gruvbox-dark-hard` theme as the default theme
 
 ### Software
 

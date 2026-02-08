@@ -88,3 +88,6 @@
 [submodule "waybar/.local/src/base16-waybar"]
 	path = waybar/.local/src/base16-waybar
 	url = git@github.com:tinted-theming/base16-waybar.git
+[submodule "qutebrowser/.config/qutebrowser/base16-qutebrowser"]
+	path = qutebrowser/.config/qutebrowser/base16-qutebrowser
+	url = git@github.com:tinted-theming/base16-qutebrowser.git

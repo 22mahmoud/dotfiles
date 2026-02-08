@@ -5,17 +5,17 @@ layout {
   focus-ring {
     on
     width 2
-    active-color "#82aaff"
-    inactive-color "#3b4261"
-    urgent-color "#ff5370"
+    active-color "#83a598"
+    inactive-color "#504945"
+    urgent-color "#fb4934"
   }
 
   border {
     on
     width 2
-    active-color "#82aaff"
-    inactive-color "#505050"
-    urgent-color "#9b0000"
+    active-color "#83a598"
+    inactive-color "#3c3836"
+    urgent-color "#fb4934"
   }
 
   tab-indicator {

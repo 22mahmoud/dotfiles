@@ -106,7 +106,7 @@ c.tabs.title.format = "{index}{audio}: {current_title}"
 c.tabs.favicons.scale = 1
 c.tabs.padding = {"left": 5, "right": 5, "top": 2, "bottom": 2}
 c.tabs.show = "multiple"
-c.tabs.width = 36
+c.tabs.width = 38
 
 # Fonts
 c.fonts.completion.entry = "11pt monospace"

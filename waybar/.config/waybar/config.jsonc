@@ -144,7 +144,7 @@
   "custom/mail": {
     "interval": 10,
     "exec": "~/.config/waybar/scripts/mail-count.sh",
-    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{text}</span>",
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#d5c4a1'>{text}</span>",
     "tooltip": false,
     "on-click": "~/.config/waybar/scripts/mail-open.sh",
     "return-type": "json"
@@ -159,7 +159,7 @@
   },
 
   "pulseaudio#output": {
-    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'>{icon}</span> <span color='#c0caf5'>{volume}%</span>",
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'>{icon}</span> <span color='#d5c4a1'>{volume}%</span>",
     "format-icons": {
       "default": ["", "", ""],
       "default-muted": "",
@@ -177,8 +177,8 @@
 
   "pulseaudio#input": {
     "format": "{format_source}",
-    "format-source": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
-    "format-source-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{volume}%</span>",
+    "format-source": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#d5c4a1'>{volume}%</span>",
+    "format-source-muted": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#d5c4a1'>{volume}%</span>",
     "on-click-right": "volume input -t",
     "on-scroll-up": "volume input inc",
     "on-scroll-down": "volume input dec",
@@ -200,14 +200,14 @@
 
   "clock#time": {
     "interval": 10,
-    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{:%I:%M %p}</span>",
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#d5c4a1'>{:%I:%M %p}</span>",
     "tooltip": false,
     "class": "time"
   },
 
   "clock#date": {
     "interval": 60,
-    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#c0caf5'>{:%A, %b %d}</span>",
+    "format": "<span font_family='Font Awesome 7 Free' font_weight='900'></span> <span color='#d5c4a1'>{:%A, %b %d}</span>",
     "tooltip": false,
     "class": "date"
   }

@@ -47,9 +47,9 @@ config.bind(",xb", "config-cycle statusbar.show always never")
 config.bind(",xt", "config-cycle tabs.show always never")
 config.bind(
     ",xx",
-    "config-cycle tabs.show always never ;; config-cycle statusbar.show always never",
+    "config-cycle tabs.show always switching ;; config-cycle statusbar.show always never",
 )
-config.bind(",t", "config-cycle tabs.width 30 400")
+config.bind(",t", "config-cycle tabs.width 38 300")
 
 config.unbind("+")
 config.unbind("-")

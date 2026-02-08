@@ -34,7 +34,7 @@ theming:
 	touch "$$XDG_CONFIG_HOME/ricing/theme.dunstrc"
 
 rice:
-	scripts/.local/bin/rice tokyonight
+	scripts/.local/bin/rice base16-gruvbox-dark-hard
 
 patch:
 	@if patch -p1 --forward --dry-run < patches/readability-js.patch >/dev/null 2>&1; then \
