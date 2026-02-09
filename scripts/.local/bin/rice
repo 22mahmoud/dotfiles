@@ -86,7 +86,7 @@ update_qutebrowser() {
 }
 
 update_wallpaper() {
-  find /mnt/hdd01/media/photos/wallpapers/* | shuf -n1 | xargs setbg
+  rwall
 }
 
 update_lazygit() {

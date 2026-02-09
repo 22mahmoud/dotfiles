@@ -1,3 +1,13 @@
+layer-rule {
+  match namespace="^notifications$"
+  block-out-from "screencast"
+}
+
+layer-rule {
+  match namespace="^swww-daemon$"
+  place-within-backdrop true
+}
+
 window-rule {
   clip-to-geometry true
 }

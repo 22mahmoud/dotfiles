@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-wallpaper="$(find /mnt/hdd01/media/photos/wallpapers -type f | shuf -n1)"
+wallpaper="$(
+  fd -d 1 -t f -e jpg -e jpeg -e png -e webp \
+    . /mnt/hdd01/media/photos/wallpapers |
+    shuf -n1
+)"
+
 exec /home/ashraf/.local/bin/setbg "$wallpaper"

@@ -1,6 +1,7 @@
 spawn-at-startup "mailsync"
 spawn-at-startup "goimapnotify"
 spawn-at-startup "kdeconnectd"
+spawn-sh-at-startup "swww-daemon & swww img /mnt/hdd01/media/photos/wallpapers/special/backdrop.jpg"
 spawn-at-startup "~/.config/setbg"
 spawn-at-startup "wl-paste" "--type" "text"  "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
@@ -17,7 +18,7 @@ spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "text-scaling-f
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-size" "24"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
-spawn-at-startup "strawberry"
 spawn-at-startup "$BROWSER"
+spawn-at-startup "strawberry"
 spawn-sh-at-startup "$TERMINAL --app-id=neomutt-term -e bicon eg neomutt"
 spawn-sh-at-startup "$TERMINAL --app-id=newsboat-term -e bicon eg newsboat"
