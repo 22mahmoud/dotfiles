@@ -4,12 +4,12 @@
 window#waybar {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 16px;
-  background: @background;
-  color: @foreground;
+  background: @base00;
+  color: @base05;
 }
 
 #window {
-  color: alpha(@foreground, 0.8);
+  color: alpha(@base05, 0.8);
   margin: 0 8px;
 }
 
@@ -30,52 +30,52 @@ window#waybar {
 }
 
 #custom-mail {
-  color: @color5;
+  color: @base0E;
 }
 
 #pulseaudio.output,
 #pulseaudio.input {
-  color: @color14;
+  color: @base0C;
 }
 
 #pulseaudio.output.muted,
 #pulseaudio.input.source-muted {
-  color: @color3;
+  color: @base0A;
 }
 
 #clock.date {
-  color: @color4;
+  color: @base0D;
 }
 
 #clock.time {
-  color: @color2;
+  color: @base0B;
 }
 
 #custom-sep {
-  color: @color8;
+  color: @base03;
 }
 
 /* sys stats module */
 #disk.home,
 #cpu,
 #memory {
-  color: alpha(@color10, 0.9);
+  color: alpha(@base0B, 0.9);
   font-size: 15px;
 }
 
 #cpu.warning,
 #memory.warning {
-  color: @color3;
+  color: @base0A;
 }
 
 #cpu.critical,
 #memory.critical {
-  color: @color1;
+  color: @base08;
 }
 
 /* workspaces */
 #workspaces button {
-  color: @color7;
+  color: @base05;
   padding: 0 10px;
   margin: 0;
   border: 0;
@@ -84,24 +84,24 @@ window#waybar {
 
 #workspaces button.focused,
 #workspaces button.active {
-  color: @color4;
+  color: @base0D;
 }
 
 #workspaces button.urgent {
-  color: @color3;
+  color: @base0A;
 }
 
 #workspaces button:hover {
-  background: alpha(@color4, 0.1);
+  background: alpha(@base0D, 0.1);
 }
 
 /* tooltip */
 tooltip {
-  background: @background;
-  border: 1px solid @color4;
+  background: @base00;
+  border: 1px solid @base0D;
   border-radius: 0;
 }
 
 tooltip label {
-  color: @foreground;
+  color: @base05;
 }

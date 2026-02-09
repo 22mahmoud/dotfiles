@@ -31,60 +31,24 @@
 [submodule "tmux/.local/share/tmux/plugins/tinted-tmux"]
 	path = tmux/.local/share/tmux/plugins/tinted-tmux
 	url = git@github.com:tinted-theming/tinted-tmux.git
-[submodule "tmux/.local/share/tmux/plugins/catppuccin"]
-	path = tmux/.local/share/tmux/plugins/catppuccin
-	url = git@github.com:catppuccin/tmux.git
-[submodule "qutebrowser/.config/qutebrowser/catppuccin"]
-	path = qutebrowser/.config/qutebrowser/catppuccin
-	url = git@github.com:catppuccin/qutebrowser.git
-[submodule "bat/.local/src/catppuccin-bat"]
-	path = bat/.local/src/catppuccin-bat
-	url = git@github.com:catppuccin/bat.git
-[submodule "git/.config/git/catppuccin-delta"]
-	path = git/.config/git/catppuccin-delta
-	url = git@github.com:catppuccin/delta.git
 [submodule "lazygit/.local/src/base16-lazygit"]
 	path = lazygit/.local/src/base16-lazygit
 	url = https://git.sr.ht/~blueingreen/base16-lazygit
-[submodule "lazygit/.local/src/catppuccin-lazygit"]
-	path = lazygit/.local/src/catppuccin-lazygit
-	url = git@github.com:catppuccin/lazygit.git
 [submodule "zathura/.local/src/base16-zathura"]
 	path = zathura/.local/src/base16-zathura
 	url = git@github.com:HaoZeke/base16-zathura.git
-[submodule "zathura/.local/src/catppuccin-zathura"]
-	path = zathura/.local/src/catppuccin-zathura
-	url = git@github.com:catppuccin/zathura.git
 [submodule "dunst/.local/src/base16-dunst"]
 	path = dunst/.local/src/base16-dunst
 	url = git@github.com:tinted-theming/base16-dunst.git
-[submodule "dunst/.local/src/catppuccin-dunst"]
-	path = dunst/.local/src/catppuccin-dunst
-	url = git@github.com:catppuccin/dunst.git
-[submodule "src/.local/src/tokyonight.nvim"]
-	path = src/.local/src/tokyonight.nvim
-	url = git@github.com:folke/tokyonight.nvim.git
-[submodule "ghostty/.local/src/catppuccin-ghostty"]
-	path = ghostty/.local/src/catppuccin-ghostty
-	url = git@github.com:catppuccin/ghostty.git
 [submodule "zsh/.local/src/tinted-fzf"]
 	path = zsh/.local/src/tinted-fzf
 	url = git@github.com:tinted-theming/tinted-fzf.git
-[submodule "zsh/.local/src/catppuccin-fzf"]
-	path = zsh/.local/src/catppuccin-fzf
-	url = git@github.com:catppuccin/fzf.git
 [submodule "zsh/.config/zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/.config/zsh/plugins/fast-syntax-highlighting
 	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
 [submodule "src/.local/src/tinted-terminal"]
 	path = src/.local/src/tinted-terminal
 	url = git@github.com:tinted-theming/tinted-terminal.git
-[submodule "alacritty/.config/alacritty/themes/catppuccin-alacritty"]
-	path = alacritty/.config/alacritty/themes/catppuccin-alacritty
-	url = git@github.com:catppuccin/alacritty.git
-[submodule "foot/.local/src/catppuccin-foot"]
-	path = foot/.local/src/catppuccin-foot
-	url = git@github.com:catppuccin/foot.git
 [submodule "waybar/.local/src/base16-waybar"]
 	path = waybar/.local/src/base16-waybar
 	url = git@github.com:tinted-theming/base16-waybar.git
