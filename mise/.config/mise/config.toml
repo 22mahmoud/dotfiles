@@ -37,5 +37,5 @@ package_manager = "npm"
 # ruby tools
 "gem:neovim" = "latest"
 # neovim
-"neovim" = "nightly"
+# "neovim" = "nightly"
 "npm:neovim" = "latest"
