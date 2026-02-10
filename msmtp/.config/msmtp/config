@@ -11,7 +11,7 @@ account            personal
 host               smtp.startmail.com
 port               465
 passwordeval       "pass mail.mahmoudashraf.dev"
-user               hey@maw.sh
+user               hello@mahmoudashraf.dev
 from               hello@mahmoudashraf.dev
 
 # # work (gmail)

@@ -6,7 +6,7 @@ configurations:
       rejectUnauthorized: true
       starttls: false
     idleLogoutTimeout: 15
-    username: hey@maw.sh
+    username: hello@mahmoudashraf.dev
     alias: personal
     passwordCMD: pass mail.mahmoudashraf.dev | head -n1
     boxes:

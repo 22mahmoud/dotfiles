@@ -12,10 +12,9 @@ export HISTFILE="$ZSH_CACHE_DIR/history"
 source "$XDG_CONFIG_HOME/ricing/theme.zsh"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg:-1"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target \
+--preview 'bat -n --color=always {}' \
+--bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export FZF_CTRL_T_COMMAND="fd"
 
 export TINTED_TMUX_OPTION_STATUSBAR=1

@@ -171,20 +171,6 @@ PATH="$HOME/.local/share/npm/bin:$PATH"
 
 export PATH
 
-if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
-  export XDG_SESSION_TYPE=wayland
-  export XDG_CURRENT_DESKTOP=niri
-  export XDG_SESSION_DESKTOP=niri
-
-  if command -v systemctl >/dev/null 2>&1; then
-    systemctl --user import-environment \
-      XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP WAYLAND_DISPLAY
-  fi
-
-  if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment --systemd \
-      XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP WAYLAND_DISPLAY
-  fi
-
+if [ "$(tty)" = "/dev/tty1" ] && [ -z "$DISPLAY" ]; then
   exec niri-session
 fi

@@ -8,7 +8,7 @@ SyncState   *
 IMAPStore        personal-remote
 Host             imap.startmail.com
 Port             993
-User             hey@maw.sh
+User             hello@mahmoudashraf.dev
 PassCmd          "pass mail.mahmoudashraf.dev"
 TLSType          IMAPS
 CertificateFile  /etc/ssl/certs/ca-certificates.crt
@@ -39,17 +39,12 @@ Channel     personal-junk
 Far         :personal-remote:"Junk"
 Near        :personal-local:Junk
 
-Channel     personal-Social
-Far         :personal-remote:"Social"
-Near        :personal-local:Social
-
 Group personal
 channel personal-inbox
 channel personal-sent
 channel personal-trash
 channel personal-drafts
 channel personal-junk
-# channel personal-Social
 
 # # work (gmail)
 # # Remote Store
