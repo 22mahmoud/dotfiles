@@ -55,3 +55,6 @@
 [submodule "qutebrowser/.config/qutebrowser/base16-qutebrowser"]
 	path = qutebrowser/.config/qutebrowser/base16-qutebrowser
 	url = git@github.com:tinted-theming/base16-qutebrowser.git
+[submodule "src/.local/src/rbw"]
+	path = src/.local/src/rbw
+	url = git@github.com:doy/rbw.git
