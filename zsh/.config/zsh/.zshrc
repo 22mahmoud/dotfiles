@@ -52,8 +52,6 @@ source "$ZDOTDIR/plugins/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$ZDOTDIR/plugins/gitstatus/gitstatus.plugin.zsh"
 source "$ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "$ZDOTDIR/plugins/cursor_mode"
+source "$ZDOTDIR/plugins/fancy-ctrl-z"
+source "$ZDOTDIR/plugins/prompt_setup"
 [[ "$TERM" == foot* ]] && source "$ZDOTDIR/plugins/foot"
-
-# prompt
-autoload -Uz prompt_setup
-prompt_setup
