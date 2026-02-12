@@ -1,0 +1,570 @@
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
+
+__fzf_img=${BASH_SOURCE[0]}
+__fzf_img=$(readlink -f "$__fzf_img")
+__state_dir="${XDG_RUNTIME_DIR:-/tmp}/fzf-img"
+mkdir -p "$__state_dir"
+__sort_state="$__state_dir/sort"
+__recursive_state="$__state_dir/recursive"
+SUPPORTED_EXTENSIONS=(jpg jpeg png webp avif gif nef)
+CONFIGURED_PATHS=(
+  "$XDG_DOWNLOAD_DIR"
+  "$XDG_PICTURES_DIR/screenshots"
+  "/mnt/hdd01/media/photos/wallpapers/"
+)
+
+keybinds_text() {
+  cat <<'EOF'
+Tab           Toggle selection (multi-select)
+Enter         Open selected image with default viewer and exit
+Ctrl-R        Rotate copy (pick 90/180/270) — multi-select
+Ctrl-O        Convert copy (pick webp/avif/png/jpeg) — multi-select
+Ctrl-T        Change sort order (pick name/size/date)
+Ctrl-Y        Copy selected image to clipboard and exit
+Ctrl-U        Copy optimized WebP (strip EXIF) to clipboard and exit
+Ctrl-A        Open selected image with Satty (annotation) and exit
+Ctrl-W        Set selected image as wallpaper using setbg and exit
+Ctrl-E        Open selected image with GIMP and exit
+Ctrl-D        Move selected image(s) to trash — multi-select
+Ctrl-/        Toggle preview
+Alt-R         Toggle recursive search and reload list
+Alt-P         Open configured image directories
+Alt-C         Copy selected image path(s)
+Alt-I         View detailed metadata in pager
+F1            Show key bindings help
+F2            Rename selected image using $EDITOR
+EOF
+}
+
+usage() {
+  local status="${1:-1}"
+
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] [DIR]
+
+Description:
+  Browse images with fzf preview and run quick actions.
+  If DIR is given, list images from that directory; otherwise use cwd.
+
+Key Bindings (fzf):
+$(keybinds_text)
+EOF
+  exit "$status"
+}
+
+show_keybinds() {
+  {
+    printf 'fzf-img key bindings\n\n'
+    keybinds_text
+    printf '\nTip: Press q to close this help.\n'
+  } | ${PAGER:-less} -R
+}
+
+require_cmd() {
+  command -v "$1" >/dev/null 2>&1 || {
+    printf 'Missing required command: %s\n' "$1" >&2
+    exit 1
+  }
+}
+
+check_deps() {
+  local deps=(fzf-menu setbg fd chafa magick notify-send wl-copy trash-put)
+  for cmd in "${deps[@]}"; do
+    require_cmd "$cmd"
+  done
+}
+
+notify() {
+  local title="${1:-}"
+  local msg="${2:-}"
+
+  notify-send -t 2200 -h string:x-canonical-private-synchronous:"fzf-img" "[fzf-img]: $title" "$msg"
+}
+
+read_recursive() {
+  local recursive
+  recursive=$(cat "$__recursive_state" 2>/dev/null) || recursive="0"
+  [[ "$recursive" =~ ^(0|1)$ ]] || recursive="0"
+  printf '%s' "$recursive"
+}
+
+toggle_recursive() {
+  local current
+  current=$(read_recursive)
+
+  if [[ "$current" == "1" ]]; then
+    printf '0' >"$__recursive_state"
+    notify "Search mode" "Current directory only"
+  else
+    printf '1' >"$__recursive_state"
+    notify "Search mode" "Recursive (include subdirs)"
+  fi
+}
+
+show_info() {
+  local file="$1"
+  {
+    printf 'File: %s\n\n' "$file"
+    if command -v exiftool >/dev/null 2>&1; then
+      exiftool -- "$file" 2>/dev/null || printf 'No metadata available\n'
+    else
+      identify -verbose -- "${file}[0]" 2>/dev/null || printf 'No metadata available\n'
+    fi
+    printf '\nTip: Press q to close this view.\n'
+  } | ${PAGER:-less} -R
+}
+
+copy_to_clipboard() {
+  local file="$1"
+
+  local mime
+  mime=$(file --mime-type -b "$file")
+
+  if wl-copy --type "$mime" <"$file"; then
+    notify "Copied to clipboard" "$(basename "$file")"
+  else
+    notify "Copy failed" "wl-copy error"
+    return 1
+  fi
+}
+
+copy_webp_to_clipboard() {
+  local file="$1"
+
+  if magick "$file" -strip -quality 82 -define webp:method=6 webp:- | wl-copy --type image/webp; then
+    notify "Copied WebP to clipboard" "$(basename "$file") (optimized, EXIF stripped)"
+  else
+    notify "Copy failed" "WebP optimize/copy error"
+    return 1
+  fi
+}
+
+copy_paths_to_clipboard() {
+  local listfile="$1"
+  local count=0
+
+  [[ -s "$listfile" ]] || return 0
+
+  while IFS= read -r _; do
+    count=$((count + 1))
+  done <"$listfile"
+
+  if wl-copy <"$listfile"; then
+    notify "Copied path(s)" "${count} item(s)"
+  else
+    notify "Copy failed" "wl-copy error"
+    return 1
+  fi
+}
+
+open_with_satty() {
+  local file="$1"
+
+  notify "Opened with Satty" "$(basename "$file")"
+  nohup satty --filename "$file" >/dev/null 2>&1 &
+}
+
+open_with_gimp() {
+  local file="$1"
+
+  notify "Opened with GIMP" "$(basename "$file")"
+  nohup gimp "$file" >/dev/null 2>&1 &
+}
+
+open_with_viewer() {
+  local file="$1"
+
+  notify "Opened with viewer" "$(basename "$file")"
+  nohup xdg-open "$file" >/dev/null 2>&1 &
+}
+
+set_wallpaper() {
+  local file="$1"
+
+  if nohup setbg "$file" >/dev/null 2>&1; then
+    notify "Wallpaper set" "$(basename "$file")"
+  else
+    notify "Wallpaper failed" "setbg error"
+    return 1
+  fi
+}
+
+pick_angle() {
+  printf '90\n180\n270\n' | fzf-menu --title='Rotate Angle' --class='fzf-menu-img__angle' --prompt='↻ angle ~ '
+}
+
+pick_format() {
+  printf 'webp\navif\npng\njpeg\n' | fzf-menu --title='Convert Format' --class='fzf-menu-img__format' --prompt='⇄ format ~ '
+}
+
+pick_sort() {
+  local choice
+  choice=$(printf 'name\nsize\ndate\n' | fzf-menu --title='Sort Order' --class='fzf-menu-img__sort' --prompt='⇅ sort ~ ') || return 1
+  [[ "$choice" =~ ^(name|size|date)$ ]] || return 1
+  printf '%s' "$choice" >"$__sort_state"
+}
+
+read_sort() {
+  local sort
+  sort=$(cat "$__sort_state" 2>/dev/null) || sort="name"
+  [[ "$sort" =~ ^(name|size|date)$ ]] || sort="name"
+  printf '%s' "$sort"
+}
+
+configured_path_entries() {
+  local path label
+
+  for path in "${CONFIGURED_PATHS[@]}"; do
+    [[ -n "$path" ]] || continue
+    [[ -d "$path" ]] || continue
+
+    label="$(basename "${path%/}")"
+    printf '%s\t%s\n' "$label" "$path"
+  done
+}
+
+pick_configured_path() {
+  local current="${1:-.}"
+  local selected
+
+  selected=$(
+    {
+      if [[ -d "$current" ]]; then
+        printf 'Current directory\t%s\n' "$current"
+      fi
+      configured_path_entries
+    } |
+      fzf-menu --title='Image Paths' --class='fzf-menu-img__paths' --prompt='📁 path ~ ' --delimiter=$'\t' --with-nth=1
+  ) || return 1
+
+  printf '%s\n' "${selected#*$'\t'}"
+}
+
+open_configured_path_picker() {
+  local current="${1:-.}"
+  local dir
+
+  dir=$(pick_configured_path "$current" || true)
+  [[ -n "$dir" ]] || return 0
+
+  menu "$dir"
+}
+
+build_output_path() {
+  local src="$1"
+  local action="$2"
+  local out_ext="${3:-}"
+  local dir base name src_ext
+
+  dir="${src%/*}"
+  base="${src##*/}"
+
+  [[ "$dir" == "$src" ]] && dir="."
+
+  if [[ "$base" == *.* && "$base" != .* ]]; then
+    name="${base%.*}"
+    src_ext=".${base##*.}"
+  else
+    name="$base"
+    src_ext=""
+  fi
+
+  if [[ -z "$out_ext" ]]; then
+    out_ext="$src_ext"
+  elif [[ "$out_ext" != .* ]]; then
+    out_ext=".${out_ext}"
+  fi
+
+  printf '%s/%s-%s%s\n' "$dir" "$name" "$action" "$out_ext"
+}
+
+rotate_one() {
+  local src="$1"
+  local angle="$2"
+  local out
+
+  out=$(build_output_path "$src" "rotate-${angle}")
+
+  if magick "$src" -strip -rotate "$angle" "$out"; then
+    notify "Rotated ${angle}°" "$(basename "$out")"
+  else
+    notify "Rotate failed" "$(basename "$src")"
+    return 1
+  fi
+}
+
+rotate() {
+  local listfile="$1"
+  local angle ok=0 fail=0
+  angle=$(pick_angle || true)
+  [[ "$angle" =~ ^(90|180|270)$ ]] || return 0
+
+  while IFS= read -r src; do
+    [[ -f "$src" ]] || continue
+    if rotate_one "$src" "$angle"; then
+      ok=$((ok + 1))
+    else
+      fail=$((fail + 1))
+    fi
+  done <"$listfile"
+
+  notify "Rotate batch done" "${ok} rotated, ${fail} failed"
+}
+
+convert_one() {
+  local src="$1"
+  local format="$2"
+  local out ext flags
+
+  case "$format" in
+  webp)
+    ext=.webp
+    flags=(-strip -quality 82 -define webp:method=6)
+    ;;
+  avif)
+    ext=.avif
+    flags=(-strip -quality 50 -define heic:speed=6)
+    ;;
+  png)
+    ext=.png
+    flags=(-strip -define png:compression-level=9 -define png:compression-filter=5)
+    ;;
+  jpeg)
+    ext=.jpg
+    flags=(-strip -quality 85 -sampling-factor 4:2:0 -interlace Plane)
+    ;;
+  *) return 0 ;;
+  esac
+
+  out=$(build_output_path "$src" "convert-${format}" "$ext")
+
+  if magick "$src" "${flags[@]}" "$out"; then
+    notify "Converted" "$(basename "$out")"
+  else
+    notify "Convert failed" "$(basename "$src")"
+    return 1
+  fi
+}
+
+convert() {
+  local listfile="$1"
+  local format ok=0 fail=0
+  format=$(pick_format || true)
+  [[ "$format" =~ ^(webp|avif|png|jpeg)$ ]] || return 0
+
+  while IFS= read -r src; do
+    [[ -f "$src" ]] || continue
+    if convert_one "$src" "$format"; then
+      ok=$((ok + 1))
+    else
+      fail=$((fail + 1))
+    fi
+  done <"$listfile"
+
+  notify "Convert batch done" "${ok} converted, ${fail} failed"
+}
+
+delete() {
+  local listfile="$1"
+  local ok=0 fail=0
+
+  while IFS= read -r file; do
+    [[ -f "$file" ]] || continue
+    if trash-put -- "$file"; then
+      ok=$((ok + 1))
+    else
+      fail=$((fail + 1))
+    fi
+  done <"$listfile"
+
+  notify "Trash batch done" "${ok} trashed, ${fail} failed"
+}
+
+rename_image() {
+  local file="$1"
+  local dir base new_base new_path tmpfile
+
+  dir="${file%/*}"
+  base="${file##*/}"
+  [[ "$dir" == "$file" ]] && dir="."
+
+  tmpfile=$(mktemp)
+  printf '%s' "$base" >"$tmpfile"
+
+  ${EDITOR:-vi} "$tmpfile" </dev/tty >/dev/tty 2>&1
+
+  new_base=$(cat "$tmpfile")
+  rm -f "$tmpfile"
+
+  new_base=$(printf '%s' "$new_base" | sed '/^$/d' | head -1)
+
+  if [[ -z "$new_base" || "$new_base" == "$base" ]]; then
+    return 0
+  fi
+
+  new_path="${dir}/${new_base}"
+
+  if [[ -e "$new_path" ]]; then
+    notify "Rename failed" "File already exists: ${new_base}"
+    return 1
+  fi
+
+  if mv -- "$file" "$new_path"; then
+    notify "Renamed" "${base} → ${new_base}"
+  else
+    notify "Rename failed" "mv error"
+    return 1
+  fi
+}
+
+preview() {
+  local file="$1"
+
+  local cols=${FZF_PREVIEW_COLUMNS:-120}
+  local lines=${FZF_PREVIEW_LINES:-40}
+  local img_lines=$((lines > 12 ? lines - 8 : lines))
+
+  local mime
+  mime=$(file -Lb --mime-type -- "$file" 2>/dev/null) || return 0
+  [[ $mime == image/* ]] || return 0
+
+  chafa --animate off -s "${cols}x${img_lines}" -- "$file" 2>/dev/null || true
+
+  local bytes size mtime dims
+  bytes=$(stat -Lc %s -- "$file" 2>/dev/null || echo 0)
+  size=$(numfmt --to=iec --suffix=B --format="%.2f" "$bytes" 2>/dev/null || echo '?')
+  mtime=$(stat -Lc %y -- "$file" 2>/dev/null | cut -d. -f1 || echo '?')
+  dims=$(identify -ping -format '%wx%h' -- "${file}[0]" 2>/dev/null || echo '?')
+
+  printf '\nSize: %s  Dimensions: %s\nModified: %s\n' "$size" "$dims" "$mtime"
+}
+
+find_images() {
+  local dir="${1:-.}"
+  shift
+
+  local fd_args=(-tf --absolute-path)
+
+  local ext
+  for ext in "${SUPPORTED_EXTENSIONS[@]}"; do
+    fd_args+=(-e "$ext")
+  done
+
+  if [[ "$(read_recursive)" != "1" ]]; then
+    fd_args+=(-d1)
+  fi
+
+  fd "${fd_args[@]}" . "$dir" "$@"
+}
+
+list_images() {
+  local dir="${1:-.}"
+  local sort
+  sort=$(read_sort)
+
+  case "$sort" in
+  size)
+    find_images "$dir" -0 |
+      xargs -0 stat -c $'%s\t%n' |
+      sort -t$'\t' -k1,1 -rn |
+      cut -f2-
+    ;;
+  date)
+    find_images "$dir" -0 |
+      xargs -0 stat -c $'%Y\t%n' |
+      sort -t$'\t' -k1,1 -rn |
+      cut -f2-
+    ;;
+  *)
+    find_images "$dir" | sort
+    ;;
+  esac
+}
+
+menu() {
+  local dir="${1:-.}"
+
+  if [[ ! -d "$dir" ]]; then
+    notify "Directory not found" "$dir"
+    open_configured_path_picker "."
+    return 0
+  fi
+
+  if ! find_images "$dir" -q; then
+    open_configured_path_picker "$dir"
+    return 0
+  fi
+
+  list_images "$dir" |
+    fzf-menu \
+      --title='fzf-menu: Image Viewer' \
+      --class='fzf-menu-img' \
+      --layout=reverse \
+      --multi \
+      --prompt='🖼️ ~ ' \
+      --preview-window 'right,60%,border-left,wrap' \
+      --color='border:0' \
+      --delimiter='/' \
+      --with-nth='-1' \
+      --bind 'tab:toggle+down' \
+      --bind 'ctrl-/:toggle-preview' \
+      --bind "enter:execute-silent(bash \"$__fzf_img\" -v {})+abort" \
+      --bind "ctrl-y:execute-silent(bash \"$__fzf_img\" -y {})+abort" \
+      --bind "ctrl-u:execute-silent(bash \"$__fzf_img\" -w {})+abort" \
+      --bind "ctrl-a:execute-silent(bash \"$__fzf_img\" -s {})+abort" \
+      --bind "ctrl-e:execute-silent(bash \"$__fzf_img\" -g {})+abort" \
+      --bind "ctrl-w:execute-silent(bash \"$__fzf_img\" -b {})+abort" \
+      --bind "ctrl-r:execute-silent(bash \"$__fzf_img\" -r {+f})+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "ctrl-o:execute-silent(bash \"$__fzf_img\" -c {+f})+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "ctrl-d:execute-silent(bash \"$__fzf_img\" -d {+f})+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "ctrl-t:execute-silent(bash \"$__fzf_img\" -t)+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "alt-r:execute-silent(bash \"$__fzf_img\" -F)+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "alt-p:execute(bash \"$__fzf_img\" -m \"$dir\" </dev/tty >/dev/tty 2>&1)+abort" \
+      --bind "alt-c:execute-silent(bash \"$__fzf_img\" -P {+f})" \
+      --bind "alt-i:execute(bash \"$__fzf_img\" -i {} </dev/tty >/dev/tty 2>&1)+refresh-preview" \
+      --bind "f2:execute(bash \"$__fzf_img\" -n {})+reload(bash \"$__fzf_img\" -l \"$dir\")" \
+      --bind "f1:execute(bash \"$__fzf_img\" -k </dev/tty >/dev/tty 2>&1)+refresh-preview" \
+      --preview "bash \"$__fzf_img\" -p {}"
+}
+
+main() {
+  while getopts 'hl:tkc:y:w:r:p:d:s:g:v:n:b:P:Fi:m:' opt; do
+    case "${opt}" in
+    l) list_images "$OPTARG" ;;
+    p) preview "$OPTARG" ;;
+
+    h) usage 0 ;;
+    k) show_keybinds ;;
+    t) pick_sort ;;
+    y) copy_to_clipboard "$OPTARG" ;;
+    w) copy_webp_to_clipboard "$OPTARG" ;;
+    s) open_with_satty "$OPTARG" ;;
+    g) open_with_gimp "$OPTARG" ;;
+    v) open_with_viewer "$OPTARG" ;;
+    b) set_wallpaper "$OPTARG" ;;
+    n) rename_image "$OPTARG" ;;
+    r) rotate "$OPTARG" ;;
+    c) convert "$OPTARG" ;;
+    d) delete "$OPTARG" ;;
+    P) copy_paths_to_clipboard "$OPTARG" ;;
+    F) toggle_recursive ;;
+    i) show_info "$OPTARG" ;;
+    m) open_configured_path_picker "$OPTARG" ;;
+    *) usage 1 ;;
+    esac
+  done
+
+  shift $((OPTIND - 1))
+
+  if [[ $OPTIND -eq 1 ]]; then
+    check_deps
+    local dir
+    dir=$(readlink -f "${1:-.}")
+    menu "$dir"
+  fi
+}
+
+main "$@"

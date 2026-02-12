@@ -26,6 +26,15 @@ window-rule {
 
 
 window-rule {
+  match app-id="fzf-menu-img*"
+
+  open-floating true
+  default-column-width { proportion 0.45; }
+  default-window-height { proportion 0.45; }
+}
+
+
+window-rule {
   match app-id=r#"thunar"#
 
   open-floating true
