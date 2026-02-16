@@ -58,9 +58,9 @@ macro , open-in-browser
 macro v set browser "mpx -a" ; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
 
-# urls-source "miniflux"
-# miniflux-url "https://rss.mahmoudashraf.dev/"
-# miniflux-login "admin"
-# miniflux-tokeneval "pass rss"
-# miniflux-flag-star "a"
-# miniflux-show-special-feeds "no"
+urls-source "miniflux"
+miniflux-url "https://rss.mahmoudashraf.dev/"
+miniflux-login "admin"
+miniflux-tokeneval "pass rss"
+miniflux-flag-star "a"
+miniflux-show-special-feeds "no"
