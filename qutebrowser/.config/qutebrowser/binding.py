@@ -51,13 +51,6 @@ config.bind(
 )
 config.bind(",t", "config-cycle tabs.width 38 300")
 
-config.unbind("+")
-config.unbind("-")
-config.unbind("=")
-config.bind("<Ctrl+=>", ":zoom-in")
-config.bind("<Ctrl+->", ":zoom-out")
-config.bind("<Ctrl+0>", ":zoom")
-
 # for old.reddit.com expand thread.
 config.set(
     "hints.selectors", {"preview": [".expando-button"]}, pattern="*://*.reddit.com/*"
