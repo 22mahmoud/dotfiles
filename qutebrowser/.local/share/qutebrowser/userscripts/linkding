@@ -1,0 +1,12 @@
+#!/bin/bash
+
+token="$LINKDING_API_TOKEN"
+base="$LINKDING_BASE_URL"
+
+curl \
+  -X POST \
+  -H "Authorization: Token ${token}" \
+  --json "{\"title\":\"$QUTE_TITLE\",\"url\":\"$QUTE_URL\"}" \
+  "$base/api/bookmarks/"
+
+echo "message-info 'Bookmark saved'" >"$QUTE_FIFO"

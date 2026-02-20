@@ -6,7 +6,8 @@ config: ConfigAPI = config  # type: ignore
 config.bind("V", "spawn mpx -a {url}")
 config.bind(",v", "hint links spawn mpx -a {hint-url}")
 
-config.bind("<ctrl+b>", "spawn --userscript linkwarden")
+# config.bind("<ctrl+b>", "spawn --userscript linkwarden")
+config.bind("<ctrl+b>", "spawn --userscript linkding")
 
 qute_rbw = "spawn --userscript qute-rbw"
 config.bind(",pl", qute_rbw)

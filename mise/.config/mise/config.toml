@@ -39,3 +39,4 @@ package_manager = "npm"
 # neovim
 # "neovim" = "nightly"
 "npm:neovim" = "latest"
+"npm:@steipete/summarize" = "latest"
