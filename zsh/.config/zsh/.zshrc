@@ -25,9 +25,6 @@ setopt HIST_VERIFY            # Do not execute immediately upon history expansio
 # completion
 source "$ZDOTDIR/completion.zsh"
 
-# Override colors
-eval "$(dircolors -b $XDG_CONFIG_HOME/shell/dircolors)"
-
 # aliases
 source "$XDG_CONFIG_HOME/shell/aliasrc"
 source "$XDG_CONFIG_HOME/shell/functions"
