@@ -33,6 +33,10 @@ typeset -gA PROMPT_COLORS=(
   [conflicted]='%F{red}'
   [stash]='%F{cyan}'
   [venv]='%F{cyan}'
+  [exec_time]='%F{yellow}'
+  [jobs]='%F{cyan}'
+  [ssh]='%F{cyan}'
+  [readonly]='%F{red}'
 )
 
 typeset -g RESET='%f'
@@ -57,6 +61,44 @@ venv_prompt_update() {
     VENV_PROMPT=" ${PROMPT_COLORS[venv]}( ${VIRTUAL_ENV:t})${RESET}"
   else
     VENV_PROMPT=""
+  fi
+}
+
+# ─────────────────────────────────────────────────────────────
+# Execution time component
+# ─────────────────────────────────────────────────────────────
+zmodload zsh/datetime
+
+typeset -g _prompt_cmd_start_time=""
+typeset -g EXEC_TIME_PROMPT=""
+
+_prompt_preexec_time() {
+  _prompt_cmd_start_time=$EPOCHREALTIME
+}
+
+_prompt_precmd_time() {
+  EXEC_TIME_PROMPT=""
+  if [[ -n $_prompt_cmd_start_time ]]; then
+    local -F elapsed=$(( EPOCHREALTIME - _prompt_cmd_start_time ))
+    _prompt_cmd_start_time=""
+
+    if (( elapsed >= 1.0 )); then
+      local -i h=$(( elapsed / 3600 ))
+      local -i m=$(( elapsed / 60 % 60 ))
+      local -F s=$(( elapsed % 60 ))
+
+      local formatted=""
+      (( h > 0 )) && formatted+="${h}h "
+      (( m > 0 )) && formatted+="${m}m "
+
+      if (( h == 0 && m == 0 )); then
+        formatted+=$(LC_NUMERIC=C printf "%.1fs" $s)
+      else
+        formatted+=$(LC_NUMERIC=C printf "%.0fs" $s)
+      fi
+
+      EXEC_TIME_PROMPT=" ${PROMPT_COLORS[exec_time]}󱎫 ${formatted}${RESET}"
+    fi
   fi
 }
 
@@ -131,6 +173,19 @@ gitstatus_prompt_update() {
 }
 
 # ─────────────────────────────────────────────────────────────
+# Read-only indicator hook
+# ─────────────────────────────────────────────────────────────
+typeset -g DIR_READONLY_PROMPT=""
+
+_prompt_precmd_readonly() {
+  if [[ ! -w $PWD ]]; then
+    DIR_READONLY_PROMPT=" ${PROMPT_COLORS[readonly]}${RESET}"
+  else
+    DIR_READONLY_PROMPT=""
+  fi
+}
+
+# ─────────────────────────────────────────────────────────────
 # Prompt setup
 # ─────────────────────────────────────────────────────────────
 prompt_setup() {
@@ -143,19 +198,34 @@ prompt_setup() {
   setopt no_prompt_bang prompt_percent prompt_subst
   typeset -g prompt_newline=$'\n%{\r%}'
 
+  # SSH context
+  typeset -g SSH_PROMPT=''
+  if [[ -n $SSH_CLIENT || -n $SSH_TTY ]]; then
+    SSH_PROMPT="${PROMPT_COLORS[ssh]}%n@%m${RESET} "
+  fi
+
   # Start gitstatus daemon
   gitstatus_stop "$_GIT_INSTANCE" && gitstatus_start -s -1 -u -1 -c -1 -d -1 "$_GIT_INSTANCE"
 
   autoload -Uz add-zsh-hook
   add-zsh-hook precmd gitstatus_prompt_update
   add-zsh-hook precmd venv_prompt_update
+  add-zsh-hook preexec _prompt_preexec_time
+  add-zsh-hook precmd _prompt_precmd_time
+  add-zsh-hook precmd _prompt_precmd_readonly
 
   PROMPT=''
   PROMPT+='${prompt_newline}'
-  PROMPT+='${PROMPT_COLORS[path]}%B%1~%b%f'
+  PROMPT+='${SSH_PROMPT}'
+  PROMPT+='${PROMPT_COLORS[path]}%B%1~%b${RESET}'
+  PROMPT+='${DIR_READONLY_PROMPT}'
   PROMPT+='${VENV_PROMPT}'
   PROMPT+='$GITSTATUS_PROMPT'
-  PROMPT+='${prompt_newline}%(?.${PROMPT_COLORS[prompt_success]}.${PROMPT_COLORS[prompt_error]})%B%b%f '
+  PROMPT+='${prompt_newline}%(?.${PROMPT_COLORS[prompt_success]}.${PROMPT_COLORS[prompt_error]})%B%(#.#.)%b${RESET} '
+
+  RPROMPT=''
+  RPROMPT+='${EXEC_TIME_PROMPT}'
+  RPROMPT+='%(1j. ${PROMPT_COLORS[jobs]} %j${RESET}.)'
 }
 
 # Initialize once (guarded inside prompt_setup).
