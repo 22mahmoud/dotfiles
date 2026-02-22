@@ -200,7 +200,7 @@ prompt_setup() {
 
   # SSH context
   typeset -g SSH_PROMPT=''
-  if [[ -n $SSH_CLIENT || -n $SSH_TTY ]]; then
+  if [[ -n $SSH_CONNECTION ]]; then
     SSH_PROMPT="${PROMPT_COLORS[ssh]}%n@%m${RESET} "
   fi
 
