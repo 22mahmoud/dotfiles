@@ -4,7 +4,10 @@
   "height": 34,
   "start_hidden": true,
 
-  "modules-left": ["niri/workspaces", "niri/window"],
+  "modules-left": [
+    "niri/workspaces"
+    // ,"niri/window",
+  ],
   "modules-right": [
     "mpris",
     "privacy",
