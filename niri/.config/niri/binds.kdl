@@ -4,6 +4,7 @@ binds {
   Mod+B { spawn-sh "$BROWSER"; }
   Mod+Shift+B { spawn-sh "$BROWSER --target private-window"; }
   Mod+N { spawn-sh "$FILE_MANAGER"; }
+  Mod+Shift+N { spawn-sh "$TERMINAL --app-id=yazi-term -e yazi"; }
 
   // Menus & Pickers
   Mod+D { spawn "fzf-dmenu"; }

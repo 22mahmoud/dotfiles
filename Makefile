@@ -1,5 +1,5 @@
 packages := desktop src scripts fontconfig bat dunst git gnupg isync \
-						lynx mangohud mpv msmtp neomutt newsboat nnn npm paru goimapnotify \
+						lynx mangohud mpv msmtp neomutt newsboat yazi npm paru goimapnotify \
 						zsh zathura tmux shell ripgrep qutebrowser lazygit gtk qt fastfetch \
 						ghostty alacritty niri waybar foot swayidle swaylock pipewire mise
 

@@ -36,6 +36,7 @@ window-rule {
 
 window-rule {
   match app-id=r#"thunar"#
+  match app-id="yazi-term"
 
   open-floating true
   default-column-width { proportion 0.60; }
