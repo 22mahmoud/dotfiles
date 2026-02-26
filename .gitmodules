@@ -10,9 +10,6 @@
 [submodule "zsh/.config/zsh/plugins/gitstatus"]
 	path = zsh/.config/zsh/plugins/gitstatus
 	url = git@github.com:romkatv/gitstatus.git
-[submodule "nnn/.local/src/nnn"]
-	path = nnn/.local/src/nnn
-	url = git@github.com:jarun/nnn.git
 [submodule "qutebrowser/.local/src/qutebrowser"]
 	path = qutebrowser/.local/src/qutebrowser
 	url = git@github.com:qutebrowser/qutebrowser.git
