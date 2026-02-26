@@ -13,6 +13,7 @@ c_ghostty="$C_RICINIG/ghostty-theme"
 c_alacritty="$C_RICINIG/alacritty-theme.toml"
 c_foot="$C_RICINIG/foot-theme.ini"
 c_waybar="$C_RICINIG/waybar.css"
+c_yazi="$C_RICINIG/yazi-flavor.toml"
 
 themes="base16-gruvbox-dark-hard
 base16-default-dark
@@ -139,6 +140,10 @@ update_waybar() {
   pkill -SIGUSR2 waybar
 }
 
+update_yazi() {
+  cp "$HOME/.local/src/tinted-yazi/flavors/$theme_name.toml" "$c_yazi"
+}
+
 update_ghostty() {
   echo "theme = $HOME/.local/src/tinted-terminal/themes/ghostty/$theme_name" >"$c_ghostty"
 }
@@ -158,6 +163,7 @@ main() {
   update_alacritty &
   update_foot &
   update_waybar &
+  update_yazi &
   update_wallpaper &
 }
 

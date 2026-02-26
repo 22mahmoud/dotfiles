@@ -55,3 +55,6 @@
 [submodule "src/.local/src/rbw"]
 	path = src/.local/src/rbw
 	url = git@github.com:doy/rbw.git
+[submodule "yazi/.local/src/tinted-yazi"]
+	path = yazi/.local/src/tinted-yazi
+	url = git@github.com:tinted-theming/tinted-yazi.git
