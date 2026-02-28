@@ -42,6 +42,6 @@ Additionally, update the recipient key in the Git [configuration file](https://g
   - server: [miniflux](https://miniflux.app/)
   - client: [newsboat](https://newsboat.org/index.html)
 - File Manager:
-  - terminal: [nnn](https://github.com/jarun/nnn/)
+  - terminal: [yazi](https://github.com/sxyazi/yazi)
   - GUI: [Thunar](https://docs.xfce.org/xfce/thunar/start)
 - Gaming: [Steam](https://store.steampowered.com/), [Bottles (flatpak)](https://usebottles.com/), [Faugus](https://github.com/Faugus/faugus-launcher), [MangoHud](https://github.com/flightlessmango/MangoHud)
