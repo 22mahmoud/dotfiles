@@ -1,3 +1,7 @@
+> [!CAUTION]
+> This repository is archived and has been migrated to my self-hosted git server at
+> [git.mahmoudashraf.dev/22mahmoud/dotfiles](https://git.mahmoudashraf.dev/22mahmoud/dotfiles).
+
 ## Mahmoud Ashraf's Dotfiles 🎨
 
 ![screenshot](screenshot-niri.png)
